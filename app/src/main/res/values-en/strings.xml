@@ -90,7 +90,7 @@
     <string name="tut_card_1">This tool allows you to read/make Mentorships. By default it will show the unread ones but can be changed from the tools at the top.</string>
     <string name="tut_card_2">This button allows to create a new Mentorship. You can create mentorships from the \"Teachers\" menu too.</string>
     <string name="action_settings">Settings</string>
-    <string name="a-view">Announces view</string>
+    <string name="a_view">Announces view</string>
     <string name="accept">Accept</string>
     <string name="all_files">All files</string>
     <string name="all_mentorships">All mentorships</string>
@@ -101,7 +101,7 @@
     <string name="file_will_save_in">The file will be saved to the folder Downloads/ConnectU!</string>
     <string name="hello_blank_fragment">Hi</string>
     <string name="later">Later</string>
-    <string name="like_app">Seems like you really like the app, cause you have used it like %totalLaunchCount% times!, Why dont you come and share your experience?</string>
+    <string name="like_app">Seems like you really like the app, cause you have used it like</string>
     <string name="never">Never :`C</string>
     <string name="open_file">Open file</string>
     <string name="pending_files_1">Pending files</string>
@@ -116,5 +116,6 @@
     <string name="scr3_tit">Practical</string>
     <string name="share_file">Share files</string>
     <string name="teachers">Teachers</string>
+    <string name="like_app_1">times!, Why dont you come and share your experience?</string>
 
 </resources>

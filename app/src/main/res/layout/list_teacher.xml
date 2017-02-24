@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        app:cardCornerRadius="3dp"
+        android:layout_gravity="center_horizontal"
+        app:cardBackgroundColor="#ffffff"
+        app:cardPreventCornerOverlap="false"
+        app:contentPadding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:transitionName="@string/activity_image_trans"
+                android:id="@+id/img"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="12dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:padding="6dp"
+                android:id="@+id/name"
+                android:transitionName="@string/activity_text_trans"
+                android:text="Pablo Escobar Gonzales"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:gravity="center"
+                android:padding="6dp"
+                android:transitionName="@string/activity_mixed_trans"
+                android:id="@+id/signature"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="Matemáticas 1 para la chucha de "/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

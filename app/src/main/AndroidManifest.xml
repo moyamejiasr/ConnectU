@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.onelio.connectu">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".LauncherActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomePage"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Apps.Anuncios.AnunciosActivity" />
+        <activity
+            android:name=".Apps.Evaluacion.EvaluacionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Apps.WebView.WebViewActivity" />
+        <activity
+            android:name=".Apps.MaterialActivity"
+            android:label="@string/mat"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Apps.Tutorias.TutoriaActivity"
+            android:label="@string/title_activity_tutoria"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Apps.Tutorias.TutoriaViewActivity" />
+        <activity android:name=".Apps.Evaluacion.EvaluacionViewActivity" />
+        <activity
+            android:name=".AboutActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Apps.NotasActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".BackgroundService.UAService"
+            android:enabled="true" />
+
+        <receiver
+            android:name=".BackgroundService.UAServiceKill"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+            <intent-filter>
+                <action android:name=".BackgroundService.Restart" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".BackgroundService.RebootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".BackgroundService.ReInstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".PreferencesActivity" />
+        <activity
+            android:name=".Apps.Horario.HorarioActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />
+        <activity android:name=".AccountActivity" />
+        <activity
+            android:name=".Apps.Profesores.TeachersActivity"
+            android:label="@string/teacher" />
+        <activity
+            android:name=".Apps.Profesores.TeachersViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Apps.Anuncios.AnunciosViewActivity" />
+        <activity android:name=".Apps.Expediente.ExpedienteActivity"></activity>
+        <activity android:name=".TestActivity"></activity>
+    </application>
+
+</manifest>

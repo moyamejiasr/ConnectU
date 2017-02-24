@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ConnectU</string>
+    <string name="again_exit">Press again to exit the app.</string>
+    <string name="all">All</string>
+    <string name="app_ua_announces">(v) Announces</string>
+    <string name="app_ua_teachingmateial">(v) Teaching Material</string>
+    <string name="app_ua_test">(v) UA Tests</string>
+    <string name="app_ua_tutorial">(v) UA Mentorship</string>
+    <string name="at"> at </string>
+    <string name="closed">Closed</string>
+    <string name="couldnt_download">Error, cant download file</string>
+    <string name="download_cancel">Download stopped, local permissions needed!</string>
+    <string name="error_connect">Error, couldn\'t connect with UACloud, please restart.</string>
+    <string name="error_password">Error, email or password wrong</string>
+    <string name="error_unknown">Unknown error!</string>
+    <string name="filter_by">Filter by</string>
+    <string name="from">From </string>
+    <string name="incoming">Incoming</string>
+    <string name="loading_wait">Loading, wait...</string>
+    <string name="mat">Materials</string>
+    <string name="news">News</string>
+    <string name="open">Open</string>
+    <string name="password">Password</string>
+    <string name="pending_files"> pending files.</string>
+    <string name="pending_notifications">pending notifications.</string>
+    <string name="previous">Previous</string>
+    <string name="published_in">Published in</string>
+    <string name="share">Share</string>
+    <string name="subject">Subject</string>
+    <string name="title_activity_launcher">ConnectU</string>
+    <string name="type">Type</string>
+    <string name="year">Year</string>
+    <string name="you_have">You have</string>
+
+    <string-array name="app_names">
+        <item>Announces</item>
+        <item>Materials</item>
+        <item>Teachers</item>
+        <item>Tutorial</item>
+        <item>Moodle</item>
+        <item>Results</item>
+        <item>Test</item>
+        <item>Schedule</item>
+    </string-array>
+    <string name="title_activity_test">Test</string>
+    <string name="by">By</string>
+    <string name="title_activity_tutoria">Mentorship</string>
+    <string name="to">To</string>
+    <string name="myself">Myself</string>
+    <string name="teacher">Teacher</string>
+    <string name="beta">Vote and share the app on the Play Store!</string>
+    <string name="pending">Pending</string>
+    <string name="ssubject">Select a subject:</string>
+    <string name="steacher">Select teacher:</string>
+    <string name="ititle">Insert title:</string>
+    <string name="notnoread">Not unread Tutorial found!</string>
+    <string name="calification">Calification:</string>
+    <string name="state">State:</string>
+    <string name="title_activity_notas">UAResults</string>
+    <string name="unseen_not">new notifications.</string>
+    <string name="rlogout">Do you really want to logout ?</string>
+    <string name="logout">Logout</string>
+    <string name="clogout">Click here if you want to log-out from the app.</string>
+    <string name="pdata">Personal Informations</string>
+    <string name="gdata">General settings</string>
+    <string name="abn">Allow notifications</string>
+    <string name="wnot">With this option you allow the App notify you if something change between 8-23 hours.</string>
+    <string name="custom">Customisation</string>
+    <string name="ringt">Customise Notification Ringtone for you</string>
+    <string name="loading_waith">Loading schelude, wait...</string>
+    <string name="about1">App developed by students from the University of Alicante for using the UACloud service. This project is not related with the university in any way and has been developed by third persons.</string>
+    <string name="about">About</string>
+    <string name="about2">This project is OpenSource with the idea of being transparent and secure. Can be found here:</string>
+    <string name="nota">RESULT</string>
+    <string name="error_connect_title">ConnectU ALert, Error:</string>
+    <string name="error_format">Error, Unsupported encoding found, Please restart the App</string>
+    <string name="account">Account</string>
+    <string name="settings">Settings</string>
+    <string name="home">Home</string>
+    <string name="contact">Contact</string>
+    <string name="loading_waite">Loading, this can take a while...</string>
+    <string name="loading_waitt">Loading profiles, this can take a while...</string>
+    <string name="title_activity_teachers_view">Professor</string>
+    <string name="disclaimer"><![CDATA[<h2><span style="color: #ff0000;"><strong>NON-OFFICIAL APP  DEVELOPPED BY STUDENTS!!!</strong></span></h2> <h2><span style="color: #ff0000;"><strong>READ THE TERMS OF USE!!!!!!</strong></span></h2> <h3><span style="color: #ff6600;"><strong>-About the app:</strong></span></h3> <p>This app is not official and it´s not related to the University of Alicante.</p> <p>The developers and the University are don´t take responsibility for possible information conditions. Misunderstood, unactualized or badly written.</p> <p>By installing this app, you´re using a beta version that might have some bugs and wrong data and could not work.</p> <p>This is a free app and the developers don´t must make a fully operational version.</p> <p>This app requires to use the network connections and to administrate the storage for accessing to UACloud and download the materials presents there.</p> <h3><span style="color: #ff6600;"><strong>-About the account:</strong></span></h3> <p>For security, the information from the accounts doesn´t go to third developed servers (They are sent to the UACloud servers). They´re stored in the data base inside the app so They can be used to connect to the UACloud.</p> <p>Despite this, the developer and the University don´t take responsibility for loosing information or being stolen inside the app.</p> <h3><span style="color: #ff6600;"><strong>-About the conditions:</strong></span></h3> <p>This condition can change if necessary, in that case, the developers have the right to do changes without any notification and not knowing that does not exclude the fair use of it.</p>]]></string>
+    <string name="home_card_1">Here you will be able to access each of the services from UACloud present in the app and if you swipe from the middle to the bottom, all the data and alerts from the Cloud will be updated.</string>
+    <string name="home_card_2">This tool allows you to search for a service present in the app and the next tool allows to update all the data and alerts from the Cloud.</string>
+    <string name="home_card_3">This tool allows you to reload all the data and alerts from the Cloud.</string>
+    <string name="mat_card_1">This tool allows to search and download files from the UACloud. As default, it will show first the unseen content but can be changed from the tools on the top.</string>
+    <string name="tut_card_1">This tool allows you to read/make Mentorships. By default it will show the unread ones but can be changed from the tools at the top.</string>
+    <string name="tut_card_2">This button allows to create a new Mentorship. You can create mentorships from the \"Teachers\" menu too.</string>
+
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/pdata"
+        android:key="personal_category">
+
+        <Preference
+            android:key="full_name"
+            android:title="Ricardo Moya Mejias"
+            android:summary="rmm156@alu.ua.es" />
+
+        <Preference
+            android:key="logoutnow"
+            android:title="@string/logout"
+            android:summary="@string/clogout"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/gdata"
+        android:key="sync_category">
+
+        <CheckBoxPreference
+            android:key="notif"
+            android:summary="@string/wnot"
+            android:title="@string/abn"
+            android:defaultValue="true"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/custom"
+        android:key="custom_category">
+
+
+        <RingtonePreference
+            android:key="notification_ringtone"
+            android:title="Notification Ringtone"
+            android:summary="@string/ringt" />
+
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Navigation"
+        android:key="custom_category">
+
+        <Preference android:title="Play Store"
+            android:summary="Vote Us">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://play.google.com/store/apps/details?id=com.onelio.myuacloud" />
+        </Preference>
+
+        <Preference android:title="Github"
+            android:summary="Visit project public Repository">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/Onelio/MyUACloud" />
+        </Preference>
+
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

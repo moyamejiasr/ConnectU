@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">ConnectUA</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="title_activity_launcher">ConnectU</string>
+    <string name="title_activity_test">Evaluación</string>
+    <string name="title_activity_notas">UANotas</string>
+    <string name="filter_by">Filtrado por</string>
+    <string name="subject">Asignatura</string>
+    <string name="type">Tipo</string>
+    <string name="year">Año</string>
+    <string name="password">Contraseña</string>
+    <string name="app_ua_test"> (v) UA Evaluacion</string>
+    <string name="app_ua_tutorial"> (v) UA Tutorias</string>
+    <string name="app_ua_teachingmateial"> (v) Materiales docentes</string>
+    <string name="app_ua_announces"> (v) Anuncios</string>
+    <string name="published_in"> Publicado en</string>
+    <string name="you_have">Tienes </string>
+    <string name="pending_files"> archivo(s) pendientes.</string>
+    <string name="pending_notifications"> notificaciones pendientes</string>
+    <string name="news"> novedades</string>
+    <string name="loading_wait">Cargando, Espere...</string>
+    <string name="loading_waite">Cargando, Esto puede tardar un poco...</string>
+    <string name="loading_waitt">Cargando perfiles, Esto puede tardar un poco...</string>
+    <string name="loading_waith">Cargando horario del mes, Espere...</string>
+    <string name="error_password">Error, Email o contraseña no coinciden.</string>
+    <string name="error_connect">Error, No se ha podido conectar con UACloud, reinicia la App.</string>
+    <string name="error_unknown">Error desconocido!</string>
+    <string name="again_exit">Pulsa de nuevo para salir de la App.</string>
+    <string name="incoming">Próximos</string>
+    <string name="previous">Anteriores</string>
+    <string name="all">Todos</string>
+    <string name="mat">Materiales</string>
+    <string name="share">Compartir</string>
+    <string name="couldnt_download">No se ha podido descargar el archivo</string>
+    <string name="download_cancel">Descarga cancelada!, se necesitan permisos de almacenamiento, Por favor acepta e intenta de nuevo.</string>
+    <string name="closed">Cerrado</string>
+    <string name="open">Abierto</string>
+    <string name="from">De </string>
+    <string name="at"> a </string>
+    <string name="closed1" translatable="false">Anteriores</string>
+    <string name="by">Por</string>
+    <string name="to">Para</string>
+    <string name="myself">Yo</string>
+    <string name="beta">Vota y comparte la app en la Play Store!</string>
+    <string name="pending">Pendiente</string>
+    <string name="ssubject">Selecciona asignatura:</string>
+    <string name="steacher">Selecciona profesor:</string>
+    <string name="ititle">Inserte asunto:</string>
+    <string name="notnoread">No hay tutorías sin leer</string>
+    <string name="state">Estado:</string>
+    <string name="unseen_not">nuevas notificaciones.</string>
+    <string name="calification">Nota:</string>
+
+    <string-array name="app_names">
+        <item>Anuncios</item>
+        <item>Materiales</item>
+        <item>Profesores</item>
+        <item>Tutorías</item>
+        <item>Moodle</item>
+        <item>Expediente</item>
+        <item>Evaluación</item>
+        <item>Horario</item>
+    </string-array>
+    <string name="title_activity_tutoria">Tutoria</string>
+    <string name="teacher">Profesor</string>
+    <string name="rlogout">¿ Realmente deseas desconectarte ?</string>
+    <string name="logout">Desconectarse</string>
+    <string name="clogout">Click aquí si deseas desconectarte de la app.</string>
+    <string name="pdata">Informacion personal</string>
+    <string name="gdata">Opciones generales</string>
+    <string name="abn">Permitir notificaciones</string>
+    <string name="wnot">Con esta opcion permites a la app notificarte de cualquier cambio entre las 8 y 23 horas.</string>
+    <string name="custom">Personalizacion</string>
+    <string name="ringt">Personaliza el Ringtone</string>
+    <string name="about1">App desarrollada por un estudiante de la UA con la intención de facilitar el manejo del UACLOUD. Este proyecto no está relacionado con la universidad de ninguna forma y ha sido desarrollada por personas ajenas a esta.</string>
+    <string name="about">Acerca de</string>
+    <string name="about2">Este proyecto es OpenSource con la intención de ser transparente y seguro. Puede ser encontrado aquí:</string>
+    <string name="nota">NOTA</string>
+    <string name="error_connect_title">ConnectU Alert, Error:</string>
+    <string name="error_format">Error, formato desconocido. Por favor reinicia la App</string>
+    <string name="error_defTitle" translatable="false">ConnectU Alert</string>
+    <string name="home">Inicio</string>
+    <string name="account">Cuenta</string>
+    <string name="settings">Configuración</string>
+    <string name="contact">Contacto</string>
+    <string name="title_activity_teachers_view">Profesor</string>
+    <string name="activity_image_trans" translatable="false">activity_image_transition</string>
+    <string name="activity_text_trans" translatable="false">activity_text_transition</string>
+    <string name="activity_mixed_trans" translatable="false">activity_mixed_transition</string>
+    <string name="fragment_image_trans" translatable="false">fragment_image_transition</string>
+
+    <string name="disclaimer"><![CDATA[<h2><span style="color: #ff0000;"><strong>&iexcl;&iexcl;&iexcl;APP NO OFICIAL, DESARROLLADA POR ESTUDIANTES!!!</strong></span></h2>
+<h2><span style="color: #ff0000;"><strong>&iexcl;&iexcl;LEER MENSAJE DE CONDICIONES DE USO!!</strong></span></h2>
+<h3><span style="color: #ff6600;"><strong>-Respecto a la App:</strong></span></h3>
+<p>La app aqu&iacute; expuesta no es oficial y no est&aacute; vinculada de ninguna forma con la Universidad de Alicante.</p>
+<p>Los desarrolladores no se hacen responsables de posibles datos errados o informaci&oacute;n desactualizada o mal expuesta.</p>
+<p>Al instalar e iniciar esta app en tu m&oacute;vil, est&aacute;s usando una versi&oacute;n que se encuentra en continuo desarrollo y que puede contener bugs y datos err&oacute;neos o incluso no funcionar.</p>
+<p>Esta app es gratuita y en ning&uacute;n momento los desarrolladores se ven obligados a aportar una versi&oacute;n 100% funcional de la misma.</p>
+<p>Esta app pide permisos para controlar las conexiones de red y administrar el almacenamiento con el objetivo de acceder al UACloud y descargar y almacenar contenido all&iacute; presente.</p>
+<h3><span style="color: #ff6600;"><strong>-Respecto a la cuenta de usuario:</strong></span></h3>
+<p>Con el objetivo de mantener seguras dentro de lo posible las cuentas de los usuarios, estas en ning&uacute;n momento salen del dispositivo a servidores de terceros (Si lo hacen a la propia UACloud), sino que son almacenadas en una base de datos dentro del directorio propio de la app para ser usadas en cada conexi&oacute;n al UACloud.</p>
+<p>A pesar de esto, los desarrolladores no se hacen cargo de p&eacute;rdida o robo de los datos dentro del entorno de la propia app.</p>
+<h3><span style="color: #ff6600;"><strong>-Respecto a las condiciones:</strong></span></h3>
+<p>Estas condiciones pueden cambiar si fuera necesario, en cuyo caso los desarrolladores se reservan el derecho de implementar dichos cambios sin previo aviso y el hecho de no conocerlas no excluye del cumplimiento de las mismas.</p>]]></string>
+    <string name="home_card_1">Aquí podrás acceder a cada uno de los aplicativos de UACloud. También podrás actualizar la información del perfil y alertas desplazando el dedo desde el centro de la pantalla hacia abajo.</string>
+    <string name="home_card_2">Esta herramienta permite buscar un aplicativo de los existentes actualmente en la app y la herramienta de la derecha permite actualizar toda la información y alertas de UACloud.</string>
+    <string name="home_card_3">Esta herramienta permite recargar la información del UACloud así como las alertas.</string>
+    <string name="mat_card_1">Este aplicativo permite buscar material desde el UACloud y descargarlo o abrirlo. Por defecto carga el material aun no abierto pero puede cambiarse desde las herramientas de arriba.</string>
+    <string name="tut_card_1">Este aplicativo permite leer tutorías de tus profesores y escribir nuevas. Por defecto carga las tutorías aun no leidas pero puede cambiarse desde las herramientas de arriba.</string>
+    <string name="tut_card_2">Mediante este botón pueden crearse nuevas tutorías aunque también pueden ser creadas desde el aplicativo \"Profesores\"</string>
+
+
+</resources>

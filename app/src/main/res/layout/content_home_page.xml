@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+xmlns:sothree="http://schemas.android.com/apk/res-auto"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/sliding_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:gravity="bottom"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:context="com.onelio.connectu.HomePage"
+tools:showIn="@layout/app_bar_home_page"
+sothree:umanoPanelHeight="68dp"
+sothree:umanoShadowHeight="4dp"
+sothree:umanoParallaxOffset="100dp"
+sothree:umanoDragView="@+id/dragView"
+sothree:umanoOverlay="true"
+sothree:umanoScrollableView="@+id/list">
+
+<!-- MAIN CONTENT -->
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/activity_main_swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:paddingBottom="50dp"
+        android:layout_height="wrap_content">
+
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:numColumns="3"
+            android:animateLayoutChanges="true"
+            android:verticalSpacing="24dp"
+            android:horizontalSpacing="14dp"
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</FrameLayout>
+
+<!-- SLIDING LAYOUT -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="false"
+    android:id="@+id/dragView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/llayout"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/advw"/>
+            <RelativeLayout
+                android:layout_width="18dp"
+                android:layout_marginBottom="-10dp"
+                android:layout_marginLeft="-20dp"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="18dp">
+                <TextView
+                    android:layout_width="20dp"
+                    android:gravity="center"
+                    android:layout_height="20dp"
+                    android:textSize="15dp"
+                    android:id="@+id/nottext"
+                    android:text="0"
+                    android:textColor="#ffffff"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/not_big_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="17sp"
+            android:text="Tienes 0 notificaciones pendientes"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:text="@string/app_ua_announces"/>
+            <ListView
+                android:id="@+id/anlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/app_ua_teachingmateial"/>
+            <ListView
+                android:id="@+id/matlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/app_ua_tutorial"/>
+            <ListView
+                android:id="@+id/tutlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/app_ua_test"/>
+            <ListView
+                android:id="@+id/evlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+

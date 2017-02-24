@@ -14,11 +14,11 @@
     <item
         android:id="@+id/action_funseen"
         android:orderInCategory="100"
-        android:title="Tutorias pendientes"
+        android:title="@string/pending_mentorship"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_fseen"
         android:orderInCategory="100"
-        android:title="Todas las tutorias"
+        android:title="@string/all_mentorships"
         app:showAsAction="never" />
 </menu>

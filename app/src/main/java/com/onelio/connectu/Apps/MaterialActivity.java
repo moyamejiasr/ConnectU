@@ -150,7 +150,7 @@ public class MaterialActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onResponse(Call call, Response response) throws IOException {
-                                        final File folderd = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/MyUACloud");
+                                        final File folderd = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/ConnectU");
                                         if (!folderd.exists()) {
                                             folderd.mkdirs();
                                         }
@@ -162,14 +162,14 @@ public class MaterialActivity extends AppCompatActivity {
                                             MaterialActivity.this.runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    Toast.makeText(getApplicationContext(), "Guardado en Descargas/MyUACloud!", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(), getString(R.string.file_will_save_in), Toast.LENGTH_LONG).show();
                                                 }
                                             });
                                         } else {
                                             MaterialActivity.this.runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    Toast.makeText(getApplicationContext(), "No se ha podido descargar el archivo", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(), getString(R.string.couldnt_download), Toast.LENGTH_LONG).show();
                                                 }
                                             });
                                         }
@@ -241,7 +241,7 @@ public class MaterialActivity extends AppCompatActivity {
                                             MaterialActivity.this.runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    Toast.makeText(getApplicationContext(), "No se ha podido descargar el archivo", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(), getString(R.string.couldnt_download), Toast.LENGTH_LONG).show();
                                                 }
                                             });
                                         }

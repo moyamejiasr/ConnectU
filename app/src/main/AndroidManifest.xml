@@ -91,12 +91,15 @@
         <activity android:name=".AccountActivity" />
         <activity
             android:name=".Apps.Profesores.TeachersActivity"
-            android:label="@string/teacher" />
+            android:label="@string/teachers" />
         <activity
             android:name=".Apps.Profesores.TeachersViewActivity"
+            android:label="@string/teacher"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Apps.Anuncios.AnunciosViewActivity" />
-        <activity android:name=".Apps.Expediente.ExpedienteActivity"></activity>
+        <activity android:name=".Apps.Anuncios.AnunciosViewActivity"
+            android:label="@string/a_view"/>
+        <activity android:name=".Apps.Expediente.ExpedienteActivity"
+            android:label="@string/expediente"></activity>
         <activity android:name=".TestActivity"></activity>
     </application>
 

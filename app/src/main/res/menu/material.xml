@@ -14,11 +14,11 @@
     <item
         android:id="@+id/action_funseen"
         android:orderInCategory="100"
-        android:title="Archivos pendientes"
+        android:title="@string/pending_files_1"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_fseen"
         android:orderInCategory="100"
-        android:title="Todos los archivos"
+        android:title="@string/all_files"
         app:showAsAction="never" />
 </menu>

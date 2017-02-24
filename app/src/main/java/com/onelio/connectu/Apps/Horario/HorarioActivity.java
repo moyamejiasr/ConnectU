@@ -84,7 +84,7 @@ public class HorarioActivity extends AppCompatActivity {
                         data.add(mEvents.get(c));
                         notifyon = false;
                     }
-                    Toast.makeText(getBaseContext(), String.valueOf(mEvents.size())+ " eventos añadidos!", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getBaseContext(), String.valueOf(mEvents.size())+ " eventos añadidos!", Toast.LENGTH_LONG).show();
                 }
                 return data;
             }

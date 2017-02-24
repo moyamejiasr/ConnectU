@@ -84,11 +84,11 @@ public class WebViewActivity extends AppCompatActivity {
                         request.allowScanningByMediaScanner();
                         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                         request.setDestinationInExternalPublicDir(
-                                Environment.DIRECTORY_DOWNLOADS + "/MyUACloud/", URLUtil.guessFileName(
+                                Environment.DIRECTORY_DOWNLOADS + "/ConnectU/", URLUtil.guessFileName(
                                         url, contentDisposition, mimetype));
                         DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
                         dm.enqueue(request);
-                        Toast.makeText(getApplicationContext(), "El archivo se guardará en la carpeta Downloads/MyUACloud!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.file_will_save_in), Toast.LENGTH_LONG).show();
                     }
                 }
             });

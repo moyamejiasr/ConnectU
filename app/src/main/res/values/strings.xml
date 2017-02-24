@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">ConnectUA</string>
+    <string name="app_name">ConnectU</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="action_settings" translatable="false">Settings</string>
+    <string name="action_settings">Configuración</string>
     <string name="title_activity_launcher">ConnectU</string>
     <string name="title_activity_test">Evaluación</string>
     <string name="title_activity_notas">UANotas</string>
@@ -111,6 +111,33 @@
     <string name="mat_card_1">Este aplicativo permite buscar material desde el UACloud y descargarlo o abrirlo. Por defecto carga el material aun no abierto pero puede cambiarse desde las herramientas de arriba.</string>
     <string name="tut_card_1">Este aplicativo permite leer tutorías de tus profesores y escribir nuevas. Por defecto carga las tutorías aun no leidas pero puede cambiarse desde las herramientas de arriba.</string>
     <string name="tut_card_2">Mediante este botón pueden crearse nuevas tutorías aunque también pueden ser creadas desde el aplicativo \"Profesores\"</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="down_file">Descargar Archivo</string>
+    <string name="share_file">Compartir Archivo</string>
+    <string name="open_file">Abrir Archivo</string>
+    <string name="reload_page">Actualizar Página</string>
+    <string name="all_files">Todos los archivos</string>
+    <string name="pending_files_1">Archivos pendientes</string>
+    <string name="pending_mentorship">Tutorias pendientes</string>
+    <string name="all_mentorships">Todas las tutorias</string>
+    <string name="expediente">Expediente</string>
+    <string name="a_view">Visor de Anuncios</string>
+    <string name="teachers">Profesores</string>
+    <string name="scr1_tit">Rápida</string>
+    <string name="scr1_content">ConnectU ha sido diseñada de forma nativa para android, lo cual la hace fluida y libre de cuelgues.</string>
+    <string name="scr2_tit">Facil de usar</string>
+    <string name="scr2_content">ConnectU está en continuo desarrollo y gracias al feedback de los usarios podemos hacer una versión cada vez más y más intuitiva.</string>
+    <string name="scr3_tit">Práctica</string>
+    <string name="scr3_content">ConnectU ha sido diseñada con la intención de aportar una herramienta de rápido acceso al usuario en su día a día perfectamente compatible con cualquier otra.</string>
+    <string name="error_conditions">Error, Tienes que aceptar las condiciones de uso para poder conectarte.</string>
+    <string name="accept">Acepto</string>
+    <string name="deny">No acepto</string>
+    <string name="like_app">Parece que de verdad te gusta esta app, pues la has usado %totalLaunchCount% veces! ¿Por que no te animas y nos comentas tu experiencia?</string>
+    <string name="rate_app">Puntua la app!</string>
+    <string name="later">Mas tarde</string>
+    <string name="never">Nunca :`C</string>
+    <string name="file_will_save_in">El archivo se guardará en la carpeta Downloads/ConnectU!</string>
 
 
 </resources>

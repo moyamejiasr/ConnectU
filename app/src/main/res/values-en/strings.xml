@@ -37,7 +37,7 @@
         <item>Announces</item>
         <item>Materials</item>
         <item>Teachers</item>
-        <item>Tutorial</item>
+        <item>Mentorship</item>
         <item>Moodle</item>
         <item>Results</item>
         <item>Test</item>
@@ -89,5 +89,32 @@
     <string name="mat_card_1">This tool allows to search and download files from the UACloud. As default, it will show first the unseen content but can be changed from the tools on the top.</string>
     <string name="tut_card_1">This tool allows you to read/make Mentorships. By default it will show the unread ones but can be changed from the tools at the top.</string>
     <string name="tut_card_2">This button allows to create a new Mentorship. You can create mentorships from the \"Teachers\" menu too.</string>
+    <string name="action_settings">Settings</string>
+    <string name="a-view">Announces view</string>
+    <string name="accept">Accept</string>
+    <string name="all_files">All files</string>
+    <string name="all_mentorships">All mentorships</string>
+    <string name="deny">Decline</string>
+    <string name="down_file">Download file</string>
+    <string name="error_conditions">Error, you need to accept the conditions in order to connect.</string>
+    <string name="expediente">Academic records</string>
+    <string name="file_will_save_in">The file will be saved to the folder Downloads/ConnectU!</string>
+    <string name="hello_blank_fragment">Hi</string>
+    <string name="later">Later</string>
+    <string name="like_app">Seems like you really like the app, cause you have used it like %totalLaunchCount% times!, Why dont you come and share your experience?</string>
+    <string name="never">Never :`C</string>
+    <string name="open_file">Open file</string>
+    <string name="pending_files_1">Pending files</string>
+    <string name="pending_mentorship">Pending mentorships</string>
+    <string name="rate_app">Rate App!</string>
+    <string name="reload_page">Update Page</string>
+    <string name="scr1_content">ConnectU has been developed in native android, si it\'s more fluid and responsive.</string>
+    <string name="scr1_tit">Faster</string>
+    <string name="scr2_content">ConnectU is always been developed and because of that and the users feedback we can make a more user-friendly version.</string>
+    <string name="scr2_tit">User-friendly</string>
+    <string name="scr3_content">ConnectU has been developed with the idea of giving a fast tool to manage access to the UACloud in an easy way.</string>
+    <string name="scr3_tit">Practical</string>
+    <string name="share_file">Share files</string>
+    <string name="teachers">Teachers</string>
 
 </resources>

@@ -1,13 +1,19 @@
 package com.onelio.connectu;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -17,12 +23,16 @@ import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.Database.RealmManager;
 import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
+import com.ramotion.paperonboarding.PaperOnboardingFragment;
+import com.ramotion.paperonboarding.PaperOnboardingPage;
+import com.ramotion.paperonboarding.listeners.PaperOnboardingOnRightOutListener;
 
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import okhttp3.*;
 
@@ -30,6 +40,51 @@ public class LoginActivity extends AppCompatActivity {
 
     //Variables
     boolean isBackPressedOnce = false;
+
+    private FragmentManager fragmentManager;
+
+    void showIntro() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        PaperOnboardingPage scr1 = new PaperOnboardingPage(getString(R.string.scr1_tit),
+                getString(R.string.scr1_content),
+                Color.parseColor("#0091EA"), R.drawable.book, R.drawable.action_home);
+        PaperOnboardingPage scr2 = new PaperOnboardingPage(getString(R.string.scr2_tit),
+                getString(R.string.scr2_content),
+                Color.parseColor("#FF5722"), R.drawable.clouds, R.drawable.action_home);
+        PaperOnboardingPage scr3 = new PaperOnboardingPage(getString(R.string.scr3_tit),
+                getString(R.string.scr3_content),
+                Color.parseColor("#26A69A"), R.drawable.leaf, R.drawable.action_home);
+
+        ArrayList<PaperOnboardingPage> elements = new ArrayList<>();
+        elements.add(scr1);
+        elements.add(scr2);
+        elements.add(scr3);
+
+        fragmentManager = getSupportFragmentManager();
+        PaperOnboardingFragment onBoardingFragment = PaperOnboardingFragment.newInstance(elements);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, onBoardingFragment);
+        fragmentTransaction.commit();
+        onBoardingFragment.setOnRightOutListener(new PaperOnboardingOnRightOutListener() {
+            @Override
+            public void onRightOut() {
+                LoginActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(getApplication(), LauncherActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                     onButtonClick();
                 } else {
                     AlertManager alert = new AlertManager(LoginActivity.this);
-                    alert.setMessage(getString(R.string.app_name), "Error, Tienes que aceptar las condiciones de uso para poder conectarte.");
+                    alert.setMessage(getString(R.string.app_name), getString(R.string.error_conditions));
                     alert.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
                         @Override
                         public void onClick(boolean isPositive) {
@@ -70,13 +125,13 @@ public class LoginActivity extends AppCompatActivity {
                     AlertManager alert = new AlertManager(LoginActivity.this);
                     alert.setCancelable(false);
                     alert.setMessage(getString(R.string.app_name), Html.fromHtml(getString(R.string.disclaimer)));
-                    alert.setPositiveButton("Acepto", new AlertManager.AlertCallBack() {
+                    alert.setPositiveButton(getString(R.string.accept), new AlertManager.AlertCallBack() {
                         @Override
                         public void onClick(boolean isPositive) {
                             checkAccept.setChecked(true);
                         }
                     });
-                    alert.setNegativeButton("No Acepto", new AlertManager.AlertCallBack() {
+                    alert.setNegativeButton(getString(R.string.deny), new AlertManager.AlertCallBack() {
                         @Override
                         public void onClick(boolean isPositive) {
                             checkAccept.setChecked(false);
@@ -143,10 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                         realm.modifyOption("username", Common.loginUsername);
                         realm.modifyOption("pass", Common.loginPassword);
                         realm.deleteRealmInstance();
-                        Intent intent = new Intent(getApplication(), LauncherActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+                        showIntro();
                     } else {
                         LoginActivity.this.runOnUiThread(new Runnable() {
                             @Override

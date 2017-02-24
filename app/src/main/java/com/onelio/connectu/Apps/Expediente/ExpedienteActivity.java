@@ -14,6 +14,9 @@ import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -21,6 +24,7 @@ import org.jsoup.select.Elements;
 public class ExpedienteActivity extends AppCompatActivity {
 
     Elements elements;
+    JSONArray jarray = new JSONArray();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +32,6 @@ public class ExpedienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expediente);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        AlertManager alert = new AlertManager(ExpedienteActivity.this);
-        alert.setIcon(R.mipmap.ic_launcher);
-        alert.setMessage(getString(R.string.app_name), "This app is still in development and could not work as expected");
         getCarrera();
     }
 
@@ -71,7 +72,7 @@ public class ExpedienteActivity extends AppCompatActivity {
         //Building dialog
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(ExpedienteActivity.this);
         builderSingle.setIcon(R.mipmap.ic_launcher);
-        builderSingle.setTitle("Selecciona una opción:-");
+        builderSingle.setTitle(getString(R.string.select));
 
         builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -97,16 +98,22 @@ public class ExpedienteActivity extends AppCompatActivity {
             public void onNavigationComplete(boolean isSuccessful, String body) {
                 if (isSuccessful) {
                     Document doc  = Jsoup.parse(body);
-                    Elements signatures = doc.select("div.NomAsi");
-                    Elements notes = doc.select("div.container");
-                    final String html = notes.get(1).html();
-                    ExpedienteActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            TextView text = (TextView)findViewById(R.id.content);
-                            text.setText(Html.fromHtml(html));
+                    Elements test = doc.select("div.campoDato");
+                    JSONObject jdata = new JSONObject();
+
+                    for (int i = 0; i < test.size()/7; i++) {
+                        try {
+                            int cpunt = i*7;
+                            jdata.put("sig_id", test.get(cpunt).text());
+                            jdata.put("sig_name", test.get(cpunt + 1).text());
+                            jdata.put("sig_type", test.get(cpunt + 2).text());
+                            jdata.put("convocat", test.get(cpunt + 5).text());
+                            jdata.put("nota", test.get(cpunt + 6).text());
+                            jarray.put(jdata);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    });
+                    }
                 }
             }
         });

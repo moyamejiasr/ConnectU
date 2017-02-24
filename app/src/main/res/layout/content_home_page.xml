@@ -40,7 +40,7 @@ sothree:umanoScrollableView="@+id/list">
             android:gravity="top"
             android:numColumns="3"
             android:animateLayoutChanges="true"
-            android:verticalSpacing="24dp"
+            android:verticalSpacing="14dp"
             android:horizontalSpacing="14dp"
             />
 

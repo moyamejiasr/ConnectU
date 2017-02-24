@@ -39,7 +39,7 @@
         <item>Teachers</item>
         <item>Mentorship</item>
         <item>Moodle</item>
-        <item>Results</item>
+        <item>Academic Records</item>
         <item>Test</item>
         <item>Schedule</item>
     </string-array>
@@ -108,7 +108,7 @@
     <string name="pending_mentorship">Pending mentorships</string>
     <string name="rate_app">Rate App!</string>
     <string name="reload_page">Update Page</string>
-    <string name="scr1_content">ConnectU has been developed in native android, si it\'s more fluid and responsive.</string>
+    <string name="scr1_content">ConnectU has been developed in native android and it\'s more fluid and responsive.</string>
     <string name="scr1_tit">Faster</string>
     <string name="scr2_content">ConnectU is always been developed and because of that and the users feedback we can make a more user-friendly version.</string>
     <string name="scr2_tit">User-friendly</string>
@@ -117,5 +117,6 @@
     <string name="share_file">Share files</string>
     <string name="teachers">Teachers</string>
     <string name="like_app_1">times!, Why dont you come and share your experience?</string>
+    <string name="select">Select an option</string>
 
 </resources>

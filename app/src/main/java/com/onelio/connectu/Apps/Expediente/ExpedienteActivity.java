@@ -1,15 +1,27 @@
 package com.onelio.connectu.Apps.Expediente;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.GridLayoutAnimationController;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.onelio.connectu.API.UAWebService;
+import com.onelio.connectu.Apps.Tutorias.TutoriaActivity;
+import com.onelio.connectu.Apps.Tutorias.TutoriaAdapter;
+import com.onelio.connectu.Apps.Tutorias.TutoriaViewActivity;
+import com.onelio.connectu.Common;
 import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.R;
@@ -21,10 +33,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExpedienteActivity extends AppCompatActivity {
 
     Elements elements;
-    JSONArray jarray = new JSONArray();
+    ExpedienteAdapter Adapter;
+    List<JSONObject> jarray = new ArrayList<>();
+    String cname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +101,7 @@ public class ExpedienteActivity extends AppCompatActivity {
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                cname = arrayAdapter.getItem(which);
                 String strURL = elements.get(which).select("button.btn").attr("onclick");
                 strURL = strURL.substring(strURL.indexOf("'") + 1, strURL.length() - 1);
                 loadPage("https://cvnet.cpd.ua.es" + strURL);
@@ -99,22 +117,44 @@ public class ExpedienteActivity extends AppCompatActivity {
                 if (isSuccessful) {
                     Document doc  = Jsoup.parse(body);
                     Elements test = doc.select("div.campoDato");
-                    JSONObject jdata = new JSONObject();
 
                     for (int i = 0; i < test.size()/7; i++) {
                         try {
                             int cpunt = i*7;
+                            JSONObject jdata = new JSONObject();
                             jdata.put("sig_id", test.get(cpunt).text());
                             jdata.put("sig_name", test.get(cpunt + 1).text());
                             jdata.put("sig_type", test.get(cpunt + 2).text());
                             jdata.put("convocat", test.get(cpunt + 5).text());
                             jdata.put("nota", test.get(cpunt + 6).text());
-                            jarray.put(jdata);
+                            jarray.add(jdata);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
+                    putData();
                 }
+            }
+        });
+    }
+
+    void putData() {
+        ExpedienteActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView name = (TextView)findViewById(R.id.name);
+                TextView carrer = (TextView)findViewById(R.id.carrer);
+                name.setText(Common.name);
+                carrer.setText(cname);
+
+                GridView gridView = (GridView) findViewById(R.id.gridview);
+                Adapter = new ExpedienteAdapter(getBaseContext(), jarray);
+
+                Animation animation = AnimationUtils.loadAnimation(getBaseContext(),R.anim.grid_item_anim);
+                GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .2f, .2f);
+                gridView.setVisibility(View.VISIBLE);
+                gridView.setAdapter(Adapter);
+                gridView.setLayoutAnimation(controller);
             }
         });
     }

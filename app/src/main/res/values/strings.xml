@@ -12,8 +12,8 @@
     <string name="type">Tipo</string>
     <string name="year">Año</string>
     <string name="password">Contraseña</string>
-    <string name="app_ua_test"> (v) UA Evaluacion</string>
-    <string name="app_ua_tutorial"> (v) UA Tutorias</string>
+    <string name="app_ua_test"> (v) UA Evaluación</string>
+    <string name="app_ua_tutorial"> (v) UA Tutorías</string>
     <string name="app_ua_teachingmateial"> (v) Materiales docentes</string>
     <string name="app_ua_announces"> (v) Anuncios</string>
     <string name="published_in"> Publicado en</string>
@@ -64,7 +64,7 @@
         <item>Evaluación</item>
         <item>Horario</item>
     </string-array>
-    <string name="title_activity_tutoria">Tutoria</string>
+    <string name="title_activity_tutoria">Tutoría</string>
     <string name="teacher">Profesor</string>
     <string name="rlogout">¿ Realmente deseas desconectarte ?</string>
     <string name="logout">Desconectarse</string>
@@ -72,7 +72,7 @@
     <string name="pdata">Informacion personal</string>
     <string name="gdata">Opciones generales</string>
     <string name="abn">Permitir notificaciones</string>
-    <string name="wnot">Con esta opcion permites a la app notificarte de cualquier cambio entre las 8 y 23 horas.</string>
+    <string name="wnot">Con esta opción permites a la app notificarte de cualquier cambio entre las 8 y 23 horas.</string>
     <string name="custom">Personalizacion</string>
     <string name="ringt">Personaliza el Ringtone</string>
     <string name="about1">App desarrollada por un estudiante de la UA con la intención de facilitar el manejo del UACLOUD. Este proyecto no está relacionado con la universidad de ninguna forma y ha sido desarrollada por personas ajenas a esta.</string>

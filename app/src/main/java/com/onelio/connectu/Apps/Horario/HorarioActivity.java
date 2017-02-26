@@ -14,6 +14,7 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.onelio.connectu.API.UAWebService;
+import com.onelio.connectu.Database.RealmManager;
 import com.onelio.connectu.R;
 
 import org.json.JSONArray;
@@ -41,6 +42,32 @@ public class HorarioActivity extends AppCompatActivity {
     ArrayList<Integer> checked = new ArrayList<>();
     int checkedReally;
 
+    void getAllMatch() {
+        RealmManager realm = new RealmManager(this);
+        if (realm.onOptionExist("cdoc")) {
+            int cdoc = Integer.valueOf(realm.getOption("cdoc"));
+            int ceva = Integer.valueOf(realm.getOption("ceva"));
+            int cexa = Integer.valueOf(realm.getOption("cexa"));
+            int cfest = Integer.valueOf(realm.getOption("cfest"));
+            checked.add(cdoc);
+            checked.add(ceva);
+            checked.add(cexa);
+            checked.add(cfest);
+            checkedReally = cdoc + ceva + cexa + cfest;
+        } else {
+            realm.createOption("cdoc", "1");
+            realm.createOption("ceva", "1");
+            realm.createOption("cexa", "1");
+            realm.createOption("cfest", "0");
+            checked.add(1); //CDOC
+            checked.add(1); //CEVA
+            checked.add(1); //CEXA
+            checked.add(0); //CFEST
+            checkedReally = 3;
+        }
+        realm.deleteRealmInstance();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +81,8 @@ public class HorarioActivity extends AppCompatActivity {
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
 
-        checked.add(1); //CDOC
-        checked.add(1); //CEVA
-        checked.add(1); //CEXA
-        checked.add(0); //CFEST
-        checkedReally = 3;
+        //Get Options
+        getAllMatch();
 
         MonthLoader.MonthChangeListener mMonthChangeListener = new MonthLoader.MonthChangeListener() {
             @Override
@@ -105,14 +129,22 @@ public class HorarioActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.horario, menu);
         MenuItem cdoc = menu.findItem(R.id.cdoc);
-        cdoc.setChecked(true);
         MenuItem ceva = menu.findItem(R.id.ceva);
-        ceva.setChecked(true);
         MenuItem cexa = menu.findItem(R.id.cexa);
-        cexa.setChecked(true);
         MenuItem cfest = menu.findItem(R.id.cfest);
-        cfest.setChecked(false);
+
+        if (checked.get(0) == 1) { cdoc.setChecked(true); }
+        if (checked.get(1) == 1) { ceva.setChecked(true); }
+        if (checked.get(2) == 1) { cexa.setChecked(true); }
+        if (checked.get(3) == 1) { cfest.setChecked(true); }
+
         return true;
+    }
+
+    void modifyMatch(String name, int value) {
+        RealmManager realm = new RealmManager(this);
+        realm.modifyOption(name, String.valueOf(value));
+        realm.deleteRealmInstance();
     }
 
     @Override
@@ -134,33 +166,41 @@ public class HorarioActivity extends AppCompatActivity {
 
         if (id == R.id.cdoc && item.isChecked()) {
             checked.set(0, 1);
+            modifyMatch("cdoc", 1);
             checkedReally++;
             mWeekView.notifyDatasetChanged();
         } else if (id == R.id.cdoc && !item.isChecked()) {
             checked.set(0, 0);
+            modifyMatch("cdoc", 0);
             checkedReally--;
             mWeekView.notifyDatasetChanged();
         } else if (id == R.id.ceva && item.isChecked()) {
             checked.set(1, 1);
+            modifyMatch("ceva", 1);
             checkedReally++;
             mWeekView.notifyDatasetChanged();
         } else if (id == R.id.ceva && !item.isChecked()) {
             checked.set(1, 0);
+            modifyMatch("ceva", 0);
             checkedReally--;
             mWeekView.notifyDatasetChanged();
         } else if (id == R.id.cexa && item.isChecked()) {
             checked.set(2, 1);
+            modifyMatch("cexa", 1);
             checkedReally++;
         } else if (id == R.id.cexa && !item.isChecked()) {
             checked.set(2, 0);
+            modifyMatch("cexa", 0);
             checkedReally--;
             mWeekView.notifyDatasetChanged();
         } else if (id == R.id.cfest && item.isChecked()) {
             checked.set(3, 1);
+            modifyMatch("cfest", 1);
             checkedReally++;
             mWeekView.notifyDatasetChanged();
         } else if (id == R.id.cfest && !item.isChecked()) {
             checked.set(3, 0);
+            modifyMatch("cfest", 0);
             checkedReally--;
             mWeekView.notifyDatasetChanged();
         } else {

@@ -46,6 +46,7 @@ public class WebViewActivity extends AppCompatActivity {
 
             webView = (WebView)findViewById(R.id.webView);
             webView.setWebViewClient(new WebViewClient());
+            webView.getSettings().setUserAgentString("IEMobile");
             webView.loadUrl(Common.webURL);
             WebSettings settings = webView.getSettings();
             settings.setJavaScriptEnabled(true);

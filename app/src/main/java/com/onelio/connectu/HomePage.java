@@ -179,7 +179,7 @@ public class HomePage extends AppCompatActivity
         List<String> strings = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.app_names)));
         final JSONArray array = new JSONArray();
         for (int i = 0; i < strings.size(); i++) {
-            if (strings.get(i).contains(filter)) {
+            if (DeviceManager.capFirstLetter(strings.get(i)).contains(DeviceManager.capFirstLetter(filter))) {
                 JSONObject jdata = new JSONObject();
                 try {
                     jdata.put("Id", i);
@@ -224,17 +224,27 @@ public class HomePage extends AppCompatActivity
                         break;
                     case 4:
                         Common.webName = "UAMoodle";
-                        Common.webURL = "https://moodle2016-17.ua.es/moodle/login/";
+                        Common.webURL = "https://moodle2016-17.ua.es/moodle/login/"; //TODO CHANGE MOODLE YEAR
                         startActivity(new Intent(HomePage.this, WebViewActivity.class));
                         break;
                     case 5:
-                        startActivity(new Intent(HomePage.this, ExpedienteActivity.class));
+                        startActivity(new Intent(HomePage.this, HorarioActivity.class));
                         break;
                     case 6:
                         startActivity(new Intent(HomePage.this, EvaluacionActivity.class));
                         break;
                     case 7:
-                        startActivity(new Intent(HomePage.this, HorarioActivity.class));
+                        startActivity(new Intent(HomePage.this, ExpedienteActivity.class));
+                        break;
+                    case 8:
+                        Common.webName = "UAProject";
+                        Common.webURL = "https://molins.cpd.ua.es/tfc/indexCas.php";
+                        startActivity(new Intent(HomePage.this, WebViewActivity.class));
+                        break;
+                    case 9:
+                        Common.webName = "Services";
+                        Common.webURL = "https://cv1.cpd.ua.es/webcv/ctrlzonapersonal/LoginCvCAS.asp";
+                        startActivity(new Intent(HomePage.this, WebViewActivity.class));
                         break;
                 }
             }

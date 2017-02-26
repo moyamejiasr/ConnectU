@@ -27,10 +27,10 @@ sothree:umanoScrollableView="@+id/list">
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/activity_main_swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:paddingBottom="50dp"
+        android:paddingBottom="74dp"
         android:layout_height="wrap_content">
 
         <GridView
@@ -41,7 +41,7 @@ sothree:umanoScrollableView="@+id/list">
             android:numColumns="3"
             android:animateLayoutChanges="true"
             android:verticalSpacing="14dp"
-            android:horizontalSpacing="14dp"
+            android:horizontalSpacing="7dp"
             />
 
     </android.support.v4.widget.SwipeRefreshLayout>

@@ -43,13 +43,19 @@ public class DeviceManager {
                 color = R.drawable.moodle;
                 break;
             case 5:
-                color = R.drawable.nota;
+                color = R.drawable.calendar;
                 break;
             case 6:
                 color = R.drawable.eva;
                 break;
             case 7:
-                color = R.drawable.calendar;
+                color = R.drawable.nota;
+                break;
+            case 8:
+                color = R.drawable.uaproject;
+                break;
+            case 9:
+                color = R.drawable.oservices;
                 break;
         }
         return color;
@@ -74,13 +80,19 @@ public class DeviceManager {
                 color = "#FF9800";
                 break;
             case 5:
-                color = "#E91E63";
+                color = "#00BFA5";
                 break;
             case 6:
                 color = "#00BFA5";
                 break;
             case 7:
-                color = "#00BFA5";
+                color = "#E91E63";
+                break;
+            case 8:
+                color = "#aaaaaa";
+                break;
+            case 9:
+                color = "#428bca";
                 break;
         }
         return color;

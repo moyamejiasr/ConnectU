@@ -39,9 +39,11 @@
         <item>Teachers</item>
         <item>Mentorship</item>
         <item>Moodle</item>
-        <item>Academic Records</item>
-        <item>Test</item>
         <item>Schedule</item>
+        <item>Test</item>
+        <item>Academic Records</item>
+        <item>UAProject</item>
+        <item>Other Services</item>
     </string-array>
     <string name="title_activity_test">Test</string>
     <string name="by">By</string>

@@ -60,9 +60,11 @@
         <item>Profesores</item>
         <item>Tutorías</item>
         <item>Moodle</item>
-        <item>Expediente</item>
-        <item>Evaluación</item>
         <item>Horario</item>
+        <item>Evaluación</item>
+        <item>Expediente</item>
+        <item>UAProject</item>
+        <item>Otros Servicios</item>
     </string-array>
     <string name="title_activity_tutoria">Tutoría</string>
     <string name="teacher">Profesor</string>

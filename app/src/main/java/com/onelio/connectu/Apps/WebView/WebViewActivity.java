@@ -46,10 +46,10 @@ public class WebViewActivity extends AppCompatActivity {
 
             webView = (WebView)findViewById(R.id.webView);
             webView.setWebViewClient(new WebViewClient());
-            webView.getSettings().setUserAgentString("IEMobile");
             webView.loadUrl(Common.webURL);
             WebSettings settings = webView.getSettings();
             settings.setJavaScriptEnabled(true);
+            settings.setUserAgentString("IEMobile");
             final String js = "javascript:document.getElementById('username').value = '"+Common.loginUsername+"';document.getElementById('password').value='"+Common.loginPassword+"';document.getElementsByName('submit')[0].click();";
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 webView.setWebViewClient(new WebViewClient() {

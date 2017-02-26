@@ -58,6 +58,8 @@ public class WebViewActivity extends AppCompatActivity {
                     public void onPageFinished(WebView view, String url) {
                         super.onPageFinished(view, url);
                         if (url.contains("autentica.cpd.ua.es")) {
+                            dialog.show();
+                            webView.setVisibility(View.INVISIBLE);
                             view.evaluateJavascript(js, new ValueCallback<String>() {
                                 @Override
                                 public void onReceiveValue(String s) {

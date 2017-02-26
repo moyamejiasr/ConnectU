@@ -74,6 +74,7 @@ public class Common {
     public static AdList announce;
     //WebView
     public static String webURL = "";
+    public static String webName = "";
     //Tutoria
     public static String cTitle = "DEFAULT TITLE LAYOUT";
     public static boolean isNewChat = false;

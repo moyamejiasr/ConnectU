@@ -223,6 +223,7 @@ public class HomePage extends AppCompatActivity
                         startActivity(new Intent(HomePage.this, TutoriaActivity.class));
                         break;
                     case 4:
+                        Common.webName = "UAMoodle";
                         Common.webURL = "https://moodle2016-17.ua.es/moodle/login/";
                         startActivity(new Intent(HomePage.this, WebViewActivity.class));
                         break;

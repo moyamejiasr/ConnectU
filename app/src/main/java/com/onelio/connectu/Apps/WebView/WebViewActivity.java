@@ -36,7 +36,7 @@ public class WebViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (!isLoaded){
             isLoaded = true;
-            setTitle("UAMoodle");
+            setTitle(Common.webName);
             dialog = new ProgressDialog(this);
             dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             dialog.setMessage(getString(R.string.loading_wait));
@@ -56,13 +56,16 @@ public class WebViewActivity extends AppCompatActivity {
                     @Override
                     public void onPageFinished(WebView view, String url) {
                         super.onPageFinished(view, url);
-                        view.evaluateJavascript(js, new ValueCallback<String>() {
-                            @Override
-                            public void onReceiveValue(String s) {
-                                dialog.cancel();
-                                webView.setVisibility(View.VISIBLE);
-                            }
-                        });
+                        if (url.contains("autentica.cpd.ua.es")) {
+                            view.evaluateJavascript(js, new ValueCallback<String>() {
+                                @Override
+                                public void onReceiveValue(String s) {
+                                }
+                            });
+                        } else {
+                            dialog.cancel();
+                            webView.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
             } else {

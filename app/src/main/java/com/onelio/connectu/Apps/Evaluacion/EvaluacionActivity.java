@@ -1,11 +1,16 @@
 package com.onelio.connectu.Apps.Evaluacion;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,36 +56,48 @@ public class EvaluacionActivity extends AppCompatActivity {
     JSONArray jtest;
     TestAdapter Adapter;
 
+    View dialoglayout;
+    AlertDialog alert = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluacion);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.title_activity_test));
+
         dialog = new ProgressDialog(this);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage(getString(R.string.loading_waite));
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
-        final ImageView img = (ImageView)findViewById(R.id.img);
-        img.setOnClickListener(new View.OnClickListener() {
+
+        //View filter
+        final LayoutInflater inflater = getLayoutInflater();
+        dialoglayout = inflater.inflate(R.layout.dialog_eva, null);
+        //Temp charger
+        final AlertDialog.Builder builder = new AlertDialog.Builder(EvaluacionActivity.this);
+        builder.setView(dialoglayout);
+        builder.setTitle("Prueba");
+        builder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                ExpandableLayout layout = (ExpandableLayout)findViewById(R.id.elayout);
-                if (layout.isExpanded()) {
-                    layout.close();
-                    img.setImageResource(R.drawable.calendar);
-                    setCointainers();
-                    dialog.show();
-                    doRequest();
-                } else {
-                    layout.expand();
-                    img.setImageResource(R.drawable.search);
-                }
+            public void onClick(DialogInterface dialog1, int id) {
+                //DO
+                setCointainers();
+                alert.hide();
+                dialog.show();
+                doRequest();
             }
         });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //Cancel View
+            }
+        });
+        alert = builder.create();
 
         //Set
         arrayoSel  = new ArrayAdapter<String>(EvaluacionActivity.this,  R.layout.spinner_item);
@@ -97,6 +114,26 @@ public class EvaluacionActivity extends AppCompatActivity {
         setCointainers();
 
         setYears();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.evaluacion, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.filter) {
+            alert.show();
+        } else {
+            super.onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void setCointainers() {
@@ -189,7 +226,7 @@ public class EvaluacionActivity extends AppCompatActivity {
     }
 
     public void setAdapters() {
-        Spinner sp_year = (Spinner)findViewById(R.id.sp_year);
+        Spinner sp_year = (Spinner)dialoglayout.findViewById(R.id.sp_year);
         sp_year.setAdapter(arrayoSel);
         sp_year.getBackground().setColorFilter(getResources().getColor(R.color.black_overlay), PorterDuff.Mode.SRC_ATOP);
         sp_year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -203,7 +240,7 @@ public class EvaluacionActivity extends AppCompatActivity {
 
             }
         });
-        Spinner sp_type = (Spinner)findViewById(R.id.sp_type);
+        Spinner sp_type = (Spinner)dialoglayout.findViewById(R.id.sp_type);
         sp_type.setAdapter(namepTipo);
         sp_type.getBackground().setColorFilter(getResources().getColor(R.color.black_overlay), PorterDuff.Mode.SRC_ATOP);
         sp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -217,7 +254,7 @@ public class EvaluacionActivity extends AppCompatActivity {
 
             }
         });
-        Spinner sp_sign = (Spinner)findViewById(R.id.sp_sign);
+        Spinner sp_sign = (Spinner)dialoglayout.findViewById(R.id.sp_sign);
         sp_sign.setAdapter(namepAsignatura);
         sp_sign.getBackground().setColorFilter(getResources().getColor(R.color.black_overlay), PorterDuff.Mode.SRC_ATOP);
         sp_sign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -235,7 +272,7 @@ public class EvaluacionActivity extends AppCompatActivity {
 
             }
         });
-        Spinner sp_order = (Spinner)findViewById(R.id.sp_order);
+        Spinner sp_order = (Spinner)dialoglayout.findViewById(R.id.sp_order);
         sp_order.setAdapter(namepOrden);
         sp_order.getBackground().setColorFilter(getResources().getColor(R.color.black_overlay), PorterDuff.Mode.SRC_ATOP);
         sp_order.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()

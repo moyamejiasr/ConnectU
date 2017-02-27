@@ -38,8 +38,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Apps.Anuncios.AnunciosActivity" />
         <activity
-            android:name=".Apps.Evaluacion.EvaluacionActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".Apps.Evaluacion.EvaluacionActivity" />
         <activity android:name=".Apps.WebView.WebViewActivity" />
         <activity
             android:name=".Apps.MaterialActivity"

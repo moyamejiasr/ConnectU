@@ -121,7 +121,7 @@ public class HorarioActivity extends AppCompatActivity {
             @Override
             public void onEventClick(WeekViewEvent event, RectF eventRect) {
                 //Event action
-                startActivity(new Intent(HorarioActivity.this, MapsActivity.class));
+                //startActivity(new Intent(HorarioActivity.this, MapsActivity.class));
             }
         });
 

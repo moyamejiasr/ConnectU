@@ -123,5 +123,6 @@
     <string name="filter_search">Search filter:</string>
     <string name="search">Search</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_maps">University Map</string>
 
 </resources>

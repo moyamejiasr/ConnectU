@@ -1,6 +1,7 @@
 package com.onelio.connectu.Apps.Horario;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.RectF;
@@ -120,6 +121,7 @@ public class HorarioActivity extends AppCompatActivity {
             @Override
             public void onEventClick(WeekViewEvent event, RectF eventRect) {
                 //Event action
+                startActivity(new Intent(HorarioActivity.this, MapsActivity.class));
             }
         });
 

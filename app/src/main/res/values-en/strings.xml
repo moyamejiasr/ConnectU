@@ -120,5 +120,8 @@
     <string name="teachers">Teachers</string>
     <string name="like_app_1">times!, Why dont you come and share your experience?</string>
     <string name="select">Select an option</string>
+    <string name="filter_search">Search filter:</string>
+    <string name="search">Search</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

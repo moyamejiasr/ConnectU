@@ -80,7 +80,7 @@ public class HomePage extends AppCompatActivity
     {
         RateMeMaybe rmm = new RateMeMaybe(this);
         rmm.setPromptMinimums(5, 3, 10, 4);
-        rmm.setDialogMessage(getString(R.string.like_app) + "%totalLaunchCount%" + getString(R.string.like_app_1));
+        rmm.setDialogMessage(getString(R.string.like_app) + " " + "%totalLaunchCount%" + " " + getString(R.string.like_app_1));
         rmm.setDialogTitle(getString(R.string.rate_app));
         rmm.setIcon(R.mipmap.ic_launcher);
         rmm.setPositiveBtn("Yeehaaa!");

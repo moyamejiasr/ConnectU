@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.Common;
+import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.LoginActivity;
 import com.onelio.connectu.R;
 import com.silencedut.expandablelayout.ExpandableLayout;
@@ -76,11 +77,11 @@ public class EvaluacionActivity extends AppCompatActivity {
         //View filter
         final LayoutInflater inflater = getLayoutInflater();
         dialoglayout = inflater.inflate(R.layout.dialog_eva, null);
-        //Temp charger
+        //Temp changer
         final AlertDialog.Builder builder = new AlertDialog.Builder(EvaluacionActivity.this);
         builder.setView(dialoglayout);
-        builder.setTitle("Prueba");
-        builder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.filter_search));
+        builder.setPositiveButton(getString(R.string.search), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog1, int id) {
@@ -91,7 +92,7 @@ public class EvaluacionActivity extends AppCompatActivity {
                 doRequest();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Cancel View
@@ -196,7 +197,7 @@ public class EvaluacionActivity extends AppCompatActivity {
                     for(int c = 0; c < pTipo.size(); c++) {
                         String data = pTipo.eq(c).attr("value");
                         arraypTipo.add(data);
-                        namepTipo.add(pTipo.eq(c).text());
+                        namepTipo.add(DeviceManager.capFirstLetter(pTipo.eq(c).text()));
                     }
                     defExamen = "";
                     pCodprs = doc.select("input[name=pCodprs]").attr("value");

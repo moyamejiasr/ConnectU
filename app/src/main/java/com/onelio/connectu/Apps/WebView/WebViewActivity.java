@@ -56,7 +56,6 @@ public class WebViewActivity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onPageFinished(WebView view, String url) {
-                        super.onPageFinished(view, url);
                         if (url.contains("autentica.cpd.ua.es")) {
                             dialog.show();
                             webView.setVisibility(View.INVISIBLE);
@@ -69,6 +68,7 @@ public class WebViewActivity extends AppCompatActivity {
                             dialog.cancel();
                             webView.setVisibility(View.VISIBLE);
                         }
+                        super.onPageFinished(view, url);
                     }
                 });
             } else {

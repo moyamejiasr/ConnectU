@@ -50,13 +50,13 @@
         <Preference android:title="Play Store"
             android:summary="Vote Us">
             <intent android:action="android.intent.action.VIEW"
-                android:data="https://play.google.com/store/apps/details?id=com.onelio.myuacloud" />
+                android:data="https://play.google.com/store/apps/details?id=com.onelio.connectu" />
         </Preference>
 
         <Preference android:title="Github"
             android:summary="Visit project public Repository">
             <intent android:action="android.intent.action.VIEW"
-                android:data="https://github.com/Onelio/MyUACloud" />
+                android:data="https://github.com/Onelio/ConnectU" />
         </Preference>
 
 

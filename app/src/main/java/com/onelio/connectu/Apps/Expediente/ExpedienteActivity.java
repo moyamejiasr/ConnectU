@@ -80,7 +80,7 @@ public class ExpedienteActivity extends AppCompatActivity {
 
     public void buildSelectDialog() {
         //Building data
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ExpedienteActivity.this, android.R.layout.select_dialog_singlechoice);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ExpedienteActivity.this, android.R.layout.select_dialog_item);
         for (int i = 0; i < elements.size(); i++) {
             String name = elements.get(i).select("td").first().text();
             arrayAdapter.add(DeviceManager.capFirstLetter(name));

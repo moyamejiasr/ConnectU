@@ -142,6 +142,10 @@
     <string name="file_will_save_in">El archivo se guardará en la carpeta Downloads/ConnectU!</string>
     <string name="like_app_1">veces! ¿Por que no te animas y nos comentas tu experiencia?</string>
     <string name="select">Selecciona una opción</string>
+    <string name="filter_search">Filtro de búsqueda</string>
+    <string name="search">Buscar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

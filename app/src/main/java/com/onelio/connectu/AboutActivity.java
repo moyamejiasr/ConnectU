@@ -28,7 +28,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Onelio/MyUACloud"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Onelio/ConnectU"));
         startActivity(browserIntent);
     }
 

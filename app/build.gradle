@@ -7,10 +7,9 @@ android {
         applicationId "com.onelio.connectu"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 8
+        versionName "1.0.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -39,7 +38,6 @@ dependencies {
     //Search box
     //Guide
     //Cool Intro
-    compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:support-v4:25.2.0'
     compile 'com.android.support:design:25.2.0'

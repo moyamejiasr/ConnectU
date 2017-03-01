@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HorarioActivity extends AppCompatActivity {
 
@@ -121,7 +123,9 @@ public class HorarioActivity extends AppCompatActivity {
             @Override
             public void onEventClick(WeekViewEvent event, RectF eventRect) {
                 //Event action
-                //startActivity(new Intent(HorarioActivity.this, MapsActivity.class));
+                //String uri = String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude);
+                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                //startActivity(intent);
             }
         });
 

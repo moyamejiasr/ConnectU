@@ -1,0 +1,288 @@
+package com.onelio.connectu.Device;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.AsyncTask;
+
+import com.alamkanak.weekview.WeekViewEvent;
+import com.onelio.connectu.API.UAWebService;
+import com.onelio.connectu.API.WebApi;
+import com.onelio.connectu.AboutActivity;
+import com.onelio.connectu.Apps.Horario.HorarioActivity;
+import com.onelio.connectu.Apps.Profesores.TeachersActivity;
+import com.onelio.connectu.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+/**
+ * Created by Onelio on 02/03/2017.
+ */
+
+public class UAUpdater {
+    //define callback interface
+    public interface UpdaterCallBack {
+        void onNavigationComplete(boolean isSuccessful, JSONObject data);
+    }
+
+    static JSONObject data = new JSONObject();
+    static boolean error = false;
+    static boolean completed = false;
+    //Private structures
+    static int connected = 0;
+    static JSONArray teachers = new JSONArray();
+
+    static Calendar time = Calendar.getInstance();
+    static int calCount = 0;
+    static JSONArray calendar = new JSONArray();
+
+
+
+    static void getNextCal(final Activity activity) {
+        //vars
+        String url = "";
+
+        switch (calCount) {
+            case 0:
+                url = UAWebService.CAL_DOC;
+                break;
+            case 1:
+                url = UAWebService.CAL_EVA;
+                break;
+            case 2:
+                url = UAWebService.CAL_EXA;
+                break;
+            case 3:
+                url = UAWebService.CAL_FEST;
+                break;
+        }
+
+        int month = time.get(Calendar.MONTH) + 1;
+        int year = time.get(Calendar.YEAR);
+
+        //Define range
+        Calendar start = Calendar.getInstance();
+        start.set(Calendar.DAY_OF_MONTH, 1);
+        start.set(Calendar.HOUR_OF_DAY, 1);
+        start.set(Calendar.MONTH, month - 1);
+        start.set(Calendar.YEAR, year);
+        Calendar end = Calendar.getInstance();
+        end.set(Calendar.DATE, end.getActualMaximum(Calendar.DATE));
+        end.set(Calendar.HOUR_OF_DAY, 23);
+        end.set(Calendar.MONTH, month);
+        end.set(Calendar.YEAR, year);
+
+        String finalPart = "&start=" + String.valueOf(start.getTimeInMillis()/1000) + "&end=" + String.valueOf(end.getTimeInMillis()/1000);
+
+        UAWebService.HttpWebGetRequest(activity, url + finalPart , new UAWebService.WebCallBack() {
+            @Override
+            public void onNavigationComplete(boolean isSuccessful, String body) {
+                if (isSuccessful) {
+                    try {
+                        JSONArray doc = new JSONArray(body);
+                        for(int c = 0; c < doc.length(); c++) {
+                            JSONObject event = doc.getJSONObject(c);
+                            calendar.put(event);
+                        }
+                        if (calCount < 3) {
+                            calCount++;
+                            getNextCal(activity);
+                        } else {
+                            data.put("calendar", calendar);
+                            completed = true;
+                        }
+                    } catch (JSONException e) {
+                        error = true;
+                    }
+                }
+            }
+        });
+
+    }
+
+    static void getTeachersData(final Activity activity) {
+        try {
+            final JSONArray signatures = data.getJSONArray("signatures");
+            for (int i = 0; i < signatures.length(); i++) {
+                final String date = data.getString("year");
+                final String id = signatures.getJSONObject(i).getString("id");
+                final String name = signatures.getJSONObject(i).getString("name");
+
+                final String json = "{\"Cod\":\"" + id + "\",\"Curso\":\"" + date + "\"}";
+                UAWebService.HttpWebJSONPostRequest(activity, UAWebService.TUTORIAS_G_DES, json, new UAWebService.WebCallBack() {
+                    @Override
+                    public void onNavigationComplete(boolean isSuccessful, String body) {
+                        Document doc = Jsoup.parse(body);
+                        //Get Profesor Name
+                        Elements elements = doc.select("option");
+                        final List<String> ttext = new ArrayList<String>();
+                        final List<String> tid = new ArrayList<String>();
+                        for (int i = 0; i < elements.size(); i++) {
+                            if(elements.eq(i).attr("value").length() > 0) {
+                                ttext.add(elements.eq(i).text());
+                                tid.add(elements.eq(i).attr("value"));
+                            }
+                        }
+                        UAWebService.HttpWebJSONPostRequest(activity, UAWebService.TUTORIAS_G_SIGN, json, new UAWebService.WebCallBack() {
+                            @Override
+                            public void onNavigationComplete(boolean isSuccessful, String body) {
+                                Document doc = Jsoup.parse(body);
+                                //Get Professor Img
+                                Elements elements = doc.select("div.well");
+                                final List<String> timg = new ArrayList<String>();
+                                final List<String> temail = new ArrayList<String>();
+                                final List<String> thtml = new ArrayList<String>();
+                                for (int c = 0; c < ttext.size(); c++) {
+                                    for (int i = 0; i < elements.size(); i++) {
+                                        String name = elements.eq(i).select("h4").text();
+                                        if (ttext.get(c).contains(name)) {
+                                            thtml.add(elements.eq(i).select("ul").html());
+                                            temail.add(DeviceManager.before(elements.eq(i).select("p").text(),"ua.es") + "ua.es");
+                                            timg.add(elements.eq(i).select("img").attr("src"));
+                                        }
+                                    }
+                                }
+                                if (ttext.size() == timg.size()) {
+                                    try {
+                                        for (int i = 0; i < tid.size(); i++) {
+                                            JSONObject jdata = new JSONObject();
+                                            jdata.put("id", tid.get(i));
+                                            jdata.put("name", ttext.get(i));
+                                            jdata.put("img", timg.get(i));
+                                            jdata.put("email", temail.get(i));
+                                            jdata.put("html", thtml.get(i));
+                                            jdata.put("signature_id", id);
+                                            jdata.put("signature", name);
+                                            jdata.put("date", date);
+                                            teachers.put(jdata);
+                                        }
+                                    } catch (JSONException e) {
+                                        error = true;
+                                    }
+                                }
+                                connected++;
+                                if (connected == signatures.length()) {
+                                    try {
+                                        data.put("teachers", teachers);
+                                        getNextCal(activity);
+                                    } catch (JSONException e) {
+                                        error = true;
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        } catch (JSONException e) {
+            error = true;
+        }
+    }
+    static void requestSignatures(final Activity activity) {
+        UAWebService.HttpWebGetRequest(activity, UAWebService.TUTORIAS_G_MAKE, new UAWebService.WebCallBack() {
+            @Override
+            public void onNavigationComplete(boolean isSuccessful, String body) {
+                if (isSuccessful) {
+                    Document doc = Jsoup.parse(body);
+                    //Get Signatures
+                    Elements elements = doc.select("select[id=ddlAsignatura] > option");
+                    JSONArray signatures = new JSONArray();
+                    for (int i = 0; i < elements.size(); i++) {
+                        if(elements.eq(i).attr("value").length() > 0) {
+                            JSONObject signature = new JSONObject();
+                            try {
+                                signature.put("name", elements.eq(i).text());
+                                signature.put("id", elements.eq(i).attr("value"));
+                                signatures.put(signature);
+                            } catch (JSONException e) {
+                                error = true;
+                            }
+                        }
+                    }
+                    try {
+                        data.put("signatures", signatures);
+                    } catch (JSONException e) {
+                        error = true;
+                    }
+                    getTeachersData(activity);
+                }
+            }
+        });
+    }
+    static void requestConn(final Activity activity) {
+        UAWebService.HttpWebGetRequest(activity, UAWebService.TUTORIAS, new UAWebService.WebCallBack() {
+            @Override
+            public void onNavigationComplete(boolean isSuccessful, String body) {
+                if (isSuccessful) {
+                    Document doc = Jsoup.parse(body);
+                    //Get Material
+                    Elements elements = doc.select("select[id=ddlCurso] > option");
+                    for (int i = 0; i < elements.size(); i++) {
+                        if (elements.eq(i).text().length() > 0) {
+                            if (elements.eq(i).hasAttr("selected")) {
+                                try {
+                                    data.put("year", elements.eq(i).text());
+                                } catch (JSONException e) {
+                                    error = true;
+                                }
+                            }
+                        }
+                    }
+                    requestSignatures(activity);
+                }
+            }
+        });
+    }
+
+    static public class updateDataResult extends AsyncTask<Void,Void,Void>{ //change Object to required type
+        private UpdaterCallBack listener;
+        private Activity activity;
+
+        public updateDataResult(Activity activity, UpdaterCallBack listener){
+            this.listener=listener;
+            this.activity=activity;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            //Restart
+            data = new JSONObject();
+            error = false;
+            completed = false;
+            connected = 0;
+            teachers = new JSONArray();
+
+            calCount = 0;
+
+            //Connect
+            requestConn(activity);
+            while (!completed || error) {}
+            return null;
+        }
+
+        protected void onPostExecute(Void s){
+            // your stuff
+            listener.onNavigationComplete(!error, data);
+        }
+    }
+
+    //Get Method
+
+
+}

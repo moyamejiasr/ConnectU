@@ -2,6 +2,7 @@ package com.onelio.connectu;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.onelio.connectu.API.WebApi;
+import com.onelio.connectu.Device.UAUpdater;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +32,20 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Onelio/ConnectU"));
-        startActivity(browserIntent);
+        //TODO : RETURN HERE
+        Toast.makeText(getBaseContext(), "STARTED!", Toast.LENGTH_LONG).show();
+        new UAUpdater.updateDataResult(AboutActivity.this, new UAUpdater.UpdaterCallBack() {
+            @Override
+            public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
+                if (isSuccessful) {
+                    Toast.makeText(getBaseContext(), "GOOD!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getBaseContext(), "BAD!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }).execute();
+        //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Onelio/ConnectU"));
+        //startActivity(browserIntent);
     }
 
     public void testing() {

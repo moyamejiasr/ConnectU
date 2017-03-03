@@ -58,6 +58,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import co.mobiwise.materialintro.animation.MaterialIntroListener;
@@ -98,8 +99,28 @@ public class HomePage extends AppCompatActivity
                 if (isSuccessful) {
                     realm.modifyOption("userData", data.toString());
                     Common.data = data;
+                    Calendar time = Calendar.getInstance();
+                    int month = time.get(Calendar.MONTH) + 1;
+                    int year = time.get(Calendar.YEAR);
+                    JSONObject jdate = null;
+                    try {
+                        jdate = new JSONObject(realm.getOption("launchTimes"));
+                        jdate = new JSONObject();
+                        jdate.put("month", month);
+                        jdate.put("year", year);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    realm.modifyOption("launchTimes", jdate.toString());
+                    realm.deleteRealmInstance();
                 } else {
                     //TODO SET ERROR CONTACT AUTO BY SERVER
+                    HomePage.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Error trying to modify profile! Pleasy notify", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
         }).execute();

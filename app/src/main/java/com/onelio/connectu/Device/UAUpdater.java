@@ -296,10 +296,10 @@ public class UAUpdater {
 
         protected void onPostExecute(Void s){
             // your stuff
-            mBuilder.setContentText("User profile updated")
-                    // Removes the progress bar
-                    .setProgress(0,0,false);
-            mNotifyManager.notify(5, mBuilder.build());
+            if (Common.updateData) {
+                mBuilder.setContentText("User profile updated").setProgress(0, 0, false);
+                mNotifyManager.notify(5, mBuilder.build());
+            }
             listener.onNavigationComplete(!error, data);
         }
 

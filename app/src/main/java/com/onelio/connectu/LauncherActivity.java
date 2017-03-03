@@ -199,13 +199,10 @@ public class LauncherActivity extends AppCompatActivity {
         int year = time.get(Calendar.YEAR);
         final RealmManager realm = new RealmManager(LauncherActivity.this);
         if (realm.onOptionExist("launchTimes")) {
+            realm.deleteRealmInstance();
             try {
                 JSONObject jdate = new JSONObject(realm.getOption("launchTimes"));
                 if (year != jdate.getInt("year") || month != jdate.getInt("month")) {
-                    jdate = new JSONObject();
-                    jdate.put("month", month);
-                    jdate.put("year", year);
-                    realm.modifyOption("launchTimes", jdate.toString());
                     //Action
                     Common.updateData = true;
                 }
@@ -233,8 +230,9 @@ public class LauncherActivity extends AppCompatActivity {
             new UAUpdater.updateDataResult(LauncherActivity.this, new UAUpdater.UpdaterCallBack() {
                 @Override
                 public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
-                    if (isSuccessful) {
+                    if (isSuccessful && data.toString().length() > 0) {
                         realm.createOption("userData", data.toString());
+                        realm.deleteRealmInstance();
                         Common.data = data;
                         Intent intent = new Intent(getApplication(), HomePage.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -242,6 +240,7 @@ public class LauncherActivity extends AppCompatActivity {
                         finish();
                     } else {
                         //TODO SET ERROR CONTACT AUTO BY SERVER
+                        realm.deleteRealmInstance();
                         AlertManager alert = new AlertManager(LauncherActivity.this);
                         alert.setIcon(R.mipmap.ic_launcher);
                         alert.setMessage(getString(R.string.error_defTitle), getString(R.string.error_profile));

@@ -27,6 +27,12 @@
             android:title="@string/abn"
             android:defaultValue="true"/>
 
+        <Preference
+            android:key="shortcut"
+            android:title="@string/create_shortcut"
+            android:summary="@string/create_shortcut_long"/>
+
+
     </PreferenceCategory>
 
     <PreferenceCategory

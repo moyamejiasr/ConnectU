@@ -149,6 +149,9 @@
     <string name="beta1">Creando perfil de usuario \n Esto puede tardar un poco la primera vez...</string>
     <string name="error_profile">Error, no se ha podido crear un perfil de usuario, volverás a la pantalla de login. Si este error persiste contáctanos en rmoya98@gmail.com</string>
     <string name="shortcut">¿Deseas crear un acceso directo a el horario en el inicio de android?, Podrás acceder directamente a este.</string>
+    <string name="created_shortcut">Creado, échale un vistazo a tu escritorio!</string>
+    <string name="create_shortcut">Crear acceso a Horario</string>
+    <string name="create_shortcut_long">Permite crear un acceso directo a el Horario desde el escritorio de android.</string>
 
 
 </resources>

@@ -89,7 +89,7 @@ public class HomePage extends AppCompatActivity
                 @Override
                 public void onClick(boolean isPositive) {
                     DeviceManager.addShortcutToHorario(getApplicationContext());
-                    Toast.makeText(getBaseContext(), "Created, take a look at your desktop!", Toast.LENGTH_LONG);
+                    Toast.makeText(getBaseContext(), getString(R.string.created_shortcut), Toast.LENGTH_LONG);
                 }
             });
             alert.setNegativeButton("NO", new AlertManager.AlertCallBack() {

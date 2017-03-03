@@ -1,5 +1,6 @@
 package com.onelio.connectu;
 
+import android.bluetooth.BluetoothClass;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +8,12 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import com.onelio.connectu.BackgroundService.Coordinator;
 import com.onelio.connectu.BackgroundService.UAService;
 import com.onelio.connectu.Database.RealmManager;
+import com.onelio.connectu.Device.DeviceManager;
 
 import io.realm.Realm;
 
@@ -52,6 +55,17 @@ public class PreferencesActivity extends PreferenceActivity {
                     realm.modifyOption("NotiCount", "0");
                 }
                 realm.deleteRealmInstance();
+                return true;
+            }
+        });
+
+        Preference shortcut;
+        shortcut = findPreference("shortcut");
+        shortcut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                DeviceManager.addShortcutToHorario(getApplicationContext());
+                Toast.makeText(getBaseContext(), getString(R.string.created_shortcut), Toast.LENGTH_LONG);
                 return true;
             }
         });

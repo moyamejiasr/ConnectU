@@ -199,7 +199,6 @@ public class LauncherActivity extends AppCompatActivity {
         int year = time.get(Calendar.YEAR);
         final RealmManager realm = new RealmManager(LauncherActivity.this);
         if (realm.onOptionExist("launchTimes")) {
-            realm.deleteRealmInstance();
             try {
                 JSONObject jdate = new JSONObject(realm.getOption("launchTimes"));
                 if (year != jdate.getInt("year") || month != jdate.getInt("month")) {
@@ -207,6 +206,7 @@ public class LauncherActivity extends AppCompatActivity {
                     Common.updateData = true;
                 }
                 Common.data = new JSONObject(realm.getOption("userData"));
+                realm.deleteRealmInstance();
                 Intent intent = new Intent(getApplication(), HomePage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -234,6 +234,7 @@ public class LauncherActivity extends AppCompatActivity {
                         realm.createOption("userData", data.toString());
                         realm.deleteRealmInstance();
                         Common.data = data;
+                        Common.firstStart = true;
                         Intent intent = new Intent(getApplication(), HomePage.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

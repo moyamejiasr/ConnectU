@@ -49,6 +49,7 @@ public class Common {
     public static boolean isNotifOn = true;
     public static JSONObject data;
     public static boolean updateData = false;
+    public static boolean firstStart = false;
 
     //LOGIN - PAGE
     //Content

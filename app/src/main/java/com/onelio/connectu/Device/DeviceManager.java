@@ -3,12 +3,15 @@ package com.onelio.connectu.Device;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import com.onelio.connectu.Apps.Horario.HorarioActivity;
+import com.onelio.connectu.HomePage;
 import com.onelio.connectu.R;
 
 
@@ -22,6 +25,27 @@ public class DeviceManager {
         } catch (PackageManager.NameNotFoundException e) {
             return "unknown";
         }
+    }
+
+    public static void addShortcutToHorario(Context context) {
+        //Adding shortcut for MainActivity
+        //on Home screen
+        Intent shortcutIntent = new Intent(context, HorarioActivity.class);
+
+        shortcutIntent.setAction(Intent.ACTION_CREATE_SHORTCUT);
+
+        Intent addIntent = new Intent();
+        addIntent
+                .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "HorarioUA");
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                Intent.ShortcutIconResource.fromContext(context,
+                        R.drawable.calendar));
+
+        addIntent
+                .setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        addIntent.putExtra("duplicate", false);  //may it's already there so don't duplicate
+        context.sendBroadcast(addIntent);
     }
 
     public static int appGetSrc(int position) {

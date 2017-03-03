@@ -79,7 +79,8 @@ public class HorarioActivity extends AppCompatActivity {
         //Get Options
         getAllMatch();
         try {
-            jdata  = Common.data.getJSONArray("calendar");
+            RealmManager realm = new RealmManager(HorarioActivity.this);
+            jdata  = new JSONObject(realm.getOption("userData")).getJSONArray("calendar");
         } catch (JSONException e) {
             e.printStackTrace();
         }

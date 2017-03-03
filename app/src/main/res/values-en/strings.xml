@@ -126,5 +126,6 @@
     <string name="title_activity_maps">University Map</string>
     <string name="beta1">Creating user profile, \nThis can take a while the first time...</string>
     <string name="error_profile">Error, cloudn\'t create user profile, you will be moved to the login screen. If this error persist, please contact us at rmoya98@gmail.com</string>
+    <string name="shortcut">Do you wish to create a shortcut to the Schedule?, You will be able to acces directly to it.</string>
 
 </resources>

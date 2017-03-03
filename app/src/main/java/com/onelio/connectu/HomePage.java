@@ -80,6 +80,27 @@ public class HomePage extends AppCompatActivity
     //Rating and Guide
     public void launchMarket()
     {
+        //Shortcut market
+        if (Common.firstStart) {
+            AlertManager alert = new AlertManager(this);
+            alert.setIcon(R.mipmap.ic_launcher);
+            alert.setMessage(getString(R.string.app_name), getString(R.string.shortcut));
+            alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                @Override
+                public void onClick(boolean isPositive) {
+                    DeviceManager.addShortcutToHorario(getApplicationContext());
+                    Toast.makeText(getBaseContext(), "Created, take a look at your desktop!", Toast.LENGTH_LONG);
+                }
+            });
+            alert.setNegativeButton("NO", new AlertManager.AlertCallBack() {
+                @Override
+                public void onClick(boolean isPositive) {
+
+                }
+            });
+            alert.show();
+        }
+        //Times Market
         RateMeMaybe rmm = new RateMeMaybe(this);
         rmm.setPromptMinimums(5, 3, 10, 4);
         rmm.setDialogMessage(getString(R.string.like_app) + " " + "%totalLaunchCount%" + " " + getString(R.string.like_app_1));
@@ -198,11 +219,11 @@ public class HomePage extends AppCompatActivity
             if (!isMyServiceRunning(Coordinator.mSensorService.getClass()) && Common.isNotifOn) {
                 startService(Coordinator.mServiceIntent);
             }
-            updateData();
+            updateData(); //Alerts Data
             //Count run for like app
             launchMarket();
             //Update Data
-            if (Common.updateData) {
+            if (Common.updateData) { //Local Stored data
                 requestDataUpdate();
             }
         }

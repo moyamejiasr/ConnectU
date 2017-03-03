@@ -47,6 +47,8 @@ public class Common {
     public static String loginPassword = "";
     //Config
     public static boolean isNotifOn = true;
+    public static JSONObject data;
+    public static boolean updateData = false;
 
     //LOGIN - PAGE
     //Content

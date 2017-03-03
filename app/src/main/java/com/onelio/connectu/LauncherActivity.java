@@ -4,14 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.API.WebApi;
 import com.onelio.connectu.Database.RealmManager;
 import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
+import com.onelio.connectu.Device.UAUpdater;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,6 +24,7 @@ import org.jsoup.select.Elements;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Calendar;
 
 public class LauncherActivity extends AppCompatActivity {
 
@@ -157,10 +163,12 @@ public class LauncherActivity extends AppCompatActivity {
                         Common.name = name.text();
                         Common.src = foto.attr("src");
                         Common.isLogged = true;
-                        Intent intent = new Intent(getApplication(), HomePage.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+                        LauncherActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                executeEnviorement();
+                            }
+                        });
                     } else {
                         AlertManager manager = new AlertManager(LauncherActivity.this);
                         manager.setMessage(getResources().getString(R.string.error_defTitle), err_message);
@@ -183,5 +191,72 @@ public class LauncherActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void executeEnviorement() {
+        Calendar time = Calendar.getInstance();
+        int month = time.get(Calendar.MONTH) + 1;
+        int year = time.get(Calendar.YEAR);
+        final RealmManager realm = new RealmManager(LauncherActivity.this);
+        if (realm.onOptionExist("launchTimes")) {
+            try {
+                JSONObject jdate = new JSONObject(realm.getOption("launchTimes"));
+                if (year != jdate.getInt("year") || month != jdate.getInt("month")) {
+                    jdate = new JSONObject();
+                    jdate.put("month", month);
+                    jdate.put("year", year);
+                    realm.modifyOption("launchTimes", jdate.toString());
+                    //Action
+                    Common.updateData = true;
+                }
+                Common.data = new JSONObject(realm.getOption("userData"));
+                Intent intent = new Intent(getApplication(), HomePage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            JSONObject jdate = new JSONObject();
+            try {
+                jdate.put("month", month);
+                jdate.put("year", year);
+                realm.createOption("launchTimes", jdate.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            TextView beta = (TextView)findViewById(R.id.beta);
+            beta.setText(getString(R.string.beta1));
+            ProgressBar pb = (ProgressBar)findViewById(R.id.progressBar);
+            pb.setIndeterminate(false);
+            new UAUpdater.updateDataResult(LauncherActivity.this, new UAUpdater.UpdaterCallBack() {
+                @Override
+                public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
+                    if (isSuccessful) {
+                        realm.createOption("userData", data.toString());
+                        Common.data = data;
+                        Intent intent = new Intent(getApplication(), HomePage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        //TODO SET ERROR CONTACT AUTO BY SERVER
+                        AlertManager alert = new AlertManager(LauncherActivity.this);
+                        alert.setIcon(R.mipmap.ic_launcher);
+                        alert.setMessage(getString(R.string.error_defTitle), getString(R.string.error_profile));
+                        alert.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
+                            @Override
+                            public void onClick(boolean isPositive) {
+                                Intent intent = new Intent(getApplication(), LoginActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                    }
+                }
+            }).execute();
+        }
     }
 }

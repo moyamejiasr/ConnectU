@@ -1,15 +1,14 @@
 package com.onelio.connectu.Device;
 
 import android.app.Activity;
-import android.graphics.Color;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
+import android.widget.ProgressBar;
 
-import com.alamkanak.weekview.WeekViewEvent;
 import com.onelio.connectu.API.UAWebService;
-import com.onelio.connectu.API.WebApi;
-import com.onelio.connectu.AboutActivity;
-import com.onelio.connectu.Apps.Horario.HorarioActivity;
-import com.onelio.connectu.Apps.Profesores.TeachersActivity;
+import com.onelio.connectu.Common;
 import com.onelio.connectu.R;
 
 import org.json.JSONArray;
@@ -19,17 +18,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 /**
  * Created by Onelio on 02/03/2017.
@@ -44,13 +35,18 @@ public class UAUpdater {
     static JSONObject data = new JSONObject();
     static boolean error = false;
     static boolean completed = false;
+    static int progress = 0;
     //Private structures
     static int connected = 0;
     static JSONArray teachers = new JSONArray();
 
-    static Calendar time = Calendar.getInstance();
+    static Calendar time;
     static int calCount = 0;
+    static int monthCount = 0;
     static JSONArray calendar = new JSONArray();
+
+    static NotificationManager mNotifyManager;
+    static NotificationCompat.Builder mBuilder;
 
 
 
@@ -73,19 +69,19 @@ public class UAUpdater {
                 break;
         }
 
-        int month = time.get(Calendar.MONTH) + 1;
+        final int month = time.get(Calendar.MONTH);
         int year = time.get(Calendar.YEAR);
 
         //Define range
         Calendar start = Calendar.getInstance();
         start.set(Calendar.DAY_OF_MONTH, 1);
         start.set(Calendar.HOUR_OF_DAY, 1);
-        start.set(Calendar.MONTH, month - 1);
+        start.set(Calendar.MONTH, month);
         start.set(Calendar.YEAR, year);
         Calendar end = Calendar.getInstance();
         end.set(Calendar.DATE, end.getActualMaximum(Calendar.DATE));
         end.set(Calendar.HOUR_OF_DAY, 23);
-        end.set(Calendar.MONTH, month);
+        end.set(Calendar.MONTH, month + 1);
         end.set(Calendar.YEAR, year);
 
         String finalPart = "&start=" + String.valueOf(start.getTimeInMillis()/1000) + "&end=" + String.valueOf(end.getTimeInMillis()/1000);
@@ -102,6 +98,7 @@ public class UAUpdater {
                         }
                         if (calCount < 3) {
                             calCount++;
+                            progress += 10;
                             getNextCal(activity);
                         } else {
                             data.put("calendar", calendar);
@@ -177,6 +174,7 @@ public class UAUpdater {
                                     }
                                 }
                                 connected++;
+                                progress += 5;
                                 if (connected == signatures.length()) {
                                     try {
                                         data.put("teachers", teachers);
@@ -220,6 +218,7 @@ public class UAUpdater {
                     } catch (JSONException e) {
                         error = true;
                     }
+                    progress = 10;
                     getTeachersData(activity);
                 }
             }
@@ -244,13 +243,14 @@ public class UAUpdater {
                             }
                         }
                     }
+                    progress = 5;
                     requestSignatures(activity);
                 }
             }
         });
     }
 
-    static public class updateDataResult extends AsyncTask<Void,Void,Void>{ //change Object to required type
+    static public class updateDataResult extends AsyncTask<Void,Integer,Void>{ //change Object to required type
         private UpdaterCallBack listener;
         private Activity activity;
 
@@ -262,6 +262,7 @@ public class UAUpdater {
         @Override
         protected Void doInBackground(Void... voids) {
             //Restart
+            time = Calendar.getInstance();
             data = new JSONObject();
             error = false;
             completed = false;
@@ -270,19 +271,55 @@ public class UAUpdater {
 
             calCount = 0;
 
+            if (Common.updateData) {
+                mNotifyManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+                mBuilder = new NotificationCompat.Builder(activity);
+                mBuilder.setContentTitle("ConnectU Manager")
+                        .setContentText("Updating user profile...")
+                        .setSmallIcon(R.drawable.download);
+                mBuilder.setProgress(100, 0, false);
+                // Displays the progress bar for the first time.
+                mNotifyManager.notify(5, mBuilder.build());
+            }
+
             //Connect
             requestConn(activity);
-            while (!completed || error) {}
+            int count = 0;
+            while (!completed || error) {
+                if (progress > count) {
+                    count = progress;
+                    publishProgress(count);
+                }
+            }
             return null;
         }
 
         protected void onPostExecute(Void s){
             // your stuff
+            mBuilder.setContentText("User profile updated")
+                    // Removes the progress bar
+                    .setProgress(0,0,false);
+            mNotifyManager.notify(5, mBuilder.build());
             listener.onNavigationComplete(!error, data);
         }
+
+        @Override
+        protected void onProgressUpdate(final Integer... values) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (!Common.updateData) {
+                        ProgressBar pb = (ProgressBar)activity.findViewById(R.id.progressBar);
+                        pb.setProgress(values[0]);
+                    } else {
+                        mBuilder.setProgress(100, values[0], false);
+                        // Displays the progress bar for the first time.
+                        mNotifyManager.notify(5, mBuilder.build());
+                    }
+                }
+            });
+        }
+
     }
-
-    //Get Method
-
 
 }

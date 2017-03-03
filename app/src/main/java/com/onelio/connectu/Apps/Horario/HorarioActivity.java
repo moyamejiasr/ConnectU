@@ -16,6 +16,7 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.onelio.connectu.API.UAWebService;
+import com.onelio.connectu.Common;
 import com.onelio.connectu.Database.RealmManager;
 import com.onelio.connectu.R;
 
@@ -35,15 +36,11 @@ public class HorarioActivity extends AppCompatActivity {
 
     WeekView mWeekView;
     Calendar time = Calendar.getInstance();
-    ArrayList<WeekViewEvent> mEvents = new ArrayList<>();
-    boolean notifyon = false;
-    JSONArray doc;
-    ProgressDialog dialog;
-    boolean first = true;
-    ArrayList<String> added = new ArrayList();
-    ArrayList<WeekViewEvent> updated = new ArrayList();
     ArrayList<Integer> checked = new ArrayList<>();
     int checkedReally;
+
+    //New
+    JSONArray jdata;
 
     void getAllMatch() {
         RealmManager realm = new RealmManager(this);
@@ -78,40 +75,62 @@ public class HorarioActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Mi Horario");
         mWeekView = (WeekView) findViewById(R.id.weekView);
-        dialog = new ProgressDialog(this);
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage(getString(R.string.loading_waith));
-        dialog.setIndeterminate(true);
-        dialog.setCanceledOnTouchOutside(false);
 
         //Get Options
         getAllMatch();
+        try {
+            jdata  = Common.data.getJSONArray("calendar");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         MonthLoader.MonthChangeListener mMonthChangeListener = new MonthLoader.MonthChangeListener() {
             @Override
             public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
                 //First time month??
-                String actual =  String.valueOf(newMonth) + String.valueOf(newYear);
-                boolean found = false;
-                for (int tc = 0; tc < added.size(); tc++) {
-                    if (added.get(tc).contains(actual)) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found && (notifyon || first)) { //Get all if not exist month
-                    first = false;
-                    added.add(actual);
-                    getAllEvents(newMonth, newYear);
-                    dialog.show();
-                }
                 ArrayList<WeekViewEvent> data = new ArrayList<>();
-                if (mEvents.size() > 0 && notifyon) {
-                    for(int c = 0; c < mEvents.size(); c++) {
-                        data.add(mEvents.get(c));
-                        notifyon = false;
+                for (int i = 0; i < jdata.length(); i++) {
+                    try {
+                        JSONObject event = jdata.getJSONObject(i);
+                        WeekViewEvent wevent = new WeekViewEvent();
+                        wevent.setName(event.getString("title") + " - " + event.getString("uaCacDescac"));
+                        String type = event.getString("uaCalendario");
+                        wevent.setLocation(event.getString("uaIdAula"));
+                        //Start
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
+                        Date date = sdf.parse(event.getString("start").replace("T", " "));
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(date);
+                        wevent.setStartTime(calendar);
+                        //End
+                        Date date1 = sdf.parse(event.getString("end").replace("T", " "));
+                        Calendar calendar1 = Calendar.getInstance();
+                        calendar1.setTime(date1);
+                        wevent.setEndTime(calendar1);
+
+                        if (calendar.get(Calendar.MONTH) + 1 == newMonth) {
+                            if (type.equals("docenciaalu")  && checked.get(0) == 1) {
+                                wevent.setColor(Color.parseColor("#2196F3"));
+                                data.add(wevent);
+                            }
+                            if (type.equals("evaluaalu") && checked.get(1) == 1) {
+                                wevent.setColor(Color.parseColor("#E91E63"));
+                                data.add(wevent);
+                            }
+                            if (type.equals("examenesalu") && checked.get(2) == 1) {
+                                wevent.setColor(Color.parseColor("#F44336"));
+                                data.add(wevent);
+                            }
+                            if (type.equals("festivos") && checked.get(3) == 1) {
+                                wevent.setColor(Color.parseColor("#FFEB3B"));
+                                data.add(wevent);
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                    //Toast.makeText(getBaseContext(), String.valueOf(mEvents.size())+ " eventos añadidos!", Toast.LENGTH_LONG).show();
                 }
                 return data;
             }
@@ -162,14 +181,6 @@ public class HorarioActivity extends AppCompatActivity {
         editor.putBoolean("checkbox", item.isChecked());
         editor.commit();
 
-        added.clear();
-        mEvents.clear();
-        first = true;
-        notifyon = false;
-        request = 0;
-        actuallyCompleted = 0;
-        doc = new JSONArray();
-
         if (id == R.id.cdoc && item.isChecked()) {
             checked.set(0, 1);
             modifyMatch("cdoc", 1);
@@ -213,100 +224,6 @@ public class HorarioActivity extends AppCompatActivity {
             super.onBackPressed();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void getAllEvents(int month, int year) {
-        //Define range
-        Calendar start = Calendar.getInstance();
-        start.set(Calendar.DAY_OF_MONTH, 1);
-        start.set(Calendar.HOUR_OF_DAY, 1);
-        start.set(Calendar.MONTH, month - 1);
-        start.set(Calendar.YEAR, year);
-        Calendar end = Calendar.getInstance();
-        end.set(Calendar.DATE, end.getActualMaximum(Calendar.DATE));
-        end.set(Calendar.HOUR_OF_DAY, 23);
-        end.set(Calendar.MONTH, month);
-        end.set(Calendar.YEAR, year);
-        //Colors:
-        //DOC = 2196F3
-        //EXA = E65100
-
-        for (int i = 0; i < 4; i++) {
-            String finalPart = "&start=" + String.valueOf(start.getTimeInMillis()/1000) + "&end=" + String.valueOf(end.getTimeInMillis()/1000);
-            String url;
-            String color;
-            if (i == 0 && checked.get(i) == 1) { //CDOC
-                url = UAWebService.CAL_DOC;
-                color = "#2196F3";
-                onNavigate(url + finalPart, color);
-            } else if (i == 1 && checked.get(i) == 1) { //CEVA
-                url = UAWebService.CAL_EVA;
-                color = "#00E676";
-                onNavigate(url + finalPart, color);
-            } else if (i == 2 && checked.get(i) == 1) { //CEXA
-                url = UAWebService.CAL_EXA;
-                color = "#E65100";
-                onNavigate(url + finalPart, color);
-            } else if (i == 3 && checked.get(i) == 1) { //CFEST
-                url = UAWebService.CAL_FEST;
-                color = "#009688";
-                onNavigate(url + finalPart, color);
-            }
-        }
-    }
-
-    int actuallyCompleted = 0;
-    long request = 0;
-
-    public void onNavigate(String url, final String color) {
-        UAWebService.HttpWebGetRequest(HorarioActivity.this, url , new UAWebService.WebCallBack() {
-            @Override
-            public void onNavigationComplete(boolean isSuccessful, String body) {
-                if (isSuccessful) {
-                    try {
-                        doc = new JSONArray(body);
-                        for(int c = 0; c < doc.length(); c++) {
-                            WeekViewEvent wevent = new WeekViewEvent();
-                            JSONObject event = doc.getJSONObject(c);
-                            wevent.setId(c+request);
-                            wevent.setName(event.getString("title") + " - " + event.getString("uaCacDescac"));
-                            wevent.setColor(Color.parseColor(color));
-                            wevent.setLocation(event.getString("uaIdAula"));
-                            //Start
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
-                            Date date = sdf.parse(event.getString("start").replace("T", " "));
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(date);
-                            wevent.setStartTime(calendar);
-                            //End
-                            Date date1 = sdf.parse(event.getString("end").replace("T", " "));
-                            Calendar calendar1 = Calendar.getInstance();
-                            calendar1.setTime(date1);
-                            wevent.setEndTime(calendar1);
-                            mEvents.add(wevent);
-                        }
-                        request += doc.length();
-                        actuallyCompleted++;
-                        if (actuallyCompleted == checkedReally * 1) {
-                            //Got to the final part
-                            actuallyCompleted = 0;
-                            HorarioActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    notifyon = true;
-                                    mWeekView.notifyDatasetChanged();
-                                    dialog.cancel();
-                                }
-                            });
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
     }
 
 }

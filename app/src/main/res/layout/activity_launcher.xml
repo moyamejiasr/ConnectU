@@ -31,6 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#ffffff"
+            android:id="@+id/beta"
+            android:maxLines="2"
             android:text="@string/beta"/>
 
         <ProgressBar
@@ -40,7 +42,7 @@
             android:layout_height="wrap_content"
             android:indeterminate="true"
             android:max="100"
-            android:progress="20"/>
+            android:progress="0"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

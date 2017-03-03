@@ -32,20 +32,8 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        //TODO : RETURN HERE
-        Toast.makeText(getBaseContext(), "STARTED!", Toast.LENGTH_LONG).show();
-        new UAUpdater.updateDataResult(AboutActivity.this, new UAUpdater.UpdaterCallBack() {
-            @Override
-            public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
-                if (isSuccessful) {
-                    Toast.makeText(getBaseContext(), "GOOD!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getBaseContext(), "BAD!", Toast.LENGTH_LONG).show();
-                }
-            }
-        }).execute();
-        //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Onelio/ConnectU"));
-        //startActivity(browserIntent);
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Onelio/ConnectU"));
+        startActivity(browserIntent);
     }
 
     public void testing() {

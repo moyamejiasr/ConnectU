@@ -44,7 +44,7 @@
     <string name="by">Por</string>
     <string name="to">Para</string>
     <string name="myself">Yo</string>
-    <string name="beta">Vota y comparte la app en la Play Store!</string>
+    <string name="beta">Conectando con los servidores de UACLoud...</string>
     <string name="pending">Pendiente</string>
     <string name="ssubject">Selecciona asignatura:</string>
     <string name="steacher">Selecciona profesor:</string>
@@ -146,6 +146,8 @@
     <string name="search">Buscar</string>
     <string name="cancel">Cancelar</string>
     <string name="title_activity_maps">Mapa Universitario</string>
+    <string name="beta1">Creando perfil de usuario \n Esto puede tardar un poco la primera vez...</string>
+    <string name="error_profile">Error, no se ha podido crear un perfil de usuario, volverás a la pantalla de login. Si este error persiste contáctanos en rmoya98@gmail.com</string>
 
 
 </resources>

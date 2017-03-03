@@ -45,6 +45,7 @@ import com.onelio.connectu.Database.RealmManager;
 import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.Device.RateMeMaybe;
+import com.onelio.connectu.Device.UAUpdater;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Picasso;
 
@@ -87,6 +88,21 @@ public class HomePage extends AppCompatActivity
         rmm.setNeutralBtn(getString(R.string.later));
         rmm.setNegativeBtn(getString(R.string.never));
         rmm.run();
+    }
+
+    void requestDataUpdate() {
+        final RealmManager realm = new RealmManager(HomePage.this);
+        new UAUpdater.updateDataResult(HomePage.this, new UAUpdater.UpdaterCallBack() {
+            @Override
+            public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
+                if (isSuccessful) {
+                    realm.modifyOption("userData", data.toString());
+                    Common.data = data;
+                } else {
+                    //TODO SET ERROR CONTACT AUTO BY SERVER
+                }
+            }
+        }).execute();
     }
 
     void startGuide(Menu menu) {
@@ -164,6 +180,10 @@ public class HomePage extends AppCompatActivity
             updateData();
             //Count run for like app
             launchMarket();
+            //Update Data
+            if (Common.updateData) {
+                requestDataUpdate();
+            }
         }
         //Swipe to refresh view in Gridview
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);

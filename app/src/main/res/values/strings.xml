@@ -65,6 +65,7 @@
         <item>Expediente</item>
         <item>UAProject</item>
         <item>Otros Servicios</item>
+        <item>CampusMap</item>
     </string-array>
     <string name="title_activity_tutoria">Tutoría</string>
     <string name="teacher">Profesor</string>
@@ -152,6 +153,10 @@
     <string name="created_shortcut">Creado, échale un vistazo a tu escritorio!</string>
     <string name="create_shortcut">Crear acceso a Horario</string>
     <string name="create_shortcut_long">Permite crear un acceso directo a el Horario desde el escritorio de android.</string>
+    <string name="hor_card">Este es el horario, desde aquí puedes ver los eventos que van a ocurrir próximamente y si haces click en uno se despliegará más información. Se recomienda confirmar en el UACloud.</string>
+    <string name="start_at">Comienza el</string>
+    <string name="since">desde</string>
+    <string name="till">hasta</string>
 
 
 </resources>

@@ -308,6 +308,11 @@ public class HomePage extends AppCompatActivity
                         Common.webURL = "https://cv1.cpd.ua.es/webcv/ctrlzonapersonal/LoginCvCAS.asp";
                         startActivity(new Intent(HomePage.this, WebViewActivity.class));
                         break;
+                    case 10:
+                        Common.webName = "Campus Map";
+                        Common.webURL = "https://www.sigua.ua.es";
+                        startActivity(new Intent(HomePage.this, WebViewActivity.class));
+                        break;
                 }
             }
         });

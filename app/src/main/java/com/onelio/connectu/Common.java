@@ -87,5 +87,9 @@ public class Common {
     public static String evid = "";
     //Profesores
     public static JSONObject teacher = new JSONObject();
+    //Horario
+    public static String siguaID = "";
+    public static String siguaName = "";
+    public static String siguaHorario = "";
 
 }

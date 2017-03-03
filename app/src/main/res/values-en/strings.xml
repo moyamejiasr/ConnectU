@@ -44,6 +44,7 @@
         <item>Academic Records</item>
         <item>UAProject</item>
         <item>Other Services</item>
+        <item>CampusMap</item>
     </string-array>
     <string name="title_activity_test">Test</string>
     <string name="by">By</string>
@@ -130,5 +131,9 @@
     <string name="created_shortcut">Created, take a look at your desktop!</string>
     <string name="create_shortcut">Create shortcut to Schedule</string>
     <string name="create_shortcut_long">Allows to create a shortcut to Schedule from the android desktop.</string>
+    <string name="hor_card">This is the schedule, here you can view all the next events and if you click one of them you will get more information about it. It\'s important to confirm events with the UACloud oficial site.</string>
+    <string name="start_at">Start at</string>
+    <string name="since">since</string>
+    <string name="till">untill</string>
 
 </resources>

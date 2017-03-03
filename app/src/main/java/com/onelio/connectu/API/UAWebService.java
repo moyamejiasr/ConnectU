@@ -47,6 +47,7 @@ public class UAWebService {
     public static String CAL_EVA = "https://cvnet.cpd.ua.es/uaHorarios/Home/ObtenerEventosCalendarioJson?calendario=evaluaalu";
     public static String CAL_EXA = "https://cvnet.cpd.ua.es/uaHorarios/Home/ObtenerEventosCalendarioJson?calendario=examenesalu";
     public static String EXP_LOAD = "https://cvnet.cpd.ua.es/uaexpeaca/";
+    public static String SIGUA_LOAD = "https://www.sigua.ua.es/api/pub/estancia/";
 
     //define callback interface
     public interface WebCallBack {

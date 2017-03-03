@@ -81,6 +81,9 @@ public class DeviceManager {
             case 9:
                 color = R.drawable.oservices;
                 break;
+            case 10:
+                color = R.drawable.map;
+                break;
         }
         return color;
     }
@@ -117,6 +120,9 @@ public class DeviceManager {
                 break;
             case 9:
                 color = "#428bca";
+                break;
+            case 10:
+                color = "#b15391";
                 break;
         }
         return color;

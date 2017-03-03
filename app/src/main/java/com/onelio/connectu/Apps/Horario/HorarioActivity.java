@@ -16,6 +16,7 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.onelio.connectu.API.UAWebService;
+import com.onelio.connectu.Apps.Tutorias.TutoriaActivity;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Database.RealmManager;
 import com.onelio.connectu.R;
@@ -32,6 +33,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import co.mobiwise.materialintro.animation.MaterialIntroListener;
+import co.mobiwise.materialintro.shape.Focus;
+import co.mobiwise.materialintro.shape.FocusGravity;
+import co.mobiwise.materialintro.view.MaterialIntroView;
+
 public class HorarioActivity extends AppCompatActivity {
 
     WeekView mWeekView;
@@ -41,6 +47,21 @@ public class HorarioActivity extends AppCompatActivity {
 
     //New
     JSONArray jdata;
+
+    void startGuide() {
+        new MaterialIntroView.Builder(this)
+                .enableIcon(false)
+                .setFocusGravity(FocusGravity.CENTER)
+                .enableDotAnimation(true)
+                .setFocusType(Focus.MINIMUM)
+                .setDelayMillis(500)
+                .enableFadeAnimation(true)
+                .setInfoText(getString(R.string.hor_card))
+                .setTarget(findViewById(R.id.weekView))
+                .setUsageId("hor_grid") //THIS SHOULD BE UNIQUE ID
+                .performClick(true)
+                .show();
+    }
 
     void getAllMatch() {
         RealmManager realm = new RealmManager(this);
@@ -96,7 +117,7 @@ public class HorarioActivity extends AppCompatActivity {
                         WeekViewEvent wevent = new WeekViewEvent();
                         wevent.setName(event.getString("title") + " - " + event.getString("uaCacDescac"));
                         String type = event.getString("uaCalendario");
-                        wevent.setLocation(event.getString("uaIdAula"));
+                        wevent.setLocation(event.getString("uaIdSigua"));
                         //Start
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
                         Date date = sdf.parse(event.getString("start").replace("T", " "));
@@ -142,10 +163,15 @@ public class HorarioActivity extends AppCompatActivity {
         mWeekView.setOnEventClickListener(new WeekView.EventClickListener() {
             @Override
             public void onEventClick(WeekViewEvent event, RectF eventRect) {
-                //Event action
-                //String uri = String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude);
-                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                //startActivity(intent);
+                Common.siguaID = event.getLocation();
+                Common.siguaName = event.getName();
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+                String start = format.format(event.getStartTime().getTime());
+                String end = format.format(event.getEndTime().getTime());
+                Common.siguaHorario = getString(R.string.start_at) + " " + format1.format(event.getStartTime().getTime()) + " " + getString(R.string.since) + " " + start + " " + getString(R.string.till) + " " + end;
+                Intent intent = new Intent(HorarioActivity.this, HorarioViewActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -154,6 +180,7 @@ public class HorarioActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.horario, menu);
+        startGuide();
         MenuItem cdoc = menu.findItem(R.id.cdoc);
         MenuItem ceva = menu.findItem(R.id.ceva);
         MenuItem cexa = menu.findItem(R.id.cexa);

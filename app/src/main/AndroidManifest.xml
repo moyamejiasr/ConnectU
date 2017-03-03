@@ -17,8 +17,8 @@
         <activity
             android:name=".LauncherActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -87,7 +87,7 @@
         <activity
             android:name=".Apps.Horario.HorarioActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
             </intent-filter>
@@ -107,6 +107,7 @@
             android:name=".Apps.Expediente.ExpedienteActivity"
             android:label="@string/expediente" />
         <activity android:name=".TestActivity" />
+        <activity android:name=".Apps.Horario.HorarioViewActivity"></activity>
     </application>
 
 </manifest>

@@ -149,7 +149,7 @@
     <string name="title_activity_maps">Mapa Universitario</string>
     <string name="beta1">Creando perfil de usuario \n Esto puede tardar un poco la primera vez...</string>
     <string name="error_profile">Error, no se ha podido crear un perfil de usuario, volverás a la pantalla de login. Si este error persiste contáctanos en rmoya98@gmail.com</string>
-    <string name="shortcut">¿Deseas crear un acceso directo a el horario en el inicio de android?, Podrás acceder directamente a este.</string>
+    <string name="shortcut">¿Deseas crear un acceso directo a el horario en el inicio de android?. Si lo deseas, puedes crearlo más tarde desde la configuración de la app.</string>
     <string name="created_shortcut">Creado, échale un vistazo a tu escritorio!</string>
     <string name="create_shortcut">Crear acceso a Horario</string>
     <string name="create_shortcut_long">Permite crear un acceso directo a el Horario desde el escritorio de android.</string>
@@ -157,6 +157,7 @@
     <string name="start_at">Comienza el</string>
     <string name="since">desde</string>
     <string name="till">hasta</string>
+    <string name="error_old">Error, algunos archivos están corruptos o desactualizados. Por favor borra el cache de la app o vuelvela a instalar.</string>
 
 
 </resources>

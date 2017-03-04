@@ -127,7 +127,7 @@
     <string name="title_activity_maps">University Map</string>
     <string name="beta1">Creating user profile, \nThis can take a while the first time...</string>
     <string name="error_profile">Error, cloudn\'t create user profile, you will be moved to the login screen. If this error persist, please contact us at rmoya98@gmail.com</string>
-    <string name="shortcut">Do you wish to create a shortcut to the Schedule?, You will be able to acces directly to it.</string>
+    <string name="shortcut">Do you wish to create a shortcut to the Schedule?, You will be able to create it latter from the app settings.</string>
     <string name="created_shortcut">Created, take a look at your desktop!</string>
     <string name="create_shortcut">Create shortcut to Schedule</string>
     <string name="create_shortcut_long">Allows to create a shortcut to Schedule from the android desktop.</string>
@@ -135,5 +135,6 @@
     <string name="start_at">Start at</string>
     <string name="since">since</string>
     <string name="till">untill</string>
+    <string name="error_old">Error, some files may be broken or outdated. Please delete app cache or reinstall it.</string>
 
 </resources>

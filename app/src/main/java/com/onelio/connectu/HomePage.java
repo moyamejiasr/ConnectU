@@ -121,12 +121,14 @@ public class HomePage extends AppCompatActivity
                     realm.modifyOption("userData", data.toString());
                     Common.data = data;
                     Calendar time = Calendar.getInstance();
+                    int week = time.get(Calendar.WEEK_OF_MONTH);
                     int month = time.get(Calendar.MONTH) + 1;
                     int year = time.get(Calendar.YEAR);
                     JSONObject jdate = null;
                     try {
                         jdate = new JSONObject(realm.getOption("launchTimes"));
                         jdate = new JSONObject();
+                        jdate.put("week", week);
                         jdate.put("month", month);
                         jdate.put("year", year);
                     } catch (JSONException e) {

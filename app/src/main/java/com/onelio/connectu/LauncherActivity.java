@@ -195,16 +195,21 @@ public class LauncherActivity extends AppCompatActivity {
 
     public void executeEnviorement() {
         Calendar time = Calendar.getInstance();
+        int week = time.get(Calendar.WEEK_OF_MONTH);
         int month = time.get(Calendar.MONTH) + 1;
         int year = time.get(Calendar.YEAR);
         final RealmManager realm = new RealmManager(LauncherActivity.this);
         if (realm.onOptionExist("launchTimes")) {
             try {
                 JSONObject jdate = new JSONObject(realm.getOption("launchTimes"));
-                if (year != jdate.getInt("year") || month != jdate.getInt("month")) {
+                if (year != jdate.getInt("year") || month != jdate.getInt("month") || week != jdate.getInt("week")) {
                     //Action
                     Common.updateData = true;
                 }
+            } catch (JSONException e) {
+                Common.updateData = true;
+            }
+            try {
                 Common.data = new JSONObject(realm.getOption("userData"));
                 realm.deleteRealmInstance();
                 Intent intent = new Intent(getApplication(), HomePage.class);
@@ -212,11 +217,21 @@ public class LauncherActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } catch (JSONException e) {
-                e.printStackTrace();
+                AlertManager alert = new AlertManager(LauncherActivity.this);
+                alert.setIcon(R.mipmap.ic_launcher);
+                alert.setMessage(getString(R.string.error_defTitle), getString(R.string.error_old));
+                alert.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
+                    @Override
+                    public void onClick(boolean isPositive) {
+                        DeviceManager.appClose();
+                    }
+                });
+                alert.show();
             }
         } else {
             JSONObject jdate = new JSONObject();
             try {
+                jdate.put("week", week);
                 jdate.put("month", month);
                 jdate.put("year", year);
                 realm.createOption("launchTimes", jdate.toString());

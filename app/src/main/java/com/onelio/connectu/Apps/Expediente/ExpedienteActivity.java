@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
@@ -78,12 +79,20 @@ public class ExpedienteActivity extends AppCompatActivity {
         });
     }
 
+    ArrayList<String> ids = new ArrayList<>();
+
     public void buildSelectDialog() {
         //Building data
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ExpedienteActivity.this, android.R.layout.select_dialog_item);
         for (int i = 0; i < elements.size(); i++) {
-            String name = elements.get(i).select("td").first().text();
-            arrayAdapter.add(DeviceManager.capFirstLetter(name));
+            Elements objects = elements.get(i).select("tr");
+            for (int j = 0; j < objects.size(); j++) {
+                if (objects.get(j).children().size() > 0) {
+                    String name = objects.get(j).child((0)).text();
+                    arrayAdapter.add(DeviceManager.capFirstLetter(name));
+                    ids.add(objects.get(j).child(1).select("button.btn").attr("onclick"));
+                }
+            }
         }
 
         //Building dialog
@@ -102,7 +111,7 @@ public class ExpedienteActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 cname = arrayAdapter.getItem(which);
-                String strURL = elements.get(which).select("button.btn").attr("onclick");
+                String strURL = ids.get(which);
                 strURL = strURL.substring(strURL.indexOf("'") + 1, strURL.length() - 1);
                 loadPage("https://cvnet.cpd.ua.es" + strURL);
             }

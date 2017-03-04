@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.onelio.connectu.API.UAWebService;
+import com.onelio.connectu.API.WebApi;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.R;
 
@@ -31,46 +32,53 @@ public class HorarioViewActivity extends AppCompatActivity {
         title.setText(Common.siguaName);
         horario.setText(Common.siguaHorario);
 
-        UAWebService.HttpWebGetRequest(HorarioViewActivity.this, UAWebService.SIGUA_LOAD + Common.siguaID, new UAWebService.WebCallBack() {
-            @Override
-            public void onNavigationComplete(final boolean isSuccessful, final String body) {
-                final CardView card = (CardView)findViewById(R.id.cardMap);
-                final TextView subtitle = (TextView)findViewById(R.id.subtitle);
-                if (isSuccessful) {
-                    try {
-                        JSONObject data = new JSONObject(body);
-                        final JSONObject object = data.getJSONArray("features").getJSONObject(0).getJSONObject("properties");
-                        HorarioViewActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    subtitle.setText(object.getString("nombre_actividad") + " " + object.getString("denominacion"));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                card.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        //Event action
-                                        String uri = null;
-                                        try {
-                                            uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.valueOf(object.getString("lat")), Double.valueOf(object.getString("lon")));
-                                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                                            startActivity(intent);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        if (!Common.isLogged) {
+            //Build Okhttp
+            WebApi.initialize(getBaseContext());
+        }
 
+        if (Common.siguaID.length() > 0) {
+            UAWebService.HttpWebGetRequest(HorarioViewActivity.this, UAWebService.SIGUA_LOAD + Common.siguaID, new UAWebService.WebCallBack() {
+                @Override
+                public void onNavigationComplete(final boolean isSuccessful, final String body) {
+                    final CardView card = (CardView) findViewById(R.id.cardMap);
+                    final TextView subtitle = (TextView) findViewById(R.id.subtitle);
+                    if (isSuccessful) {
+                        try {
+                            JSONObject data = new JSONObject(body);
+                            final JSONObject object = data.getJSONArray("features").getJSONObject(0).getJSONObject("properties");
+                            HorarioViewActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        subtitle.setText(object.getString("nombre_actividad") + " " + object.getString("denominacion"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    card.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            //Event action
+                                            String uri = null;
+                                            try {
+                                                uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.valueOf(object.getString("lat")), Double.valueOf(object.getString("lon")));
+                                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                                                startActivity(intent);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
                 }
-            }
-        });
+            });
+        }
 
     }
 

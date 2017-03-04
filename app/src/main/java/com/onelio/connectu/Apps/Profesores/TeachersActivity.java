@@ -37,7 +37,7 @@ public class TeachersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //TODO ADD TO ALL
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         try {
             teachers  = Common.data.getJSONArray("teachers");
         } catch (JSONException e) {

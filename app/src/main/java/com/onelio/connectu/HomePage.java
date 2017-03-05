@@ -147,7 +147,7 @@ public class HomePage extends AppCompatActivity
                         @Override
                         public void run() {
                             AlertManager alert = new AlertManager(HomePage.this);
-                            alert.setMessage("IMPORTANT ERROR!", "Error trying update profile! Pleasy notify to developers at rmoya98@gmail.com");
+                            alert.setMessage("IMPORTANT ERROR!", "Error trying to update profile! Pleasy notify to developers at rmoya98@gmail.com");
                             alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
                                 @Override
                                 public void onClick(boolean isPositive) {

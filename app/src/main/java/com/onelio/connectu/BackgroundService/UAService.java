@@ -84,7 +84,7 @@ public class UAService extends Service {
     }
     String loginUsername;
     String loginPassword;
-    int timeSleep = 1800000; // 30 minutos -> 1800000 // 1 hora - >3600000
+    int timeSleep = 900000; // 30 minutos -> 1800000 // 1 hora - >3600000 // Actually 15 min
     int curAlert = 0;
     public static boolean active = true;
 

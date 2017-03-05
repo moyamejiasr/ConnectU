@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.API.WebApi;
@@ -63,7 +64,11 @@ public class HorarioViewActivity extends AppCompatActivity {
                                             try {
                                                 uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.valueOf(object.getString("lat")), Double.valueOf(object.getString("lon")));
                                                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                                                startActivity(intent);
+                                                if(intent.resolveActivity(getPackageManager()) != null) {
+                                                    startActivityForResult(intent, 0);
+                                                } else {
+                                                    Toast.makeText(getBaseContext(), "You don't have any maps app installed.", Toast.LENGTH_LONG).show();
+                                                }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }

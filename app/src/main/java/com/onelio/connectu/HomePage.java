@@ -508,9 +508,11 @@ public class HomePage extends AppCompatActivity
         CircularImageView view = (CircularImageView)headerView.findViewById(R.id.imageView);
         usern.setText(Common.name);
         alerts.setText(getResources().getString(R.string.you_have) + " " + Common.alerts + " " + getResources().getString(R.string.news));
-        Picasso.with(getBaseContext())
-                .load(Common.src)
-                .into(view);
+        if (Common.src.length() > 0) {
+            Picasso.with(getBaseContext())
+                    .load(Common.src)
+                    .into(view);
+        }
         gridShow();
         setAlerts();
     }

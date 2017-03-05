@@ -315,7 +315,7 @@ public class MaterialActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Closed!", Toast.LENGTH_SHORT);
         } else {
             //fab.setVisibility(View.VISIBLE);
-            fname = object.getName();
+            fname = object.getName() + "." + object.getFiletype();
             furl = "https://cvnet.cpd.ua.es/uamatdocente/Materiales/File?idMat=" + object.getFileid() + "&tipoorigen=" + object.getFiletype();
             onItemClick();
         }

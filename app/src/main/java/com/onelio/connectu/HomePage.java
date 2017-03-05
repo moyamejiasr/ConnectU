@@ -137,11 +137,28 @@ public class HomePage extends AppCompatActivity
                     realm.modifyOption("launchTimes", jdate.toString());
                     realm.deleteRealmInstance();
                 } else {
-                    //TODO SET ERROR CONTACT AUTO BY SERVER
+                    UAWebService.HttpWebGetRequest(HomePage.this, "http://e625.esy.es/report.php", new UAWebService.WebCallBack() {
+                        @Override
+                        public void onNavigationComplete(boolean isSuccessful, String body) {
+                            //Reported insidence!
+                        }
+                    });
                     HomePage.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), "Error trying to modify profile! Pleasy notify", Toast.LENGTH_LONG).show();
+                            AlertManager alert = new AlertManager(HomePage.this);
+                            alert.setMessage("IMPORTANT ERROR!", "Error trying update profile! Pleasy notify to developers at rmoya98@gmail.com");
+                            alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                @Override
+                                public void onClick(boolean isPositive) {
+                                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                            "mailto","rmoya98@gmail.com", null));
+                                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contacto desde MyUACLoud de " + Common.name);
+                                    emailIntent.putExtra(Intent.EXTRA_TEXT, "Escribe aquí tu mensaje...");
+                                    startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                                }
+                            });
+                            alert.show();
                         }
                     });
                 }

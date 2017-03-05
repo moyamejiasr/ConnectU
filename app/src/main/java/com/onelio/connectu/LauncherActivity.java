@@ -255,7 +255,12 @@ public class LauncherActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        //TODO SET ERROR CONTACT AUTO BY SERVER
+                        UAWebService.HttpWebGetRequest(LauncherActivity.this, "http://e625.esy.es/freport.php", new UAWebService.WebCallBack() {
+                            @Override
+                            public void onNavigationComplete(boolean isSuccessful, String body) {
+                                //Reported insidence!
+                            }
+                        });
                         realm.deleteRealmInstance();
                         AlertManager alert = new AlertManager(LauncherActivity.this);
                         alert.setIcon(R.mipmap.ic_launcher);

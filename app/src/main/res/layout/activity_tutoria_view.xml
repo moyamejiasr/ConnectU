@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="8dp"
     android:orientation="vertical">
 
@@ -18,61 +19,55 @@
             android:layout_width="0px"
             android:layout_height="0px"/>
 
-        <EditText
-            android:id="@+id/messageEdit"
+        <android.support.v7.widget.CardView
+            android:id="@id/card_view1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="8dp"
+            android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/chatSendButton"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/sp_text_dev"
-            android:padding="6dp"
-            android:layout_marginLeft="3dp"
-            android:autoText="true"
-            android:hint="type message" />
+            android:layout_toStartOf="@+id/chatSendButton"
+            app:cardCornerRadius="3dp"
+            app:cardBackgroundColor="#ffffff"
+            app:cardPreventCornerOverlap="false"
+            app:contentPadding="0dp">
+
+            <EditText
+                android:id="@+id/messageEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="6dp"
+                android:background="@android:color/transparent"
+                android:autoText="true"
+                android:hint="Type message"
+                android:imeOptions="actionNone" />
+
+         </android.support.v7.widget.CardView>
 
         <ImageButton
             android:id="@+id/chatSendButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_menu_send"
             android:background="@drawable/round_btn"
             android:layout_marginRight="9dp"
-            android:text="Send MSG"
-            android:textColor="@color/background_material_light"/>
+            android:text="Send MSG" />
 
-        <ListView
+        <GridView
             android:id="@+id/messagesContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
-            android:layout_marginBottom="20dp"
-            android:layout_above="@+id/messageEdit"
-            android:layout_below="@+id/meLbl"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="3dp"
+            android:layout_above="@+id/card_view1"
+            android:layout_marginTop="3dp"
             android:listSelector="@android:color/transparent"
             android:transcriptMode="alwaysScroll"
             android:divider="@null" />
-
-        <TextView
-            android:id="@+id/meLbl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:text="@string/myself"
-            android:singleLine="false"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/friendLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="Friend"
-            android:textSize="20dp" />
 
     </RelativeLayout>
 </LinearLayout>

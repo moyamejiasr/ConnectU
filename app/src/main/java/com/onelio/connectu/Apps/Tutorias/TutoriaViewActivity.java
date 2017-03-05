@@ -4,19 +4,19 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.API.WebApi;
-import com.onelio.connectu.Apps.Chat.ChatAdapter;
-import com.onelio.connectu.Apps.Chat.ChatMessage;
+import com.onelio.connectu.Apps.Chat.MessagesListAdapter;
+import com.onelio.connectu.Apps.Chat.Msg;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
@@ -29,9 +29,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -41,10 +39,11 @@ public class TutoriaViewActivity extends AppCompatActivity {
 
     ProgressDialog dialog;
     private EditText messageET;
-    private ListView messagesContainer;
+    private GridView messagesContainer;
     private ImageButton sendBtn;
-    private ChatAdapter adapter;
-    private ArrayList<ChatMessage> chatHistory;
+    private MessagesListAdapter adapter;
+    ArrayList<Msg> listMessages;
+    private ArrayList<Msg> chatHistory;
     String idPadre = "";
 
     @Override
@@ -59,8 +58,6 @@ public class TutoriaViewActivity extends AppCompatActivity {
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
         setTitle(Common.cTitle);
-        TextView companionLabel = (TextView) findViewById(R.id.friendLabel);
-        companionLabel.setText(getString(R.string.teacher));// Hard Coded
 
         if(!Common.isNewChat) {
             sendRead();
@@ -73,8 +70,19 @@ public class TutoriaViewActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.tutoria_view, menu);
+        menu.getItem(0).setIcon(getResources().getDrawable(R.mipmap.ic_launcher));
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onBackPressed();
+        int id = item.getItemId();
+        if (id != R.id.icon) {
+            super.onBackPressed();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -83,16 +91,11 @@ public class TutoriaViewActivity extends AppCompatActivity {
         UAWebService.HttpWebPostRequest(TutoriaViewActivity.this, UAWebService.TUTORIAS_READ, json, new UAWebService.WebCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, final String body) {
-                if (isSuccessful) {
+                if (!isSuccessful) {
                     TutoriaViewActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            try {
-                                JSONObject jdata = new JSONObject(body);
-                                Toast.makeText(getBaseContext(), jdata.getString("result"), Toast.LENGTH_LONG).show();
-                            } catch (JSONException e) {
-                                Toast.makeText(getBaseContext(), body, Toast.LENGTH_LONG).show();
-                            }
+                            Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -118,24 +121,16 @@ public class TutoriaViewActivity extends AppCompatActivity {
                     //Get view
                     Elements user = doc.select("img.imgUsuarioG");
                     Elements texto = doc.select("div.row");
-                    chatHistory = new ArrayList<ChatMessage>();
+                    chatHistory = new ArrayList<>();
 
                     for(int c = 0; c < user.size(); c++) {
                         Elements type = texto.eq(c*2).select("div.row > div > div.bubble");
                         String textor = texto.eq(c*2).select("div.row > div > div").text();
                         if(type.size() != 0) {
-                            ChatMessage msg = new ChatMessage();
-                            msg.setId(c + 1);
-                            msg.setMe(true);
-                            msg.setMessage(textor);
-                            msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                            Msg msg = new Msg(true, textor);
                             chatHistory.add(msg);
                         } else {
-                            ChatMessage msg = new ChatMessage();
-                            msg.setId(c + 1);
-                            msg.setMe(false);
-                            msg.setMessage(textor);
-                            msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                            Msg msg = new Msg(false, textor);
                             chatHistory.add(msg);
                         }
 
@@ -163,14 +158,10 @@ public class TutoriaViewActivity extends AppCompatActivity {
     }
 
     public void initControls() {
-        messagesContainer = (ListView) findViewById(R.id.messagesContainer);
+        messagesContainer = (GridView) findViewById(R.id.messagesContainer);
         messageET = (EditText) findViewById(R.id.messageEdit);
         sendBtn = (ImageButton) findViewById(R.id.chatSendButton);
 
-        TextView meLabel = (TextView) findViewById(R.id.meLbl);
-        TextView companionLabel = (TextView) findViewById(R.id.friendLabel);
-        RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
-        companionLabel.setText(getString(R.string.teacher));// Hard Coded
         loadDummyHistory();
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +174,7 @@ public class TutoriaViewActivity extends AppCompatActivity {
 
                 dialog.show();
                 if(Common.isNewChat) {
+                    messageET.setEnabled(false);
                     try {
                         Common.jdata.put("txtPregunta", messageText);
                     } catch (JSONException e) {
@@ -197,7 +189,6 @@ public class TutoriaViewActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call call, Response response) throws IOException {
                                 if (response.isSuccessful()) {
-                                    Document doc = Jsoup.parse(response.body().string());
                                     TutoriaViewActivity.this.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -245,38 +236,32 @@ public class TutoriaViewActivity extends AppCompatActivity {
                     }
                 }
 
-                ChatMessage chatMessage = new ChatMessage();
-                chatMessage.setId(122);//dummy
-                chatMessage.setMessage(messageText);
-                chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
-                chatMessage.setMe(true);
-
+                Msg chatMessage = new Msg(true, messageText);
                 messageET.setText("");
-                messageET.setEnabled(false);
 
                 displayMessage(chatMessage);
             }
         });
     }
 
-    public void displayMessage(ChatMessage message) {
-        adapter.add(message);
-        adapter.notifyDataSetChanged();
+    public void displayMessage(Msg message) {
+        listMessages.add(message);
+        messagesContainer.deferNotifyDataSetChanged();
         scroll();
     }
 
     private void scroll() {
-        messagesContainer.setSelection(messagesContainer.getCount() - 1);
+        messagesContainer.setSelection(listMessages.size()-1);
     }
 
     private void loadDummyHistory(){
-
-        adapter = new ChatAdapter(TutoriaViewActivity.this, new ArrayList<ChatMessage>());
+        listMessages = new ArrayList<Msg>();
+        adapter = new MessagesListAdapter(this, listMessages);
         messagesContainer.setAdapter(adapter);
 
         if (chatHistory != null) {
             for (int i = 0; i < chatHistory.size(); i++) {
-                ChatMessage message = chatHistory.get(i);
+                Msg message = chatHistory.get(i);
                 displayMessage(message);
             }
         }

@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.Apps.Anuncios.AnunciosActivity;
@@ -81,7 +82,7 @@ public class HomePage extends AppCompatActivity
     public void launchMarket()
     {
         //Shortcut market
-        if (Common.firstStart) {
+        if (Common.firstStart && isFirsttime) {
             AlertManager alert = new AlertManager(this);
             alert.setIcon(R.mipmap.ic_launcher);
             alert.setMessage(getString(R.string.app_name), getString(R.string.shortcut));
@@ -137,12 +138,8 @@ public class HomePage extends AppCompatActivity
                     realm.modifyOption("launchTimes", jdate.toString());
                     realm.deleteRealmInstance();
                 } else {
-                    UAWebService.HttpWebGetRequest(HomePage.this, "http://e625.esy.es/report.php", new UAWebService.WebCallBack() {
-                        @Override
-                        public void onNavigationComplete(boolean isSuccessful, String body) {
-                            //Reported insidence!
-                        }
-                    });
+                    FirebaseCrash.log("Launcher Activity - Failed to edit User profile!");
+                    FirebaseCrash.report(new Exception("Failed to profile"));
                     HomePage.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

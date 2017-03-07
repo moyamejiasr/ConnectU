@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.API.WebApi;
 import com.onelio.connectu.Database.RealmManager;
@@ -255,12 +256,8 @@ public class LauncherActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        UAWebService.HttpWebGetRequest(LauncherActivity.this, "http://e625.esy.es/freport.php", new UAWebService.WebCallBack() {
-                            @Override
-                            public void onNavigationComplete(boolean isSuccessful, String body) {
-                                //Reported insidence!
-                            }
-                        });
+                        FirebaseCrash.log("Launcher Activity - Failed Creating User profile!");
+                        FirebaseCrash.report(new Exception("Failed to profile"));
                         realm.deleteRealmInstance();
                         AlertManager alert = new AlertManager(LauncherActivity.this);
                         alert.setIcon(R.mipmap.ic_launcher);

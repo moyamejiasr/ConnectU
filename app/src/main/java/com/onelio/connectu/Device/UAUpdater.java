@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
 import android.widget.ProgressBar;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.R;
@@ -105,6 +106,8 @@ public class UAUpdater {
                             completed = true;
                         }
                     } catch (JSONException e) {
+                        FirebaseCrash.log("Failed in url with" + String.valueOf(calCount));
+                        FirebaseCrash.log(e.getMessage().toString());
                         error = true;
                     }
                 }
@@ -180,6 +183,8 @@ public class UAUpdater {
                                         data.put("teachers", teachers);
                                         getNextCal(activity);
                                     } catch (JSONException e) {
+                                        FirebaseCrash.log("JSON Exception in Tutorias_G_SIGN 2");
+                                        FirebaseCrash.log(e.getMessage());
                                         error = true;
                                     }
                                 }
@@ -189,6 +194,8 @@ public class UAUpdater {
                 });
             }
         } catch (JSONException e) {
+            FirebaseCrash.log("JSON Exception in Tutorias_G_DES 1");
+            FirebaseCrash.log(e.getMessage().toString());
             error = true;
         }
     }
@@ -209,6 +216,8 @@ public class UAUpdater {
                                 signature.put("id", elements.eq(i).attr("value"));
                                 signatures.put(signature);
                             } catch (JSONException e) {
+                                FirebaseCrash.log("Failed in Tutorias_G_MAKE with");
+                                FirebaseCrash.log(e.getMessage().toString());
                                 error = true;
                             }
                         }
@@ -216,6 +225,8 @@ public class UAUpdater {
                     try {
                         data.put("signatures", signatures);
                     } catch (JSONException e) {
+                        FirebaseCrash.log("Failed in Tutorias_G_MAKE with");
+                        FirebaseCrash.log(e.getMessage().toString());
                         error = true;
                     }
                     progress = 10;
@@ -239,12 +250,15 @@ public class UAUpdater {
                                     data.put("year", elements.eq(i).text());
                                 } catch (JSONException e) {
                                     error = true;
+                                    FirebaseCrash.log("JSON Exception connecting to UA.Tutorias");
                                 }
                             }
                         }
                     }
                     progress = 5;
                     requestSignatures(activity);
+                } else {
+                    FirebaseCrash.log("Failed connecting to UA.Tutorias");
                 }
             }
         });
@@ -272,6 +286,7 @@ public class UAUpdater {
             calCount = 0;
 
             if (Common.updateData) {
+                FirebaseCrash.log("UAUpdater - Updating data");
                 mNotifyManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
                 mBuilder = new NotificationCompat.Builder(activity);
                 mBuilder.setContentTitle("ConnectU Manager")
@@ -280,6 +295,8 @@ public class UAUpdater {
                 mBuilder.setProgress(100, 0, false);
                 // Displays the progress bar for the first time.
                 mNotifyManager.notify(5, mBuilder.build());
+            } else {
+                FirebaseCrash.log("UAUpdater - Creating data");
             }
 
             //Connect
@@ -300,6 +317,7 @@ public class UAUpdater {
                 mBuilder.setContentText("User profile updated").setProgress(0, 0, false);
                 mNotifyManager.notify(5, mBuilder.build());
             }
+            FirebaseCrash.log("Finished with error (0=no) " + String.valueOf(!error));
             listener.onNavigationComplete(!error, data);
         }
 
@@ -313,7 +331,6 @@ public class UAUpdater {
                         pb.setProgress(values[0]);
                     } else {
                         mBuilder.setProgress(100, values[0], false);
-                        // Displays the progress bar for the first time.
                         mNotifyManager.notify(5, mBuilder.build());
                     }
                 }

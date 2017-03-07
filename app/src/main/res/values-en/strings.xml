@@ -126,7 +126,7 @@
     <string name="cancel">Cancel</string>
     <string name="title_activity_maps">University Map</string>
     <string name="beta1">Creating user profile, \nThis can take a while the first time...</string>
-    <string name="error_profile">Error, cloudn\'t create user profile, you will be moved to the login screen. If this error persist, please contact us at rmoya98@gmail.com</string>
+    <string name="error_profile">Error, cloudn\'t create user profile, you will be moved to the login screen. We have recibed a report to prevent this error in the future.</string>
     <string name="shortcut">Do you wish to create a shortcut to the Schedule?, You will be able to create it latter from the app settings.</string>
     <string name="created_shortcut">Created, take a look at your desktop!</string>
     <string name="create_shortcut">Create shortcut to Schedule</string>

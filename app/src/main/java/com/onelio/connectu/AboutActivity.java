@@ -6,11 +6,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.WebApi;
+import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.UAUpdater;
 
 import org.json.JSONObject;
@@ -33,9 +35,18 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Onelio/ConnectU"));
-        startActivity(browserIntent);
+        //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Onelio/ConnectU"));
+        //startActivity(browserIntent);
         //startActivity(new Intent(AboutActivity.this, TestActivity.class));
+        AlertManager alert = new AlertManager(AboutActivity.this);
+        alert.setCancelable(false);
+        alert.setMessage(getString(R.string.app_name), Html.fromHtml(getString(R.string.disclaimer)));
+        alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+            @Override
+            public void onClick(boolean isPositive) {
+            }
+        });
+        alert.show();
     }
 
     public void testing() {

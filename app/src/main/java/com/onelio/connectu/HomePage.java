@@ -521,11 +521,13 @@ public class HomePage extends AppCompatActivity
         not_big_text.setText(getResources().getString(R.string.you_have) + " " + Common.alerts + " " + getResources().getString(R.string.pending_notifications));
         //AUNUNCIOS
         rowData =new ArrayList<ItemList>();
-        for(int i=0;i<Common.ANUNCIOS.size();i++){
-            ItemList data =new ItemList();
-            data.setTitle(DeviceManager.capFirstLetter(Common.ANUNCIOS.eq(i).text()));
-            data.setSubtitle(Common.SUBANUNCIOS.eq(i).text());
-            rowData.add(data);
+        if (Common.ANUNCIOS != null) {
+            for (int i = 0; i < Common.ANUNCIOS.size(); i++) {
+                ItemList data = new ItemList();
+                data.setTitle(DeviceManager.capFirstLetter(Common.ANUNCIOS.eq(i).text()));
+                data.setSubtitle(Common.SUBANUNCIOS.eq(i).text());
+                rowData.add(data);
+            }
         }
         list = (ListView) findViewById(R.id.anlist);
         ItemListAdapter adapter = new ItemListAdapter(this, rowData);
@@ -541,11 +543,13 @@ public class HomePage extends AppCompatActivity
         justifyListViewHeightBasedOnChildren(list);
         //MATDOCENTE
         rowData =new ArrayList<ItemList>();
-        for(int i=0;i<Common.MATDOCENTE.size();i++){
-            ItemList data =new ItemList();
-            data.setTitle(DeviceManager.capFirstLetter(Common.MATDOCENTE.eq(i).text().substring(Common.MATDOCENTE.eq(i).text().lastIndexOf(") ") + 2)));
-            data.setSubtitle(getResources().getString(R.string.you_have) + Common.SUBMATDOCENTE.eq(i).text() + " " + getResources().getString(R.string.pending_files));
-            rowData.add(data);
+        if (Common.MATDOCENTE != null) {
+            for (int i = 0; i < Common.MATDOCENTE.size(); i++) {
+                ItemList data = new ItemList();
+                data.setTitle(DeviceManager.capFirstLetter(Common.MATDOCENTE.eq(i).text().substring(Common.MATDOCENTE.eq(i).text().lastIndexOf(") ") + 2)));
+                data.setSubtitle(getResources().getString(R.string.you_have) + Common.SUBMATDOCENTE.eq(i).text() + " " + getResources().getString(R.string.pending_files));
+                rowData.add(data);
+            }
         }
         list = (ListView) findViewById(R.id.matlist);
         adapter = new ItemListAdapter(this, rowData);
@@ -561,11 +565,13 @@ public class HomePage extends AppCompatActivity
         justifyListViewHeightBasedOnChildren(list);
         //UATUTORIAS
         rowData =new ArrayList<ItemList>();
-        for(int i=0;i<Common.UATUTORIAS.size();i++){
-            ItemList data =new ItemList();
-            data.setTitle(DeviceManager.capFirstLetter(Common.UATUTORIAS.eq(i).text()));
-            data.setSubtitle(Common.SUBUATUTORIAS.eq(i).text());
-            rowData.add(data);
+        if (Common.UATUTORIAS != null) {
+            for (int i = 0; i < Common.UATUTORIAS.size(); i++) {
+                ItemList data = new ItemList();
+                data.setTitle(DeviceManager.capFirstLetter(Common.UATUTORIAS.eq(i).text()));
+                data.setSubtitle(Common.SUBUATUTORIAS.eq(i).text());
+                rowData.add(data);
+            }
         }
         list = (ListView) findViewById(R.id.tutlist);
         adapter = new ItemListAdapter(this, rowData);
@@ -581,11 +587,13 @@ public class HomePage extends AppCompatActivity
         justifyListViewHeightBasedOnChildren(list);
         //UAEVALUACION
         rowData =new ArrayList<ItemList>();
-        for(int i=0;i<Common.UAEVALUACION.size();i++){
-            ItemList data =new ItemList();
-            data.setTitle(DeviceManager.capFirstLetter(Common.UAEVALUACION.eq(i).text()));
-            data.setSubtitle(Common.SUBUAEVALUACION.eq(i).text());
-            rowData.add(data);
+        if (Common.UAEVALUACION != null) {
+            for (int i = 0; i < Common.UAEVALUACION.size(); i++) {
+                ItemList data = new ItemList();
+                data.setTitle(DeviceManager.capFirstLetter(Common.UAEVALUACION.eq(i).text()));
+                data.setSubtitle(Common.SUBUAEVALUACION.eq(i).text());
+                rowData.add(data);
+            }
         }
         list = (ListView) findViewById(R.id.evlist);
         adapter = new ItemListAdapter(this, rowData);

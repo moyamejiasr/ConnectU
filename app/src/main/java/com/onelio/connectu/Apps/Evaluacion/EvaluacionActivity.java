@@ -24,7 +24,6 @@ import com.onelio.connectu.Common;
 import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.LoginActivity;
 import com.onelio.connectu.R;
-import com.silencedut.expandablelayout.ExpandableLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;

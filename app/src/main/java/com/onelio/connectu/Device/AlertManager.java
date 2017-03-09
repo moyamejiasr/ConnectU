@@ -1,11 +1,18 @@
 package com.onelio.connectu.Device;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.text.Spanned;
+import android.widget.Toast;
 
 import com.onelio.connectu.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Onelio on 14/02/2017.
@@ -15,6 +22,7 @@ public class AlertManager {
     //Define
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
+    private Activity activity;
 
     //define callback interface
     public interface AlertCallBack {
@@ -22,6 +30,7 @@ public class AlertManager {
     }
 
     public AlertManager(Activity activity) {
+        this.activity = activity;
         builder = new AlertDialog.Builder(activity);
         //Default
         builder.setIcon(R.drawable.advw)
@@ -63,9 +72,19 @@ public class AlertManager {
         });
     }
 
+    private boolean getIfRunning(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return !activity.isDestroyed();
+        } else {
+            return !activity.isFinishing();
+        }
+    }
+
     public void show() {
-        dialog = builder.create();
-        dialog.show();
+        if (getIfRunning(activity)) {
+            dialog = builder.create();
+            dialog.show();
+        }
     }
 
     public void cancel() {

@@ -63,7 +63,11 @@ public class TutoriaAdapter extends BaseAdapter {
         final TextView fecha = (TextView)convertView.findViewById(R.id.date);
         final TextView autor = (TextView)convertView.findViewById(R.id.autor);
 
-        Picasso.with(mContext).load(names.get(position).getSrc()).into(tipo);
+        if (names.get(position).getSrc().length() > 0) {
+            Picasso.with(mContext).load(names.get(position).getSrc()).into(tipo);
+        } else {
+            tipo.setImageResource(R.mipmap.ic_launcher);
+        }
 
         titulo.setText(names.get(position).getName());
         fecha.setText(names.get(position).getStartdate());

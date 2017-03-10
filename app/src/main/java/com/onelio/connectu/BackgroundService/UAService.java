@@ -240,6 +240,7 @@ public class UAService extends Service {
                                     PendingIntent intent = PendingIntent.getActivity(getBaseContext(), 0, notificationIntent, 0);
                                     NotificationCompat.Builder mBuilder =
                                             new NotificationCompat.Builder(getBaseContext())
+                                                    .setDefaults(NotificationCompat.DEFAULT_ALL)
                                                     .setSmallIcon(R.drawable.advw)
                                                     .setContentIntent(intent)
                                                     .setContentTitle("MyUACloud Alert")

@@ -313,9 +313,11 @@ public class UAUpdater {
 
         protected void onPostExecute(Void s){
             // your stuff
-            if (Common.updateData) {
-                mBuilder.setContentText("User profile updated").setProgress(0, 0, false);
+            if (Common.updateData && error) {
+                mBuilder.setContentText("Error updating user profile!").setProgress(0, 0, false);
                 mNotifyManager.notify(5, mBuilder.build());
+            } else if (Common.updateData) {
+                mNotifyManager.cancel(5);
             }
             FirebaseCrash.log("Finished with error (0=no) " + String.valueOf(!error));
             listener.onNavigationComplete(!error, data);

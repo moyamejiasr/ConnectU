@@ -42,6 +42,8 @@ import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
 import co.mobiwise.materialintro.view.MaterialIntroView;
 
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
 public class TutoriaActivity extends AppCompatActivity {
 
     ProgressDialog dialog;

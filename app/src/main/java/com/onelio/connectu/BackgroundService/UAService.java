@@ -245,7 +245,7 @@ public class UAService extends Service {
                                                     .setContentIntent(intent)
                                                     .setContentTitle("MyUACloud Alert")
                                                     .setContentText(getResources().getString(R.string.you_have) + " " + String.valueOf(data - curAlert) + " " + getResources().getString(R.string.unseen_not))
-                                                    .setAutoCancel(true);;
+                                                    .setAutoCancel(true);
                                     NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                                     mNotifyMgr.notify(1, mBuilder.build());
                                 }
@@ -276,11 +276,11 @@ public class UAService extends Service {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         Log.i("EXIT", "ondestroy!");
         if(active) {
             Intent broadcastIntent = new Intent(getBaseContext(), UAServiceKill.class);
             sendBroadcast(broadcastIntent);
         }
+        super.onDestroy();
     }
 }

@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.API.WebApi;
 import com.onelio.connectu.Apps.Chat.MessagesListAdapter;
@@ -95,7 +96,9 @@ public class TutoriaViewActivity extends AppCompatActivity {
                     TutoriaViewActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
+                            FirebaseCrash.log(body);
+                            FirebaseCrash.report(new Exception("Failed to make tutoria " + Common.tutId + " readed"));
+                            Toast.makeText(getBaseContext(), "Error while making this tutoria as readed!", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -167,7 +170,7 @@ public class TutoriaViewActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String messageText = messageET.getText().toString();
+                final String messageText = messageET.getText().toString();
                 if (TextUtils.isEmpty(messageText)) {
                     return;
                 }
@@ -184,21 +187,70 @@ public class TutoriaViewActivity extends AppCompatActivity {
                         WebApi.mpost(Common.TUTORIAS_NT, Common.jdata, new Callback() {
                             @Override
                             public void onFailure(Call call, IOException e) {
+                                AlertManager alert = new AlertManager(TutoriaViewActivity.this);
+                                alert.setMessage(getString(R.string.app_name), getString(R.string.error_connect));
+                                alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                    @Override
+                                    public void onClick(boolean isPositive) {
+                                    }
+                                });
+                                alert.show();
                             }
 
                             @Override
                             public void onResponse(Call call, Response response) throws IOException {
+                                final String text = response.body().string();
                                 if (response.isSuccessful()) {
                                     TutoriaViewActivity.this.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Common.isNewChat = false;
-                                            sendBtn.setEnabled(false);
                                             dialog.hide();
-                                            Toast.makeText(getBaseContext(), "Sended!", Toast.LENGTH_SHORT).show();
-                                            //TODO: Fix get TutoID
+                                            try {
+                                                JSONObject result = new JSONObject(text);
+                                                if (result.getInt("resultado") == -1) {
+                                                    AlertManager alert = new AlertManager(TutoriaViewActivity.this);
+                                                    alert.setMessage(getString(R.string.app_name), result.getString("result"));
+                                                    alert.setIcon(R.mipmap.ic_launcher);
+                                                    alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                                        @Override
+                                                        public void onClick(boolean isPositive) {
+                                                        }
+                                                    });
+                                                    alert.show();
+                                                } else {
+                                                    Common.isNewChat = false;
+                                                    sendBtn.setEnabled(true); //Who cares...
+                                                    Common.tutId = String.valueOf(result.getInt("resultado"));
+                                                    if (Common.jdata.has("idTuto") ) {
+                                                        Common.jdata.remove("idTuto");
+                                                    }
+                                                    Common.jdata.put("idTuto", Common.tutId);
+                                                    Msg chatMessage = new Msg(true, messageText);
+                                                    messageET.setText("");
+                                                    displayMessage(chatMessage);
+                                                    Toast.makeText(getBaseContext(), result.getString("result"), Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                AlertManager alert = new AlertManager(TutoriaViewActivity.this);
+                                                alert.setMessage(getString(R.string.app_name), getString(R.string.error_format));
+                                                alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                                    @Override
+                                                    public void onClick(boolean isPositive) {
+                                                    }
+                                                });
+                                                alert.show();
+                                            }
                                         }
                                     });
+                                } else {
+                                    AlertManager alert = new AlertManager(TutoriaViewActivity.this);
+                                    alert.setMessage(getString(R.string.app_name), getString(R.string.error_connect));
+                                    alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                        @Override
+                                        public void onClick(boolean isPositive) {
+                                        }
+                                    });
+                                    alert.show();
                                 }
                                 response.close();
                             }
@@ -216,17 +268,63 @@ public class TutoriaViewActivity extends AppCompatActivity {
                         WebApi.mpostc(Common.TUTORIAS_NP, Common.jdata, new Callback() {
                             @Override
                             public void onFailure(Call call, IOException e) {
+                                AlertManager alert = new AlertManager(TutoriaViewActivity.this);
+                                alert.setMessage(getString(R.string.app_name), getString(R.string.error_connect));
+                                alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                    @Override
+                                    public void onClick(boolean isPositive) {
+                                    }
+                                });
+                                alert.show();
                             }
 
                             @Override
                             public void onResponse(Call call, Response response) throws IOException {
+                                final String text = response.body().string();
                                 if (response.isSuccessful()) {
                                     TutoriaViewActivity.this.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             dialog.hide();
+                                            try {
+                                                JSONObject result = new JSONObject(text);
+                                                if (result.getInt("resultado") == -1) {
+                                                    AlertManager alert = new AlertManager(TutoriaViewActivity.this);
+                                                    alert.setMessage(getString(R.string.app_name), result.getString("result"));
+                                                    alert.setIcon(R.mipmap.ic_launcher);
+                                                    alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                                        @Override
+                                                        public void onClick(boolean isPositive) {
+                                                        }
+                                                    });
+                                                    alert.show();
+                                                } else {
+                                                    Msg chatMessage = new Msg(true, messageText);
+                                                    messageET.setText("");
+                                                    displayMessage(chatMessage);
+                                                    Toast.makeText(getBaseContext(), result.getString("result"), Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                AlertManager alert = new AlertManager(TutoriaViewActivity.this);
+                                                alert.setMessage(getString(R.string.app_name), getString(R.string.error_format));
+                                                alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                                    @Override
+                                                    public void onClick(boolean isPositive) {
+                                                    }
+                                                });
+                                                alert.show();
+                                            }
                                         }
                                     });
+                                } else {
+                                    AlertManager alert = new AlertManager(TutoriaViewActivity.this);
+                                    alert.setMessage(getString(R.string.app_name), getString(R.string.error_connect));
+                                    alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                        @Override
+                                        public void onClick(boolean isPositive) {
+                                        }
+                                    });
+                                    alert.show();
                                 }
                                 response.close();
                             }
@@ -235,11 +333,6 @@ public class TutoriaViewActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
-                Msg chatMessage = new Msg(true, messageText);
-                messageET.setText("");
-
-                displayMessage(chatMessage);
             }
         });
     }

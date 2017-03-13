@@ -65,14 +65,14 @@ public class WebViewActivity extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            dialog.cancel();
+                            dialog.hide();
                             webView.setVisibility(View.VISIBLE);
                         }
                         super.onPageFinished(view, url);
                     }
                 });
             } else {
-                dialog.cancel();
+                dialog.hide();
                 webView.setVisibility(View.VISIBLE);
             }
             webView.setDownloadListener(new DownloadListener() {

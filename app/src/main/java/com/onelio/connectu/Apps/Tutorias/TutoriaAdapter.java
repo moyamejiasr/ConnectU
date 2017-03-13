@@ -65,13 +65,15 @@ public class TutoriaAdapter extends BaseAdapter {
 
         if (names.get(position).getSrc().length() > 0) {
             Picasso.with(mContext).load(names.get(position).getSrc()).into(tipo);
+            titulo.setText(names.get(position).getName());
+            fecha.setText(names.get(position).getStartdate());
+            autor.setText(mContext.getResources().getString(R.string.to) + " " + names.get(position).getUser());
         } else {
             tipo.setImageResource(R.mipmap.ic_launcher);
+            titulo.setText("Error, couldn't load data");
+            fecha.setText("None");
+            autor.setText("Please refresh or reload");
         }
-
-        titulo.setText(names.get(position).getName());
-        fecha.setText(names.get(position).getStartdate());
-        autor.setText(mContext.getResources().getString(R.string.to) + " " + names.get(position).getUser());
 
         return convertView;
     }

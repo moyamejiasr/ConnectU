@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -187,10 +188,11 @@ public class TutoriaActivity extends AppCompatActivity {
     }
 
     public void showData() {
+        ListView gridView = (ListView) findViewById(R.id.gridview);
         if (Adapter!=null) {
             Adapter.notifyDataSetChanged();
+            gridView.deferNotifyDataSetChanged();
         }
-        ListView gridView = (ListView) findViewById(R.id.gridview);
         TextView emptyText = (TextView)findViewById(android.R.id.empty);
         gridView.setEmptyView(emptyText);
         Adapter = new TutoriaAdapter(getBaseContext(), elem);
@@ -207,8 +209,9 @@ public class TutoriaActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.enter, R.anim.exit);
             }
         });
-        dialog.cancel();
     }
+
+    int times = 0;
 
     public void loadSeen(){
         elem = new ArrayList<TutoriaList>();
@@ -263,7 +266,7 @@ public class TutoriaActivity extends AppCompatActivity {
                                 TutoriaActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        dialog.cancel();
+                                        dialog.hide();
                                     }
                                 });
                             }
@@ -271,8 +274,10 @@ public class TutoriaActivity extends AppCompatActivity {
                                 TutoriaActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        if (Adapter != null) {
+                                        ListView gridView = (ListView) findViewById(R.id.gridview);
+                                        if (Adapter!=null) {
                                             Adapter.notifyDataSetChanged();
+                                            gridView.deferNotifyDataSetChanged();
                                         }
                                     }
                                 });
@@ -320,6 +325,16 @@ public class TutoriaActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+                    times++;
+                    if (times == sid.size()) {
+                        times = 0;
+                        TutoriaActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.hide();
+                            }
+                        });
                     }
                 }
             });

@@ -262,11 +262,15 @@ public class TutoriaActivity extends AppCompatActivity {
                             JSONObject jdata = new JSONObject(body);
                             int size = jdata.getInt("iTotalDisplayRecords");
                             JSONArray jobj = jdata.getJSONArray("aaData");
-                            if (size==0) {
+                            if (size < 1) {
                                 TutoriaActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        dialog.hide();
+                                        ListView gridView = (ListView) findViewById(R.id.gridview);
+                                        if (Adapter!=null) {
+                                            Adapter.notifyDataSetChanged();
+                                            gridView.deferNotifyDataSetChanged();
+                                        }
                                     }
                                 });
                             }
@@ -315,12 +319,6 @@ public class TutoriaActivity extends AppCompatActivity {
                                 item.setId(id);
                                 item.setSign(sgname);
                                 elem.add(item);
-                                TutoriaActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        showData();
-                                    }
-                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -332,6 +330,12 @@ public class TutoriaActivity extends AppCompatActivity {
                         TutoriaActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                TutoriaActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showData();
+                                    }
+                                });
                                 dialog.hide();
                             }
                         });

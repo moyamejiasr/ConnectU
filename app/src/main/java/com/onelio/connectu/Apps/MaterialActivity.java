@@ -198,7 +198,8 @@ public class MaterialActivity extends AppCompatActivity {
                                         if (downloadedFile.exists()) {
                                             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                                             sharingIntent.setType(getMimeType(downloadedFile.getParent() + "/" + fname));
-                                            sharingIntent.putExtra(Intent.EXTRA_STREAM, downloadedFile);
+                                            Uri uri = Uri.fromFile(downloadedFile);
+                                            sharingIntent.putExtra(Intent.EXTRA_STREAM, uri.toString());
                                             startActivity(Intent.createChooser(sharingIntent, getString(R.string.share)));
                                             downloadedFile.deleteOnExit();
                                         } else {

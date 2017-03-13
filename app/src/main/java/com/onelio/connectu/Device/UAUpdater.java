@@ -43,7 +43,6 @@ public class UAUpdater {
 
     static Calendar time;
     static int calCount = 0;
-    static int monthCount = 0;
     static JSONArray calendar = new JSONArray();
 
     static NotificationManager mNotifyManager;
@@ -280,10 +279,12 @@ public class UAUpdater {
             data = new JSONObject();
             error = false;
             completed = false;
+            progress = 0;
             connected = 0;
             teachers = new JSONArray();
 
             calCount = 0;
+            calendar = new JSONArray();
 
             if (Common.updateData) {
                 FirebaseCrash.log("UAUpdater - Updating data");

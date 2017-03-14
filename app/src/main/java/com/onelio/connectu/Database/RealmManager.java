@@ -2,6 +2,8 @@ package com.onelio.connectu.Database;
 
 import android.content.Context;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmQuery;
@@ -32,7 +34,13 @@ public class RealmManager {
 
     public String getOption(String value) {
         Settings setting = realm.where(Settings.class).equalTo("name", value).findFirst();
-        return setting.getValue();
+        if (setting != null) {
+            return setting.getValue();
+        } else {
+            FirebaseCrash.log("Database crashed");
+            FirebaseCrash.report(new Exception("Failed database with " + value));
+            return "";
+        }
     }
 
     public void deleteRealmInstance() {

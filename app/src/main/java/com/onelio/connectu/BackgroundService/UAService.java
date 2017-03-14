@@ -152,6 +152,7 @@ public class UAService extends Service {
 
         //Get Data
         //Create Realm
+        Log.w("UAService", "Started!");
         Realm.init(getBaseContext());
         RealmConfiguration config = new RealmConfiguration.Builder().build();
         Realm.setDefaultConfiguration(config);
@@ -243,7 +244,7 @@ public class UAService extends Service {
                                                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                                                     .setSmallIcon(R.drawable.advw)
                                                     .setContentIntent(intent)
-                                                    .setContentTitle("MyUACloud Alert")
+                                                    .setContentTitle(getString(R.string.app_name) + " Alert")
                                                     .setContentText(getResources().getString(R.string.you_have) + " " + String.valueOf(data - curAlert) + " " + getResources().getString(R.string.unseen_not))
                                                     .setAutoCancel(true);
                                     NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

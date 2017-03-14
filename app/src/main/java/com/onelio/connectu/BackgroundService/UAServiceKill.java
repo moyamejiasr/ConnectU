@@ -13,6 +13,6 @@ public class UAServiceKill extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(UAServiceKill.class.getSimpleName(), "Service Stops!");
-        context.startService(new Intent(context, UAService.class));;
+        context.startService(new Intent(context, UAService.class));
     }
 }

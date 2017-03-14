@@ -90,7 +90,7 @@ public class HomePage extends AppCompatActivity
                 @Override
                 public void onClick(boolean isPositive) {
                     DeviceManager.addShortcutToHorario(getApplicationContext());
-                    Toast.makeText(getBaseContext(), getString(R.string.created_shortcut), Toast.LENGTH_LONG);
+                    Toast.makeText(getBaseContext(), getString(R.string.created_shortcut), Toast.LENGTH_LONG).show();
                 }
             });
             alert.setNegativeButton("NO", new AlertManager.AlertCallBack() {
@@ -195,7 +195,9 @@ public class HomePage extends AppCompatActivity
 
     @Override
     public void onDestroy() {
-        stopService(Coordinator.mServiceIntent);
+        if (Coordinator.mServiceIntent != null) {
+            stopService(Coordinator.mServiceIntent);
+        }
         super.onDestroy();
     }
 

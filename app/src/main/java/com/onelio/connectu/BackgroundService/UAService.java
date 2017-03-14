@@ -21,6 +21,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Database.Settings;
+import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.LauncherActivity;
 import com.onelio.connectu.R;
 
@@ -159,7 +160,8 @@ public class UAService extends Service {
         Realm realm = Realm.getDefaultInstance();
         Settings username = realm.where(Settings.class).equalTo("name", "username").findFirst();
         Settings data = realm.where(Settings.class).equalTo("name", "NotiCount").findFirst();
-        if (username != null) {
+        String isOn = realm.where(Settings.class).equalTo("name", "isNotifOn").findFirst().getValue();
+        if (username != null && isOn.contains("yes")) {
             loginUsername = username.getValue();
             if (!loginUsername.contains("Guest")) {
                 curAlert = Integer.parseInt(data.getValue());
@@ -170,6 +172,11 @@ public class UAService extends Service {
                 msg.arg1 = startId;
                 mServiceHandler.sendMessage(msg);
             }
+            realm.close();
+        } else {
+            realm.close();
+            active = false;
+            stopSelf();
         }
         realm.close();
         return START_STICKY;

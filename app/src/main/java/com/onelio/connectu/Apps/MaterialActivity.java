@@ -1,6 +1,7 @@
 package com.onelio.connectu.Apps;
 
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.onelio.connectu.API.WebApi;
 import com.onelio.connectu.Common;
+import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.LoginActivity;
 import com.onelio.connectu.R;
@@ -236,7 +238,23 @@ public class MaterialActivity extends AppCompatActivity {
                                             Intent intent = new Intent(Intent.ACTION_VIEW);
                                             intent.setDataAndType(Uri.fromFile(downloadedFile), getMimeType(downloadedFile.getParent() + "/" + fname));
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                                            startActivity(intent);
+                                            try {
+                                                startActivity(intent);
+                                            }catch (ActivityNotFoundException ex) {
+                                                MaterialActivity.this.runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        AlertManager alert = new AlertManager(MaterialActivity.this);
+                                                        alert.setMessage("Error", "Couldn't find any app to open this file!");
+                                                        alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                                                            @Override
+                                                            public void onClick(boolean isPositive) {
+                                                            }
+                                                        });
+                                                        alert.show();
+                                                    }
+                                                });
+                                            }
                                             downloadedFile.deleteOnExit();
                                         } else {
                                             MaterialActivity.this.runOnUiThread(new Runnable() {

@@ -212,9 +212,9 @@ public class LauncherActivity extends AppCompatActivity {
             }
             try {
                 Common.data = new JSONObject(realm.getOption("userData"));
-                realm.deleteRealmInstance();
                 Intent intent = new Intent(getApplication(), HomePage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                realm.deleteRealmInstance();
                 startActivity(intent);
                 finish();
             } catch (JSONException e) {
@@ -224,7 +224,12 @@ public class LauncherActivity extends AppCompatActivity {
                 alert.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
                     @Override
                     public void onClick(boolean isPositive) {
-                        DeviceManager.appClose();
+                        realm.deleteAll();
+                        Intent intent = new Intent(getApplication(), LauncherActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        realm.deleteRealmInstance();
+                        startActivity(intent);
+                        finish();
                     }
                 });
                 alert.show();
@@ -247,8 +252,14 @@ public class LauncherActivity extends AppCompatActivity {
                 @Override
                 public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
                     if (isSuccessful && data.toString().length() > 0) {
-                        realm.createOption("userData", data.toString());
-                        realm.deleteRealmInstance();
+                        try {
+                            realm.createOption("userData", data.toString());
+                            realm.deleteRealmInstance();
+                        } catch (IllegalStateException ex) {
+                            RealmManager realm1 = new RealmManager(getBaseContext());
+                            realm1.createOption("userData", data.toString());
+                            realm1.deleteRealmInstance();
+                        }
                         Common.data = data;
                         Common.firstStart = true;
                         Intent intent = new Intent(getApplication(), HomePage.class);

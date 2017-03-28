@@ -19,6 +19,7 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Database.Settings;
 import com.onelio.connectu.Device.DeviceManager;
@@ -205,13 +206,18 @@ public class UAService extends Service {
                     if (response.isSuccessful()) {
                         Document doc = Jsoup.parse(response.body().string());
                         //Get Post data
-                        Element lurl = doc.select("form[id=fm1]").first();
-                        String loginURL = lurl.attr("action");
-                        Element lt = doc.select("input[name=lt]").first();
-                        String ltr = lt.attr("value");
-                        Element execution = doc.select("input[name=execution]").first();
-                        String executionr = execution.attr("value");
-                        startMainActivity(loginURL, ltr, executionr);
+                        if (doc != null) {
+                            Element lurl = doc.select("form[id=fm1]").first();
+                            String loginURL = lurl.attr("action");
+                            Element lt = doc.select("input[name=lt]").first();
+                            String ltr = lt.attr("value");
+                            Element execution = doc.select("input[name=execution]").first();
+                            String executionr = execution.attr("value");
+                            startMainActivity(loginURL, ltr, executionr);
+                        } else {
+                            FirebaseCrash.log("UAService - Failed to connect!");
+                            FirebaseCrash.report(new Exception("Error code: " + String.valueOf(response.code())));
+                        }
                     }
                 }
             });

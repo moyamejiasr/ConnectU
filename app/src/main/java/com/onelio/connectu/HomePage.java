@@ -114,11 +114,11 @@ public class HomePage extends AppCompatActivity
     }
 
     void requestDataUpdate() {
-        final RealmManager realm = new RealmManager(HomePage.this);
         new UAUpdater.updateDataResult(HomePage.this, new UAUpdater.UpdaterCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
                 if (isSuccessful) {
+                    RealmManager realm = new RealmManager(HomePage.this);
                     realm.modifyOption("userData", data.toString());
                     Common.data = data;
                     Calendar time = Calendar.getInstance();

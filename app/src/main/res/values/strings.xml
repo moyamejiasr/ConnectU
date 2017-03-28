@@ -160,7 +160,7 @@
     <string name="start_at">Comienza el</string>
     <string name="since">desde</string>
     <string name="till">hasta</string>
-    <string name="error_old">Error, algunos archivos están corruptos o desactualizados. Por favor borra el cache de la app o vuelvela a instalar.</string>
+    <string name="error_old">Error, algunos archivos están corruptos o desactualizados. Es necesario que vuelvas a conectarte!</string>
 
 
 </resources>

@@ -13,9 +13,14 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.onelio.connectu.API.UAWebService;
+import com.onelio.connectu.Apps.MaterialActivity;
+import com.onelio.connectu.BackgroundService.UAService;
 import com.onelio.connectu.Common;
+import com.onelio.connectu.Database.RealmManager;
 import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
+import com.onelio.connectu.HomePage;
+import com.onelio.connectu.LauncherActivity;
 import com.onelio.connectu.R;
 
 import org.json.JSONArray;
@@ -39,7 +44,27 @@ public class TeachersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teachers);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         try {
-            teachers  = Common.data.getJSONArray("teachers");
+            if (Common.data != null) {
+                teachers = Common.data.getJSONArray("teachers");
+            } else {
+                AlertManager alert = new AlertManager(TeachersActivity.this);
+                alert.setMessage("Error", "Your profile is outdated, please login again to update it!");
+                alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
+                    @Override
+                    public void onClick(boolean isPositive) {
+                    }
+                });
+                alert.show();
+                RealmManager manager = new RealmManager(TeachersActivity.this);
+                manager.deleteAll();
+                manager.deleteRealmInstance();
+                UAService.active = false;
+                Common.isNotifOn = false;
+                Intent intent = new Intent(getApplication(), LauncherActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

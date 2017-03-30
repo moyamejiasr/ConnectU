@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.webkit.MimeTypeMap;
 
 import com.onelio.connectu.Apps.Horario.HorarioActivity;
 import com.onelio.connectu.HomePage;
@@ -25,6 +26,15 @@ public class DeviceManager {
         } catch (PackageManager.NameNotFoundException e) {
             return "unknown";
         }
+    }
+
+    public static String AbsolutegetMimeType(String url) {
+        String type = null;
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        }
+        return type;
     }
 
     public static void addShortcutToHorario(Context context) {

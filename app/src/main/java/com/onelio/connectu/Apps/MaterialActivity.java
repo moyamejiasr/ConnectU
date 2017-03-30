@@ -36,6 +36,7 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,10 +59,19 @@ public class MaterialActivity extends AppCompatActivity {
     MatAdapter Adapter;
     String idmat = "-1";
     String codasi = "-1";
+    File deleteFile;
 
     //Download
     String fname = "";
     String furl = "";
+
+    @Override
+    protected void onResume() { //If an intent end we finish deleting our file
+        if (deleteFile != null) {
+            deleteFile.deleteOnExit();
+        }
+        super.onResume();
+    }
 
     void startGuide(Menu menu) {
         new MaterialIntroView.Builder(this)
@@ -193,17 +203,17 @@ public class MaterialActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onResponse(Call call, Response response) throws IOException {
-                                        File downloadedFile = new File(folder,fname);
+                                        File downloadedFile = new File(folder, URLEncoder.encode(fname, "UTF-8"));
                                         BufferedSink sink = Okio.buffer(Okio.sink(downloadedFile));
                                         sink.writeAll(response.body().source());
                                         sink.close();
-                                        if (downloadedFile.exists()) {
-                                            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                            sharingIntent.setType(getMimeType(downloadedFile.getParent() + "/" + fname));
-                                            Uri uri = Uri.fromFile(downloadedFile);
-                                            sharingIntent.putExtra(Intent.EXTRA_STREAM, uri.toString());
-                                            startActivity(Intent.createChooser(sharingIntent, getString(R.string.share)));
-                                            downloadedFile.deleteOnExit();
+
+                                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+                                        if(downloadedFile.exists()) {
+                                            intentShareFile.setType(DeviceManager.AbsolutegetMimeType(downloadedFile.toString()));
+                                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(downloadedFile));
+                                            deleteFile = downloadedFile;
+                                            startActivity(Intent.createChooser(intentShareFile, getString(R.string.share_file)));
                                         } else {
                                             MaterialActivity.this.runOnUiThread(new Runnable() {
                                                 @Override
@@ -334,7 +344,7 @@ public class MaterialActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Closed!", Toast.LENGTH_SHORT);
         } else {
             //fab.setVisibility(View.VISIBLE);
-            fname = object.getName() + "." + object.getFiletype();
+            fname = object.getName();
             furl = "https://cvnet.cpd.ua.es/uamatdocente/Materiales/File?idMat=" + object.getFileid() + "&tipoorigen=" + object.getFiletype();
             onItemClick();
         }

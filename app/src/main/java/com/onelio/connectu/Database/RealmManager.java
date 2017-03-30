@@ -3,6 +3,7 @@ package com.onelio.connectu.Database;
 import android.content.Context;
 
 import com.google.firebase.crash.FirebaseCrash;
+import com.onelio.connectu.Device.AlertManager;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

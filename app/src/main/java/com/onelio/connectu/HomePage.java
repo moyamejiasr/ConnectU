@@ -403,7 +403,7 @@ public class HomePage extends AppCompatActivity
         if (id == R.id.contacto) {
             Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                     "mailto","rmoya98@gmail.com", null));
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contacto desde MyUACLoud de " + Common.name);
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contacto desde ConnectU de " + Common.name);
             emailIntent.putExtra(Intent.EXTRA_TEXT, "Escribe aquí tu mensaje...");
             startActivity(Intent.createChooser(emailIntent, "Send email..."));
         } else if (id == R.id.about) {

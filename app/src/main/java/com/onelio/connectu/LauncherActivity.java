@@ -211,12 +211,31 @@ public class LauncherActivity extends AppCompatActivity {
                 Common.updateData = true;
             }
             try {
-                Common.data = new JSONObject(realm.getOption("userData"));
-                Intent intent = new Intent(getApplication(), HomePage.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                realm.deleteRealmInstance();
-                startActivity(intent);
-                finish();
+                String sdata = realm.getOption("userData");
+                if (sdata.length() > 1) {
+                    Common.data = new JSONObject(sdata);
+                    Intent intent = new Intent(getApplication(), HomePage.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    realm.deleteRealmInstance();
+                    startActivity(intent);
+                    finish();
+                } else {
+                    AlertManager alert = new AlertManager(LauncherActivity.this);
+                    alert.setIcon(R.mipmap.ic_launcher);
+                    alert.setMessage(getString(R.string.error_defTitle), getString(R.string.error_old));
+                    alert.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
+                        @Override
+                        public void onClick(boolean isPositive) {
+                            realm.deleteAll();
+                            Intent intent = new Intent(getApplication(), LauncherActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            realm.deleteRealmInstance();
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                    alert.show();
+                }
             } catch (JSONException e) {
                 AlertManager alert = new AlertManager(LauncherActivity.this);
                 alert.setIcon(R.mipmap.ic_launcher);

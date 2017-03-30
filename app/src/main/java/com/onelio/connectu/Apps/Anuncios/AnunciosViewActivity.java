@@ -8,6 +8,7 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.UnderlineSpan;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.onelio.connectu.Common;
@@ -19,6 +20,7 @@ public class AnunciosViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncios_view);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView htexto = (TextView)findViewById(R.id.htexto);
         TextView badge = (TextView)findViewById(R.id.badge);
@@ -44,4 +46,11 @@ public class AnunciosViewActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onBackPressed();
+        return true;
+    }
+
 }

@@ -223,6 +223,9 @@ public class UAService extends Service {
             });
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            FirebaseCrash.log("UAService - Failed to connect, giving error null");
+            FirebaseCrash.report(e);
         }
     }
 

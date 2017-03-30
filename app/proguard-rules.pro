@@ -15,3 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep class okio.** { *; }
+-dontwarn okio.**
+-keep class com.squareup.** { *; }
+-dontwarn com.squareup.**
+-keep class com.onelio.** { *; }
+-dontwarn com.onelio.**

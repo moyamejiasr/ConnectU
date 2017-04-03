@@ -229,6 +229,18 @@ public class UAService extends Service {
         }
     }
 
+    public void updateNumber(int data) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        RealmQuery<Settings> query = realm.where(Settings.class);
+        query.equalTo("name", "NotiCount");
+        Settings result1 = query.findFirst();
+        result1.setValue(String.valueOf(data));
+        realm.copyToRealmOrUpdate(result1);
+        realm.commitTransaction();
+        curAlert = data;
+    }
+
     public void startMainActivity(String loginURL, String lt, String execution) {
         try {
             String json = "username=" + URLEncoder.encode(loginUsername, "UTF-8") +
@@ -258,24 +270,16 @@ public class UAService extends Service {
                                     NotificationCompat.Builder mBuilder =
                                             new NotificationCompat.Builder(getBaseContext())
                                                     .setDefaults(NotificationCompat.DEFAULT_ALL)
-                                                    .setSmallIcon(R.drawable.advw)
+                                                    .setSmallIcon(R.drawable.book)
                                                     .setContentIntent(intent)
                                                     .setContentTitle(getString(R.string.app_name) + " Alert")
                                                     .setContentText(getResources().getString(R.string.you_have) + " " + String.valueOf(data - curAlert) + " " + getResources().getString(R.string.unseen_not))
                                                     .setAutoCancel(true);
                                     NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                    updateNumber(data);
                                     mNotifyMgr.notify(1, mBuilder.build());
-                                }
-                                if (curAlert != data) {
-                                    Realm realm = Realm.getDefaultInstance();
-                                    realm.beginTransaction();
-                                    RealmQuery<Settings> query = realm.where(Settings.class);
-                                    query.equalTo("name", "NotiCount");
-                                    Settings result1 = query.findFirst();
-                                    result1.setValue(String.valueOf(data));
-                                    realm.copyToRealmOrUpdate(result1);
-                                    realm.commitTransaction();
-                                    curAlert = data;
+                                }else if (curAlert != data) {
+                                    updateNumber(data);
                                 }
                             }
                         }

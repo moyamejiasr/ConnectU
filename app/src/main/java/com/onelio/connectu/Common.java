@@ -31,6 +31,7 @@ public class Common {
     public static String loginPassword = "";
     //Config
     public static boolean isNotifOn = true;
+    public static boolean isNotifUOn = true;
     public static JSONObject data;
     public static boolean updateData = false;
     public static boolean firstStart = false;

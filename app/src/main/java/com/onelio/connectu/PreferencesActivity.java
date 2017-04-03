@@ -29,6 +29,31 @@ public class PreferencesActivity extends PreferenceActivity {
         pref.setTitle(Common.name);
         pref.setSummary(Common.loginUsername);
 
+        final CheckBoxPreference pref2;
+        pref2 = (CheckBoxPreference)findPreference("notif_u");
+        if (Common.isNotifUOn) {
+            pref2.setChecked(true);
+        } else {
+            pref2.setChecked(false);
+        }
+        pref2.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                RealmManager realm = new RealmManager(getBaseContext());
+                if (o.equals(true)) {
+                    Common.isNotifUOn = true;
+                    //Realm
+                    realm.modifyOption("isNotifUOn", "yes");
+                } else {
+                    Common.isNotifUOn = false;
+                    //Realm
+                    realm.modifyOption("isNotifUOn", "no");
+                }
+                realm.deleteRealmInstance();
+                return true;
+            }
+        });
+
         final CheckBoxPreference pref1;
         pref1 = (CheckBoxPreference)findPreference("notif");
         if (Common.isNotifOn) {

@@ -27,6 +27,12 @@
             android:title="@string/abn"
             android:defaultValue="true"/>
 
+        <CheckBoxPreference
+            android:key="notif_u"
+            android:summary="@string/notify_update_text"
+            android:title="@string/notify_update"
+            android:defaultValue="true"/>
+
         <Preference
             android:key="shortcut"
             android:title="@string/create_shortcut"

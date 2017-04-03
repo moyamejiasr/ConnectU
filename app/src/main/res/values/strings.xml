@@ -161,6 +161,12 @@
     <string name="since">desde</string>
     <string name="till">hasta</string>
     <string name="error_old">Error, algunos archivos están corruptos o desactualizados. Es necesario que vuelvas a conectarte!</string>
+    <string name="update_profile_tit" translatable="false">ConnectU Profile Updater</string>
+    <string name="update_profile">Vamos a actualizar la información del UACloud. Puedes seguir usando la app pero puede que la velocidad de carga sea un poco más lenta. Por favor perdona el inconveniente.</string>
+    <string name="why">¿Por qué?</string>
+    <string name="why_update">Para agailizar la carga de páginas cierta información se guarda localmente, debido a esto hay que actualizarla de vez en cuando para que no haya diferencia con la disponible en el UACloud y en nuestro caso, ese periodo es semanalmente. Puedes desactivar la notificacion de actualización de la información desde la configuración de la app en el menú desplegable izquierdo.</string>
+    <string name="notify_update">Avisar de actualización</string>
+    <string name="notify_update_text">Avisarme cuando se actualize la información personal con un mensaje.</string>
 
 
 </resources>

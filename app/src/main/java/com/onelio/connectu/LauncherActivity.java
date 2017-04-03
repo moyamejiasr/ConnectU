@@ -74,6 +74,17 @@ public class LauncherActivity extends AppCompatActivity {
         //Create Realm database instance
         RealmManager realm = new RealmManager(getBaseContext());
 
+        if (realm.onOptionExist("isNotifUOn")) {
+            if (realm.getOption("isNotifUOn").contains("yes")) {
+                Common.isNotifUOn = true;
+            } else {
+                Common.isNotifUOn = false;
+            }
+        } else {
+            Common.isNotifUOn = true;
+            realm.createOption("isNotifUOn", "yes"); //This option will allow notifications on update
+        }
+
         if (realm.onOptionExist("isNotifOn")) {
             if (realm.getOption("isNotifOn").contains("yes")) {
                 Common.isNotifOn = true;

@@ -114,13 +114,42 @@ public class HomePage extends AppCompatActivity
     }
 
     void requestDataUpdate() {
+        if (Common.isNotifUOn) {
+            final AlertManager alertManager = new AlertManager(HomePage.this);
+            alertManager.setMessage(getString(R.string.update_profile_tit), getString(R.string.update_profile));
+            alertManager.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
+                @Override
+                public void onClick(boolean isPositive) {
+
+                }
+            });
+            alertManager.setNegativeButton(getString(R.string.why), new AlertManager.AlertCallBack() {
+                @Override
+                public void onClick(boolean isPositive) {
+                    HomePage.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            alertManager.cancel();
+                            AlertManager alert = new AlertManager(HomePage.this);
+                            alert.setMessage("ConnectU Help", getString(R.string.why_update));
+                            alert.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
+                                @Override
+                                public void onClick(boolean isPositive) {
+                                }
+                            });
+                            alert.show();
+                        }
+                    });
+                }
+            });
+            alertManager.show();
+        }
         new UAUpdater.updateDataResult(HomePage.this, new UAUpdater.UpdaterCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
                 if (isSuccessful) {
                     RealmManager realm = new RealmManager(HomePage.this);
-                    realm.modifyOption("userData", data.toString());
-                    Common.data = data;
+                    //Update last modify
                     Calendar time = Calendar.getInstance();
                     int week = time.get(Calendar.WEEK_OF_MONTH);
                     int month = time.get(Calendar.MONTH) + 1;
@@ -136,6 +165,9 @@ public class HomePage extends AppCompatActivity
                         e.printStackTrace();
                     }
                     realm.modifyOption("launchTimes", jdate.toString());
+                    //Set data
+                    realm.modifyOption("userData", data.toString());
+                    Common.data = data;
                     realm.deleteRealmInstance();
                 } else {
                     FirebaseCrash.log("Launcher Activity - Failed to edit User profile!");
@@ -144,14 +176,14 @@ public class HomePage extends AppCompatActivity
                         @Override
                         public void run() {
                             AlertManager alert = new AlertManager(HomePage.this);
-                            alert.setMessage("IMPORTANT ERROR!", "Error trying to update profile! Pleasy notify to developers at rmoya98@gmail.com");
+                            alert.setMessage("ERROR!", "Error trying to update profile! Pleasy notify to developers at rmoya98@gmail.com");
                             alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
                                 @Override
                                 public void onClick(boolean isPositive) {
                                     Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                                             "mailto","rmoya98@gmail.com", null));
-                                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contacto desde MyUACLoud de " + Common.name);
-                                    emailIntent.putExtra(Intent.EXTRA_TEXT, "Escribe aquí tu mensaje...");
+                                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contacto desde ConnectU de " + Common.name);
+                                    emailIntent.putExtra(Intent.EXTRA_TEXT, "Escribe aquí tu mensaje y de ser posible tu carrera y nombre. Gracias");
                                     startActivity(Intent.createChooser(emailIntent, "Send email..."));
                                 }
                             });

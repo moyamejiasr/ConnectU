@@ -54,11 +54,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mNotifyMgr.notify(1, mBuilder.build());
 
-        if (!isMyServiceRunning(Coordinator.mSensorService.getClass())) {
+        /*if (!isMyServiceRunning(Coordinator.mSensorService.getClass())) {
             startService(Coordinator.mServiceIntent);
             Log.w(TAG, body);
             DeviceManager.appClose();
-        }
+        }*/
 
     }
     // [END receive_message]

@@ -6,6 +6,7 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.onelio.connectu.Device.AlertManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,11 +37,23 @@ public class WebApi {
                 .build();
     }
 
+    private static void clientRestarter() {
+        WebApi.client = new OkHttpClient().newBuilder()
+                .cookieJar(WebApi.cookieJar)
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .build();
+    }
+
     public static Call get(String url, Callback callback) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .addHeader("X-Requested-With", "es.ua.uacloud")
                 .build();
+        if (client == null) {
+            clientRestarter();
+        }
         Call call = client.newCall(request);
         call.enqueue(callback);
         return call;
@@ -55,6 +68,9 @@ public class WebApi {
                 .addHeader("content-type", "application/x-www-form-urlencoded")
                 .addHeader("cache-control", "no-cache")
                 .build();
+        if (client == null) {
+            clientRestarter();
+        }
         Call call = client.newCall(request);
         call.enqueue(callback);
         return call;
@@ -70,10 +86,13 @@ public class WebApi {
                 .addHeader("content-type", "application/x-www-form-urlencoded")
                 .addHeader("cache-control", "no-cache")
                 .build();
+        if (client == null) {
+            clientRestarter();
+        }
         Call call = client.newCall(request);
         call.enqueue(callback);
         return call;
-    }
+    } //Deprecated
 
     public static Call jpost(String url, String json, Callback callback) throws IOException {
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
@@ -84,6 +103,9 @@ public class WebApi {
                 .addHeader("content-type", "application/json")
                 .addHeader("cache-control", "no-cache")
                 .build();
+        if (client == null) {
+            clientRestarter();
+        }
         Call call = client.newCall(request);
         call.enqueue(callback);
         return call;

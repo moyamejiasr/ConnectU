@@ -158,6 +158,7 @@ public class AdAdapter extends BaseAdapter {
                                 @Override
                                 public void run() {
                                     if (state.equals("True")) {
+                                        Common.needMainReload = true;
                                         Toast.makeText(activity.getBaseContext(), "Marcado como leido!", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(activity.getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
@@ -180,6 +181,7 @@ public class AdAdapter extends BaseAdapter {
                                 @Override
                                 public void run() {
                                     if (state.equals("True")) {
+                                        Common.needMainReload = true;
                                         Toast.makeText(activity.getBaseContext(), "Marcado como no leido!", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(activity.getBaseContext(), "Error", Toast.LENGTH_SHORT).show();

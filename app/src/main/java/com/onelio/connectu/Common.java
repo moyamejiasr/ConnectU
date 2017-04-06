@@ -43,6 +43,7 @@ public class Common {
     public static String loginURL = "";
 
     //Main - PAGE
+    public static boolean needMainReload = false;
     public static String alerts = "0";
     public static String name = "Username";
     public static String src = "";

@@ -167,6 +167,7 @@
     <string name="why_update">Para agailizar la carga de páginas cierta información se guarda localmente, debido a esto hay que actualizarla de vez en cuando para que no haya diferencia con la disponible en el UACloud y en nuestro caso, ese periodo es semanalmente. Puedes desactivar la notificacion de actualización de la información desde la configuración de la app en el menú desplegable izquierdo.</string>
     <string name="notify_update">Avisar de actualización</string>
     <string name="notify_update_text">Avisarme cuando se actualize la información personal con un mensaje.</string>
+    <string name="empty_loading_main">Cargando datos...</string>
 
 
 </resources>

@@ -21,6 +21,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.Common;
+import com.onelio.connectu.Database.RealmManager;
 import com.onelio.connectu.Database.Settings;
 import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.LauncherActivity;
@@ -160,12 +161,10 @@ public class UAService extends Service {
         Realm.setDefaultConfiguration(config);
         Realm realm = Realm.getDefaultInstance();
         Settings username = realm.where(Settings.class).equalTo("name", "username").findFirst();
-        Settings data = realm.where(Settings.class).equalTo("name", "NotiCount").findFirst();
         String isOn = realm.where(Settings.class).equalTo("name", "isNotifOn").findFirst().getValue();
         if (username != null && isOn.contains("yes")) {
             loginUsername = username.getValue();
             if (!loginUsername.contains("Guest")) {
-                curAlert = Integer.parseInt(data.getValue());
                 Settings pass = realm.where(Settings.class).equalTo("name", "pass").findFirst();
                 loginPassword = pass.getValue();
                 //Start Work
@@ -208,12 +207,17 @@ public class UAService extends Service {
                         //Get Post data
                         if (doc != null) {
                             Element lurl = doc.select("form[id=fm1]").first();
-                            String loginURL = lurl.attr("action");
-                            Element lt = doc.select("input[name=lt]").first();
-                            String ltr = lt.attr("value");
-                            Element execution = doc.select("input[name=execution]").first();
-                            String executionr = execution.attr("value");
-                            startMainActivity(loginURL, ltr, executionr);
+                            if (lurl != null) {
+                                String loginURL = lurl.attr("action");
+                                Element lt = doc.select("input[name=lt]").first();
+                                String ltr = lt.attr("value");
+                                Element execution = doc.select("input[name=execution]").first();
+                                String executionr = execution.attr("value");
+                                startMainActivity(loginURL, ltr, executionr);
+                            } else {
+                                FirebaseCrash.log("UAService - Failed to load lurl!");
+                                FirebaseCrash.report(new Exception("Error data: " + doc.text()));
+                            }
                         } else {
                             FirebaseCrash.log("UAService - Failed to connect!");
                             FirebaseCrash.report(new Exception("Error code: " + String.valueOf(response.code())));
@@ -229,16 +233,16 @@ public class UAService extends Service {
         }
     }
 
+    public void getNumber() {
+        RealmManager realmManager = new RealmManager(getBaseContext());
+        curAlert = Integer.valueOf(realmManager.getOption("NotiCount"));
+        realmManager.deleteRealmInstance();
+    }
+
     public void updateNumber(int data) {
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        RealmQuery<Settings> query = realm.where(Settings.class);
-        query.equalTo("name", "NotiCount");
-        Settings result1 = query.findFirst();
-        result1.setValue(String.valueOf(data));
-        realm.copyToRealmOrUpdate(result1);
-        realm.commitTransaction();
-        curAlert = data;
+        RealmManager realmManager = new RealmManager(getBaseContext());
+        realmManager.modifyOption("NotiCount", String.valueOf(data));
+        realmManager.deleteRealmInstance();
     }
 
     public void startMainActivity(String loginURL, String lt, String execution) {
@@ -257,8 +261,10 @@ public class UAService extends Service {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         if (response.isSuccessful()) {
-                            Document doc = Jsoup.parse(response.body().string());
+                            //Load Realm alert data
+                            getNumber();
                             //Get User Data
+                            Document doc = Jsoup.parse(response.body().string());
                             Elements name = doc.select("a.dropdown-toggle > span[id=nombre]");
                             if (!name.text().contains("Usuario no validado")) {
                                 Elements alertas = doc.select("a.dropdown-toggle > span.numeroAlertas");

@@ -24,6 +24,20 @@ sothree:umanoScrollableView="@+id/list">
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerVertical="true">
+        <TextView
+            android:id="@android:id/empty"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Your text here"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/activity_main_swipe_refresh_layout"
         android:layout_width="match_parent"

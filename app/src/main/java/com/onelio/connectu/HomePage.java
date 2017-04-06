@@ -226,6 +226,15 @@ public class HomePage extends AppCompatActivity
     }
 
     @Override
+    public void onResume() {
+        if (Common.needMainReload) {
+            Common.needMainReload = false;
+            refreshData();
+        }
+        super.onResume();
+    }
+
+    @Override
     public void onDestroy() {
         if (Coordinator.mServiceIntent != null) {
             stopService(Coordinator.mServiceIntent);
@@ -311,6 +320,9 @@ public class HomePage extends AppCompatActivity
         GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .2f, .2f);
         gridView.setVisibility(View.VISIBLE);
         gridView.setAdapter(appsAdapter);
+        TextView emptyText = (TextView)findViewById(android.R.id.empty);
+        emptyText.setText(getString(R.string.empty_loading_main));
+        gridView.setEmptyView(emptyText);
         gridView.setLayoutAnimation(controller);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -555,10 +567,14 @@ public class HomePage extends AppCompatActivity
         not_big_text.setText(getResources().getString(R.string.you_have) + " " + Common.alerts + " " + getResources().getString(R.string.pending_notifications));
         //AUNUNCIOS
         rowData =new ArrayList<ItemList>();
-        if (Common.ANUNCIOS != null) {
-            for (int i = 0; i < Common.ANUNCIOS.size(); i++) {
+        if (Common.SUBANUNCIOS != null) {
+            for (int i = 0; i < Common.SUBANUNCIOS.size(); i++) {
                 ItemList data = new ItemList();
-                data.setTitle(DeviceManager.capFirstLetter(Common.ANUNCIOS.eq(i).text()));
+                if (Common.ANUNCIOS.eq(i) != null) {
+                    data.setTitle(DeviceManager.capFirstLetter(Common.ANUNCIOS.eq(i).text()));
+                } else {
+                    data.setTitle("UACloud");
+                }
                 data.setSubtitle(Common.SUBANUNCIOS.eq(i).text());
                 rowData.add(data);
             }

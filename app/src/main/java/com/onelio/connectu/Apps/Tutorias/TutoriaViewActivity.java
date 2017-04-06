@@ -101,6 +101,8 @@ public class TutoriaViewActivity extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "Error while making this tutoria as readed!", Toast.LENGTH_LONG).show();
                         }
                     });
+                } else {
+                    Common.needMainReload = true;
                 }
             }
         });

@@ -141,5 +141,6 @@
     <string name="why_update">In order to load the pages more faster, we save some date locally that needs to be updated periodically. In our case, this period is weekly. If you want to stop reciving notifications about this update you can desactivate them from the settings.</string>
     <string name="notify_update">Notify Update</string>
     <string name="notify_update_text">Notify me when the user data is being updated with a message.</string>
+    <string name="empty_loading_main">Loading data...</string>
 
 </resources>

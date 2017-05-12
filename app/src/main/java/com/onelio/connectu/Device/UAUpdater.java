@@ -10,6 +10,8 @@ import android.widget.ProgressBar;
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.UAWebService;
 import com.onelio.connectu.Common;
+import com.onelio.connectu.Database.RealmManager;
+import com.onelio.connectu.HomePage;
 import com.onelio.connectu.R;
 
 import org.json.JSONArray;
@@ -318,6 +320,26 @@ public class UAUpdater {
                 mBuilder.setContentText("Error updating user profile!").setProgress(0, 0, false);
                 mNotifyManager.notify(5, mBuilder.build());
             } else if (Common.updateData) {
+                RealmManager realm = new RealmManager(activity);
+                //Update last modify
+                Calendar time = Calendar.getInstance();
+                int week = time.get(Calendar.WEEK_OF_MONTH);
+                int month = time.get(Calendar.MONTH) + 1;
+                int year = time.get(Calendar.YEAR);
+                JSONObject jdate = null;
+                try {
+                    jdate = new JSONObject(realm.getOption("launchTimes"));
+                    jdate = new JSONObject();
+                    jdate.put("week", week);
+                    jdate.put("month", month);
+                    jdate.put("year", year);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                realm.modifyOption("launchTimes", jdate.toString());
+                //Set data
+                realm.modifyOption("userData", data.toString());
+                realm.deleteRealmInstance();
                 mNotifyManager.cancel(5);
             }
             FirebaseCrash.log("Finished with error (0=no) " + String.valueOf(!error));

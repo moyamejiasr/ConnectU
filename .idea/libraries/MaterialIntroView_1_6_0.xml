@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="MaterialIntroView-1.6.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/c120db83385069c4476b21a4544ffb2569c79726/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/c120db83385069c4476b21a4544ffb2569c79726/output/res" />
+      <root url="file://C:/Android/.android/build-cache/c120db83385069c4476b21a4544ffb2569c79726/output/res" />
+      <root url="jar://C:/Android/.android/build-cache/c120db83385069c4476b21a4544ffb2569c79726/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

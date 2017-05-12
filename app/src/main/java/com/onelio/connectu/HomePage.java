@@ -148,27 +148,7 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
                 if (isSuccessful) {
-                    RealmManager realm = new RealmManager(HomePage.this);
-                    //Update last modify
-                    Calendar time = Calendar.getInstance();
-                    int week = time.get(Calendar.WEEK_OF_MONTH);
-                    int month = time.get(Calendar.MONTH) + 1;
-                    int year = time.get(Calendar.YEAR);
-                    JSONObject jdate = null;
-                    try {
-                        jdate = new JSONObject(realm.getOption("launchTimes"));
-                        jdate = new JSONObject();
-                        jdate.put("week", week);
-                        jdate.put("month", month);
-                        jdate.put("year", year);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    realm.modifyOption("launchTimes", jdate.toString());
-                    //Set data
-                    realm.modifyOption("userData", data.toString());
                     Common.data = data;
-                    realm.deleteRealmInstance();
                 } else {
                     FirebaseCrash.log("Launcher Activity - Failed to edit User profile!");
                     FirebaseCrash.report(new Exception("Failed to profile"));

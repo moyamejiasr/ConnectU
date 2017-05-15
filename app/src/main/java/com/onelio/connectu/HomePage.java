@@ -47,6 +47,7 @@ import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.Device.RateMeMaybe;
 import com.onelio.connectu.Device.UAUpdater;
+import com.onelio.connectu.Apps.NotasActivity;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Picasso;
 
@@ -354,6 +355,9 @@ public class HomePage extends AppCompatActivity
                         Common.webName = "Campus Map";
                         Common.webURL = "https://www.sigua.ua.es";
                         startActivity(new Intent(HomePage.this, WebViewActivity.class));
+                        break;
+                    case 11:
+                        startActivity(new Intent(HomePage.this, NotasActivity.class));
                         break;
                 }
             }

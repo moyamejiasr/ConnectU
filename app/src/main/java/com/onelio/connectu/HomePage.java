@@ -47,7 +47,6 @@ import com.onelio.connectu.Device.AlertManager;
 import com.onelio.connectu.Device.DeviceManager;
 import com.onelio.connectu.Device.RateMeMaybe;
 import com.onelio.connectu.Device.UAUpdater;
-import com.onelio.connectu.Apps.NotasActivity;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Picasso;
 
@@ -149,7 +148,27 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onNavigationComplete(boolean isSuccessful, JSONObject data) {
                 if (isSuccessful) {
+                    RealmManager realm = new RealmManager(HomePage.this);
+                    //Update last modify
+                    Calendar time = Calendar.getInstance();
+                    int week = time.get(Calendar.WEEK_OF_MONTH);
+                    int month = time.get(Calendar.MONTH) + 1;
+                    int year = time.get(Calendar.YEAR);
+                    JSONObject jdate = null;
+                    try {
+                        jdate = new JSONObject(realm.getOption("launchTimes"));
+                        jdate = new JSONObject();
+                        jdate.put("week", week);
+                        jdate.put("month", month);
+                        jdate.put("year", year);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    realm.modifyOption("launchTimes", jdate.toString());
+                    //Set data
+                    realm.modifyOption("userData", data.toString());
                     Common.data = data;
+                    realm.deleteRealmInstance();
                 } else {
                     FirebaseCrash.log("Launcher Activity - Failed to edit User profile!");
                     FirebaseCrash.report(new Exception("Failed to profile"));
@@ -204,15 +223,6 @@ public class HomePage extends AppCompatActivity
                     }
                 })
                 .show();
-    }
-
-    @Override
-    public void onResume() {
-        if (Common.needMainReload) {
-            Common.needMainReload = false;
-            refreshData();
-        }
-        super.onResume();
     }
 
     @Override
@@ -301,9 +311,6 @@ public class HomePage extends AppCompatActivity
         GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .2f, .2f);
         gridView.setVisibility(View.VISIBLE);
         gridView.setAdapter(appsAdapter);
-        TextView emptyText = (TextView)findViewById(android.R.id.empty);
-        emptyText.setText(getString(R.string.empty_loading_main));
-        gridView.setEmptyView(emptyText);
         gridView.setLayoutAnimation(controller);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -355,9 +362,6 @@ public class HomePage extends AppCompatActivity
                         Common.webName = "Campus Map";
                         Common.webURL = "https://www.sigua.ua.es";
                         startActivity(new Intent(HomePage.this, WebViewActivity.class));
-                        break;
-                    case 11:
-                        startActivity(new Intent(HomePage.this, NotasActivity.class));
                         break;
                 }
             }
@@ -551,14 +555,10 @@ public class HomePage extends AppCompatActivity
         not_big_text.setText(getResources().getString(R.string.you_have) + " " + Common.alerts + " " + getResources().getString(R.string.pending_notifications));
         //AUNUNCIOS
         rowData =new ArrayList<ItemList>();
-        if (Common.SUBANUNCIOS != null) {
-            for (int i = 0; i < Common.SUBANUNCIOS.size(); i++) {
+        if (Common.ANUNCIOS != null) {
+            for (int i = 0; i < Common.ANUNCIOS.size(); i++) {
                 ItemList data = new ItemList();
-                if (Common.ANUNCIOS.eq(i) != null) {
-                    data.setTitle(DeviceManager.capFirstLetter(Common.ANUNCIOS.eq(i).text()));
-                } else {
-                    data.setTitle("UACloud");
-                }
+                data.setTitle(DeviceManager.capFirstLetter(Common.ANUNCIOS.eq(i).text()));
                 data.setSubtitle(Common.SUBANUNCIOS.eq(i).text());
                 rowData.add(data);
             }

@@ -1,81 +1,71 @@
 package com.onelio.connectu;
 
-import com.onelio.connectu.Apps.Anuncios.AdList;
-
-import org.json.JSONObject;
-import org.jsoup.select.Elements;
-
-/**
- * Created by Onelio on 07/10/2016.
- */
 public class Common {
 
-    //Here goes everything related with the App
-    //URLs List
-    public static String LOGIN_URL = "https://cvnet.cpd.ua.es/uacloud/home/indexVerificado";
-    public static String EVALUACION_URL = "https://cvnet.cpd.ua.es/uaevalua";
-    public static String EVALUACION_URL_2 = "https://cvnet.cpd.ua.es/uaevalua/miscontroles";
-    public static String NOTAS_SIG = "https://cvnet.cpd.ua.es/uaEvalua/misnotas/DashBoardAsignatura/";
-    public static String MATERIALES_LOGIN = "https://cvnet.cpd.ua.es/uaMatDocente"; //https://autentica.cpd.ua.es/cas/login?service=https%3a%2f%2fcvnet.cpd.ua.es%2fuamatdocente%2f
-    public static String MATERIALES_NEW = "https://cvnet.cpd.ua.es/uamatdocente/Materiales/CursoMaterialesPend";
-    public static String MATERIALES_ALL = "https://cvnet.cpd.ua.es/uamatdocente/Materiales/CursoMaterialesTodos";
-    public static String MATERIALES_NAV = "https://cvnet.cpd.ua.es/uamatdocente/Materiales/VistaMateriales";
-    public static String TUTORIAS_UNSEEN = "https://cvnet.cpd.ua.es/uaTutorias/Emisor/FiltroListadoTutoSinLeerAsig";
-    public static String TUTORIAS_SEEN = "https://cvnet.cpd.ua.es/uaTutorias/Emisor/FiltroListadoTutoHechasAsig";
-    public static String TUTORIAS_NT = "https://cvnet.cpd.ua.es/uatutorias/Emisor/NuevaTutoria";
-    public static String TUTORIAS_NP = "https://cvnet.cpd.ua.es/uatutorias/Emisor/NuevaPregunta";
+    /**
+    Project developed by Onelio
+     This project has been developed by onlio and don't offer any warranty of any type.
+     If you want to copy and distribute this software please commission me.
+    **/
 
-    //State
-    public static boolean isLogged = false;
-    public static String loginUsername = "";
-    public static String loginPassword = "";
-    //Config
-    public static boolean isNotifOn = true;
-    public static boolean isNotifUOn = true;
-    public static JSONObject data;
-    public static boolean updateData = false;
-    public static boolean firstStart = false;
+    //Format: OBJECTUSE_DATATYPE_DATANAME
 
-    //LOGIN - PAGE
-    //Content
-    public static String lt = "";
-    public static String execution = "";
-    public static String loginURL = "";
+    //AccountManager
+    public static String PREFERENCE_BOOLEAN_ISLOGGED = "isLogged";
+    public static String PREFERENCE_STRING_EMAIL = "userEmail";
+    public static String PREFERENCE_STRING_PASSWORD = "userPassword";
+    public static String PREFERENCE_STRING_LASTLOGINVERSION = "lastLoginVersion";
+    public static String PREFERENCE_STRING_LASTLOGINDATE = "lastLoginDate";
+    public static String PREFERENCE_JSON_NOTIFICATIONS = "userNotifications";
+    public static String PREFERENCE_INT_RECTIME = "notiTime";
+    public static String PREFERENCE_LONG_LAST_UP_TIME = "lastUpdateTime";
+    public static String PREFERENCE_JSON_ACADEMIC_YEAR = "academicYear";
+    public static String PREFERENCE_JSON_HORARIO = "uaHorario";
+    public static String PREFERENCE_JSON_PUBLICPREF = "publicPreferences";
 
-    //Main - PAGE
-    public static boolean needMainReload = false;
-    public static String alerts = "0";
-    public static String name = "Username";
-    public static String src = "";
-    //Alerts
-    public static Elements MATDOCENTE;
-    public static Elements SUBMATDOCENTE;
-    public static Elements ANUNCIOS;
-    public static Elements SUBANUNCIOS;
-    public static Elements UATUTORIAS;
-    public static Elements SUBUATUTORIAS;
-    public static Elements UAEVALUACION;
-    public static Elements SUBUAEVALUACION;
+    //Notifications
+    public static String GROUP_KEY_ALERTS = "group_key_alerts";
+    public static int INT_REC_TIME = 900000; //15 min
+
+    //UAUpdater Service
+    public static String INTENT_KEY_UPDATE_TYPE = "updateType";
+    public static String INTENT_KEY_RESULT = "result";
+    public static String INTENT_KEY_LOC =  "yloc";
+
+    //UAUpdate Type
+    public static String UAUPDATE_TYPE_NORMAL = "uanormal";
+    public static String UAUPDATE_TYPE_SILENCE = "uasilence";
+
+    //Home
+    public static String HOME_EXTRA_TYPE = "type";
+
+    //WebView Extras
+    public static String WEBVIEW_EXTRA_NAME = "activityName";
+    public static String WEBVIEW_EXTRA_URL = "activityUrl";
+    public static String WEBVIEW_EXTRA_COLOR = "activityColor";
+    public static String WEBVIEW_EXTRA_NLOGIN = "activityNeedsLogin";
+
+    //Horario Filter Type
+    public static String HORARIO_FILTER_DOCENCIA = "docencia";
+    public static String HORARIO_FILTER_EVALUACION = "evaluación";
+    public static String HORARIO_FILTER_EXAMENES = "examenes";
+    public static String HORARIO_FILTER_FESTIVO = "festivos";
+
+    //Materiales
+    public static String MATERIALES_TEMP_FILE = "temp";
+
+    //Tutorias
+    public static String TUTORIAS_STRING_ID = "id";
+    public static String TUTORIAS_STRING_TITLE = "title";
+    public static String TUTORIAS_STRING_AUTHOR = "publisher";
+    public static String TUTORIAS_STRING_YEAR = "year";
+    public static String TUTORIAS_STRING_SUBJECTID = "subjectID";
+    public static String TUTORIAS_BOOL_ISHOME = "isHome";
 
 
-    //Apps
-    //Anuncios
-    public static AdList announce;
-    //WebView
-    public static String webURL = "";
-    public static String webName = "";
-    //Tutoria
-    public static String cTitle = "DEFAULT TITLE LAYOUT";
-    public static boolean isNewChat = false;
-    public static String tutId = "";
-    public static JSONObject jdata = new JSONObject();
-    //Evaluacion
-    public static String evid = "";
-    //Profesores
-    public static JSONObject teacher = new JSONObject();
-    //Horario
-    public static String siguaID = "";
-    public static String siguaName = "";
-    public static String siguaHorario = "";
+    //Global Filter Type
+    public static String GLOBAL_FILTER_YEAR = "year";
+    public static String GLOBAL_SETTING_ISNOTIFON = "notiOn";
+    public static String GLOBAL_SETTING_NOTIFICATIONDISPLAY = "notiDisplay";
 
 }

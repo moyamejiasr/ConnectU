@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/cdoc"
+    <item android:id="@+id/action_docente"
         android:titleCondensed="Persist"
-        android:title="Horario Docente"
+        android:title="@string/horario_docente"
         android:icon="@android:drawable/ic_menu_preferences"
         android:checkable="true">
     </item>
-    <item android:id="@+id/ceva"
+    <item android:id="@+id/action_evaluacion"
         android:titleCondensed="Persist"
-        android:title="Horario Evaluativo"
+        android:title="@string/horario_evaluativo"
         android:icon="@android:drawable/ic_menu_preferences"
         android:checkable="true">
     </item>
-    <item android:id="@+id/cexa"
+    <item android:id="@+id/action_examenes"
         android:titleCondensed="Persist"
-        android:title="Horario Exámenes"
+        android:title="@string/horario_ex_menes"
         android:icon="@android:drawable/ic_menu_preferences"
         android:checkable="true">
     </item>
-    <item android:id="@+id/cfest"
+    <item android:id="@+id/action_festivo"
         android:titleCondensed="Persist"
-        android:title="Festivos"
+        android:title="@string/horario_festivos"
         android:icon="@android:drawable/ic_menu_preferences"
         android:checkable="true">
     </item>

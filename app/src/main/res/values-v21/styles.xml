@@ -1,9 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
+    <!-- Main Theme -->
+    <style name="Main_AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- +v21 Transition for animation icons -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+        <!-- -v21 -->
         <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
+        <item name="android:windowBackground">@color/windowBackgroundLight</item>
+        <item name="colorAccent">@color/colorAccentLight</item>
+        <!-- Bugfix -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material.Fix</item>
     </style>
 </resources>

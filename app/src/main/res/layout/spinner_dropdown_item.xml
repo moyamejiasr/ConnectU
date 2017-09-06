@@ -3,7 +3,7 @@
     android:id="@android:id/text1"
     style="?android:attr/spinnerDropDownItemStyle"
     android:singleLine="true"
-    android:textSize="15dp"
+    android:textSize="15sp"
     android:background="#FAFAFA"
     android:textColor="#616161"
     android:layout_width="match_parent"

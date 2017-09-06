@@ -7,120 +7,143 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
+        android:configChanges="orientation"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- Launcher -->
         <activity
-            android:name=".LauncherActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
+            android:name=".Activities.LauncherActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/Launcher_AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".HomePage"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".Apps.Anuncios.AnunciosActivity" />
-        <activity android:name=".Apps.Evaluacion.EvaluacionActivity" />
-        <activity android:name=".Apps.WebView.WebViewActivity" />
-        <activity
-            android:name=".Apps.MaterialActivity"
-            android:label="@string/mat"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Apps.Tutorias.TutoriaActivity"
-            android:label="@string/title_activity_tutoria"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Apps.Tutorias.TutoriaViewActivity" />
-        <activity android:name=".Apps.Evaluacion.EvaluacionViewActivity" />
-        <activity
-            android:name=".AboutActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Apps.NotasActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
 
-        <service
-            android:name=".BackgroundService.UAService"
-            android:enabled="true" />
+        <!-- MainPage -->
+        <activity
+            android:name=".Activities.MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Main_AppTheme" />
 
+        <!-- Login Page -->
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Launcher_AppTheme" />
+
+        <!-- Service Notifications Receiver -->
         <receiver
-            android:name=".BackgroundService.UAServiceKill"
-            android:enabled="true"
-            android:exported="true"
-            android:label="RestartServiceWhenStopped">
-            <intent-filter>
-                <action android:name=".BackgroundService.Restart" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".BackgroundService.RebootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".BackgroundService.ReInstallReceiver">
+            android:name=".Services.AlarmNotificatorReceiver"
+            android:enabled="true" />
+        <receiver android:name=".ReceiverBoot">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
         </receiver>
 
-        <activity android:name=".PreferencesActivity" />
-        <activity
-            android:name=".Apps.Horario.HorarioActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".AccountActivity" />
-        <activity
-            android:name=".Apps.Profesores.TeachersActivity"
-            android:label="@string/teachers" />
-        <activity
-            android:name=".Apps.Profesores.TeachersViewActivity"
-            android:label="@string/teacher"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Apps.Anuncios.AnunciosViewActivity"
-            android:label="@string/a_view" />
-        <activity
-            android:name=".Apps.Expediente.ExpedienteActivity"
-            android:label="@string/expediente" />
-        <activity android:name=".TestActivity" />
-        <activity android:name=".Apps.Horario.HorarioViewActivity"></activity>
-
-        <!-- [START firebase_service] -->
         <service
-            android:name=".BackgroundService.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-        <!-- [END firebase_service] -->
+            android:name=".Services.UAService"
+            android:enabled="true" />
+        <service android:name=".Services.UAUpdate" />
 
+        <!-- Anuncios Page -->
+        <activity
+            android:name=".Activities.Apps.Anuncios.AnunciosActivity"
+            android:label="@string/title_activity_anuncios"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Apps.Anuncios.AnunciosViewActivity"
+            android:label="@string/title_activity_anuncios"
+            android:screenOrientation="portrait" />
+
+        <!-- Profesores Page -->
+        <activity
+            android:name=".Activities.Apps.Profesores.ProfesoresActivity"
+            android:label="@string/title_activity_profesores"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Apps.Profesores.ProfesoresViewActivity"
+            android:label="@string/title_activity_profesores"
+            android:screenOrientation="portrait" />
+
+        <!-- Horario Page -->
+        <activity
+            android:name=".Activities.Apps.Horario.HorarioActivity"
+            android:label="@string/title_activity_horario"
+            android:screenOrientation="portrait" />
+
+        <!-- Web Page -->
+        <activity
+            android:name=".Activities.Apps.WebView.WebActivity"
+            android:label="@string/title_activity_webview"
+            android:screenOrientation="sensor" />
+
+        <!-- Materiales Page -->
+        <activity
+            android:name=".Activities.Apps.Materiales.MaterialesActivity"
+            android:label="@string/title_activity_materiales"
+            android:screenOrientation="portrait" />
+
+        <!-- Tutorias Page -->
+        <activity
+            android:name=".Activities.Apps.Tutorias.TutoriasActivity"
+            android:label="@string/title_activity_tutorias"
+            android:screenOrientation="portrait" />
+
+        <!-- Tutorias View Page -->
+        <activity
+            android:name=".Activities.Apps.Tutorias.TutoriasViewActivity"
+            android:label="@string/title_activity_null"
+            android:screenOrientation="portrait" />
+
+        <!-- Evaluacion Page -->
+        <activity
+            android:name=".Activities.Apps.Evaluacion.EvaluacionActivity"
+            android:label="@string/title_activity_evaluacion"
+            android:screenOrientation="portrait" />
+
+        <!-- User Preferences -->
+        <!-- Notifications -->
+        <activity
+            android:name=".Activities.Preferences.NotificationsActivity"
+            android:label="@string/title_activity_notifications"
+            android:screenOrientation="portrait" />
+        <!-- Notifications -->
+        <activity
+            android:name=".Activities.Preferences.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait" />
+
+
+        <!-- Widgets -->
+        <receiver android:name=".HorarioWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/horario_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

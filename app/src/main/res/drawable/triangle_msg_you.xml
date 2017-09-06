@@ -8,7 +8,7 @@
             android:pivotY="-40%" >
             <shape
                 android:shape="rectangle" >
-                <stroke android:color="@color/colorPrimaryDark" android:width="10dp"/>
+                <stroke android:color="@color/colorAccent" android:width="10dp"/>
             </shape>
         </rotate>
 
@@ -21,7 +21,7 @@
             android:pivotY="-40%" >
             <shape
                 android:shape="rectangle" >
-                <stroke android:color="@color/colorPrimaryDark" android:width="10dp"/>
+                <stroke android:color="@color/colorAccent" android:width="10dp"/>
 
             </shape>
         </rotate>

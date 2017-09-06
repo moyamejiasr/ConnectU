@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/share" android:title="@string/share_file" android:icon="@drawable/ic_menu_share"/>
-    <item android:id="@+id/download" android:title="@string/down_file" android:icon="@drawable/download"/>
-    <group android:id="@+id/helpgroup">
-        <item android:id="@+id/open" android:title="@string/open_file" android:icon="@drawable/ic_menu_slideshow"/>
-    </group>
-</menu>

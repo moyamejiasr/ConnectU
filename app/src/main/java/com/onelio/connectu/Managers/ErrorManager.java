@@ -26,6 +26,8 @@ public class ErrorManager {
     public static String BAD_RESPONSE = "_failed_unexpected_response_code";
     public static String UNABLE_DISPLAY = "_failed_unable_to_display";
     public static String EMPTY_RESPONSE = "_failed_empty_response";
+    /** Tutorias**/
+    public static String TEACHER_ID_NOT_FOUND = "_failed_teacher_not_found";
 
     public ErrorManager(View v){
         this.v = v;
@@ -108,6 +110,11 @@ public class ErrorManager {
         }
         if (message.equals(EMPTY_RESPONSE)) {
             error = context.getResources().getString(R.string.error_empty_response);
+            icon = R.drawable.ic_chat_bubble_outline_black_24dp;
+            return true;
+        }
+        if (message.equals(TEACHER_ID_NOT_FOUND)) {
+            error = context.getResources().getString(R.string.error_tutoria_n_found);
             icon = R.drawable.ic_chat_bubble_outline_black_24dp;
             return true;
         }

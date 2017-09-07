@@ -14,7 +14,7 @@ public class ReceiverBoot extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.e("TEST ONELIO", "RESTARING ALARM FIRED BY " + intent.getAction());
         //TODO RESTORE ON COMPLETE
-        App app = (App)context.getApplicationContext();
+        /*App app = (App)context.getApplicationContext();
         if (app.loadUser()) { //User logged in
             if (app.getPublicPreferenceB(Common.GLOBAL_SETTING_ISNOTIFON)) { //Are notifications on?
                 NotificationManager manager = new NotificationManager(context);
@@ -22,6 +22,6 @@ public class ReceiverBoot extends BroadcastReceiver {
                     manager.setRecurrentService();
                 }
             }
-        }
+        }*/
     }
 }

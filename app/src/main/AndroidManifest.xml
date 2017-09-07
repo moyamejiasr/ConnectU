@@ -82,6 +82,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Apps.Profesores.ProfesoresViewActivity"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_profesores"
             android:screenOrientation="portrait" />
 

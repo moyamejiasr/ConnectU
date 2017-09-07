@@ -9,6 +9,7 @@ import com.onelio.connectu.Containers.BubbleData;
 import com.onelio.connectu.Containers.SubjectData;
 import com.onelio.connectu.Containers.TutoriaData;
 import com.onelio.connectu.Managers.AppManager;
+import com.onelio.connectu.Managers.ErrorManager;
 import com.onelio.connectu.R;
 
 import org.json.JSONArray;
@@ -21,6 +22,9 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class TutoriasRequest {
 
@@ -35,6 +39,7 @@ public class TutoriasRequest {
     private static String TUTORIAS_G_MAKE = "https://cvnet.cpd.ua.es/uatutorias/emisor/hacer";
     private static String TUTORIAS_NT = "https://cvnet.cpd.ua.es/uatutorias/Emisor/NuevaTutoria";
     private static String TUTORIAS_NP = "https://cvnet.cpd.ua.es/uatutorias/Emisor/NuevaPregunta";
+    private static String TUTORIAS_TEACHER_FIND = "https://cvnet.cpd.ua.es/uaTutorias/Emisor/GetDestinatariosmisPDI";
     //Private content
     //Session
     private Context context;
@@ -250,26 +255,66 @@ public class TutoriasRequest {
         });
     }
 
-    public void requestNewTutoria(final TutoriasCallback callback) {
-        UAWebService.HttpWebGetRequest(context, TUTORIAS_G_MAKE, new UAWebService.WebCallBack() {
+    public void teacherFind(String subjectId, final String teacherName, final TutoriasCallback callback) {
+        String json = "{\"Cod\":\"" + subjectId + "\",\"Curso\":\"" + parseYear() + "\"}";
+        UAWebService.HttpWebJSONPostRequest(context, TUTORIAS_TEACHER_FIND, json, new UAWebService.WebCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, String body) {
-                callback.onResult(isSuccessful, body);
+                if (isSuccessful) {
+                    Document doc = Jsoup.parse(body);
+                    //Get Post data
+                    Element element = doc.select("select[id=ddlDestinatario]").first();
+                    boolean found = false;
+                    for (Element teacher : element.children()) {
+                        if (teacher.text().equals(teacherName)) {
+                            found = true;
+                            callback.onResult(true, teacher.attr("value"));
+                        }
+                    }
+                    if (!found)
+                        callback.onResult(false, ErrorManager.TEACHER_ID_NOT_FOUND);
+                } else {
+                    callback.onResult(false, body);
+                }
             }
         });
     }
 
-    public void createTutoria() {
-        /*RequestBody requestBody = new MultipartBody.Builder()
+    public void requestNewTutoria(final String subjectId, final String teacherName, final TutoriasCallback callback) {
+        UAWebService.HttpWebGetRequest(context, TUTORIAS_G_MAKE, new UAWebService.WebCallBack() {
+            @Override
+            public void onNavigationComplete(final boolean isSuccessful, String body) {
+                if (isSuccessful) {
+                    teacherFind(subjectId, teacherName, new TutoriasCallback() {
+                        @Override
+                        public void onResult(boolean onResult, String message) {
+                            callback.onResult(onResult, message);
+                        }
+                    });
+                } else {
+                    callback.onResult(false, body);
+                }
+            }
+        });
+    }
+
+    public void createTutoria(String subjectId, String destinationId, String title, String text) {
+        RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("ddlCurso", json.getString("ddlCurso"))
-                .addFormDataPart("ddlAsignatura", json.getString("ddlAsignatura"))
-                .addFormDataPart("ddlDestinatario", json.getString("ddlDestinatario"))
-                .addFormDataPart("ckDestinatarios", json.getString("ckDestinatarios"))
-                .addFormDataPart("ckDestinatarios", json.getString("ckDestinatarios1"))
-                .addFormDataPart("txtAsunto", json.getString("txtAsunto"))
-                .addFormDataPart("txtPregunta", json.getString("txtPregunta"))
-                .build();*/
+                .addFormDataPart("ddlCurso", parseYear())
+                .addFormDataPart("ddlAsignatura", subjectId)
+                .addFormDataPart("ddlDestinatario", destinationId)
+                .addFormDataPart("ckDestinatarios", "1")
+                .addFormDataPart("ckDestinatarios", "false")
+                .addFormDataPart("txtAsunto", title)
+                .addFormDataPart("txtPregunta", text)
+                .build();
+        UAWebService.HttpWebMultiPartPostRequest(context, TUTORIAS_NT, requestBody, new UAWebService.WebCallBack() {
+            @Override
+            public void onNavigationComplete(boolean isSuccessful, String body) {
+                String xd = "xd";
+            }
+        });
     }
 
     public void markTutoriaReadId(String id, final TutoriasCallback callback) {

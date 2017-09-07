@@ -166,6 +166,7 @@
 
                     <ImageButton
                         android:id="@+id/send"
+                        android:onClick="sendMessage"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:background="@drawable/ic_send_accent_24dp" />

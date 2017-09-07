@@ -79,7 +79,9 @@ public class ProfesoresViewActivity extends AppCompatActivity {
             @Override
             public void onClick(boolean isPositive) {
                 Intent intent = new Intent(ProfesoresViewActivity.this, TutoriasViewActivity.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra(Common.TUTORIAS_STRING_AUTHOR, data.getName());
+                intent.putExtra(Common.TUTORIAS_STRING_AUTHOR_IMG, data.getPicture());
                 intent.putExtra(Common.TUTORIAS_STRING_YEAR, data.getYear());
                 intent.putExtra(Common.TUTORIAS_STRING_SUBJECTID, data.getSubject());
                 intent.putExtra(Common.TUTORIAS_STRING_TITLE, alert.getInputResult());

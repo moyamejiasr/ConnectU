@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,10 @@ public class TutoriasViewActivity extends AppCompatActivity {
     String subjectID;
     String year;
     String author;
+    String authorImg;
     boolean isHome = false;
+    //__
+    String authorId;
     TutoriasRequest request;
 
     List<BubbleData> bubbles;
@@ -52,6 +56,7 @@ public class TutoriasViewActivity extends AppCompatActivity {
         //Get Data
         id = getIntent().getStringExtra(Common.TUTORIAS_STRING_ID);
         author = getIntent().getStringExtra(Common.TUTORIAS_STRING_AUTHOR);
+        authorImg = getIntent().getStringExtra(Common.TUTORIAS_STRING_AUTHOR_IMG);
         title = getIntent().getStringExtra(Common.TUTORIAS_STRING_TITLE);
         year = getIntent().getStringExtra(Common.TUTORIAS_STRING_YEAR);
         subjectID = getIntent().getStringExtra(Common.TUTORIAS_STRING_SUBJECTID);
@@ -74,12 +79,19 @@ public class TutoriasViewActivity extends AppCompatActivity {
         vtitle.setText(title);
         vauthor.setText(AppManager.capAfterSpace(author));
 
+        CircleImageView image = (CircleImageView) findViewById(R.id.toolbar_image);
+        if (authorImg != null && !authorImg.isEmpty()) {
+            Picasso.with(getBaseContext()).load(authorImg).placeholder(R.drawable.ic_placeholder).into(image);
+        } else {
+            Picasso.with(getBaseContext()).load(R.drawable.ic_placeholder).into(image);
+        }
+
         listMsg = (RecyclerView) findViewById(R.id.tutoriasViewRecycler);
         initializeConnection();
     }
 
     private void initializeConnection() { //Used to initialize communication with the UACloud service that we are going to use
-        if (!id.isEmpty()) { //Empty or null means new one
+        if ( id != null && !id.isEmpty()) { //Empty or null means new one
             request.fetchTutoriaById(id, new TutoriasRequest.TutoriasCallback() {
                 @Override
                 public void onResult(final boolean onResult, final String message) { //Get Data
@@ -108,14 +120,15 @@ public class TutoriasViewActivity extends AppCompatActivity {
                 }
             });
         } else {
-            request.requestNewTutoria(new TutoriasRequest.TutoriasCallback() {
+            request.requestNewTutoria(subjectID, author, new TutoriasRequest.TutoriasCallback() {
                 @Override
-                public void onResult(final boolean onResult, final String message) {
+                public void onResult(final boolean onResult, final String message) { //Create New One
                     TutoriasViewActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             if (onResult) {
                                 isLoading = false;
+                                authorId = message;
                             } else {
                                 ErrorManager error = new ErrorManager(getBaseContext());
                                 if (!error.handleError(message)) {
@@ -127,6 +140,17 @@ public class TutoriasViewActivity extends AppCompatActivity {
                     });
                 }
             });
+        }
+    }
+
+    public void sendMessage(View v) {
+        EditText text = (EditText) findViewById(R.id.messageEdit);
+        if (!isLoading) {
+            if (id != null && !id.isEmpty()) {
+
+            } else {
+                request.createTutoria(subjectID, authorId, title, text.getText().toString());
+            }
         }
     }
 
@@ -195,7 +219,9 @@ public class TutoriasViewActivity extends AppCompatActivity {
             }
             return super.onOptionsItemSelected(item);
         } else {
-            super.onBackPressed();
+            if (!isHome) {
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
             return true;
         }
 

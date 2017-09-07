@@ -58,6 +58,7 @@ public class Common {
     public static String TUTORIAS_STRING_ID = "id";
     public static String TUTORIAS_STRING_TITLE = "title";
     public static String TUTORIAS_STRING_AUTHOR = "publisher";
+    public static String TUTORIAS_STRING_AUTHOR_IMG = "publisherImg";
     public static String TUTORIAS_STRING_YEAR = "year";
     public static String TUTORIAS_STRING_SUBJECTID = "subjectID";
     public static String TUTORIAS_BOOL_ISHOME = "isHome";

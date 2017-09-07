@@ -1,8 +1,10 @@
 package com.onelio.connectu.Activities.Apps.Tutorias;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.TutoriasRequest;
+import com.onelio.connectu.Activities.Apps.Profesores.ProfesoresActivity;
 import com.onelio.connectu.Adapters.ViewMaterialesPagerAdapter;
 import com.onelio.connectu.App;
 import com.onelio.connectu.Common;
@@ -38,6 +41,7 @@ public class TutoriasActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private FloatingActionButton fabTut;
     private TextView title;
     private AVLoadingIndicatorView progress;
 
@@ -48,10 +52,6 @@ public class TutoriasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorias);
-        //TODO REMOVE THIS
-        AlertManager alert = new AlertManager(getBaseContext());
-        alert.setMessage("Antes que nada, recuerda que este aplicativo esta incompleto y a pesar de que es posible ver tutorias no es aun crearlas. Gracias");
-        alert.show();
         //Action bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,6 +66,7 @@ public class TutoriasActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         progress = (AVLoadingIndicatorView) findViewById(R.id.material_progress);
         title = (TextView) findViewById(R.id.toolbar_title);
+        fabTut = (FloatingActionButton) findViewById(R.id.fabTut);
         setYearAdapters();
         request = new TutoriasRequest(this);
         updateYear(true, app.getPublicPreferenceI(Common.GLOBAL_FILTER_YEAR));
@@ -88,6 +89,7 @@ public class TutoriasActivity extends AppCompatActivity {
             progress.show();
             tabLayout.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
+            fabTut.setVisibility(View.GONE);
             doRequest();
         }
     }
@@ -103,6 +105,7 @@ public class TutoriasActivity extends AppCompatActivity {
                             setupViewPager(viewPager);
                             tabLayout.setVisibility(View.VISIBLE);
                             viewPager.setVisibility(View.VISIBLE);
+                            fabTut.setVisibility(View.VISIBLE);
                             progress.hide();
                         } else {
                             ErrorManager error = new ErrorManager(getBaseContext());
@@ -139,6 +142,13 @@ public class TutoriasActivity extends AppCompatActivity {
             alert.show();
         } else {
             Toast.makeText(getBaseContext(), getString(R.string.error_year_loading), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onAddTutoria(View v) {
+        Intent intent = new Intent(this, ProfesoresActivity.class);
+        if (year != -1) {
+            startActivity(intent);
         }
     }
 

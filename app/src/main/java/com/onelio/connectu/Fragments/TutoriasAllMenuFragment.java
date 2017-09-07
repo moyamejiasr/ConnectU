@@ -122,6 +122,7 @@ public class TutoriasAllMenuFragment extends Fragment {
             Intent intent = new Intent(getActivity(), TutoriasViewActivity.class);
             intent.putExtra(Common.TUTORIAS_STRING_ID, tutorias.get(item).getId());
             intent.putExtra(Common.TUTORIAS_STRING_AUTHOR, tutorias.get(item).getTeacherName());
+            intent.putExtra(Common.TUTORIAS_STRING_AUTHOR_IMG, tutorias.get(item).getTeacherPicture());
             intent.putExtra(Common.TUTORIAS_STRING_TITLE, tutorias.get(item).getTitle());
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

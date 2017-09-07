@@ -1,5 +1,6 @@
 package com.onelio.connectu.Activities.Apps.Tutorias;
 
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import com.onelio.connectu.Managers.ErrorManager;
 import com.onelio.connectu.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -143,13 +146,83 @@ public class TutoriasViewActivity extends AppCompatActivity {
         }
     }
 
-    public void sendMessage(View v) {
-        EditText text = (EditText) findViewById(R.id.messageEdit);
-        if (!isLoading) {
-            if (id != null && !id.isEmpty()) {
+    public void addBubble(String text) {
+        Date date = new Date();
+        BubbleData bubble = new BubbleData();
+        bubble.setAuthor("Yo");
+        bubble.setDate(" " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+        bubble.setImage("");
+        bubble.setText(text + "bb"); //bb is added to fit the -2 chars at the end of the adapter
+        bubble.setMe(true);
+        if (bubbles == null) {
+            bubbles = new ArrayList<>();
+        }
+        bubbles.add(bubble);
+        putInitialMessages();
+    }
 
+    public void sendMessage(final View v) {
+        AppManager.hideKeyboard(this);
+        final EditText text = (EditText) findViewById(R.id.messageEdit);
+        if (text.getText().toString().isEmpty())
+            return;
+        if (!isLoading) {
+            final ProgressDialog progress = new ProgressDialog(this);
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setMessage(getString(R.string.alert_loading));
+            progress.setIndeterminate(true);
+            progress.setCanceledOnTouchOutside(false);
+            progress.show();
+            text.setEnabled(false);
+            v.setEnabled(false);
+            if (id != null && !id.isEmpty()) {
+                request.answerTutoria(id, text.getText().toString(), new TutoriasRequest.TutoriasCallback() {
+                    @Override
+                    public void onResult(final boolean onResult, final String message) {
+                        TutoriasViewActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                                if (onResult) {
+                                    addBubble(text.getText().toString());
+                                    text.setText("");
+                                    Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    text.setEnabled(true);
+                                    v.setEnabled(true);
+                                    ErrorManager error = new ErrorManager(getBaseContext());
+                                    if (!error.handleError(message)) {
+                                        Toast.makeText(getBaseContext(), getString(R.string.not_available), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
             } else {
-                request.createTutoria(subjectID, authorId, title, text.getText().toString());
+                request.createTutoria(subjectID, authorId, title, text.getText().toString(), new TutoriasRequest.TutoriasCallback() {
+                    @Override
+                    public void onResult(final boolean onResult, final String message) {
+                        TutoriasViewActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                                if (onResult) {
+                                    addBubble(text.getText().toString());
+                                    text.setText("");
+                                    Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    text.setEnabled(true);
+                                    v.setEnabled(true);
+                                    ErrorManager error = new ErrorManager(getBaseContext());
+                                    if (!error.handleError(message)) {
+                                        Toast.makeText(getBaseContext(), getString(R.string.not_available), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
             }
         }
     }
@@ -219,6 +292,7 @@ public class TutoriasViewActivity extends AppCompatActivity {
             }
             return super.onOptionsItemSelected(item);
         } else {
+            super.onBackPressed();
             if (!isHome) {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }

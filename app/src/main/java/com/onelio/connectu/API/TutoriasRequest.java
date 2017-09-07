@@ -45,6 +45,7 @@ public class TutoriasRequest {
     private Context context;
     private App app;
     private List<BubbleData> bubbles;
+    private String idPadre = "";
     private static int year = 0; //It's static to share the same value throw all the instances
 
     //define callback interface
@@ -108,6 +109,8 @@ public class TutoriasRequest {
     private List<BubbleData> parseBubblesFromBody(String body) {
         List<BubbleData> bubbles = new ArrayList<>();
         Document doc = Jsoup.parse(body);
+        //Get Padre
+        idPadre = doc.select("input[name=idPadre").attr("value");
         //Get Rows
         Element chats = doc.select(TUTORIAS_LIST_BODY).first();
         try {
@@ -298,7 +301,7 @@ public class TutoriasRequest {
         });
     }
 
-    public void createTutoria(String subjectId, String destinationId, String title, String text) {
+    public void createTutoria(String subjectId, String destinationId, String title, String text, final TutoriasCallback callback) {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("ddlCurso", parseYear())
@@ -312,7 +315,41 @@ public class TutoriasRequest {
         UAWebService.HttpWebMultiPartPostRequest(context, TUTORIAS_NT, requestBody, new UAWebService.WebCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, String body) {
-                String xd = "xd";
+                if (isSuccessful) {
+                    try {
+                        JSONObject jdata = new JSONObject(body);
+                        callback.onResult(true, jdata.getString("result"));
+                    } catch (JSONException e) {
+                        callback.onResult(false, ErrorManager.BAD_RESPONSE);
+                    }
+                } else {
+                    callback.onResult(false, body);
+                }
+            }
+        });
+    }
+
+    public void answerTutoria(String tutId, String text, final TutoriasCallback callback) {
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("idTuto", tutId)
+                .addFormDataPart("idPadre", idPadre)
+                .addFormDataPart("TextBoxPregunta", text)
+                .addFormDataPart("inputFileArch", "")
+                .build();
+        UAWebService.HttpWebMultiPartPostRequest(context, TUTORIAS_NP, requestBody, new UAWebService.WebCallBack() {
+            @Override
+            public void onNavigationComplete(boolean isSuccessful, String body) {
+                if (isSuccessful) {
+                    try {
+                        JSONObject jdata = new JSONObject(body);
+                        callback.onResult(true, jdata.getString("result"));
+                    } catch (JSONException e) {
+                        callback.onResult(false, ErrorManager.BAD_RESPONSE);
+                    }
+                } else {
+                    callback.onResult(false, body);
+                }
             }
         });
     }

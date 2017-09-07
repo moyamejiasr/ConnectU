@@ -21,6 +21,11 @@
         android:key="sync_category">
 
         <Preference
+            android:key="preference_staticyear"
+            android:title="@string/staticyear"
+            android:summary="@string/staticyear_long"/>
+
+        <Preference
             android:key="preference_notification"
             android:title="@string/notifications" />
 

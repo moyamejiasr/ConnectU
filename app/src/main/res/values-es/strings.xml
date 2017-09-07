@@ -162,4 +162,7 @@
     <string name="not_available">Temporalmente no disponible</string>
     <string name="title_activity_about">Acerca de</string>
     <string name="activity_about_long">Aprende más acerca de nosotros y del proyecto</string>
+    <string name="error_tutoria_n_found">No hemos podido localizar este profesor</string>
+    <string name="staticyear">Cambiar año por defecto</string>
+    <string name="staticyear_long">Cambia el año académico por defecto que será mostrado cuando se acceda a un aplicativo</string>
 </resources>

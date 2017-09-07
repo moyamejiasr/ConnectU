@@ -54,7 +54,11 @@ public class AppManager {
     }
 
     public static String removeLastChars(String str, int count) {
-        return str.substring(0, str.length() - count);
+        try {
+            return str.substring(0, str.length() - count);
+        }catch(StringIndexOutOfBoundsException e) {
+            return str;
+        }
     }
 
     public static  boolean isStoragePermissionGranted(final Activity activity) {

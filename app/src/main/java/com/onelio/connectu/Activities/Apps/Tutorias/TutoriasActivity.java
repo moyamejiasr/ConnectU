@@ -140,8 +140,6 @@ public class TutoriasActivity extends AppCompatActivity {
                 }
             });
             alert.show();
-        } else {
-            Toast.makeText(getBaseContext(), getString(R.string.error_year_loading), Toast.LENGTH_SHORT).show();
         }
     }
 

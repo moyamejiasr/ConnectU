@@ -198,6 +198,8 @@
     <string name="logout">Sing out</string>
     <string name="logout_long">Click here if you wish to logout from the app</string>
     <string name="gdata">General settings</string>
+    <string name="staticyear">Change default year</string>
+    <string name="staticyear_long">Change default academic year to load when accessing an App</string>
     <string name="notifications">Notifications</string>
     <string name="shortcut">Shortcuts and Widgets</string>
     <string name="custom">UI Settings</string>

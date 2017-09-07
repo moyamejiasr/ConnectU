@@ -70,6 +70,11 @@ public class NotificationListFragment extends Fragment {
                     if (stype.equals("MATDOCENTE")) {
                         Intent intent = new Intent(getActivity(), MaterialesActivity.class);
                         startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            finalJsonObj.remove(i);
+                        }
+                        adapter.notifyDataSetChanged();
+                        countNotifications(finalJsonObj);
                     }
                     if (stype.equals("UATUTORIAS")) {
                         try {
@@ -78,36 +83,41 @@ public class NotificationListFragment extends Fragment {
                             intent.putExtra(Common.TUTORIAS_STRING_AUTHOR, finalJsonObj.getJSONObject(i).getString("title"));
                             intent.putExtra(Common.TUTORIAS_STRING_TITLE, finalJsonObj.getJSONObject(i).getString("text"));
                             intent.putExtra(Common.TUTORIAS_BOOL_ISHOME, true);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                                finalJsonObj.remove(i);
-                            }
-                            adapter.notifyDataSetChanged();
-                            countNotifications(finalJsonObj);
                             startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
                         } catch (JSONException e) {
                             Intent intent = new Intent(getActivity(), TutoriasActivity.class);
                             startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
                         }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            finalJsonObj.remove(i);
+                        }
+                        adapter.notifyDataSetChanged();
+                        countNotifications(finalJsonObj);
                     }
                     if (stype.equals("ANUNCIOS")) {
                         try {
                             Intent intent = new Intent(getActivity(), AnunciosViewActivity.class);
                             intent.putExtra("JDATA", finalJsonObj.getJSONObject(i).getString("id"));
                             intent.putExtra("LOAD", true);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                                finalJsonObj.remove(i);
-                            }
-                            adapter.notifyDataSetChanged();
-                            countNotifications(finalJsonObj);
                             startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
                         } catch (JSONException e) {
                             Intent intent = new Intent(getActivity(), AnunciosActivity.class);
                             startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
                         }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            finalJsonObj.remove(i);
+                        }
+                        adapter.notifyDataSetChanged();
+                        countNotifications(finalJsonObj);
                     }
                     if (stype.equals("UAEVALUACION")) {
                         Intent intent = new Intent(getActivity(), EvaluacionActivity.class);
                         startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            finalJsonObj.remove(i);
+                        }
+                        adapter.notifyDataSetChanged();
+                        countNotifications(finalJsonObj);
                     }
                 }
             });

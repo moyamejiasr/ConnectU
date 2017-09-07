@@ -14,7 +14,10 @@ import com.onelio.connectu.Containers.BubbleData;
 import com.onelio.connectu.Managers.AppManager;
 import com.onelio.connectu.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MessageRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -80,7 +83,16 @@ public class MessageRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         ViewHolder vh = (ViewHolder)holder;
         BubbleData m = messagesItems.get(position);
         vh.txtMsg.setText(AppManager.removeLastChars(Html.fromHtml(m.getText()).toString(), 2));
-        vh.date.setText("13:00"); //TODO change date
+
+        //Parse date
+        String date = AppManager.after(m.getDate(), " ");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        try {
+            Date time = format.parse(date);
+            vh.date.setText(time.getHours() + ":" + time.getMinutes());
+        } catch (ParseException e) {
+            vh.date.setText("unknown");
+        }
 
     }
 }

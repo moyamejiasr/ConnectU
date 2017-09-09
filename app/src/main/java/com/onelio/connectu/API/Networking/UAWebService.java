@@ -31,19 +31,6 @@ public class UAWebService {
     private static boolean isStillLoggedIn(Response response, String prevURL) {
         String url = response.networkResponse().request().url().toString();
         //If Contains login(now so logged out) page but not previously(requested in) == Logged out!
-
-        //TODO DELETE THIS PART
-        if (url.contains("autentica.cpd.ua.es")) {
-            FirebaseCrash.log(prevURL);
-            FirebaseCrash.log(url);
-            try {
-                FirebaseCrash.log(response.body().string());
-            } catch (IOException e) {
-                e.printStackTrace(); //:D Smile face
-            }
-            FirebaseCrash.report(new Exception("TEST NO SESSION UA"));
-        }
-
         return (!url.contains("autentica.cpd.ua.es") || prevURL.contains("autentica"));
     }
 

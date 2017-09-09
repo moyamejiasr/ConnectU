@@ -40,11 +40,11 @@
     <string name="no">No</string>
 
     <!-- Launcher Page -->
-    <string name="loading">Throwing the trash</string>
-    <string name="loading1">Cleaning the dishes</string>
-    <string name="loading2">Taking a rest(Joke)</string>
-    <string name="loading3">Opening the windows</string>
-    <string name="loading4">Closing them again</string>
+    <string name="loading">Bathing the fishes</string>
+    <string name="loading1">Breaking the walls</string>
+    <string name="loading2">Taking the breakfast</string>
+    <string name="loading3">Making the moonwalk</string>
+    <string name="loading4">Just doing nothing</string>
     <string name="loading5">We are nearly finished</string>
     <string name="completed">Completed</string>
     <!-- Login Page -->

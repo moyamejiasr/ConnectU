@@ -161,6 +161,12 @@ public class AnunciosActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 FirebaseCrash.report(e);
                 AlertManager alertManager = new AlertManager(getBaseContext());
+                alertManager.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
+                    @Override
+                    public void onClick(boolean isPositive) {
+
+                    }
+                });
                 alertManager.setMessage(getString(R.string.error_unexpected), getString(R.string.error_unable_display));
                 alertManager.show();
             }

@@ -244,7 +244,7 @@ public class HomeMenuFragment extends Fragment {
                 //Create View and add it
                 RelativeLayout fragment = new RelativeLayout(getActivity());
                 fragment.setId(i);
-                getFragmentManager().beginTransaction().add(fragment.getId(), intent, null).commit();
+                getFragmentManager().beginTransaction().add(fragment.getId(), intent, null).commitAllowingStateLoss(); //commitAllowingStateLoss insteaf of commit to fix a bug Exception java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
                 linear.addView(fragment);
                 i++;
             }

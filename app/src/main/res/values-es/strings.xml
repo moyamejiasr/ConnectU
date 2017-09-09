@@ -73,11 +73,11 @@
     <string name="horario_evaluativo">Incluir Evaluación</string>
     <string name="horario_ex_menes">Incluir exámenes</string>
     <string name="horario_festivos">Incluir festivos</string>
-    <string name="loading">Tirando la basura</string>
-    <string name="loading1">Limpiando los platos</string>
-    <string name="loading2">Descansando un rato(broma)</string>
-    <string name="loading3">Abriendo las ventanas</string>
-    <string name="loading4">Cerrándolas de nuevo</string>
+    <string name="loading">Bañando los peces</string>
+    <string name="loading1">Rompiendo los muros</string>
+    <string name="loading2">Desayunando</string>
+    <string name="loading3">Haciendo el moonwalk</string>
+    <string name="loading4">Sin hacer nada (LOL)</string>
     <string name="loading5">Ya casi terminamos</string>
     <string name="logout">Desconectarse</string>
     <string name="logout_long">Presiona aquí para desconectarte de la app</string>

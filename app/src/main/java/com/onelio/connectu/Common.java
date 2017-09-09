@@ -31,6 +31,7 @@ public class Common {
     public static String INTENT_KEY_UPDATE_TYPE = "updateType";
     public static String INTENT_KEY_RESULT = "result";
     public static String INTENT_KEY_LOC =  "yloc";
+    public static String INTENT_KEY_ERROR =  "ierror";
 
     //UAUpdate Type
     public static String UAUPDATE_TYPE_NORMAL = "uanormal";

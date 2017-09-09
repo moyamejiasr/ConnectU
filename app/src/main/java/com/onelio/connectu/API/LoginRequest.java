@@ -60,7 +60,7 @@ public class LoginRequest {
         return json;
     }
 
-    private boolean loginConfirmState(Document doc) {
+    private boolean loginConfirmState(Document doc, String user) {
         //Get User Data
         error = 0;
         err_message = "Error, Alert not added";
@@ -79,7 +79,7 @@ public class LoginRequest {
                 return true; // Name is valid, continue login
             } else {
                 //User still not match but error not found, that means that the error is in the method so let's report it
-                FirebaseCrash.report(new Exception(doc.text()));
+                FirebaseCrash.report(new Exception(user + " " + doc.text()));
                 err_message = context.getString(R.string.error_login_failed);
                 return false;
             }
@@ -124,7 +124,7 @@ public class LoginRequest {
             public void onNavigationComplete(boolean isSuccessful, String body) {
                 if (isSuccessful) {
                     Document doc = Jsoup.parse(body);
-                    boolean loginSuccess = loginConfirmState(doc);
+                    boolean loginSuccess = loginConfirmState(doc, user);
                     if (loginSuccess) {
                         FirebaseCrash.log("Loggin success!");
                         saveLoginData(); //Save date & version of actual login

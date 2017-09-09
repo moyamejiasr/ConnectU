@@ -212,6 +212,7 @@ public class LauncherActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             Bundle bundle = intent.getExtras();
+            String message = (String)bundle.get(Common.INTENT_KEY_ERROR);
             UAUpdate.YearDataLoc num = (UAUpdate.YearDataLoc)bundle.get(Common.INTENT_KEY_LOC);
             if (bundle != null) {
                 int resultCode = bundle.getInt(Common.INTENT_KEY_RESULT);
@@ -243,10 +244,13 @@ public class LauncherActivity extends AppCompatActivity {
                     //Failed
                     unregisterReceiver(receiver);
                     FirebaseCrash.log("Falied doing normal update in " + num.name());
+                    FirebaseCrash.log(message);
                     FirebaseCrash.report(new Exception("Normal Update Error"));
                     profile.setImageResource(R.drawable.ic_cancel_red);
                     ltext.setText(getString(R.string.app_name_error));
-                    Toast.makeText(getBaseContext(), getString(R.string.error_problem_service) + " " + num.name(), Toast.LENGTH_LONG).show();
+                    ErrorManager error = new ErrorManager(LauncherActivity.this);
+                    if (!error.handleError(message))
+                        Toast.makeText(getBaseContext(), getString(R.string.error_problem_service) + " " + num.name(), Toast.LENGTH_LONG).show();
                 }
             }
         }

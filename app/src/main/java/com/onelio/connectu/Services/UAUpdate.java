@@ -79,13 +79,20 @@ public class UAUpdate extends IntentService {
                             subject = request.academicYears.get(yloc).getSubjectsData().get(sloc).getId();
                             request.loadTeachersByYearAndSubject(year, subject, false, callback); //Load teachers
                         } else {
-                            //Go next year
-                            sloc = 0;
-                            yloc++;
-                            result = Activity.RESULT_OK;
-                            loc = YearDataLoc.YEARS;
-                            publishResults(result, loc);
-                            callback.onCompleted(true, "");
+                            int ysize = request.academicYears.size() - 1;
+                            if (yloc < ysize) { //Has more years??
+                                //Go next year
+                                sloc = 0;
+                                yloc++;
+                                result = Activity.RESULT_OK;
+                                loc = YearDataLoc.YEARS;
+                                publishResults(result, loc, message);
+                                callback.onCompleted(true, "");
+                            } else { //In case of last subject of prev year has no teacher
+                                //End the process
+                                request.saveAcademicYear(); //Continue next step
+                                updateHorario();
+                            }
                         }
                         break;
                     case TEACHERS:
@@ -100,7 +107,7 @@ public class UAUpdate extends IntentService {
                             //Update status
                             result = Activity.RESULT_OK;
                             loc = YearDataLoc.YEARS;
-                            publishResults(result, loc);
+                            publishResults(result, loc, message);
                             //Continue
                             sloc = 0;
                             yloc++;
@@ -117,7 +124,7 @@ public class UAUpdate extends IntentService {
                     FirebaseCrash.report(new Exception(message));
                 }
                 result = Activity.RESULT_CANCELED;
-                publishResults(result, loc);
+                publishResults(result, loc, message);
             }
         }
     };
@@ -139,7 +146,7 @@ public class UAUpdate extends IntentService {
         //Update state
         result = Activity.RESULT_OK;
         loc = YearDataLoc.C_DOSENCIA;
-        publishResults(result, loc);
+        publishResults(result, loc, "");
         hrequest.loadHorario(hstart, hend, htype, hcallback);
     }
 
@@ -152,28 +159,28 @@ public class UAUpdate extends IntentService {
                         htype = HorarioRequest.CALENDAR_EVALUACION;
                         loc = YearDataLoc.C_EVALUACION;
                         result = Activity.RESULT_OK;
-                        publishResults(result, loc);
+                        publishResults(result, loc, message);
                         hrequest.loadHorario(hstart, hend, htype, hcallback);
                         break;
                     case C_EVALUACION:
                         htype = HorarioRequest.CALENDAR_EXAMENES;
                         loc = YearDataLoc.C_EXAMENES;
                         result = Activity.RESULT_OK;
-                        publishResults(result, loc);
+                        publishResults(result, loc, message);
                         hrequest.loadHorario(hstart, hend, htype, hcallback);
                         break;
                     case C_EXAMENES:
                         htype = HorarioRequest.CAlENDAR_FESTIVOS;
                         loc = YearDataLoc.C_FESTIVOS;
                         result = Activity.RESULT_OK;
-                        publishResults(result, loc);
+                        publishResults(result, loc, message);
                         hrequest.loadHorario(hstart, hend, htype, hcallback);
                         break;
                     case C_FESTIVOS:
                         loc = YearDataLoc.COMPLETED;
                         result = Activity.RESULT_FIRST_USER;
                         hrequest.saveFullHorario();
-                        publishResults(result, loc);
+                        publishResults(result, loc, message);
                         //Finish Update & Save update time
                         app.lastUpdateTime = UpdaterHelper.changeUpdatedDate(getBaseContext());
                         break;
@@ -182,17 +189,18 @@ public class UAUpdate extends IntentService {
                 FirebaseCrash.log("Failed loading object number: " + loc.name());
                 FirebaseCrash.report(new Exception(message));
                 result = Activity.RESULT_CANCELED;
-                publishResults(result, loc);
+                publishResults(result, loc, message);
             }
         }
     };
 
 
-    private void publishResults(int result, YearDataLoc loc) {
+    private void publishResults(int result, YearDataLoc loc, String error) {
         if (!isSilence) {
             Intent intent = new Intent(NOTIFICATION);
             intent.putExtra(Common.INTENT_KEY_RESULT, result);
             intent.putExtra(Common.INTENT_KEY_LOC, loc);
+            intent.putExtra(Common.INTENT_KEY_ERROR, error);
             sendBroadcast(intent);
         }
     }

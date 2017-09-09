@@ -66,6 +66,12 @@ public class ErrorManager {
                 case 1:
                     AlertManager alert = new AlertManager(activity);
                     alert.setIcon(icon);
+                    alert.setPositiveButton("Ok", new AlertManager.AlertCallBack() {
+                        @Override
+                        public void onClick(boolean isPositive) {
+
+                        }
+                    });
                     alert.setMessage(context.getResources().getString(R.string.app_name_error), error);
                     alert.show();
                     break;

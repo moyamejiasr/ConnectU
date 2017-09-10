@@ -48,18 +48,18 @@ public class HttpClient {
     }
 
     public HttpClient(Context context) {
+        app = (App) context.getApplicationContext();
         if (app.cookieJar==null)
             cookieMaker();
-        app = (App) context.getApplicationContext();
         client = new OkHttpClient().newBuilder()
                 .cookieJar(app.cookieJar)
                 .build();
     }
 
     public HttpClient(Context context, boolean big) { //Evaluacion case (Cause Evaluacion is reaaaaaaaaallllyyy sloooow)
+        app = (App) context.getApplicationContext();
         if (app.cookieJar==null)
             cookieMaker();
-        app = (App) context.getApplicationContext();
         client = new OkHttpClient().newBuilder()
                 .cookieJar(app.cookieJar)
                 .connectTimeout(20, TimeUnit.SECONDS)

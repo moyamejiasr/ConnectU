@@ -56,6 +56,12 @@
             android:summary="@string/activity_about_long">
         </Preference>
 
+        <Preference
+            android:key="preference_tys"
+            android:title="@string/tys"
+            android:summary="@string/tys_long">
+        </Preference>
+
         <Preference android:title="Play Store"
             android:summary="Vote Us">
             <intent android:action="android.intent.action.VIEW"

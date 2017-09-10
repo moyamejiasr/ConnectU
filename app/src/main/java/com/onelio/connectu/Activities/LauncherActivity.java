@@ -243,14 +243,15 @@ public class LauncherActivity extends AppCompatActivity {
                 }else {
                     //Failed
                     unregisterReceiver(receiver);
-                    FirebaseCrash.log("Falied doing normal update in " + num.name());
-                    FirebaseCrash.log(message);
-                    FirebaseCrash.report(new Exception("Normal Update Error"));
                     profile.setImageResource(R.drawable.ic_cancel_red);
                     ltext.setText(getString(R.string.app_name_error));
                     ErrorManager error = new ErrorManager(LauncherActivity.this);
-                    if (!error.handleError(message))
+                    if (!error.handleError(message)) {
+                        FirebaseCrash.log("Falied doing normal update in " + num.name());
+                        FirebaseCrash.log(message);
+                        FirebaseCrash.report(new Exception("Normal Update Error"));
                         Toast.makeText(getBaseContext(), getString(R.string.error_problem_service) + " " + num.name(), Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         }

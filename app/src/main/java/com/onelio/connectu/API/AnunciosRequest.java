@@ -155,7 +155,7 @@ public class AnunciosRequest {
                     } catch (NullPointerException e) {
                         FirebaseCrash.log(body);
                         FirebaseCrash.report(e);
-                        callback.onResult(false, ErrorManager.UNKNOWN_RESPONSE_FORMAT);
+                        callback.onResult(false, ErrorManager.LOGIN_REJECTED); //Usually because session ended!
                     }
                 } else {
                     callback.onResult(false, body);

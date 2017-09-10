@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.text.Html;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
+import com.onelio.connectu.Activities.LoginActivity;
 import com.onelio.connectu.Activities.Preferences.AboutActivity;
 import com.onelio.connectu.Activities.Preferences.NotificationsActivity;
 import com.onelio.connectu.App;
@@ -50,6 +52,8 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         about.setOnPreferenceClickListener(onAbout);
         Preference theme = findPreference("preference_theme");
         theme.setOnPreferenceClickListener(onTheme);
+        Preference tys = findPreference("preference_tys");
+        tys.setOnPreferenceClickListener(onTySRequest);
     }
 
     private void setYearAdapters() {
@@ -64,6 +68,23 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         @Override
         public boolean onPreferenceClick(Preference preference) {
             startActivity(new Intent(getActivity(), NotificationsActivity.class));
+            return true;
+        }
+    };
+
+    Preference.OnPreferenceClickListener onTySRequest = new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            final AlertManager alert = new AlertManager(getActivity());
+            alert.setCancelable(false);
+            alert.setMessage(getString(R.string.app_name), Html.fromHtml(getString(R.string.disclaimer)));
+            alert.setPositiveButton(getString(R.string.accept), new AlertManager.AlertCallBack() {
+                @Override
+                public void onClick(boolean isPositive) {
+                    alert.cancel();
+                }
+            });
+            alert.show();
             return true;
         }
     };

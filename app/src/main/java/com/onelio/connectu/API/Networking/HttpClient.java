@@ -2,13 +2,17 @@ package com.onelio.connectu.API.Networking;
 
 import android.content.Context;
 
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.onelio.connectu.App;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Cookie;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,7 +23,33 @@ public class HttpClient {
     private OkHttpClient client;
     private App app;
 
+    private void cookieMaker() { //Method to prevent exception caused by cookieJar being null even if there is no login after
+        app.cookieJar = new ClearableCookieJar() {
+            @Override
+            public void clearSession() {
+
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+
+            }
+
+            @Override
+            public List<Cookie> loadForRequest(HttpUrl url) {
+                return null;
+            }
+        };
+    }
+
     public HttpClient(Context context) {
+        if (app.cookieJar==null)
+            cookieMaker();
         app = (App) context.getApplicationContext();
         client = new OkHttpClient().newBuilder()
                 .cookieJar(app.cookieJar)
@@ -27,6 +57,8 @@ public class HttpClient {
     }
 
     public HttpClient(Context context, boolean big) { //Evaluacion case (Cause Evaluacion is reaaaaaaaaallllyyy sloooow)
+        if (app.cookieJar==null)
+            cookieMaker();
         app = (App) context.getApplicationContext();
         client = new OkHttpClient().newBuilder()
                 .cookieJar(app.cookieJar)

@@ -165,4 +165,6 @@
     <string name="error_tutoria_n_found">No hemos podido localizar este profesor</string>
     <string name="staticyear">Cambiar año por defecto</string>
     <string name="staticyear_long">Cambia el año académico por defecto que será mostrado cuando se acceda a un aplicativo</string>
+    <string name="tys">Términos y condiciones de uso</string>
+    <string name="tys_long">Leer de nuevo los términos y condiciones de uso</string>
 </resources>

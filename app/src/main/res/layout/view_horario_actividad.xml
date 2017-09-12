@@ -46,6 +46,41 @@
 
         </android.support.v7.widget.CardView>
 
+        <RelativeLayout
+            android:id="@+id/lastD"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_centerVertical="true" >
+
+            <View
+                android:layout_centerHorizontal="true"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#E0E0E0" />
+
+            <com.onelio.connectu.CustomViews.VerticalTextView
+                android:id="@+id/lastTD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="#fafafa"
+                android:fontFamily="sans-serif"
+                android:gravity="bottom"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="17dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingEnd="6dp"
+                android:paddingStart="6dp"
+                android:text="2 hours"
+                android:textColor="#9E9E9E"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

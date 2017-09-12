@@ -65,7 +65,8 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.ViewHo
         holder.subject.setText(context.getString(R.string.view_horario_loc) + " " + event.getLoc());
         holder.location.setText(event.getTitle() + " " + event.getText());
 
-        String time = TimeParserHelper.parseTime(event.getStart().getHours()) + ":" + TimeParserHelper.parseTime(event.getStart().getMinutes()) + " h";
+        String time = TimeParserHelper.parseTime(event.getStart().getHours()) + ":" + TimeParserHelper.parseTime(event.getStart().getMinutes()) + "h - "
+                + TimeParserHelper.parseTime(event.getEnd().getHours()) + ":" + TimeParserHelper.parseTime(event.getEnd().getMinutes()) + "h";
         holder.hour.setText(time);
 
         holder.llayout.setOnTouchListener(new View.OnTouchListener() {

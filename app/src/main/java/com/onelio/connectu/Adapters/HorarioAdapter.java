@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.onelio.connectu.API.HorarioRequest;
 import com.onelio.connectu.Containers.CalendarEvent;
+import com.onelio.connectu.CustomViews.VerticalTextView;
 import com.onelio.connectu.Helpers.TimeParserHelper;
 import com.onelio.connectu.R;
 
@@ -34,7 +35,9 @@ public class HorarioAdapter  extends RecyclerView.Adapter<HorarioAdapter.ViewHol
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public RelativeLayout llayout;
+        public RelativeLayout lastL;
         public ImageView left_lineD;
+        public VerticalTextView lastT;
         public TextView hour;
         public TextView title;
         public TextView subtitle;
@@ -56,6 +59,8 @@ public class HorarioAdapter  extends RecyclerView.Adapter<HorarioAdapter.ViewHol
             loc = (TextView) v.findViewById(R.id.locD);
             lloc = (LinearLayout) v.findViewById(R.id.llLocD);
             instant = (TextView) v.findViewById(R.id.instD);
+            lastL = (RelativeLayout) v.findViewById(R.id.lastD);
+            lastT = (VerticalTextView) v.findViewById(R.id.lastTD);
         }
     }
 
@@ -115,15 +120,25 @@ public class HorarioAdapter  extends RecyclerView.Adapter<HorarioAdapter.ViewHol
 
         if (event.getType().equals(HorarioRequest.CALENDAR_DOCENCIA)) {
             holder.left_lineD.setBackgroundColor(Color.parseColor("#0091EA"));
+            String duration = TimeParserHelper.getDifference(context, event.getStart(), event.getEnd());
+            if (!duration.isEmpty()) {
+                holder.lastL.setVisibility(View.VISIBLE);
+                holder.lastT.setText(duration);
+            } else {
+                holder.lastL.setVisibility(View.INVISIBLE);
+            }
         }
         if (event.getType().equals(HorarioRequest.CALENDAR_EVALUACION)) {
             holder.left_lineD.setBackgroundColor(Color.parseColor("#009688"));
+            holder.lastL.setVisibility(View.INVISIBLE);
         }
         if (event.getType().equals(HorarioRequest.CALENDAR_EXAMENES)) {
             holder.left_lineD.setBackgroundColor(Color.parseColor("#F50057"));
+            holder.lastL.setVisibility(View.INVISIBLE);
         }
         if (event.getType().equals(HorarioRequest.CAlENDAR_FESTIVOS)) {
             holder.left_lineD.setBackgroundColor(Color.parseColor("#FFEB3B"));
+            holder.lastL.setVisibility(View.INVISIBLE);
         }
 
         holder.llayout.setOnTouchListener(new View.OnTouchListener() {

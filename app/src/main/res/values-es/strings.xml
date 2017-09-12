@@ -13,7 +13,7 @@
     <string name="action_year">Filtro por año</string>
     <string name="alert_loading">Cargando, espere por favor…</string>
     <string name="alert_logout">¿Realmente deseas desconectarte?</string>
-    <string name="app_name_error">Error de ConnectU</string>
+    <string name="app_name_error">ConnectU Error</string>
     <string name="apps_expediente_fail_reason">No disponible en este momento</string>
     <string name="back_to_exit">Presiona atrás de nuevo para salir de la app</string>
     <string name="blank_favorites">Aun no has marcado nada para recordar</string>
@@ -129,7 +129,7 @@
     <string name="view_horario_holiday">Días libres</string>
     <string name="view_horario_hours">horas</string>
     <string name="view_horario_in">comienza en</string>
-    <string name="view_horario_last">Dura</string>
+    <string name="view_horario_last">Duración:</string>
     <string name="view_horario_loc">En</string>
     <string name="view_horario_lotofplaces">Consulta la web oficial para más información</string>
     <string name="view_horario_minutes">minutos</string>

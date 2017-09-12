@@ -155,7 +155,7 @@
     <string name="view_horario_holiday">Free Holiday</string>
     <string name="view_horario_in">start in</string>
     <string name="view_horario_loc">At</string>
-    <string name="view_horario_last">Last</string>
+    <string name="view_horario_last">Duration:</string>
     <string name="view_horario_ended">ended</string>
     <string name="view_horario_days">days</string>
     <string name="view_horario_hours">hours</string>

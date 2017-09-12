@@ -231,7 +231,9 @@ public class HomeMenuFragment extends Fragment {
         JSONObject jsonObj = app.notifications;
         Iterator<String> keys = jsonObj.keys();
         LinearLayout linear = (LinearLayout)getActivity().findViewById(R.id.fragments_view);
-        linear.removeAllViews(); //Clear before any use
+        if (linear == null)
+            return; //Fix error caused by a bad refresh cycle that deletes the linearlayout
+        linear.removeAllViewsInLayout(); //Clear before any use
         int i = 1;
         while( keys.hasNext() ){
             String key = keys.next(); // Get key in json object

@@ -73,11 +73,11 @@
     <string name="horario_evaluativo">Incluir Evaluación</string>
     <string name="horario_ex_menes">Incluir exámenes</string>
     <string name="horario_festivos">Incluir festivos</string>
-    <string name="loading">Bañando los peces</string>
-    <string name="loading1">Rompiendo los muros</string>
-    <string name="loading2">Desayunando</string>
-    <string name="loading3">Haciendo el moonwalk</string>
-    <string name="loading4">Sin hacer nada (LOL)</string>
+    <string name="loading">Quitando el polvo</string>
+    <string name="loading1">Imitando risa malvada</string>
+    <string name="loading2">Limpiando las ventanas</string>
+    <string name="loading3">Tomando un café</string>
+    <string name="loading4">Y una siesta al sol..</string>
     <string name="loading5">Ya casi terminamos</string>
     <string name="logout">Desconectarse</string>
     <string name="logout_long">Presiona aquí para desconectarte de la app</string>
@@ -167,4 +167,5 @@
     <string name="staticyear_long">Cambia el año académico por defecto que será mostrado cuando se acceda a un aplicativo</string>
     <string name="tys">Términos y condiciones de uso</string>
     <string name="tys_long">Leer de nuevo los términos y condiciones de uso</string>
+    <string name="message_downloading_to_d">Descargando archivo a la carpeta de descargas</string>
 </resources>

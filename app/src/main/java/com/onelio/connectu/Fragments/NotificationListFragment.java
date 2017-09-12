@@ -70,11 +70,12 @@ public class NotificationListFragment extends Fragment {
                     if (stype.equals("MATDOCENTE")) {
                         Intent intent = new Intent(getActivity(), MaterialesActivity.class);
                         startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        //TODO REMOVE THIS PART IF CODE WORKS WELL WITHOUT DELETING ITEM EVERY TIME
+                        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                             finalJsonObj.remove(i);
                         }
                         adapter.notifyDataSetChanged();
-                        countNotifications(finalJsonObj);
+                        countNotifications(finalJsonObj);*/
                     }
                     if (stype.equals("UATUTORIAS")) {
                         try {
@@ -88,11 +89,11 @@ public class NotificationListFragment extends Fragment {
                             Intent intent = new Intent(getActivity(), TutoriasActivity.class);
                             startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
                         }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                             finalJsonObj.remove(i);
                         }
                         adapter.notifyDataSetChanged();
-                        countNotifications(finalJsonObj);
+                        countNotifications(finalJsonObj);*/
                     }
                     if (stype.equals("ANUNCIOS")) {
                         try {
@@ -104,20 +105,20 @@ public class NotificationListFragment extends Fragment {
                             Intent intent = new Intent(getActivity(), AnunciosActivity.class);
                             startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
                         }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                             finalJsonObj.remove(i);
                         }
                         adapter.notifyDataSetChanged();
-                        countNotifications(finalJsonObj);
+                        countNotifications(finalJsonObj);*/
                     }
                     if (stype.equals("UAEVALUACION")) {
                         Intent intent = new Intent(getActivity(), EvaluacionActivity.class);
                         startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                             finalJsonObj.remove(i);
                         }
                         adapter.notifyDataSetChanged();
-                        countNotifications(finalJsonObj);
+                        countNotifications(finalJsonObj);*/
                     }
                 }
             });

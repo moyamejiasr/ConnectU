@@ -74,7 +74,11 @@
                 android:data="https://github.com/Onelio/ConnectU" />
         </Preference>
 
-
+        <Preference
+            android:key="preference_version"
+            android:title="Unknown"
+            android:summary="Unknown">
+        </Preference>
 
     </PreferenceCategory>
 

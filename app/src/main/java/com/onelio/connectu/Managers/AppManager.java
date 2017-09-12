@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 
 import com.google.firebase.crash.FirebaseCrash;
+import com.onelio.connectu.BuildConfig;
 import com.onelio.connectu.R;
 
 import java.io.File;
@@ -108,8 +109,12 @@ public class AppManager {
             return pInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             FirebaseCrash.report(e);
-            return "unknown";
+            return "Unknown";
         }
+    }
+
+    public static boolean isDebug() {
+        return BuildConfig.DEBUG;
     }
 
     public static void hideKeyboard(Activity activity) {

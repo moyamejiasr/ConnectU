@@ -145,7 +145,7 @@ public class HorarioRequest {
                     }
 
                     int index = isNewerThan(event, events, date);
-                    if (index > 0) {
+                    if (index > -1) {
                         events.add(index, event);
                     } else {
                         events.add(event);

@@ -82,9 +82,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Apps.Profesores.ProfesoresViewActivity"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_profesores"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
 
         <!-- Horario Page -->
         <activity
@@ -95,6 +95,11 @@
         <!-- Web Page -->
         <activity
             android:name=".Activities.Apps.WebView.WebActivity"
+            android:label="@string/title_activity_webview"
+            android:screenOrientation="sensor" />
+
+        <!-- Webmail UA (WebPage Mod) -->
+        <activity android:name=".Activities.Apps.Webmail.WebmailActivity"
             android:label="@string/title_activity_webview"
             android:screenOrientation="sensor" />
 
@@ -134,7 +139,6 @@
             android:label="@string/title_activity_about"
             android:screenOrientation="portrait" />
 
-
         <!-- Widgets -->
         <receiver android:name=".HorarioWidget">
             <intent-filter>
@@ -149,13 +153,12 @@
         <!-- Firebase Ownership -->
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".FirebaseIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 

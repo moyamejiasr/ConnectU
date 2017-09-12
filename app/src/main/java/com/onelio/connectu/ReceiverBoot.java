@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.onelio.connectu.Managers.AppManager;
 import com.onelio.connectu.Managers.NotificationManager;
 
 public class ReceiverBoot extends BroadcastReceiver {
@@ -13,7 +14,10 @@ public class ReceiverBoot extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.e("TEST ONELIO", "RESTARING ALARM FIRED BY " + intent.getAction());
-        //TODO RESTORE ON COMPLETE
+
+        if (AppManager.isDebug())
+            return; //Only activate in release mode, Reason below
+
         App app = (App)context.getApplicationContext();
         if (app.loadUser()) { //User logged in
             if (app.getPublicPreferenceB(Common.GLOBAL_SETTING_ISNOTIFON)) { //Are notifications on?
@@ -25,3 +29,29 @@ public class ReceiverBoot extends BroadcastReceiver {
         }
     }
 }
+
+/***
+ * Important to distinguish between release & debug
+ * Android execute package replaced, which is fired by Studio..
+ * Which is a non sense action when they fire package removed & added too..
+ * Don't ask why... just google stuff
+ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄▄▄░░░░░
+ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░███▀█░░░░
+ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░███░██░░░
+ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░███░░██░░░
+ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄██░░░░██░░
+ ░░░░░░░░░░░░░░░░▄▄█▀▀▀▀█▄▄▄▄███▄░░░██░░
+ ░░░░░░░░░░░░░▄█▀░░░░░░░░░▀▀▀▀█░▀█░░██░░
+ ░░░░░░░░░░░░█▀░░░░░░░░░░░░░░░▀█▄█▀▀▀░░░
+ ░░░░░░░░░░░▄▀░░░░░░░░░░░░░░░░▀█▄░░░░░░░
+ ░░░░░░░░░░░▀█▄░█░░▄▀░░░░░░░▄▄█░░░░░░░░░
+ ░░░░░░░░▄▄▄▄█▀▀▀██▄▄░░░░░░▄▀░░░░░░░░░░░
+ ░░░░▄▄██▄▀▀░░░░░█▀░░░░░░▄██▄░░░░░░░░░░░
+ ░░▄██▀▀░░░░░░░░▄█░░░░░▄█▀▄█░▀▀█▄▄▄▄▄▄▄▄
+ ░██▀░░░░░░░░▄██░░░░░░▄▀▄▄▀░░░░░░░░░░░░░
+ █▀▀░░░░░░▄█▀▄░▀▄▄▄▄██▀▀▀░░░░░█░░░░░░░░░
+ █░░░░░▄▄▀░░░░█░░░░░░░░░░░░░░░▀░░░░░░░░░
+ ░▀▀▀▀▀▀░░░░░░░█░░░░░░░░░░░░░░░▀▀█▀▀▀▀▀▀
+ ░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░█▀░░░░░░
+ ░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░▄█░░░░░░░
+ */

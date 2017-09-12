@@ -4,8 +4,9 @@ public class Common {
 
     /**
     Project developed by Onelio
-     This project has been developed by onlio and don't offer any warranty of any type.
-     If you want to copy and distribute this software please commission me.
+     This project has been developed by Onlio and don't offer any warranty of any type.
+     If you want to copy this software please refer to this github repository as the original
+     in your app
     **/
 
     //Format: OBJECTUSE_DATATYPE_DATANAME

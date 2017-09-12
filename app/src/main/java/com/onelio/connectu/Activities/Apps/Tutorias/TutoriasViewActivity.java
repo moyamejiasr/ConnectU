@@ -228,6 +228,8 @@ public class TutoriasViewActivity extends AppCompatActivity {
     }
 
     private void setTeacherPicture() {
+        if (authorImg != null && !authorImg.isEmpty())
+            return; //In that case image has been actually set, so return
         for (BubbleData bubble : bubbles) {
             if (!bubble.isMe()) {
                 CircleImageView image = (CircleImageView) findViewById(R.id.toolbar_image);

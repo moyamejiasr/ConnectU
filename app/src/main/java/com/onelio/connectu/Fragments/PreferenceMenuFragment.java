@@ -20,6 +20,7 @@ import com.onelio.connectu.App;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Containers.AcademicYear;
 import com.onelio.connectu.Managers.AlertManager;
+import com.onelio.connectu.Managers.AppManager;
 import com.onelio.connectu.R;
 
 import java.util.ArrayList;
@@ -54,6 +55,14 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         theme.setOnPreferenceClickListener(onTheme);
         Preference tys = findPreference("preference_tys");
         tys.setOnPreferenceClickListener(onTySRequest);
+
+        String type = "release";
+        if (AppManager.isDebug())
+            type = "debug";
+
+        Preference version = findPreference("preference_version");
+        version.setTitle("ConnectU App version " + AppManager.getAppVersion(getContext()));
+        version.setSummary("You are on " + type + " mode");
     }
 
     private void setYearAdapters() {

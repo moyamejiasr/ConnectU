@@ -1,12 +1,12 @@
-package com.onelio.connectu.Activities.Apps.WebView;
+package com.onelio.connectu.Activities.Apps.Webmail;
 
 import android.app.DownloadManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,12 +22,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.onelio.connectu.Activities.Apps.WebView.WebActivity;
 import com.onelio.connectu.App;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Managers.AppManager;
 import com.onelio.connectu.R;
 
-public class WebActivity extends AppCompatActivity {
+public class WebmailActivity extends AppCompatActivity {
 
     WebView webView;
     ProgressBar progress;
@@ -75,7 +76,6 @@ public class WebActivity extends AppCompatActivity {
             settings.setUserAgentString("IEMobile");
             startControllers();
         }
-
     }
 
     @Override
@@ -120,15 +120,15 @@ public class WebActivity extends AppCompatActivity {
 
     private void startControllers() {
         webView.loadUrl(url);
-        final String js = "javascript:document.getElementById('username').value = '"
-                + app.account.getEmail() + "';document.getElementById('password').value='"
-                + app.account.getPassword() + "';document.getElementsByName('submit')[0].click();";
+        final String js = "javascript:document.getElementById('usuario').value = '"
+                + app.account.getEmail() + "';document.getElementById('pass').value='"
+                + app.account.getPassword() + "';document.getElementsByName('Enviar')[0].click();";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webView.setWebViewClient(new WebViewClient() {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void onPageFinished(WebView view, String url) {
-                    if (url.contains("autentica.cpd.ua.es") || (needsLogin && url.equals(WebActivity.this.url))) {
+                    if (needsLogin && url.equals(WebmailActivity.this.url)) {
                         if (needsLogin)
                             needsLogin = false; //Prevent from repeating after login
 
@@ -156,7 +156,7 @@ public class WebActivity extends AppCompatActivity {
         webView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
-                if (AppManager.isStoragePermissionGranted(WebActivity.this)) {
+                if (AppManager.isStoragePermissionGranted(WebmailActivity.this)) {
                     DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 
                     request.setMimeType(mimeType);

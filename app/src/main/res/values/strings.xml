@@ -175,6 +175,8 @@
     <string name="title_webapp_uaproject" translatable="false">UAProject</string>
     <string name="title_webapp_otrosservicios" translatable="false">Otros Servicios</string>
     <string name="title_webapp_sigua" translatable="false">Campus Map</string>
+    <string name="title_webapp_email" translatable="false">UA Webmail</string>
+    <string name="message_downloading_to_d">Downloading file to the download folder</string>
     <!-- Apps Fragment -->
     <string name="apps_expediente_fail_reason">Not available at this moment</string>
     <string-array name="app_names" translatable="false">
@@ -189,6 +191,7 @@
         <item>UAProject</item>
         <item>Otros Servicios</item>
         <item>CampusMap</item>
+        <item>UA Email</item>
         <item>Contacto B</item>
     </string-array>
     <!-- Favorite Fragment -->

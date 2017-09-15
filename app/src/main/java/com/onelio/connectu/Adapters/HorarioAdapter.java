@@ -15,9 +15,11 @@ import android.widget.TextView;
 import com.onelio.connectu.API.HorarioRequest;
 import com.onelio.connectu.Containers.CalendarEvent;
 import com.onelio.connectu.CustomViews.VerticalTextView;
+import com.onelio.connectu.Helpers.ObjectHelper;
 import com.onelio.connectu.Helpers.TimeParserHelper;
 import com.onelio.connectu.R;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class HorarioAdapter  extends RecyclerView.Adapter<HorarioAdapter.ViewHol
 
     private List<CalendarEvent> data;
     private Context context;
+    private String rawPlaces;
 
     public interface OnItemClickListener {
         void onItemClick(int item);
@@ -68,6 +71,12 @@ public class HorarioAdapter  extends RecyclerView.Adapter<HorarioAdapter.ViewHol
         data = myDataset;
         this.context = context;
         this.listener = listener;
+        //Load future raw for places(aulas)
+        try {
+            rawPlaces = ObjectHelper.LoadFile("places", context);
+        } catch (IOException e) {
+            rawPlaces = "";
+        }
     }
 
     @Override
@@ -93,7 +102,12 @@ public class HorarioAdapter  extends RecyclerView.Adapter<HorarioAdapter.ViewHol
 
         if (!event.getLoc().isEmpty()) {
             holder.lloc.setVisibility(View.VISIBLE);
-            holder.loc.setText(context.getString(R.string.view_horario_loc) + " " + event.getLoc());
+            String loc = ObjectHelper.getPlace(rawPlaces, event.getSigua());
+            if (!loc.isEmpty()) {
+                holder.loc.setText(context.getString(R.string.view_horario_loc) + " " + loc);
+            } else {
+                holder.loc.setText(context.getString(R.string.view_horario_loc) + " " + event.getLoc());
+            }
         } else {
             holder.lloc.setVisibility(View.GONE);
         }

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.AnunciosRequest;
 import com.onelio.connectu.Adapters.AnunciosAdapter;
+import com.onelio.connectu.Common;
 import com.onelio.connectu.Helpers.AnimTransHelper;
 import com.onelio.connectu.Managers.AlertManager;
 import com.onelio.connectu.Managers.ErrorManager;

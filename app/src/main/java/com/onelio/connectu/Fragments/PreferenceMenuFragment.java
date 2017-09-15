@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
+import com.onelio.connectu.Activities.Apps.Testing.Test1;
 import com.onelio.connectu.Activities.LoginActivity;
 import com.onelio.connectu.Activities.Preferences.AboutActivity;
 import com.onelio.connectu.Activities.Preferences.NotificationsActivity;
@@ -141,6 +142,7 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         @Override
         public boolean onPreferenceClick(Preference preference) {
             Toast.makeText(getContext(), getString(R.string.not_available), Toast.LENGTH_SHORT).show();
+            Test1.HttpWebGetRequest(getContext());
             return true;
         }
     };

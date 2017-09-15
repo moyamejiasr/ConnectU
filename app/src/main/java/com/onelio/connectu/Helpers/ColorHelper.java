@@ -122,7 +122,10 @@ public class ColorHelper
             case 11:
                 color = R.drawable.ic_webmail;
                 break;
-            case 12: //TODO BETA ONLY!, DELETE WHEN FINISHED
+            case 12:
+                color = R.drawable.ic_uacloud;
+                break;
+            case 13: //TODO BETA ONLY!, DELETE WHEN FINISHED
                 color = R.drawable.ic_contacto;
                 break;
         }

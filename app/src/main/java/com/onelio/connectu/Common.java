@@ -72,6 +72,6 @@ public class Common {
     public static String GLOBAL_SETTING_NOTIFICATIONDISPLAY = "notiDisplay";
 
     //Global Reminders
-    public static String GLOBAL_STRINGS_REMINDERS
+    public static String GLOBAL_STRINGS_REMINDERS;
 
 }

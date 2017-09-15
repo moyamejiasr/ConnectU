@@ -86,6 +86,16 @@ public class LoginRequest {
         }
     }
 
+    private void getSessionFromBody(Document doc) {
+        //Get Post data
+        Element lurl = doc.select("form[id=fm1]").first();
+        app.account.setLoginURL(lurl.attr("action"));
+        Element lt = doc.select("input[name=lt]").first();
+        app.account.setLt(lt.attr("value"));
+        Element exe = doc.select("input[name=execution]").first();
+        app.account.setExecution(exe.attr("value"));
+    }
+
     private void saveLoginData() {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
@@ -101,13 +111,7 @@ public class LoginRequest {
             public void onNavigationComplete(boolean isSuccessful, String body) {
                 if (isSuccessful) {
                     Document doc = Jsoup.parse(body);
-                    //Get Post data
-                    Element lurl = doc.select("form[id=fm1]").first();
-                    app.account.setLoginURL(lurl.attr("action"));
-                    Element lt = doc.select("input[name=lt]").first();
-                    app.account.setLt(lt.attr("value"));
-                    Element exe = doc.select("input[name=execution]").first();
-                    app.account.setExecution(exe.attr("value"));
+                    getSessionFromBody(doc);
                     FirebaseCrash.log("Session created!");
                     callback.onLoginResult(true, "");
                 } else {
@@ -134,6 +138,8 @@ public class LoginRequest {
                         app.account.setPictureURL(doc.select("a.dropdown-toggle > span[id=retrato] > img").attr("src"));
                         HomeRequest notificationsLoader = new HomeRequest(context);
                         notificationsLoader.parseAlertsFromBody(body);
+                    } else {
+                        getSessionFromBody(doc);
                     }
                     app.account.setLogged(loginSuccess);
                     callback.onLoginResult(loginSuccess, err_message);

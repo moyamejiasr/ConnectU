@@ -142,7 +142,15 @@ public class AppsMenuFragment extends Fragment {
                     intentmail.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, true);
                     startActivity(intentmail, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
-                case 12: //Contacto Beta
+                case 12: //UACloud
+                    Intent intentua = new Intent(getActivity(), WebActivity.class);
+                    intentua.putExtra(Common.WEBVIEW_EXTRA_COLOR, Color.parseColor("#07aaf4"));
+                    intentua.putExtra(Common.WEBVIEW_EXTRA_NAME, getString(R.string.title_webapp_ua));
+                    intentua.putExtra(Common.WEBVIEW_EXTRA_URL, WebApps.UACloud);
+                    intentua.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, false);
+                    startActivity(intentua, AnimTransHelper.circleSlideUp(getContext(), v));
+                    break;
+                case 13: //Contacto Beta
                     String version = "unknown";
                     try {
                         PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);

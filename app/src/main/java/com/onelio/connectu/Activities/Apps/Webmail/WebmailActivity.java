@@ -108,6 +108,8 @@ public class WebmailActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (webView.canGoBack()) {
             webView.goBack();
+            if (!webView.canGoBack())
+                super.onBackPressed();
         } else {
             super.onBackPressed();
         }

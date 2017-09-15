@@ -141,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:ellipsize="end"
                     android:textColor="#757575"
                     android:text="At A2/A01"/>

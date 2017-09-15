@@ -7,5 +7,6 @@ public class WebApps {
     public static String OtrosServicios = "https://autentica.cpd.ua.es/cas/login?service=https://cv1.cpd.ua.es/webcv/CtrlZonaPersonal/LoginCvCAS.asp";
     public static String Sigua = "https://www.sigua.ua.es";
     public static String Webmail = "https://www1.webmail.ua.es/login0.php3?idi=es";
+    public static String UACloud = "https://autentica.cpd.ua.es/cas/login?service=https://cvnet.cpd.ua.es/uacloud/home/indexVerificado";
 
 }

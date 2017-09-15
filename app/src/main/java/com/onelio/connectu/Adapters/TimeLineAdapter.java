@@ -10,14 +10,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.onelio.connectu.Containers.CalendarEvent;
+import com.onelio.connectu.Helpers.ObjectHelper;
 import com.onelio.connectu.Helpers.TimeParserHelper;
 import com.onelio.connectu.R;
 
+import java.io.IOException;
 import java.util.List;
 
 public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.ViewHolder> {
     private List<CalendarEvent> values;
     private Context context;
+    private String rawPlaces;
 
     public interface OnItemClickListener {
         void onItemClick(int item, CalendarEvent event);
@@ -47,6 +50,12 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.ViewHo
         values = myDataset;
         this.context = context;
         this.listener = listener;
+        //Load future raw for places(aulas)
+        try {
+            rawPlaces = ObjectHelper.LoadFile("places", context);
+        } catch (IOException e) {
+            rawPlaces = "";
+        }
     }
 
     @Override
@@ -62,7 +71,13 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final CalendarEvent event = values.get(position);
-        holder.subject.setText(context.getString(R.string.view_horario_loc) + " " + event.getLoc());
+        String loc = ObjectHelper.getPlace(rawPlaces, event.getSigua());
+        if (!loc.isEmpty()) {
+            holder.subject.setText(context.getString(R.string.view_horario_loc) + " " + loc);
+        } else {
+            holder.subject.setText(context.getString(R.string.view_horario_loc) + " " + event.getLoc());
+        }
+
         holder.location.setText(event.getTitle() + " " + event.getText());
 
         String time = TimeParserHelper.parseTime(event.getStart().getHours()) + ":" + TimeParserHelper.parseTime(event.getStart().getMinutes()) + "h - "

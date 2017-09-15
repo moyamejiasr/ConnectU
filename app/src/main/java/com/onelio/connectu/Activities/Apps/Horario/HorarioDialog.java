@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.HorarioRequest;
 import com.onelio.connectu.Containers.CalendarEvent;
+import com.onelio.connectu.Helpers.ObjectHelper;
 import com.onelio.connectu.Helpers.TimeParserHelper;
 import com.onelio.connectu.R;
 
@@ -69,8 +70,14 @@ public class HorarioDialog extends Dialog {
             type.setText(getContext().getString(R.string.dialog_horario_festivo));
         }
 
+        String rloc = ObjectHelper.getPlace(getContext(), event.getSigua());
+        if (rloc.isEmpty())
+            rloc = event.getLoc();
+
         String instant = TimeParserHelper.getDifference(getContext(), event.getStart(), event.getEnd());
-        text.setText(getContext().getString(R.string.view_horario_last) + " " + instant);
+        String content = getContext().getString(R.string.view_horario_last) + " " + instant
+                + "\n" + getContext().getString(R.string.view_horario_loc) + ": " + rloc;
+        text.setText(content);
 
         HorarioRequest request = new HorarioRequest(getContext());
         request.getSIGUA(event, new HorarioRequest.HorarioCallback() {

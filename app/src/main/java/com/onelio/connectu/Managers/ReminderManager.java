@@ -20,7 +20,7 @@ public class ReminderManager {
         app = (App) context.getApplicationContext();
         ids = new ArrayList<>();
 
-        String raw = app.getPublicPreferenceS()
+        String raw = app.getPublicPreferenceS("");
     }
 
     public void saveReminder(String id) {

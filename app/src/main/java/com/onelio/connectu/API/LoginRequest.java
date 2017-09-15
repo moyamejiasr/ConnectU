@@ -130,7 +130,7 @@ public class LoginRequest {
                     Document doc = Jsoup.parse(body);
                     boolean loginSuccess = loginConfirmState(doc, user);
                     if (loginSuccess) {
-                        FirebaseCrash.log("Loggin success!");
+                        FirebaseCrash.log("Loggin success");
                         saveLoginData(); //Save date & version of actual login
                         app.account.setEmail(user);
                         app.account.setPassword(pass);

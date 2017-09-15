@@ -123,31 +123,43 @@ public class LoginRequest {
 
     //Login account in
     public void loginAccount(final String user, final String pass, final LoginCallback callback) { //Change bool for callback
-        UAWebService.HttpWebPostRequest(context, LOGIN_DOMAIN + app.account.getLoginURL(), getJData(user, pass), new UAWebService.WebCallBack() {
-            @Override
-            public void onNavigationComplete(boolean isSuccessful, String body) {
-                if (isSuccessful) {
-                    Document doc = Jsoup.parse(body);
-                    boolean loginSuccess = loginConfirmState(doc, user);
-                    if (loginSuccess) {
-                        FirebaseCrash.log("Loggin success!");
-                        saveLoginData(); //Save date & version of actual login
-                        app.account.setEmail(user);
-                        app.account.setPassword(pass);
-                        app.account.setName(doc.select("a.dropdown-toggle > span[id=nombre]").text());
-                        app.account.setPictureURL(doc.select("a.dropdown-toggle > span[id=retrato] > img").attr("src"));
-                        HomeRequest notificationsLoader = new HomeRequest(context);
-                        notificationsLoader.parseAlertsFromBody(body);
+        Date now = new Date();
+        if (app.lastSessionTime != 0 && now.getTime() - app.lastSessionTime > 420000) { //If more than 7 minutes has passed but is different to 0
+            UAWebService.HttpWebPostRequest(context, LOGIN_DOMAIN + app.account.getLoginURL(), getJData(user, pass), new UAWebService.WebCallBack() {
+                @Override
+                public void onNavigationComplete(boolean isSuccessful, String body) {
+                    if (isSuccessful) {
+                        Document doc = Jsoup.parse(body);
+                        boolean loginSuccess = loginConfirmState(doc, user);
+                        if (loginSuccess) {
+                            FirebaseCrash.log("Loggin success!");
+                            saveLoginData(); //Save date & version of actual login
+                            app.lastSessionTime = new Date().getTime();
+                            app.account.setEmail(user);
+                            app.account.setPassword(pass);
+                            app.account.setName(doc.select("a.dropdown-toggle > span[id=nombre]").text());
+                            app.account.setPictureURL(doc.select("a.dropdown-toggle > span[id=retrato] > img").attr("src"));
+                            HomeRequest notificationsLoader = new HomeRequest(context);
+                            notificationsLoader.parseAlertsFromBody(body);
+                        } else {
+                            getSessionFromBody(doc);
+                        }
+                        app.account.setLogged(loginSuccess);
+                        callback.onLoginResult(loginSuccess, err_message);
                     } else {
-                        getSessionFromBody(doc);
+                        callback.onLoginResult(false, body);
                     }
-                    app.account.setLogged(loginSuccess);
-                    callback.onLoginResult(loginSuccess, err_message);
-                } else {
-                    callback.onLoginResult(false, body);
                 }
-            }
-        });
+            });
+        } else {
+            HomeRequest notificationsLoader = new HomeRequest(context);
+            notificationsLoader.getAlerts(new HomeRequest.HomeCallback() {
+                @Override
+                public void onHomeResult(boolean onSuccess, String message) {
+                    callback.onLoginResult(onSuccess, message);
+                }
+            });
+        }
     }
 
 }

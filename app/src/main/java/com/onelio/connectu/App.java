@@ -43,8 +43,7 @@ public class App extends Application {
     public JSONObject horario = new JSONObject();
 
     //Login state
-    int sessionState = 0;
-    long lastSessionTime = 0L;
+    public long lastSessionTime = 0L;
 
     //Bugfix API 16 Ressource Compat
     @Override
@@ -54,8 +53,6 @@ public class App extends Application {
     }
 
     public void initializeNetworking() {
-        //Tell state
-        sessionState = 1;
         //Initialize NetWorking
         cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getBaseContext()));
         //Initialize userData

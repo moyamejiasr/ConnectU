@@ -59,6 +59,29 @@ public class App extends Application {
         account = new AccountData();
     }
 
+    //This method
+    public JSONObject loadJUser() {
+        JSONObject result = new JSONObject();
+        DatabaseManager database = new DatabaseManager(getBaseContext());
+        boolean isLogged = database.getBoolean(Common.PREFERENCE_BOOLEAN_ISLOGGED);
+        if (isLogged) {
+            try {
+                result.put("logged", true);
+                result.put("email", database.getString(Common.PREFERENCE_STRING_EMAIL));
+                result.put("pass", database.getString(Common.PREFERENCE_STRING_PASSWORD));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                notifications = new JSONObject(database.getString(Common.PREFERENCE_JSON_NOTIFICATIONS));
+            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
+                e.printStackTrace(); //dummy action for exception cause it has been initialized before
+            }
+        }
+        return result;
+    }
+
     public boolean loadUser() {
         DatabaseManager database = new DatabaseManager(getBaseContext());
         Gson gson = new Gson();

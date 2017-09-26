@@ -24,6 +24,7 @@ import com.onelio.connectu.Managers.ErrorManager;
 import com.onelio.connectu.R;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class UAService extends Service {
 
@@ -39,6 +40,8 @@ public class UAService extends Service {
     public UAService() {
     }
 
+    JSONObject resultUser;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
@@ -46,16 +49,21 @@ public class UAService extends Service {
             Log.e("ONELIO TEST", "ACTION CONTINUED, EXPECT UPDATE");
             //Run App
             app = (App) this.getApplication();
-            app.initializeNetworking();
+            app.initializeNetworking(); //TODO THIS
             FirebaseCrash.log("01-UAService started, cache restarted!");
             final LoginRequest login = new LoginRequest(this);
             login.createSession(new LoginRequest.LoginCallback() {
                 @Override
                 public void onLoginResult(boolean onResult, String message) {
                     if (onResult) {
-                        if (app.loadUser()) {
-                            //Continue to login
-                            login.loginAccount(app.account.getEmail(), app.account.getPassword(), onUserLogin);
+                        resultUser = app.loadJUser();
+                        try {
+                            if (resultUser.getBoolean("logged")) { //TODO THIS
+                                //Continue to login
+                                login.loginAccount(resultUser.getString("email"), resultUser.getString("pass"), onUserLogin);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     } else {
                         if (!message.equals(ErrorManager.FAILED_CONNECTION)) {

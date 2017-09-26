@@ -26,7 +26,7 @@ public class Common {
 
     //Notifications
     public static String GROUP_KEY_ALERTS = "group_key_alerts";
-    public static int INT_REC_TIME = 900000; //15 min
+    public static int INT_REC_TIME = 1800000; //30 min
 
     //UAUpdater Service
     public static String INTENT_KEY_UPDATE_TYPE = "updateType";

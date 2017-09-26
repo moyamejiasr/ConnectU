@@ -15,7 +15,7 @@ public class AccountData {
     private String pictureURL;
 
     //Settings
-    private int notificationTime = 900000; //15 minutes => 900000
+    private int notificationTime = 1800000; //30 min
 
     public void setPassword(String password){
         this.password = password;

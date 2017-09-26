@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.Html;
 import android.view.View;
 import android.view.Window;
@@ -29,6 +30,7 @@ public class ProfesoresViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_profesores_view);
         Gson gson = new Gson();
         data = gson.fromJson((String) getIntent().getSerializableExtra("JDATA"), TeacherData.class);

@@ -98,7 +98,7 @@ public class HorarioDialog extends Dialog {
                                     public void onClick(View view) {
                                         //Event action
                                         try {
-                                            String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.valueOf(object.getString("lat")), Double.valueOf(object.getString("lon")));
+                                            String uri = String.format(Locale.ENGLISH, "geo:%f,%f?z=21", Double.valueOf(object.getString("lat")), Double.valueOf(object.getString("lon")));
                                             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                                             if(intent.resolveActivity(getContext().getPackageManager()) != null) {
                                                 activity.startActivityForResult(intent, 0);

@@ -2,14 +2,8 @@ package com.onelio.connectu.Activities.Apps.Testing;
 
 import android.content.Context;
 
-import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.Networking.HttpClient;
-import com.onelio.connectu.API.Networking.UAWebService;
-import com.onelio.connectu.App;
-import com.onelio.connectu.Managers.AlertManager;
 import com.onelio.connectu.Managers.AppManager;
-import com.onelio.connectu.Managers.ErrorManager;
-import com.onelio.connectu.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -3,7 +3,6 @@ package com.onelio.connectu.Managers;
 import android.content.Context;
 
 import com.onelio.connectu.App;
-import com.onelio.connectu.Containers.AnuncioData;
 
 import java.util.ArrayList;
 import java.util.List;

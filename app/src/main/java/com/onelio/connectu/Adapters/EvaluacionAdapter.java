@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -92,8 +93,8 @@ public class EvaluacionAdapter extends RecyclerView.Adapter<EvaluacionAdapter.Vi
         holder.card.setCardBackgroundColor(Color.parseColor(ColorHelper.getColor(AppManager.after(data.getType(), " ").charAt(0))));
         holder.type.setText(AppManager.capAfterSpace(data.getType()));
         holder.subtitle.setText(context.getString(R.string.evaluacion_published_in) + " " + AppManager.capAfterSpace(data.getSubject()));
-        String date = context.getString(R.string.evaluacion_from) + " " + data.getStart().getDay() + "/" + data.getStart().getMonth() + "/" + (data.getStart().getYear() + 1900)
-                + " " + context.getString(R.string.evaluacion_to) + " " + data.getEnd().getDay() + "/" + data.getEnd().getMonth() + "/" + (data.getEnd().getYear() + 1900);
+        String date = context.getString(R.string.evaluacion_from) + " " + DateFormat.format("dd",   data.getStart()) + "/" + DateFormat.format("MM",   data.getStart()) + "/" + (data.getStart().getYear() + 1900)
+                + " " + context.getString(R.string.evaluacion_to) + " " + DateFormat.format("dd",   data.getEnd()) + "/" + DateFormat.format("MM",   data.getStart()) + "/" + (data.getEnd().getYear() + 1900);
         holder.date.setText(date);
 
         if (data.getTypeID().equals("2")) {

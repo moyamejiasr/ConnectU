@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.Html;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -47,8 +48,8 @@ public class EvaluacionViewDialog extends Dialog {
         card.setCardBackgroundColor(Color.parseColor(ColorHelper.getColor(AppManager.after(data.getType(), " ").charAt(0))));
         type.setText(AppManager.capAfterSpace(data.getType()));
         subtitle.setText(getContext().getString(R.string.evaluacion_published_in) + " " + AppManager.capAfterSpace(data.getSubject()));
-        String sdate = getContext().getString(R.string.evaluacion_from) + " " + data.getStart().getDay() + "/" + data.getStart().getMonth() + "/" + (data.getStart().getYear() + 1900)
-                + " " + getContext().getString(R.string.evaluacion_to) + " " + data.getEnd().getDay() + "/" + data.getEnd().getMonth() + "/" + (data.getEnd().getYear() + 1900);
+        String sdate = getContext().getString(R.string.evaluacion_from) + " " + DateFormat.format("dd",   data.getStart()) + "/" + DateFormat.format("MM",   data.getStart()) + "/" + (data.getStart().getYear() + 1900)
+                + " " + getContext().getString(R.string.evaluacion_to) + " " + DateFormat.format("dd",   data.getEnd()) + "/" + DateFormat.format("MM",   data.getStart()) + "/" + (data.getEnd().getYear() + 1900);
         date.setText(sdate);
         text.setText(Html.fromHtml(data.getTable()));
 

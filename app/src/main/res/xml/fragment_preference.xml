@@ -35,7 +35,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <!--!<PreferenceCategory
         android:title="@string/custom"
         android:key="custom_category">
 
@@ -44,7 +44,7 @@
             android:title="@string/theme"
             android:summary="@string/theme_long"/>
 
-    </PreferenceCategory>
+    </PreferenceCategory> -->
 
     <PreferenceCategory
         android:title="@string/mdata"

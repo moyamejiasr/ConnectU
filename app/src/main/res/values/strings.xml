@@ -168,6 +168,8 @@
     <string name="view_horario_official_test">Official Test</string>
     <string name="view_horario_not_class">You have no class today (/@.@)/</string>
     <string name="see_in_map">See in map</string>
+    <!-- Evaluacion -->
+    <string name="title_activity_expediente" translatable="false">Expediente</string>
     <!-- WebView -->
     <string name="title_activity_webview" translatable="false">WebView</string>
     <string name="action_restart">Restart App</string>

@@ -99,7 +99,8 @@
             android:screenOrientation="sensor" />
 
         <!-- Webmail UA (WebPage Mod) -->
-        <activity android:name=".Activities.Apps.Webmail.WebmailActivity"
+        <activity
+            android:name=".Activities.Apps.Webmail.WebmailActivity"
             android:label="@string/title_activity_webview"
             android:screenOrientation="sensor" />
 
@@ -125,6 +126,10 @@
         <activity
             android:name=".Activities.Apps.Evaluacion.EvaluacionActivity"
             android:label="@string/title_activity_evaluacion"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".Activities.Apps.Expediente.ExpedienteActivity"
+            android:label="@string/title_activity_expediente"
             android:screenOrientation="portrait" />
 
         <!-- User Preferences -->

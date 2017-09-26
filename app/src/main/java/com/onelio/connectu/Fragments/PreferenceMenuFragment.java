@@ -51,8 +51,8 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         test.setOnPreferenceClickListener(onNotificationsOpen);
         Preference about = findPreference("preference_about");
         about.setOnPreferenceClickListener(onAbout);
-        Preference theme = findPreference("preference_theme");
-        theme.setOnPreferenceClickListener(onTheme);
+        /*Preference theme = findPreference("preference_theme");
+        theme.setOnPreferenceClickListener(onTheme);*/
         Preference tys = findPreference("preference_tys");
         tys.setOnPreferenceClickListener(onTySRequest);
 
@@ -137,12 +137,12 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         }
     };
 
-    Preference.OnPreferenceClickListener onTheme = new Preference.OnPreferenceClickListener() {
+    /*Preference.OnPreferenceClickListener onTheme = new Preference.OnPreferenceClickListener() {
         @Override
         public boolean onPreferenceClick(Preference preference) {
             Toast.makeText(getContext(), getString(R.string.not_available), Toast.LENGTH_SHORT).show();
             Test1.HttpWebGetRequest(getContext());
             return true;
         }
-    };
+    };*/
 }

@@ -224,7 +224,6 @@
     <string name="delaynot">Delay time</string>
     <string name="delaynot_long">Set a delay for the app to find new notifications (Bigger time save more internet)</string>
     <string-array name="Time">
-        <item>30 minutes</item>
         <item>45 minutes</item>
         <item>1 hour</item>
         <item>2 hours</item>
@@ -232,9 +231,9 @@
         <item>8 hours</item>
         <item>12 hours</item>
         <item>1 day</item>
+        <item>2 days</item>
     </string-array>
     <string-array name="TimeData" translatable="false">
-        <item>1800000</item>
         <item>2700000</item>
         <item>3600000</item>
         <item>7200000</item>
@@ -242,6 +241,7 @@
         <item>28800000</item>
         <item>43200000</item>
         <item>86400000</item>
+        <item>172800000</item>
     </string-array>
     <string name="displaysilnot">Display with sound</string>
     <string name="displaysilnot_long">Make sound and activate led light if available</string>

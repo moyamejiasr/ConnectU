@@ -26,7 +26,11 @@ public class Common {
 
     //Notifications
     public static String GROUP_KEY_ALERTS = "group_key_alerts";
-    public static int INT_REC_TIME = 1800000; //30 min
+    public static int INT_REC_TIME = 2700000; //45 min
+    /**
+     * Caution with the update time, it's set at 45 min at default but more likely will be updated to 1-2 hours
+     * in nexts updates as requested by the university
+     */
 
     //UAUpdater Service
     public static String INTENT_KEY_UPDATE_TYPE = "updateType";
@@ -72,6 +76,6 @@ public class Common {
     public static String GLOBAL_SETTING_NOTIFICATIONDISPLAY = "notiDisplay";
 
     //Global Reminders
-    public static String GLOBAL_STRINGS_REMINDERS;
+    public static String GLOBAL_STRINGS_REMINDERS = "reminders";
 
 }

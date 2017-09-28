@@ -69,7 +69,7 @@ public class NotificationListFragment extends Fragment {
                     if (stype.equals("MATDOCENTE")) {
                         Intent intent = new Intent(getActivity(), MaterialesActivity.class);
                         startActivity(intent, AnimTransHelper.circleSlideUp(getContext(), view));
-                        //TODO REMOVE THIS PART IF CODE WORKS WELL WITHOUT DELETING ITEM EVERY TIME
+                        //TODO OLD DELETING OBJECTS ON CLICK IMPLEMENTATION, COMMENTED FOR LEGACY
                         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                             finalJsonObj.remove(i);
                         }

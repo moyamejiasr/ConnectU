@@ -36,7 +36,7 @@ public class ProfilePreference extends Preference {
         TextView user = (TextView) holder.findViewById(R.id.user_Name);
         ImageView picture = (ImageView) holder.findViewById(R.id.user_Profile);
         String name = app.account.getName();
-        if (name == null) { //TODO SOLVE THIS ERROR
+        if (name == null) {
             name = "User";
         }
         user.setText(name);

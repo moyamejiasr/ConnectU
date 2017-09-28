@@ -73,11 +73,11 @@
     <string name="horario_evaluativo">Incluir Evaluación</string>
     <string name="horario_ex_menes">Incluir exámenes</string>
     <string name="horario_festivos">Incluir festivos</string>
-    <string name="loading">Quitando el polvo</string>
-    <string name="loading1">Imitando risa malvada</string>
-    <string name="loading2">Limpiando las ventanas</string>
-    <string name="loading3">Tomando un café</string>
-    <string name="loading4">Y una siesta al sol..</string>
+    <string name="loading">Hola!</string>
+    <string name="loading1">Estamos cargando…</string>
+    <string name="loading2">Queremos ofrecerte…</string>
+    <string name="loading3">…la mejor experiencia</string>
+    <string name="loading4">que nos sea posible.</string>
     <string name="loading5">Ya casi terminamos</string>
     <string name="logout">Desconectarse</string>
     <string name="logout_long">Presiona aquí para desconectarte de la app</string>
@@ -140,7 +140,6 @@
     <string name="yes">Si</string>
     <string name="blank_schelude_home">Sin actividades para hoy</string>
     <string-array name="Time">
-        <item>30 minutos</item>
         <item>45 minutos</item>
         <item>1 hora</item>
         <item>2 horas</item>
@@ -148,6 +147,7 @@
         <item>8 horas</item>
         <item>12 horas</item>
         <item>1 día</item>
+        <item>2 días</item>
     </string-array>
     <string name="title_activity_notifications">Notificaciones</string>
     <string name="ndata">Configuración Notificaciones</string>
@@ -168,18 +168,16 @@
     <string name="tys">Términos y condiciones de uso</string>
     <string name="tys_long">Leer de nuevo los términos y condiciones de uso</string>
     <string name="message_downloading_to_d">Descargando archivo a la carpeta de descargas</string>
-    <string name="disclaimer"><![CDATA[<h2><span style="color: #ff0000;"><strong>&iexcl;&iexcl;APP NO OFICIAL, DESARROLLADA POR ESTUDIANTES!!</strong></span></h2>
-<h2><span style="color: #ff0000;"><strong>&iexcl;&iexcl;LEER MENSAJE DE CONDICIONES DE USO!!</strong></span></h2>
+    <string name="disclaimer"><![CDATA[<h2><span style="color: #ff0000;">ConnectU TyQ</span></h2>
+<h2><span style="color: #ff0000;"><strong>Importante leer</strong></span></h2>
 <h3><span style="color: #ff6600;"><strong>-Respecto a la App:</strong></span></h3>
-<p>La app aqu&iacute; expuesta no es oficial y no est&aacute; vinculada de ninguna forma con la Universidad de Alicante.</p>
-<p>Los desarrolladores no se hacen responsables de posibles datos errados o informaci&oacute;n desactualizada o mal expuesta. Si se diera el caso, los desarrolladores (de manera completamente desinteresada) tratar&iacute;an de corregirlo con parches o actualizaciones.</p>
-<p>Al instalar e iniciar esta app en tu m&oacute;vil, est&aacute;s usando una versi&oacute;n que se encuentra en continuo desarrollo la cual podr&iacute;a contener fallos y dar un rendimiento err&oacute;neo, incluso no funcionar.</p>
-<p>Esta app es gratuita y en ning&uacute;n momento los desarrolladores se ven obligados a aportar una versi&oacute;n 100% funcional de la misma. Si se dieran bugs o fallos en el funcionamiento de la misma, los desarrolladores tratar&iacute;an de repararlos. Para facilitar esto, la app posee un servicio que informa en caso de error a los desarrolladores proporcionando informaci&oacute;n espec&iacute;fica del fallo, as&iacute; como la localizaci&oacute;n de &eacute;ste, o los datos err&oacute;neos que provocaron el fallo.</p>
-<p>Nunca recibimos datos personales como el usuario o la contraseña.</p>
-<p>Esta app pide permisos para controlar las conexiones de red y administrar el almacenamiento con el objetivo de acceder al UACloud y descargar y almacenar contenido all&iacute; presente. Tambi&eacute;n es posible que pida permisos para crear enlaces directos en el escritorio para facilitar el acceso a &eacute;sta, sin embargo, &eacute;sta es una opción no obligatoria para el usuario.</p>
+<p>La app aqu&iacute; expuesta est&aacute; desarrollada por estudiantes y no es oficial, por tanto no est&aacute; vinculada de ninguna forma con la Universidad de Alicante.</p>
+<p>Los desarrolladores no se hacen responsables de posible informaci&oacute;n desactualizada o mal expuesta.</p>
+<p>Esta app es gratuita y en ning&uacute;n momento los desarrolladores se ven obligados a aportar una versi&oacute;n 100% funcional de la misma. Si se dieran bugs o fallos en el funcionamiento de esta, se tratar&iacute;an de reparar sin ning&uacute;n tipo de obligaci&oacute;n. Para facilitar esto, la app posee un servicio que informa en caso de error proporcionando informaci&oacute;n espec&iacute;fica del fallo, as&iacute; como la localizaci&oacute;n de &eacute;ste, o los datos err&oacute;neos que provocaron el fallo o en casos extremos el email para contactar por problemas como la imposibilidad de conectarse.</p>
+<p>Esta app pide permisos para controlar las conexiones de red y administrar el almacenamiento con el objetivo de acceder al UACloud y descargar y almacenar contenido all&iacute; presente. Tambi&eacute;n es posible que pida permisos para crear enlaces directos en el escritorio para facilitar el acceso a &eacute;sta, sin embargo, &eacute;sta es una opci&oacute;n no obligatoria para el usuario. Por &uacute;ltimo, esta aplicaci&oacute;n tambi&eacute;n pide permisos menores como el Wake_CLOCK o START_ON_BOOT para asegurar el correcto funcionamiento de las notificaciones.</p>
 <h3><span style="color: #ff6600;"><strong>-Respecto a la cuenta de usuario:</strong></span></h3>
-<p>Con el objetivo de mantener seguras dentro de lo posible las cuentas de los usuarios (Refiri&eacute;ndose con esto a nombre de usuario y contraseña), &eacute;stas en ning&uacute;n momento salen del dispositivo a servidores de terceros (S&iacute; que lo hacen a la propia UACloud), sino que son almacenadas en una base de datos dentro del directorio propio de la app para ser usadas en cada conexi&oacute;n al UACloud.</p>
-<p>A pesar de esto, los desarrolladores no se hacen cargo de p&eacute;rdida o robo de los datos dentro del entorno de la propia app.</p>
+<p>Con el objetivo de mantener seguras dentro de lo posible las cuentas de los usuarios (Refiri&eacute;ndose con esto a nombre de usuario y contrase&ntilde;a), &eacute;stas en ning&uacute;n momento salen del dispositivo a servidores de terceros (S&iacute; que lo hacen a la propia UACloud y el email como m&eacute;todo de contacto en caso de fallos mayores como se indica arriba), sino que son almacenadas dentro de la carpeta de sistema de android, en un entorno privado accesible solo para la propia app llamado SharedPreferences para ser usadas en cada conexi&oacute;n al UACloud.</p>
+<p>A pesar de esto, los desarrolladores no se hacen cargo de p&eacute;rdida o robo de los datos dentro del entorno de la propia app con o sin root.</p>
 <h3><span style="color: #ff6600;"><strong>-Respecto a las condiciones:</strong></span></h3>
 <p>Estas condiciones pueden cambiar si fuera necesario, en cuyo caso los desarrolladores se reservan el derecho de implementar dichos cambios sin previo aviso y el hecho de no conocerlas no excluye del cumplimiento de las mismas.</p>
 <p>Podr&aacute; leer las condiciones desde la pantalla de Login o desde un acceso existente en la pantalla "Acerca de"</p>

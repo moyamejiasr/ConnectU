@@ -125,7 +125,7 @@ public class ColorHelper
             case 12:
                 color = R.drawable.ic_uacloud;
                 break;
-            case 13: //TODO BETA ONLY!, DELETE WHEN FINISHED
+            case 13: //TODO BETA ONLY!, DELETE WHEN FINISHED // Extended now!
                 color = R.drawable.ic_contacto;
                 break;
         }

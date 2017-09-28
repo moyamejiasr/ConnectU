@@ -99,7 +99,7 @@ public class WebActivity extends AppCompatActivity {
             if (webView.canGoBack()) {
                 webView.goBack();
             } else {
-                super.onBackPressed();
+                onBackPressed();
             }
             return true;
         }

@@ -51,8 +51,10 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         test.setOnPreferenceClickListener(onNotificationsOpen);
         Preference about = findPreference("preference_about");
         about.setOnPreferenceClickListener(onAbout);
-        /*Preference theme = findPreference("preference_theme");
-        theme.setOnPreferenceClickListener(onTheme);*/
+        Preference shortcut = findPreference("preference_shortcut");
+        shortcut.setOnPreferenceClickListener(onTheme);
+        Preference shortcut1 = findPreference("preference_webmail");
+        shortcut1.setOnPreferenceClickListener(onTheme1);
         Preference tys = findPreference("preference_tys");
         tys.setOnPreferenceClickListener(onTySRequest);
 
@@ -137,12 +139,21 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         }
     };
 
-    /*Preference.OnPreferenceClickListener onTheme = new Preference.OnPreferenceClickListener() {
+    Preference.OnPreferenceClickListener onTheme = new Preference.OnPreferenceClickListener() {
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            Toast.makeText(getContext(), getString(R.string.not_available), Toast.LENGTH_SHORT).show();
-            Test1.HttpWebGetRequest(getContext());
+            AppManager.addShortcutToHorario(getContext());
+            Toast.makeText(getContext(), "Done!", Toast.LENGTH_LONG).show();
             return true;
         }
-    };*/
+    };
+
+    Preference.OnPreferenceClickListener onTheme1 = new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            AppManager.addShortcutToWebmail(getContext());
+            Toast.makeText(getContext(), "Done!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+    };
 }

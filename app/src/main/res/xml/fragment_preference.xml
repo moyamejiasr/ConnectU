@@ -33,6 +33,10 @@
             android:key="preference_shortcut"
             android:title="@string/shortcut" />
 
+        <Preference
+            android:key="preference_webmail"
+            android:title="@string/shortcut2" />
+
     </PreferenceCategory>
 
     <!--!<PreferenceCategory

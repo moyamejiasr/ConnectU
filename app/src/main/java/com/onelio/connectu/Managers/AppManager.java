@@ -2,9 +2,12 @@ package com.onelio.connectu.Managers;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -14,7 +17,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 
 import com.google.firebase.crash.FirebaseCrash;
+import com.onelio.connectu.Activities.Apps.Horario.HorarioActivity;
+import com.onelio.connectu.Activities.Apps.WebView.WebApps;
+import com.onelio.connectu.Activities.Apps.Webmail.WebmailActivity;
 import com.onelio.connectu.BuildConfig;
+import com.onelio.connectu.Common;
 import com.onelio.connectu.R;
 
 import java.io.File;
@@ -60,6 +67,52 @@ public class AppManager {
         }catch(StringIndexOutOfBoundsException e) {
             return str;
         }
+    }
+
+    public static void addShortcutToHorario(Context context) {
+        //Adding shortcut for MainActivity
+        //on Home screen
+        Intent shortcutIntent = new Intent(context, HorarioActivity.class);
+        shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        Intent addIntent = new Intent();
+        addIntent
+                .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "HorarioUA");
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                Intent.ShortcutIconResource.fromContext(context,
+                        R.drawable.ic_horario));
+
+        addIntent
+                .setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        addIntent.putExtra("duplicate", false);  //may be already there so don't duplicate
+        context.sendBroadcast(addIntent);
+    }
+
+    public static void addShortcutToWebmail(Context context) {
+        //Adding shortcut for MainActivity
+        //on Home screen
+        Intent shortcutIntent = new Intent(context, WebmailActivity.class);
+        shortcutIntent.putExtra(Common.WEBVIEW_EXTRA_COLOR, Color.parseColor("#607d8b"));
+        shortcutIntent.putExtra(Common.WEBVIEW_EXTRA_NAME, context.getString(R.string.title_webapp_email));
+        shortcutIntent.putExtra(Common.WEBVIEW_EXTRA_URL, WebApps.Webmail);
+        shortcutIntent.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, true);
+        shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        Intent addIntent = new Intent();
+        addIntent
+                .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "eMailUA");
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                Intent.ShortcutIconResource.fromContext(context,
+                        R.drawable.ic_webmail));
+
+        addIntent
+                .setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        addIntent.putExtra("duplicate", false);  //may be already there so don't duplicate
+        context.sendBroadcast(addIntent);
     }
 
     public static  boolean isStoragePermissionGranted(final Activity activity) {

@@ -57,6 +57,8 @@ public class WebmailActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(color);
         }
         app = (App) getApplication();
+        if (app.account == null && !app.loadUser()) //If account is null and cannot create user
+            super.onDestroy();
 
         TextView title = (TextView) findViewById(R.id.toolbar_title);
         title.setText(name);
@@ -98,7 +100,7 @@ public class WebmailActivity extends AppCompatActivity {
             if (webView.canGoBack()) {
                 webView.goBack();
             } else {
-                super.onBackPressed();
+                onBackPressed();
             }
             return true;
         }

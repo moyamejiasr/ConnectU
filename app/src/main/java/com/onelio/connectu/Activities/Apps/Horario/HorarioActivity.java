@@ -50,6 +50,8 @@ public class HorarioActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkGreen));
         }
         app = (App) getApplication();
+        if (app.account == null && !app.loadUser()) //If account is null and cannot create user
+            super.onDestroy();
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView = (RecyclerView) findViewById(R.id.horarioRecycler);

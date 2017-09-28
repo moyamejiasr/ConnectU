@@ -27,9 +27,12 @@
             android:theme="@style/Launcher_AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
 
         <!-- MainPage -->
@@ -90,6 +93,7 @@
         <activity
             android:name=".Activities.Apps.Horario.HorarioActivity"
             android:label="@string/title_activity_horario"
+            android:exported="true"
             android:screenOrientation="portrait" />
 
         <!-- Web Page -->
@@ -102,6 +106,7 @@
         <activity
             android:name=".Activities.Apps.Webmail.WebmailActivity"
             android:label="@string/title_activity_webview"
+            android:exported="true"
             android:screenOrientation="sensor" />
 
         <!-- Materiales Page -->

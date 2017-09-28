@@ -103,7 +103,7 @@
     <string name="see_in_map">Ver en mapa</string>
     <string name="send_email">Enviar email</string>
     <string name="send_tutoria">Tutoría</string>
-    <string name="shortcut">Accesos directos y Widgets</string>
+    <string name="shortcut">Instalar acceso al Horario</string>
     <string name="subject">Selecciona una asignatura:</string>
     <string name="theme">Theme UI</string>
     <string name="theme_long">Customiza el tema de la app</string>
@@ -182,4 +182,6 @@
 <p>Estas condiciones pueden cambiar si fuera necesario, en cuyo caso los desarrolladores se reservan el derecho de implementar dichos cambios sin previo aviso y el hecho de no conocerlas no excluye del cumplimiento de las mismas.</p>
 <p>Podr&aacute; leer las condiciones desde la pantalla de Login o desde un acceso existente en la pantalla "Acerca de"</p>
 <p>En caso de inconsistencias entre traducciones de este documento, siempre prevalecer&aacute; lo que dicte la versi&oacute;n en castellano ante cualquier otra.</p>]]></string>
+    <string name="error_unexpected_long">Por favor reinicia la app</string>
+    <string name="shortcut2">Instalar acceso al eMail de la UA</string>
 </resources>

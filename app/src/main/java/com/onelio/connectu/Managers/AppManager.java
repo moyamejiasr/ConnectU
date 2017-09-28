@@ -47,18 +47,22 @@ public class AppManager {
 
     @NonNull
     public static String capAfterSpace(String text) {
-        StringBuffer res = new StringBuffer();
-        String source = text.toLowerCase();
-        String[] strArr = source.split(" ");
-        for (String str : strArr) {
-            char[] stringArray = str.trim().toCharArray();
-            stringArray[0] = Character.toUpperCase(stringArray[0]);
-            str = new String(stringArray);
+        try {
+            StringBuffer res = new StringBuffer();
+            String source = text.toLowerCase();
+            String[] strArr = source.split(" ");
+            for (String str : strArr) {
+                char[] stringArray = str.trim().toCharArray();
+                stringArray[0] = Character.toUpperCase(stringArray[0]);
+                str = new String(stringArray);
 
-            res.append(str).append(" ");
+                res.append(str).append(" ");
+            }
+
+            return res.toString().trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return text;
         }
-
-        return res.toString().trim();
     }
 
     public static String removeLastChars(String str, int count) {

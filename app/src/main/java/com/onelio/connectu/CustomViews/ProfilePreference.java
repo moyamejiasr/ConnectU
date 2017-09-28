@@ -1,6 +1,7 @@
 package com.onelio.connectu.CustomViews;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
@@ -32,6 +33,7 @@ public class ProfilePreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         App app = (App) getContext().getApplicationContext();
         TextView user = (TextView) holder.findViewById(R.id.user_Name);
         ImageView picture = (ImageView) holder.findViewById(R.id.user_Profile);

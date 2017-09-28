@@ -69,6 +69,8 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
 
     private void setYearAdapters() {
         List<String> years = new ArrayList<>();
+        if (app.academicYears == null)
+            return;
         for (AcademicYear year : app.academicYears) {
             years.add(year.getYear());
         }

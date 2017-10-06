@@ -25,4 +25,19 @@
             <extra android:name="activityNeedsLogin" android:value="true" />
         </intent>
     </shortcut>
+    <shortcut
+        android:icon="@drawable/ic_language_black_24dp"
+        android:shortcutId="map"
+        android:shortcutLongLabel="@string/static_shortcut_message2"
+        android:shortcutShortLabel="@string/static_shortcut_message2">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.onelio.connectu.Activities.Apps.Webmail.WebmailActivity"
+            android:targetPackage="com.onelio.connectu" >
+            <extra android:name="activityColor" android:value="#e91e63" />
+            <extra android:name="activityName" android:value="Campus Map" />
+            <extra android:name="activityUrl" android:value="https://www.sigua.ua.es" />
+            <extra android:name="activityNeedsLogin" android:value="false" />
+        </intent>
+    </shortcut>
 </shortcuts>

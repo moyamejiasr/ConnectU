@@ -290,7 +290,7 @@ public class UAWebService {
                         BufferedSink sink = Okio.buffer(Okio.sink(file));
                         sink.writeAll(response.body().source());
                         sink.close();
-                        callback.onNavigationComplete(response.isSuccessful(), response.body().string());
+                        callback.onNavigationComplete(response.isSuccessful(), ErrorManager.FILE_DONT_EXIST);
                     }
                     response.close();
                 }

@@ -282,5 +282,6 @@
 
     <string name="static_shortcut_message" translatable="false">Horario</string>
     <string name="static_shortcut_message1" translatable="false">UA eMail</string>
+    <string name="static_shortcut_message2" translatable="false">UA Map</string>
 
 </resources>

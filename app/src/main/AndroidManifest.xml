@@ -52,14 +52,17 @@
         <receiver
             android:name=".Services.AlarmNotificatorReceiver"
             android:enabled="true" />
-        <receiver android:name=".ReceiverBoot">
+        <receiver android:enabled="true"  android:exported="true" android:name=".ReceiverBoot">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".ReceiverUpdate">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-
-                <data android:scheme="package" />
             </intent-filter>
         </receiver>
 

@@ -203,7 +203,7 @@
     <string name="blank_favorites">You still have not attached anything to remember</string>
     <!-- Preferences Fragment -->
     <string name="pdata">Personal Information</string>
-    <string name="logout">Sing out</string>
+    <string name="logout">Sign out</string>
     <string name="logout_long">Click here if you wish to logout from the app</string>
     <string name="gdata">General settings</string>
     <string name="staticyear">Change default year</string>

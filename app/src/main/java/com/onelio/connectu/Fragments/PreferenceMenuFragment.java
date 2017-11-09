@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
-import com.onelio.connectu.Activities.Apps.Testing.Test1;
 import com.onelio.connectu.Activities.Preferences.AboutActivity;
 import com.onelio.connectu.Activities.Preferences.NotificationsActivity;
 import com.onelio.connectu.App;

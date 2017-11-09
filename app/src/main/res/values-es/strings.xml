@@ -32,7 +32,7 @@
     <string name="error_file_not_downloaded">Error, no pudimos descargar el archivo</string>
     <string name="error_find_open">No pudimos encontrar ninguna app para abrir este archivo!</string>
     <string name="error_find_show">No encontramos nada que mostrar</string>
-    <string name="error_login_failed">Error, app login inválido. Por favor inténtalo más tarde o contacta con un desarrollador</string>
+    <string name="error_login_failed">Error desconocido. Por favor inténtalo más tarde</string>
     <string name="error_materiales_session_ended">Sessión finalizada, regresa al menú y vuelve a intentarlo!</string>
     <string name="error_no_internet">Error, no nos fue posible conectar con UACloud.</string>
     <string name="error_no_logged">Error, UACloud cerró la sesión. Reinicia la app</string>

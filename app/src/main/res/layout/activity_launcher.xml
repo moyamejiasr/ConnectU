@@ -12,7 +12,7 @@
         android:transitionName="@string/activity_login_image_trans"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:srcCompat="@drawable/logo_launcher"
+        app:srcCompat="@drawable/logo_launcher_christmas"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"

@@ -3,8 +3,6 @@ package com.onelio.connectu.Containers;
 public class AccountData {
 
     //Session
-    private String loginURL;
-    private String lt;
     private String execution;
     private String email;
     private String password;
@@ -39,22 +37,6 @@ public class AccountData {
 
     public boolean isLogged() {
         return isLogged;
-    }
-
-    public void setLoginURL(String loginURL){
-        this.loginURL = loginURL;
-    }
-
-    public String getLoginURL(){
-        return loginURL;
-    }
-
-    public void setLt(String lt){
-        this.lt = lt;
-    }
-
-    public String getLt(){
-        return lt;
     }
 
     public void setExecution(String execution){

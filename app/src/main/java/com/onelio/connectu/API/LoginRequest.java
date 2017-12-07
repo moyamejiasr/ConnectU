@@ -22,8 +22,7 @@ import java.util.Date;
 public class LoginRequest {
 
     //Private definitions
-    private static String LOGIN_URL = "https://cvnet.cpd.ua.es/uacloud/home/indexVerificado";
-    private static String LOGIN_DOMAIN = "https://autentica.cpd.ua.es";
+    private static String LOGIN_DOMAIN = "https://autentica.cpd.ua.es/cas/login?service=https%3a%2f%2fcvnet.cpd.ua.es%2fuacloud%2fhome%2findexVerificado";
     //Private content
     //Session
     private Context context;
@@ -51,9 +50,8 @@ public class LoginRequest {
         try {
             json = "username=" + URLEncoder.encode(loginUsername, "UTF-8") +
                     "&password=" + loginPassword +
-                    "&lt=" + app.account.getLt() +
                     "&execution=" + app.account.getExecution() +
-                    "&_eventId=submit&submit=";
+                    "&_eventId=submit&geolocation=";
         } catch (UnsupportedEncodingException e) {
             FirebaseCrash.report(e);
         }
@@ -88,10 +86,6 @@ public class LoginRequest {
 
     private void getSessionFromBody(Document doc) {
         //Get Post data
-        Element lurl = doc.select("form[id=fm1]").first();
-        app.account.setLoginURL(lurl.attr("action"));
-        Element lt = doc.select("input[name=lt]").first();
-        app.account.setLt(lt.attr("value"));
         Element exe = doc.select("input[name=execution]").first();
         app.account.setExecution(exe.attr("value"));
     }
@@ -106,7 +100,7 @@ public class LoginRequest {
 
     //Get Session data from login page
     public void createSession(final LoginCallback callback){
-        UAWebService.HttpWebGetRequest(context, LOGIN_URL, new UAWebService.WebCallBack() {
+        UAWebService.HttpWebGetRequest(context, LOGIN_DOMAIN, new UAWebService.WebCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, String body) {
                 if (isSuccessful) {
@@ -123,7 +117,7 @@ public class LoginRequest {
 
     //Login account in
     public void loginAccount(final String user, final String pass, final LoginCallback callback) { //Change bool for callback
-        UAWebService.HttpWebPostRequest(context, LOGIN_DOMAIN + app.account.getLoginURL(), getJData(user, pass), new UAWebService.WebCallBack() {
+        UAWebService.HttpWebPostRequest(context, LOGIN_DOMAIN, getJData(user, pass), new UAWebService.WebCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, String body) {
                 if (isSuccessful) {

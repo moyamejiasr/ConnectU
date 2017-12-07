@@ -188,7 +188,7 @@ public class EvaluacionRequest {
         events = new ArrayList<>();
         String url = EVALUACION_URL_3 + "caca=" + parseYear() + "&codper=" + pCodprs + "&codasi=" + parseSubject() + "&ver=" + parseFilter() + "&tipo=";
         String json = "iDisplayLength=-1";
-        UAWebService.HttpWebLongPostRequest(context, url, json, new UAWebService.WebCallBack() {
+        UAWebService.HttpWebPostRequest(context, url, json, new UAWebService.WebCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, String body) {
                 if (isSuccessful) {

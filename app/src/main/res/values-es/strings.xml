@@ -133,7 +133,7 @@
     <string name="view_horario_loc">En</string>
     <string name="view_horario_lotofplaces">Consulta la web oficial para más información</string>
     <string name="view_horario_minutes">minutos</string>
-    <string name="view_horario_not_class">Hoy no tienes clase!!!! (/@.@)/</string>
+    <string name="view_horario_not_class">Dia sin clases</string>
     <string name="view_horario_official_test">Examen Oficial</string>
     <string name="view_horario_started">termina en</string>
     <string name="year">Selecciona un año</string>

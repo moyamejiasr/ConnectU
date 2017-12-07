@@ -42,7 +42,7 @@ public class UAWebService {
 
     public static void HttpWebGetRequest(final Context context, final String stringUrl, final WebCallBack callback) {
         final App app = (App) context.getApplicationContext();
-        HttpClient client = new HttpClient(context);
+        HttpClient client = new HttpClient(context, true);
         try {
             client.get(stringUrl, new Callback() {
                 @Override
@@ -88,7 +88,7 @@ public class UAWebService {
     //Post Method
     public static void HttpWebPostRequest(final Context context, final String stringUrl, String json, final WebCallBack callback) {
         final App app = (App) context.getApplicationContext();
-        HttpClient client = new HttpClient(context);
+        HttpClient client = new HttpClient(context, true); //Finally UA fucked up their service, now it's f slow too
         try {
             client.post(stringUrl, json, new Callback() {
                 @Override
@@ -131,56 +131,10 @@ public class UAWebService {
         }
     }
 
-    //Post Long Method
-    public static void HttpWebLongPostRequest(final Context context, final String stringUrl, String json, final WebCallBack callback) {
-        final App app = (App) context.getApplicationContext();
-        HttpClient client = new HttpClient(context, true);
-        try {
-            client.post(stringUrl, json, new Callback() {
-                @Override
-                public void onFailure(Call call, final IOException e) {
-                    //Couldn't connect with UACloud
-                    callback.onNavigationComplete(false, ErrorManager.FAILED_CONNECTION);
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    if (app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
-                        callback.onNavigationComplete(false, ErrorManager.LOGIN_REJECTED);
-                    } else {
-                        if (isNotError(response)) {
-                            String body = response.body().string();
-                            if (!body.isEmpty()) {
-                                callback.onNavigationComplete(response.isSuccessful(), body);
-                            } else {
-                                callback.onNavigationComplete(false, ErrorManager.EMPTY_RESPONSE);
-                            }
-                        } else {
-                            callback.onNavigationComplete(false, ErrorManager.BAD_RESPONSE);
-                        }
-                    }
-                    response.close();
-                }
-            });
-        } catch (IOException e) {
-            //Unexpected error
-            FirebaseCrash.report(e);
-            AlertManager alert = new AlertManager(context);
-            alert.setMessage(context.getString(R.string.error_unexpected), e.getMessage());
-            alert.setPositiveButton("OK", new AlertManager.AlertCallBack() {
-                @Override
-                public void onClick(boolean isPositive) {
-                    AppManager.appClose();
-                }
-            });
-            alert.show();
-        }
-    }
-
     //JSONPost Method
     public static void HttpWebJSONPostRequest(final Context context, final String stringUrl, String json, final WebCallBack callback) {
         final App app = (App) context.getApplicationContext();
-        HttpClient client = new HttpClient(context);
+        HttpClient client = new HttpClient(context, true);
         try {
             client.jpost(stringUrl, json, new Callback() {
                 @Override
@@ -226,7 +180,7 @@ public class UAWebService {
     //MultipartPost Method
     public static void HttpWebMultiPartPostRequest(final Context context, final String stringUrl, RequestBody body, final WebCallBack callback) {
         final App app = (App) context.getApplicationContext();
-        HttpClient client = new HttpClient(context);
+        HttpClient client = new HttpClient(context, true);
         try {
             client.mpost(stringUrl, body, new Callback() {
                 @Override
@@ -272,7 +226,7 @@ public class UAWebService {
     //Normal Download
     public static void HttpFileDownloadRequest(final Context context, final String stringUrl, final File file, final WebCallBack callback) {
         final App app = (App) context.getApplicationContext();
-        HttpClient client = new HttpClient(context);
+        HttpClient client = new HttpClient(context, true);
         file.deleteOnExit();
         try {
             client.download(stringUrl, new Callback() {

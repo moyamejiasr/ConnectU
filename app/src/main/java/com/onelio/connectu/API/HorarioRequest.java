@@ -1,6 +1,7 @@
 package com.onelio.connectu.API;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.onelio.connectu.API.Networking.UAWebService;
 import com.onelio.connectu.App;

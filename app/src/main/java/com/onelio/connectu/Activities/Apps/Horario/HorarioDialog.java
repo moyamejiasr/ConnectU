@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -79,12 +80,23 @@ public class HorarioDialog extends Dialog {
                 + "\n" + getContext().getString(R.string.view_horario_loc) + ": " + rloc;
         text.setText(content);
 
-        HorarioRequest request = new HorarioRequest(getContext());
+        lExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HorarioDialog.super.onBackPressed();
+            }
+        });
+
+        //Last loadding part
+        if (event.getType().equals(HorarioRequest.CAlENDAR_FESTIVOS) || activity == null) {
+            return; //If festivo or activity null disable last segment for preventing crash
+        }
+
+
+        HorarioRequest request = new HorarioRequest(activity);
         request.getSIGUA(event, new HorarioRequest.HorarioCallback() {
             @Override
             public void onCompleted(final boolean onResult, final String message) {
-                if(activity == null)
-                    return;
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -117,13 +129,6 @@ public class HorarioDialog extends Dialog {
                         }
                     }
                 });
-            }
-        });
-
-        lExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HorarioDialog.super.onBackPressed();
             }
         });
 

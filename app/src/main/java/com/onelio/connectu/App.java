@@ -42,9 +42,6 @@ public class App extends Application {
     public List<AcademicYear> academicYears;
     public JSONObject horario = new JSONObject();
 
-    //Login state
-    public long lastSessionTime = 0L;
-
     //Bugfix API 16 Ressource Compat
     @Override
     public void onCreate() {

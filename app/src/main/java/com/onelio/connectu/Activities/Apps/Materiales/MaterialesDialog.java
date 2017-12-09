@@ -243,8 +243,8 @@ public class MaterialesDialog extends Dialog {
                                     Intent intent = new Intent(Intent.ACTION_SEND);
                                     intent.setType(AppManager.getMimeType(file.getParent() + "/" + file.getName()));
                                     intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+file));
-                                    intent.putExtra(Intent.EXTRA_SUBJECT, getContext().getString(R.string.app_name));
-                                    intent.putExtra(Intent.EXTRA_TEXT, getContext().getString(R.string.materiales_sharing_you));
+                                    intent.putExtra(Intent.EXTRA_SUBJECT, getContext().getString(R.string.materiales_sharing_you));
+                                    intent.putExtra(Intent.EXTRA_TEXT, data.getFileName());
                                     try {
                                         activity.startActivity(Intent.createChooser(intent, getContext().getString(R.string.materiales_share_button)));
                                     } catch (ActivityNotFoundException ex) {

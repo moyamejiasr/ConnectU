@@ -3,6 +3,9 @@ package com.onelio.connectu.API.Networking;
 import android.content.Context;
 
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.onelio.connectu.App;
 
 import java.io.IOException;
@@ -23,34 +26,14 @@ public class HttpClient {
     private OkHttpClient client;
     private App app;
 
-    private void cookieMaker() { //Method to prevent exception caused by cookieJar being null even if there is no login after
-        app.cookieJar = new ClearableCookieJar() {
-            @Override
-            public void clearSession() {
-
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-
-            }
-
-            @Override
-            public List<Cookie> loadForRequest(HttpUrl url) {
-                return null;
-            }
-        };
+    private void cookieMaker(Context context) { //Method to prevent exception caused by cookieJar being null even if there is no login after
+        app.cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
     }
 
     public HttpClient(Context context) {
         app = (App) context.getApplicationContext();
         if (app.cookieJar==null)
-            cookieMaker();
+            cookieMaker(context);
         client = new OkHttpClient().newBuilder()
                 .cookieJar(app.cookieJar)
                 .build();
@@ -59,7 +42,7 @@ public class HttpClient {
     public HttpClient(Context context, boolean big) { //Evaluacion case (Cause Evaluacion is reaaaaaaaaallllyyy sloooow)
         app = (App) context.getApplicationContext();
         if (app.cookieJar==null)
-            cookieMaker();
+            cookieMaker(context);
         client = new OkHttpClient().newBuilder()
                 .cookieJar(app.cookieJar)
                 .connectTimeout(20, TimeUnit.SECONDS)

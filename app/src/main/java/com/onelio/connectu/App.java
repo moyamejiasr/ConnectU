@@ -56,7 +56,7 @@ public class App extends Application {
         account = new AccountData();
     }
 
-    //This method
+    //This method is used parallel with loadUser to prevent implementation problems
     public JSONObject loadJUser() {
         JSONObject result = new JSONObject();
         DatabaseManager database = new DatabaseManager(getBaseContext());
@@ -72,6 +72,19 @@ public class App extends Application {
 
             try {
                 notifications = new JSONObject(database.getString(Common.PREFERENCE_JSON_NOTIFICATIONS));
+            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
+                e.printStackTrace(); //dummy action for exception cause it has been initialized before
+            }
+
+            //Getting Horario
+            try {
+                horario = new JSONObject(database.getString(Common.PREFERENCE_JSON_HORARIO));
+            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
+                e.printStackTrace(); //dummy action for exception cause it has been initialized before
+            }
+            //Getting Horario Preferences
+            try {
+                publicPreferences = new JSONObject(database.getString(Common.PREFERENCE_JSON_PUBLICPREF));
             } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
                 e.printStackTrace(); //dummy action for exception cause it has been initialized before
             }

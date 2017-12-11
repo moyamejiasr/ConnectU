@@ -133,7 +133,6 @@ public class MaterialesDialog extends Dialog {
                                 if (onResult) {
                                     Intent intent = new Intent(Intent.ACTION_VIEW);
                                     intent.setDataAndType(Uri.fromFile(file), AppManager.getMimeType(file.getParent() + "/" + file.getName()));
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                     try {
                                         activity.startActivity(intent);
                                     } catch (ActivityNotFoundException ex) {

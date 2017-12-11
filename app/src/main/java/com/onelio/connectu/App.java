@@ -59,6 +59,7 @@ public class App extends Application {
     //This method is used parallel with loadUser to prevent implementation problems
     public JSONObject loadJUser() {
         JSONObject result = new JSONObject();
+        Gson gson = new Gson();
         DatabaseManager database = new DatabaseManager(getBaseContext());
         boolean isLogged = database.getBoolean(Common.PREFERENCE_BOOLEAN_ISLOGGED);
         if (isLogged) {
@@ -74,6 +75,18 @@ public class App extends Application {
                 notifications = new JSONObject(database.getString(Common.PREFERENCE_JSON_NOTIFICATIONS));
             } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
                 e.printStackTrace(); //dummy action for exception cause it has been initialized before
+            }
+
+            //Get Last Update
+            lastUpdateTime = database.getLong(Common.PREFERENCE_LONG_LAST_UP_TIME);
+
+            //Getting Academic Years
+            String ayear = database.getString(Common.PREFERENCE_JSON_ACADEMIC_YEAR);
+            Type listType = new TypeToken<ArrayList<AcademicYear>>(){}.getType();
+            if (ayear != null && ayear.length() != 0) {
+                academicYears = gson.fromJson(ayear, listType);
+            } else {
+                academicYears = new ArrayList<>();
             }
 
             //Getting Horario

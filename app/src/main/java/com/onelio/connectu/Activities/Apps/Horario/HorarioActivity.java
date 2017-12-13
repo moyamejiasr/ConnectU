@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +19,11 @@ import com.onelio.connectu.Adapters.HorarioAdapter;
 import com.onelio.connectu.App;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Containers.CalendarEvent;
+import com.onelio.connectu.Managers.DatabaseManager;
 import com.onelio.connectu.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -115,6 +120,14 @@ public class HorarioActivity extends AppCompatActivity {
     }
 
     private void initializePicker() {
+        //If no lastUpdate data because entering too fast from outside
+        if (app.lastUpdateTime == 0) {
+            DatabaseManager database = new DatabaseManager(getApplicationContext());
+            app.lastUpdateTime = database.getLong(Common.PREFERENCE_LONG_LAST_UP_TIME);
+            try {
+                app.horario = new JSONObject(database.getString(Common.PREFERENCE_JSON_HORARIO));
+            } catch (JSONException | NullPointerException ignored) {}
+        }
         /* end after 1 month from now */
         Calendar endDate = Calendar.getInstance();
         endDate.setTimeInMillis(app.lastUpdateTime);

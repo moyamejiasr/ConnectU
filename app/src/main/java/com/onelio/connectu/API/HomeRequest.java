@@ -45,16 +45,18 @@ public class HomeRequest {
         Gson gson = new Gson();
         JSONObject jstring = new JSONObject(gson.toJson(data));
         //Content has type??
-        if (!content.has(data.getType())) {
-            content.put(data.getType(), new JSONObject());
-            content.getJSONObject(data.getType()).put("notifications", new JSONArray());
+        JSONObject tcontent = new JSONObject(content.toString()); //Prevent ConcurrentModificationException by adding a temp obj
+        if (!tcontent.has(data.getType())) {
+            tcontent.put(data.getType(), new JSONObject());
+            tcontent.getJSONObject(data.getType()).put("notifications", new JSONArray());
         }
         //Old notifications has this type?? or has this notification??
         if (!app.notifications.has(data.getType()) || !app.notifications.getJSONObject(data.getType()).toString().contains(jstring.toString())) {
             //If not, set it as new because it's not in the old section
             newcontent.put(jstring);
         }
-        content.getJSONObject(data.getType()).getJSONArray("notifications").put(jstring);
+        tcontent.getJSONObject(data.getType()).getJSONArray("notifications").put(jstring);
+        content = tcontent;
     }
 
     public void parseAlertsFromBody(String body){
@@ -118,7 +120,11 @@ public class HomeRequest {
         }
         //Save to file
         DatabaseManager database = new DatabaseManager(context);
-        database.putString(Common.PREFERENCE_JSON_NOTIFICATIONS, content.toString());
+        String result = content.toString();
+        if (result == null) {
+            result = "";
+        }
+        database.putString(Common.PREFERENCE_JSON_NOTIFICATIONS, result);
         //Load to main
         app.notifications = content;
         app.newNotifications = newcontent;

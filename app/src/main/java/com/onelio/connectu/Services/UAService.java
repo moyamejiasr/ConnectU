@@ -21,6 +21,7 @@ import com.onelio.connectu.Common;
 import com.onelio.connectu.Containers.NotificationData;
 import com.onelio.connectu.Helpers.UpdaterHelper;
 import com.onelio.connectu.Managers.ErrorManager;
+import com.onelio.connectu.Managers.NotificationManager;
 import com.onelio.connectu.R;
 
 import org.json.JSONException;
@@ -49,7 +50,7 @@ public class UAService extends Service {
             Log.e("ONELIO TEST", "ACTION CONTINUED, EXPECT UPDATE");
             //Run App
             app = (App) this.getApplication();
-            app.initializeNetworking(); //TODO THIS
+            app.initializeNetworking();
             FirebaseCrash.log("01-UAService started, cache restarted!");
             final LoginRequest login = new LoginRequest(this);
             login.createSession(new LoginRequest.LoginCallback() {
@@ -58,7 +59,7 @@ public class UAService extends Service {
                     if (onResult) {
                         resultUser = app.loadJUser();
                         try {
-                            if (resultUser.getBoolean("logged")) { //TODO THIS
+                            if (resultUser.getBoolean("logged")) {
                                 //Continue to login
                                 login.loginAccount(resultUser.getString("email"), resultUser.getString("pass"), onUserLogin);
                             }
@@ -86,6 +87,11 @@ public class UAService extends Service {
             if (onResult) {
                 //Notifications
                 userSearchForNews();
+
+                /*TODO DEBUG PART
+                NotificationManager manager = new NotificationManager(getApplicationContext());
+                manager.deactivateRecurrentService();*/
+
                 //Updates
                 FirebaseCrash.log("Trying update in UAService with last time " + String.valueOf(app.lastUpdateTime));
                 if (!message.equals("_ISFIRST") && UpdaterHelper.needsSilenceUpdate(app.lastUpdateTime)) {

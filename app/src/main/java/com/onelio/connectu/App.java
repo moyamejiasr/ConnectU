@@ -73,9 +73,7 @@ public class App extends Application {
 
             try {
                 notifications = new JSONObject(database.getString(Common.PREFERENCE_JSON_NOTIFICATIONS));
-            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
-                e.printStackTrace(); //dummy action for exception cause it has been initialized before
-            }
+            } catch (JSONException | NullPointerException ignored) {} //If content is wrong or empty create new
 
             //Get Last Update
             lastUpdateTime = database.getLong(Common.PREFERENCE_LONG_LAST_UP_TIME);
@@ -89,18 +87,10 @@ public class App extends Application {
                 academicYears = new ArrayList<>();
             }
 
-            //Getting Horario
-            try {
-                horario = new JSONObject(database.getString(Common.PREFERENCE_JSON_HORARIO));
-            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
-                e.printStackTrace(); //dummy action for exception cause it has been initialized before
-            }
-            //Getting Horario Preferences
+            //Getting Public Preferences
             try {
                 publicPreferences = new JSONObject(database.getString(Common.PREFERENCE_JSON_PUBLICPREF));
-            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
-                e.printStackTrace(); //dummy action for exception cause it has been initialized before
-            }
+            } catch (JSONException | NullPointerException ignored) {} //If content is wrong or empty create new
         }
         return result;
     }
@@ -122,9 +112,7 @@ public class App extends Application {
 
             try {
                 notifications = new JSONObject(database.getString(Common.PREFERENCE_JSON_NOTIFICATIONS));
-            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
-                e.printStackTrace(); //dummy action for exception cause it has been initialized before
-            }
+            } catch (JSONException | NullPointerException ignored) {} //If content is wrong or empty create new
 
             //Get Last Update
             lastUpdateTime = database.getLong(Common.PREFERENCE_LONG_LAST_UP_TIME);
@@ -141,15 +129,12 @@ public class App extends Application {
             //Getting Horario
             try {
                 horario = new JSONObject(database.getString(Common.PREFERENCE_JSON_HORARIO));
-            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
-                e.printStackTrace(); //dummy action for exception cause it has been initialized before
-            }
-            //Getting Horario Preferences
+            } catch (JSONException | NullPointerException ignored) {} //If content is wrong or empty create new
+
+            //Getting Public Preferences
             try {
                 publicPreferences = new JSONObject(database.getString(Common.PREFERENCE_JSON_PUBLICPREF));
-            } catch (JSONException | NullPointerException e) { //If content is wrong or empty create new
-                e.printStackTrace(); //dummy action for exception cause it has been initialized before
-            }
+            } catch (JSONException | NullPointerException ignored) {} //If content is wrong or empty create new
 
         }
         return isLogged;

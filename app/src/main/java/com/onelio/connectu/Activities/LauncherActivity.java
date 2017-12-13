@@ -13,6 +13,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class LauncherActivity extends AppCompatActivity {
     private RelativeLayout rlayout; //Layout for progressbar
     private CircleImageView profile; //Inside rlayout
     private TextView ltext; //Inside rlayout
+    private ProgressBar undefProg; //Used to give to the user some "loading" feedback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class LauncherActivity extends AppCompatActivity {
         rlayout = (RelativeLayout) findViewById(R.id.launcher_playout);
         profile = (CircleImageView) findViewById(R.id.launcher_cimage);
         ltext = (TextView) findViewById(R.id.launcher_ltext);
+        undefProg = (ProgressBar) findViewById(R.id.undefProg);
         //Initialize app networking
         FirebaseCrash.log("01-Launched");
         app = (App) LauncherActivity.this.getApplication();
@@ -173,9 +176,7 @@ public class LauncherActivity extends AppCompatActivity {
     public void onStop() {
         try {
         unregisterReceiver(receiver);
-        } catch(RuntimeException e) {
-            e.printStackTrace(); //Prevent crash, no method
-        }
+        } catch(RuntimeException ignored) {} //Prevent crash, no method
         super.onStop();
     }
 
@@ -183,6 +184,7 @@ public class LauncherActivity extends AppCompatActivity {
         FirebaseCrash.log("05-Login completed");
         //Start loading data
         if (UpdaterHelper.isFirstLauncher(app.lastUpdateTime)) { //Update first time data
+            undefProg.setVisibility(View.INVISIBLE);
             Picasso.with(getBaseContext())
                     .load(app.account.getPictureURL())
                     .error(R.drawable.ic_placeholder)

@@ -64,59 +64,64 @@ public class UAUpdate extends IntentService {
         @Override
         public void onCompleted(boolean onResult, String message) {
             if (onResult) {
-                switch(loc) {
-                    case YEARS:
-                        //Load year subjects
-                        loc = YearDataLoc.SUBJECTS;
-                        year = request.academicYears.get(yloc).getYear();
-                        request.loadSubjectsByYear(year, callback);
-                        break;
-                    case SUBJECTS:
-                        loc = YearDataLoc.TEACHERS;
+                try {
+                    switch(loc) {
+                        case YEARS:
+                            //Load year subjects
+                            loc = YearDataLoc.SUBJECTS;
+                            year = request.academicYears.get(yloc).getYear();
+                            request.loadSubjectsByYear(year, callback);
+                            break;
+                        case SUBJECTS:
+                            loc = YearDataLoc.TEACHERS;
 
-                        if (request.academicYears.get(yloc).getSubjectsData().size() != 0) { //Has subjects?
-                            //Continue searching
-                            subject = request.academicYears.get(yloc).getSubjectsData().get(sloc).getId();
-                            request.loadTeachersByYearAndSubject(year, subject, false, callback); //Load teachers
-                        } else {
+                            if (request.academicYears.get(yloc).getSubjectsData().size() != 0) { //Has subjects?
+                                //Continue searching
+                                subject = request.academicYears.get(yloc).getSubjectsData().get(sloc).getId();
+                                request.loadTeachersByYearAndSubject(year, subject, false, callback); //Load teachers
+                            } else {
+                                int ysize = request.academicYears.size() - 1;
+                                if (yloc < ysize) { //Has more years??
+                                    //Go next year
+                                    sloc = 0;
+                                    yloc++;
+                                    result = Activity.RESULT_OK;
+                                    loc = YearDataLoc.YEARS;
+                                    publishResults(result, loc, message);
+                                    callback.onCompleted(true, "");
+                                } else { //In case of last subject of prev year has no teacher
+                                    //End the process
+                                    request.saveAcademicYear(); //Continue next step
+                                    updateHorario();
+                                }
+                            }
+                            break;
+                        case TEACHERS:
                             int ysize = request.academicYears.size() - 1;
-                            if (yloc < ysize) { //Has more years??
-                                //Go next year
-                                sloc = 0;
-                                yloc++;
+                            int ssize = request.academicYears.get(yloc).getSubjectsData().size() - 1;
+
+                            if (sloc < ssize) { //Has more subjects??
+                                sloc++;
+                                loc = YearDataLoc.SUBJECTS;
+                                callback.onCompleted(true, ""); //Load them
+                            } else if (yloc < ysize) { //Has more years??
+                                //Update status
                                 result = Activity.RESULT_OK;
                                 loc = YearDataLoc.YEARS;
                                 publishResults(result, loc, message);
-                                callback.onCompleted(true, "");
-                            } else { //In case of last subject of prev year has no teacher
-                                //End the process
+                                //Continue
+                                sloc = 0;
+                                yloc++;
+                                callback.onCompleted(true, ""); //Load them
+                            } else {
                                 request.saveAcademicYear(); //Continue next step
                                 updateHorario();
                             }
-                        }
-                        break;
-                    case TEACHERS:
-                        int ysize = request.academicYears.size() - 1;
-                        int ssize = request.academicYears.get(yloc).getSubjectsData().size() - 1;
-
-                        if (sloc < ssize) { //Has more subjects??
-                            sloc++;
-                            loc = YearDataLoc.SUBJECTS;
-                            callback.onCompleted(true, ""); //Load them
-                        } else if (yloc < ysize) { //Has more years??
-                            //Update status
-                            result = Activity.RESULT_OK;
-                            loc = YearDataLoc.YEARS;
-                            publishResults(result, loc, message);
-                            //Continue
-                            sloc = 0;
-                            yloc++;
-                            callback.onCompleted(true, ""); //Load them
-                        } else {
-                            request.saveAcademicYear(); //Continue next step
-                            updateHorario();
-                        }
-                        break;
+                            break;
+                    }
+                } catch(Exception e) {
+                    result = Activity.RESULT_CANCELED;
+                    publishResults(result, loc, ErrorManager.UNKNOWN_RESPONSE_FORMAT);
                 }
             } else {
                 if (!message.equals(ErrorManager.FAILED_CONNECTION)) {

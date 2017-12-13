@@ -36,12 +36,20 @@ public class AppManager {
 
     @NonNull
     public static String after(String string, String separator) {
-        return string.substring(string.lastIndexOf(separator) + separator.length());
+        try {
+            return string.substring(string.lastIndexOf(separator) + separator.length());
+        } catch (StringIndexOutOfBoundsException e) {
+            return string;
+        }
     }
 
     @NonNull
     public static String before(String string, String separator) {
-        return string.substring(0, string.indexOf(separator));
+        try {
+            return string.substring(0, string.indexOf(separator));
+        } catch (StringIndexOutOfBoundsException e) {
+            return string;
+        }
     }
 
     @NonNull

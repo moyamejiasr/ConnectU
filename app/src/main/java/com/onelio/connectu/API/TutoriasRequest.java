@@ -268,6 +268,10 @@ public class TutoriasRequest {
                     //Get Post data
                     Element element = doc.select("select[id=ddlDestinatario]").first();
                     boolean found = false;
+                    if (element.children() == null) {
+                        callback.onResult(false, ErrorManager.TEACHER_ID_NOT_FOUND);
+                        return;
+                    }
                     for (Element teacher : element.children()) {
                         if (teacher.text().equals(teacherName)) {
                             found = true;

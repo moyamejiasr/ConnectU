@@ -87,6 +87,10 @@ public class LoginRequest {
     private void getSessionFromBody(Document doc) {
         //Get Post data
         Element exe = doc.select("input[name=execution]").first();
+        if (exe == null) {
+            app.account.setExecution("");
+            return;
+        }
         app.account.setExecution(exe.attr("value"));
     }
 

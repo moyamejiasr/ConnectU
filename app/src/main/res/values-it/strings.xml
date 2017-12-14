@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ConnectU</string>
+    <string name="accept">Accettare</string>
+    <string name="action_action">Azione</string>
+    <string name="action_filter">Filtra per tipo</string>
+    <string name="action_markRead">Segna come letto</string>
+    <string name="action_markUnread">Segna come non letto</string>
+    <string name="action_readall">Segna tutto come letto</string>
+    <string name="action_reload">Ricaricare</string>
+    <string name="action_restart">Reiniziare applicazione</string>
+    <string name="action_subject">Filtrare per materia</string>
+    <string name="action_year">Filtro per anno</string>
+    <string name="alert_loading">Caricamento, perfavore attendere…</string>
+    <string name="alert_logout">Desideri disconnetterti?</string>
+    <string name="app_name_error">ConnectU Error</string>
+    <string name="apps_expediente_fail_reason">Non disponibile in questo momento</string>
+    <string name="back_to_exit">Premere nuovamente indietro per uscire dall\'applicazione</string>
+    <string name="blank_favorites">Ancora non hai segnato nulla da ricordare</string>
+    <string name="completed">Completato</string>
+    <string name="custom">Configurazione UI</string>
+    <string name="date_time_days">Giorni</string>
+    <string name="date_time_hours">Ore</string>
+    <string name="date_time_moment">Un momento</string>
+    <string name="date_time_months">Mesi</string>
+    <string name="date_time_prev">Da</string>
+    <string name="deny">Negare</string>
+    <string name="error_bad_response">Errore, UACloud non ha risposto correttamente. Perfavore riprova piú tardi!</string>
+    <string name="error_casting_action">Non è stato possibile realizzarlo, perfavore riprova piú tardi.</string>
+    <string name="error_download_cancel">Azione interrotta, permesso di salvataggio negato!</string>
+    <string name="error_external_app">Errore chiamando app esterna.</string>
+    <string name="error_file_not_downloaded">Errore, non è stato possibile scaricare l\'archivio</string>
+    <string name="error_find_open">Non è stata trovata alcuna app per aprire l\'archivio</string>
+    <string name="error_find_show">Non è stato trovato nulla da mostrare</string>
+    <string name="error_login_failed">Errore sconosciuto. Perfavore riprova piú tardi.</string>
+    <string name="error_materiales_session_ended">Sessione terminata, ritorna al menú e riprova!</string>
+    <string name="error_no_internet">Errore, non è stato possibile connettersi al UACloud</string>
+    <string name="error_no_logged">Errore, UACloud ha chiuso la sessione. Reinizia l\'applicazione</string>
+    <string name="error_no_maps">Errore, non hai l\'applicazione Google Maps installata.</string>
+    <string name="error_notificatin_null">Non è possibile mostrare la notifica in questo momento</string>
+    <string name="error_notificatin_null_title">Errore di notifica</string>
+    <string name="error_problem_service">Errore, non è possibile ottenere informazioni di servizio. Perfavore riprova, e se il problema persiste contattaci a rmoya98@gmail.com con il codice:</string>
+    <string name="error_unable_display">Non è possibile mostrare il contenuto in questo momento, riprova più tardi!</string>
+    <string name="error_unable_show">Non è possibile mostrarlo in questo momento</string>
+    <string name="error_unexpected">Errore inaspettato</string>
+    <string name="error_unkown_response_format">Errore, non è possibile realizzare quest\'azione. Prova nuovamente!</string>
+    <string name="error_web_older">Le vecchie versioni di Android non permettono il login automatico. Perfavore, procedi al login manuale.</string>
+    <string name="error_year_loading">Stiamo giá cambiando anno!</string>
+    <string name="evaluacion_card_not_need_send">Non è necessario inviare alcun documento</string>
+    <string name="evaluacion_card_not_open">Non ancora aperto</string>
+    <string name="evaluacion_card_not_open_sended">Attualmente chiuso</string>
+    <string name="evaluacion_card_open_not_sended">Aperto ma non inviato</string>
+    <string name="evaluacion_card_open_sended">Aperto ed inviato</string>
+    <string name="evaluacion_filer_by">Filtra per</string>
+    <string name="evaluacion_filer_subject">Materia</string>
+    <string name="evaluacion_filer_type">Tipo</string>
+    <string name="evaluacion_filer_year">Anno</string>
+    <string name="evaluacion_from">Da</string>
+    <string name="evaluacion_loading">Caricamento dati…</string>
+    <string name="evaluacion_no_description">Senza descrizione</string>
+    <string name="evaluacion_published_in">Pubblicato in</string>
+    <string name="evaluacion_to">a</string>
+    <string name="filter_all_subjects">Mostrare tutte le materie</string>
+    <string name="gdata">Opzioni generali</string>
+    <string name="home_blank_mini_notifications">Senza nuove notifiche</string>
+    <string name="home_blank_notifications">Non hai alcuna notifica da leggere</string>
+    <string name="home_end">Sei arrivato in fondo alla pagina!</string>
+    <string name="home_schedule">Orario</string>
+    <string name="home_title_notifications">Notifiche in attesa</string>
+    <string name="home_title_reminder">Promemoria importanti</string>
+    <string name="home_title_schedule">Orario per oggi</string>
+    <string name="horario_docente">Includere Didattica</string>
+    <string name="horario_evaluativo">Includere Valutazioni</string>
+    <string name="horario_ex_menes">Includere Esami</string>
+    <string name="horario_festivos">Includere Festivitá</string>
+    <string name="loading">Ciao forestiero!</string>
+    <string name="loading1">Caricamento…</string>
+    <string name="loading2">Vogliamo offrirti…</string>
+    <string name="loading3">…La migliore esperienza</string>
+    <string name="loading4">che sia possibile.</string>
+    <string name="loading5">Ci siamo quasi</string>
+    <string name="logout">Disconnettere</string>
+    <string name="logout_long">Premere qui per disconnetterti dall\'App</string>
+    <string name="materiales_by">Per</string>
+    <string name="materiales_loading">Ottenendo archivio…</string>
+    <string name="materiales_loading_file">Ricevendo archivio…</string>
+    <string name="materiales_published_by">Pubblicato per:</string>
+    <string name="materiales_saved_at">Archivio scaricato e salvato in Downloads/ConnectU/</string>
+    <string name="materiales_share_button">Archivio condiviso</string>
+    <string name="materiales_sharing_you">Condiviso da ConnectU</string>
+    <string name="materiales_type_file">Archivio PDF</string>
+    <string name="mdata">More about</string>
+    <string name="message_marked">Azione compiuta con successo</string>
+    <string name="no">No</string>
+    <string name="notifi_more_text">Hai ricevuto piú di una notifica dalla tua ultima visita</string>
+    <string name="notifi_more_title_have">Hai</string>
+    <string name="notifi_more_title_more">notifiche non lette</string>
+    <string name="notifi_more_title_more_files">documenti in attesa</string>
+    <string name="notifi_more_title_more_notifications">notifiche in attesa</string>
+    <string name="notifications">Notifiche</string>
+    <string name="password">Password</string>
+    <string name="pdata">Informazioni Personali</string>
+    <string name="see_in_map">Vedere sulla mappa</string>
+    <string name="send_email">Inviare email</string>
+    <string name="send_tutoria">Tutoraggio</string>
+    <string name="shortcut">Installare accesso all\'orario</string>
+    <string name="subject">Seleziona una materia:</string>
+    <string name="theme">Theme UI</string>
+    <string name="theme_long">Personalizza il tema dell\'App</string>
+    <string name="title_favs">Calendario</string>
+    <string name="title_folder_home">Inizio</string>
+    <string name="title_folder_unseen">Documenti in attesa</string>
+    <string name="title_fragment_files_all">Tutti</string>
+    <string name="title_fragment_files_recent">In attesa</string>
+    <string name="title_fragment_tutorias_all">Tutti</string>
+    <string name="title_fragment_tutorias_recent">In attesa</string>
+    <string name="title_home">Inizio</string>
+    <string name="title_settings">Opzioni</string>
+    <string name="tutoria_cancel">Cancellare</string>
+    <string name="tutoria_create">Creare</string>
+    <string name="tutoria_insert_topic">Inserisci oggetto</string>
+    <string name="tutoria_not_found">Non sono stati trovati tutoraggi per questa selezione</string>
+    <string name="tutoria_type">Scrivi un messaggio</string>
+    <string name="tutoria_without_answer">Senza risposta</string>
+    <string name="university">Universitá di Alicante</string>
+    <string name="view_horario_allday">questo evento durerá tutto il giorno</string>
+    <string name="view_horario_days">giorni</string>
+    <string name="view_horario_ended">terminato</string>
+    <string name="view_horario_holiday">Giorni liberi</string>
+    <string name="view_horario_hours">Ore</string>
+    <string name="view_horario_in">comincia in</string>
+    <string name="view_horario_last">Durata:</string>
+    <string name="view_horario_loc">In</string>
+    <string name="view_horario_lotofplaces">Consulta il sito ufficiale per maggiori informazioni</string>
+    <string name="view_horario_minutes">minuti</string>
+    <string name="view_horario_not_class">Giorni senza lezione</string>
+    <string name="view_horario_official_test">Esame Ufficiale</string>
+    <string name="view_horario_started">termina in</string>
+    <string name="year">Seleziona un anno</string>
+    <string name="yes">Si</string>
+    <string name="blank_schelude_home">Senza attivitá per oggi</string>
+    <string-array name="Time">
+        <item>45 minuti</item>
+        <item>1 ora</item>
+        <item>2 ore</item>
+        <item>4 ore</item>
+        <item>8 ore</item>
+        <item>12 ore</item>
+        <item>1 giorno</item>
+        <item>2 giorno</item>
+    </string-array>
+    <string name="title_activity_notifications">Notifiche</string>
+    <string name="ndata">Configurazione Notifiche</string>
+    <string name="error_empty_response">Errore, UACloud non ha risposto</string>
+    <string name="enablenot_long">Attivare per permettere all\'applicazione di avvisare l\'utente quando riceve una nuova notifica</string>
+    <string name="enablenot">Abilitare notifiche</string>
+    <string name="displaysilnot_long">Suono ed illuminazione led, se disponibili</string>
+    <string name="displaysilnot">Mostrare con suono</string>
+    <string name="delaynot_long">Indicare un tempo di attesa tra le ricerche di notifiche (Maggiori valori, maggiore risparmio dati)</string>
+    <string name="delaynot">Tempo di attesa</string>
+    <string name="error_materiales_loading_dir">Caricando documento, attendere prego</string>
+    <string name="not_available">Temporaneamente non disponibile</string>
+    <string name="title_activity_about">Riguardo a</string>
+    <string name="activity_about_long">Scopri di piú su di noi e sul nostro progetto</string>
+    <string name="error_tutoria_n_found">Non abbiamo potuto localizzare questo docente</string>
+    <string name="staticyear">Cambia anno predefinito</string>
+    <string name="staticyear_long">Cambia anno accademico predefinito che verrá mostrato all\'accesso dell\'applicazione</string>
+    <string name="tys">Termini e condizioni d\'uso</string>
+    <string name="tys_long">Leggi nuovamente i termini e le condizioni d\'uso</string>
+    <string name="message_downloading_to_d">Scaricando l\'archivio nella cartella dei download</string>
+    <string name="disclaimer"><![CDATA[<h2><span style="color: #ff0000;">ConnectU TyQ</span></h2>
+<h2><span style="color: #ff0000;"><strong>Importante, leggere</strong></span></h2>
+<h3><span style="color: #ff6600;"><strong>-Riguardo all\'App:</strong></span></h3>
+<p>L\'applicazione qui esposta è sviluppata da studenti e non è ufficiale, pertanto non è vincolata in alcuna forma con l\'universitá di Alicante.</p>
+<p>Gli sviluppatori non sono responsabili di possibili informazioni non aggiornate o mostrate erroneamente.</p>
+<p>Questa applicazione è gratuita e in alcun momento gli sviluppatori si vedranno obbligati a fornire una versione 100% funzionale della stessa. Se ci fossero bugs o problemi nel funzionamento di questa, si cercherebbe di riparare senza alcun tipo di obbligo.Per facilitare questo, l\'applicazione possiede un servizio che informa in caso di errore proporzionando informazioni specifiche dell\'errore, come la localizazione di questo, o i dati erronei che lo provocano, o in casi estremi, la mail per contattare riguardo a problemi di impossibilitá di connessione.</p>
+<p>Questa applicazione richiede permessi per controllare le conessioni di rete ed amministrare lo spazio di salvataggio con l\'obiettivo di accedete all\'UACloud e scaricare ed archiviare contenuti presenti. E\' anche possibile che chieda permessi per creare collegamenti diretti alla pagina principale per facilitare l\'accesso ad essa. Ciónonostante, questa è una opzione non obbligatoria per l\'utente.Per ultimo, questa applicazione richiede anche permessi minori come il Wake_CLOCK o START_ON_BOOT per assicurare il corretto funzionamento delle notifiche.</p>
+<h3><span style="color: #ff6600;"><strong>-Riguardo all'account utente:</strong></span></h3>
+<p>Con l'obiettivo di mantenere al sicuro, nel possibile, gli account degli utenti (In riferimento a nome utente e password), questi in nessun momento usciranno dal dispositivo a fornitori terzi (Si che lo fanno al proprio UACloud e alla mail come metodo di contatto, in caso di gravi problemi come sopra indicato), piuttosto sono salvate nella cartella del sistema Android, in un ambiente privato accessibile esclusivamente dalla propria App e chiamato SharedPreferences, per essere utilizzati ad ogni connessione all'UACloud.</p>
+<p>Nonosante ció, gli sviluppatori non si fanno carico della perdita o del furto di dato all'interno dell'ambiente della propria applicazione con o senza root.</p>
+<h3><span style="color: #ff6600;"><strong>-Riguardo alle condizioni:</strong></span></h3>
+<p>Queste condizioni possono cambiare se fosse necessario, in tal caso gli sviluppatori si riservano il diritto di implementare questi cambiamenti senza avviso previo, ed il fatto di non conoscerle non esclude dal compimento delle stesse.</p>
+<p>Potrai leggere le condizioni dalla schermata di Login o da un accesso esistente nella schermata "Riguardo a"</p>
+<p>In caso di incorrettezze nelle traduzioni di questo documento, sará sempre valido ció che sostiene la versione in Castellano prima di qualunque altra.</p>]]></string>
+    <string name="error_unexpected_long">Perfavore, reinizia l\'app</string>
+    <string name="shortcut2">Installare accesso alla mail dell\'UA</string>
+</resources>

@@ -19,6 +19,7 @@ import com.onelio.connectu.Activities.Apps.Anuncios.AnunciosActivity;
 import com.onelio.connectu.Activities.Apps.Evaluacion.EvaluacionActivity;
 import com.onelio.connectu.Activities.Apps.Horario.HorarioActivity;
 import com.onelio.connectu.Activities.Apps.Materiales.MaterialesActivity;
+import com.onelio.connectu.Activities.Apps.Notas.NotasActivity;
 import com.onelio.connectu.Activities.Apps.Profesores.ProfesoresActivity;
 import com.onelio.connectu.Activities.Apps.Tutorias.TutoriasActivity;
 import com.onelio.connectu.Activities.Apps.WebView.WebActivity;
@@ -107,10 +108,14 @@ public class AppsMenuFragment extends Fragment {
                     Intent intentEvaluacion = new Intent(getActivity(), EvaluacionActivity.class);
                     startActivity(intentEvaluacion, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
-                case 7: //Expediente
+                case 7: //Notas
+                    Intent intentNotas = new Intent(getActivity(), NotasActivity.class);
+                    startActivity(intentNotas, AnimTransHelper.circleSlideUp(getContext(), v));
+                    break;
+                case 8: //Expediente
                     Toast.makeText(getContext(), getString(R.string.apps_expediente_fail_reason), Toast.LENGTH_SHORT).show();
                     break;
-                case 8: //UAProject
+                case 9: //UAProject
                     Intent intentUAProject = new Intent(getActivity(), WebActivity.class);
                     intentUAProject.putExtra(Common.WEBVIEW_EXTRA_COLOR, Color.parseColor("#607d8b"));
                     intentUAProject.putExtra(Common.WEBVIEW_EXTRA_NAME, getString(R.string.title_webapp_uaproject));
@@ -118,7 +123,7 @@ public class AppsMenuFragment extends Fragment {
                     intentUAProject.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, false);
                     startActivity(intentUAProject, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
-                case 9: //OtrosServicios
+                case 10: //OtrosServicios
                     Intent intentOtrosServicios = new Intent(getActivity(), WebActivity.class);
                     intentOtrosServicios.putExtra(Common.WEBVIEW_EXTRA_COLOR, Color.parseColor("#07aaf4"));
                     intentOtrosServicios.putExtra(Common.WEBVIEW_EXTRA_NAME, getString(R.string.title_webapp_otrosservicios));
@@ -126,7 +131,7 @@ public class AppsMenuFragment extends Fragment {
                     intentOtrosServicios.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, false);
                     startActivity(intentOtrosServicios, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
-                case 10: //Sigua
+                case 11: //Sigua
                     Intent intentSigua = new Intent(getActivity(), WebActivity.class);
                     intentSigua.putExtra(Common.WEBVIEW_EXTRA_COLOR, Color.parseColor("#e91e63"));
                     intentSigua.putExtra(Common.WEBVIEW_EXTRA_NAME, getString(R.string.title_webapp_sigua));
@@ -134,7 +139,7 @@ public class AppsMenuFragment extends Fragment {
                     intentSigua.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, false);
                     startActivity(intentSigua, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
-                case 11: //Webmail
+                case 12: //Webmail
                     Intent intentmail = new Intent(getActivity(), WebmailActivity.class);
                     intentmail.putExtra(Common.WEBVIEW_EXTRA_COLOR, Color.parseColor("#607d8b"));
                     intentmail.putExtra(Common.WEBVIEW_EXTRA_NAME, getString(R.string.title_webapp_email));
@@ -142,7 +147,7 @@ public class AppsMenuFragment extends Fragment {
                     intentmail.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, true);
                     startActivity(intentmail, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
-                case 12: //UACloud
+                case 13: //UACloud
                     Intent intentua = new Intent(getActivity(), WebActivity.class);
                     intentua.putExtra(Common.WEBVIEW_EXTRA_COLOR, Color.parseColor("#07aaf4"));
                     intentua.putExtra(Common.WEBVIEW_EXTRA_NAME, getString(R.string.title_webapp_ua));
@@ -150,7 +155,7 @@ public class AppsMenuFragment extends Fragment {
                     intentua.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, false);
                     startActivity(intentua, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
-                case 13: //Contacto Beta
+                case 14: //Contacto Beta
                     String version = "unknown";
                     try {
                         PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);

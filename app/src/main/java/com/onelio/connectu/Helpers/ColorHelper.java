@@ -108,24 +108,27 @@ public class ColorHelper
                 color = R.drawable.ic_evaluacion;
                 break;
             case 7:
-                color = R.drawable.ic_expediente;
+                color = R.drawable.ic_notas;
                 break;
             case 8:
-                color = R.drawable.ic_uaproject;
+                color = R.drawable.ic_expediente;
                 break;
             case 9:
-                color = R.drawable.ic_otroservicios;
+                color = R.drawable.ic_uaproject;
                 break;
             case 10:
-                color = R.drawable.ic_mapa;
+                color = R.drawable.ic_otroservicios;
                 break;
             case 11:
-                color = R.drawable.ic_webmail;
+                color = R.drawable.ic_mapa;
                 break;
             case 12:
+                color = R.drawable.ic_webmail;
+                break;
+            case 13:
                 color = R.drawable.ic_uacloud;
                 break;
-            case 13: //TODO BETA ONLY!, DELETE WHEN FINISHED // Extended now!
+            case 14:
                 color = R.drawable.ic_contacto;
                 break;
         }

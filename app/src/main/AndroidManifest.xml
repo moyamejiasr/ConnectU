@@ -27,9 +27,11 @@
             android:theme="@style/Launcher_AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
@@ -52,9 +54,13 @@
         <receiver
             android:name=".Services.AlarmNotificatorReceiver"
             android:enabled="true" />
-        <receiver android:enabled="true"  android:exported="true" android:name=".ReceiverBoot">
+        <receiver
+            android:name=".ReceiverBoot"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
@@ -95,8 +101,8 @@
         <!-- Horario Page -->
         <activity
             android:name=".Activities.Apps.Horario.HorarioActivity"
-            android:label="@string/title_activity_horario"
             android:exported="true"
+            android:label="@string/title_activity_horario"
             android:screenOrientation="portrait" />
 
         <!-- Web Page -->
@@ -108,8 +114,8 @@
         <!-- Webmail UA (WebPage Mod) -->
         <activity
             android:name=".Activities.Apps.Webmail.WebmailActivity"
-            android:label="@string/title_activity_webview"
             android:exported="true"
+            android:label="@string/title_activity_webview"
             android:screenOrientation="sensor" />
 
         <!-- Materiales Page -->
@@ -135,8 +141,8 @@
             android:name=".Activities.Apps.Evaluacion.EvaluacionActivity"
             android:label="@string/title_activity_evaluacion"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Activities.Apps.Expediente.ExpedienteActivity"
+        <activity
+            android:name=".Activities.Apps.Expediente.ExpedienteActivity"
             android:label="@string/title_activity_expediente"
             android:screenOrientation="portrait" />
 
@@ -175,6 +181,7 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".Activities.Apps.Notas.NotasActivity"></activity>
     </application>
 
 </manifest>

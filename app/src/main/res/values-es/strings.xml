@@ -18,7 +18,7 @@
     <string name="back_to_exit">Presiona atrás de nuevo para salir de la app</string>
     <string name="blank_favorites">Aun no has marcado nada para recordar</string>
     <string name="completed">Completado</string>
-    <string name="custom">Configración UI</string>
+    <string name="custom">Configuración UI</string>
     <string name="date_time_days">días</string>
     <string name="date_time_hours">horas</string>
     <string name="date_time_moment">un momento</string>
@@ -33,7 +33,7 @@
     <string name="error_find_open">No pudimos encontrar ninguna app para abrir este archivo!</string>
     <string name="error_find_show">No encontramos nada que mostrar</string>
     <string name="error_login_failed">Error desconocido. Por favor inténtalo más tarde</string>
-    <string name="error_materiales_session_ended">Sessión finalizada, regresa al menú y vuelve a intentarlo!</string>
+    <string name="error_materiales_session_ended">Sesión finalizada, regresa al menú y vuelve a intentarlo!</string>
     <string name="error_no_internet">Error, no nos fue posible conectar con UACloud.</string>
     <string name="error_no_logged">Error, UACloud cerró la sesión. Reinicia la app</string>
     <string name="error_no_maps">Error, no tienes la app de Google Maps instalada.</string>

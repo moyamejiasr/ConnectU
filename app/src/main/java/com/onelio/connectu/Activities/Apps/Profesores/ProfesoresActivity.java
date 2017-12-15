@@ -155,7 +155,7 @@ public class ProfesoresActivity extends AppCompatActivity {
             alert.show();
             return super.onOptionsItemSelected(item);
         } else if (id == R.id.action_subject) {
-            //Select Year
+            //Select Subject
             final AlertManager alert = new AlertManager(this);
             alert.setIcon(R.drawable.ic_filter_black_24dp);
             alert.setMessage(getString(R.string.subject));

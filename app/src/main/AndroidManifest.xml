@@ -146,6 +146,12 @@
             android:label="@string/title_activity_expediente"
             android:screenOrientation="portrait" />
 
+        <!-- Notas Evaluacion Page -->
+        <activity
+            android:name=".Activities.Apps.Notas.NotasActivity"
+            android:label="@string/title_activity_evaluacion_notas"
+            android:screenOrientation="portrait" />
+
         <!-- User Preferences -->
         <!-- Notifications -->
         <activity
@@ -181,7 +187,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Activities.Apps.Notas.NotasActivity"></activity>
     </application>
 
 </manifest>

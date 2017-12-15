@@ -98,7 +98,13 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> 
         holder.type.setText(AppManager.capFirstLetter(type));
         holder.date.setText(date);
         holder.title.setText(title);
-        holder.text.setText(description);
+
+        if (description != null && !description.equals("null")) {
+            holder.text.setVisibility(View.VISIBLE);
+            holder.text.setText(description);
+        } else {
+            holder.text.setVisibility(View.GONE);
+        }
 
         if (annotations != null && !annotations.equals("null")) {
             holder.annl.setVisibility(View.VISIBLE);

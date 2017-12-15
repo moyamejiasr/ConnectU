@@ -143,7 +143,7 @@ public class NotasActivity extends AppCompatActivity {
     }
 
     private void setSubjectsAdapter() {
-        List<String> subjects = ObjectHelper.getSubjectsName(getBaseContext(), year, true);
+        List<String> subjects = ObjectHelper.getSubjectsName(getBaseContext(), year, false);
         subjectAdapter = new ArrayAdapter<>(this, R.layout.view_dialog_select, subjects);
     }
 
@@ -156,7 +156,6 @@ public class NotasActivity extends AppCompatActivity {
                     public void run() {
                         if (onResult) {
                             progress.setVisibility(View.INVISIBLE);
-                            emptyView.setVisibility(View.VISIBLE);
                             isUpdating = false;
                             onSubjectClick(null);
                         } else {
@@ -174,7 +173,7 @@ public class NotasActivity extends AppCompatActivity {
     }
 
     private void filterSubject(int subject) {
-        request.setSubject(subject);
+        request.setSubject(subject + 1);
         doRequest();
     }
 
@@ -183,7 +182,8 @@ public class NotasActivity extends AppCompatActivity {
         request.setYear(year);
         this.year = year;
         if (!isFirst) {
-            doRequest();
+            setSubjectsAdapter();
+            onSubjectClick(null);
         }
     }
 
@@ -253,6 +253,8 @@ public class NotasActivity extends AppCompatActivity {
     public void onSubjectClick(View v) {
         //Select Year
         if (!isUpdating) { //Handle loading cases
+            emptyView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
             //Select Subject
             final AlertManager alert = new AlertManager(this);
             alert.setIcon(R.drawable.ic_filter_black_24dp);

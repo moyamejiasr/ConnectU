@@ -126,6 +126,7 @@
     <!-- Evaluacion -->
     <string name="title_activity_evaluacion" translatable="false">Evaluacion</string>
     <string name="title_activity_evaluacion_notas" translatable="false">Notas Eval.</string>
+    <string name="notas_see_more">See More</string>
     <string name="action_filter">Type Filter</string>
     <string name="evaluacion_filer_by">Filter by</string>
     <string name="evaluacion_filer_type">Type</string>

@@ -184,4 +184,5 @@
 <p>En caso de inconsistencias entre traducciones de este documento, siempre prevalecer&aacute; lo que dicte la versi&oacute;n en castellano ante cualquier otra.</p>]]></string>
     <string name="error_unexpected_long">Por favor reinicia la app</string>
     <string name="shortcut2">Instalar acceso al eMail de la UA</string>
+    <string name="notas_see_more">Ver mas</string>
 </resources>

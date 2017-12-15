@@ -7,6 +7,7 @@
 
     <!-- Apps Color -->
     <color name="colorPrimaryDarkGreen">#009688</color>
+    <color name="colorPrimaryDarkBlue">#448aff</color>
 
     <!-- Light -->
     <color name="colorPrimaryLight">#FFFFFF</color>

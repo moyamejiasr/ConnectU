@@ -27,10 +27,12 @@ import com.onelio.connectu.Activities.Apps.Evaluacion.EvaluacionActivity;
 import com.onelio.connectu.Activities.Apps.Evaluacion.EvaluacionFilterDialog;
 import com.onelio.connectu.Activities.Apps.Evaluacion.EvaluacionViewDialog;
 import com.onelio.connectu.Adapters.EvaluacionAdapter;
+import com.onelio.connectu.Adapters.NotasAdapter;
 import com.onelio.connectu.App;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Containers.AcademicYear;
 import com.onelio.connectu.Containers.EvaluacionData;
+import com.onelio.connectu.Containers.NotaData;
 import com.onelio.connectu.Helpers.ObjectHelper;
 import com.onelio.connectu.Managers.AlertManager;
 import com.onelio.connectu.Managers.ErrorManager;
@@ -51,7 +53,7 @@ public class NotasActivity extends AppCompatActivity {
     private LinearLayoutManager mLayoutManager;
     private LinearLayout emptyView;
     private ProgressBar progress;
-    List<EvaluacionData> events;
+    List<NotaData> events;
     SwipeRefreshLayout layout;
 
     private ListAdapter yearAdapter;
@@ -69,8 +71,8 @@ public class NotasActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimaryDarkGreen));
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkGreen));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimaryDarkBlue));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkBlue));
         }
         app = (App) this.getApplication();
         //SetView
@@ -189,7 +191,7 @@ public class NotasActivity extends AppCompatActivity {
         isUpdating = true;
         progress.setVisibility(View.VISIBLE);
         events = new ArrayList<>();
-        mAdapter = new EvaluacionAdapter(getBaseContext(), onClick, events);
+        mAdapter = new NotasAdapter(getBaseContext(), events);
         recyclerView.setAdapter(mAdapter);
         emptyView.setVisibility(View.GONE);
         request.fetchGrades(new NotasRequest.NotasCallback() {
@@ -202,9 +204,9 @@ public class NotasActivity extends AppCompatActivity {
                         isUpdating = false;
                         layout.setRefreshing(false);
                         if (onResult) {
-                            /*events = request.getEvents();
-                            mAdapter = new EvaluacionAdapter(getBaseContext(), onClick, events);
-                            recyclerView.setAdapter(mAdapter);*/
+                            events = request.getGrades();
+                            mAdapter = new NotasAdapter(getBaseContext(), events);
+                            recyclerView.setAdapter(mAdapter);
                             if (events.isEmpty()) {
                                 emptyView.setVisibility(View.VISIBLE);
                                 recyclerView.setVisibility(View.GONE);
@@ -279,13 +281,6 @@ public class NotasActivity extends AppCompatActivity {
             } else {
                 layout.setRefreshing(false);
             }
-        }
-    };
-
-    EvaluacionAdapter.OnItemClickListener onClick = new EvaluacionAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int item) {
-            //TODO ADD
         }
     };
 

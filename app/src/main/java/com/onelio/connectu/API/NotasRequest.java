@@ -90,6 +90,10 @@ public class NotasRequest {
         });
     }
 
+    public List<NotaData> getGrades() {
+        return grades;
+    }
+
     public void fetchGrades(final NotasCallback callback) {
         grades = new ArrayList<>();
         String json = "asignatura=" + parseSubject() + "&caca=" + parseYear();

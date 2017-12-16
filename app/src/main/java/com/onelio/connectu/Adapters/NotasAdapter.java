@@ -92,7 +92,14 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> 
         } else {
             scolor = Color.GREEN;
         }
-        TextDrawable drawable = TextDrawable.builder().buildRect(String.valueOf(grade.getNota()), scolor);
+
+        String nota;
+        if((int)grade.getNota() == grade.getNota()){ //Check if is exact
+            nota = String.valueOf((int)grade.getNota());
+        } else {
+            nota = String.valueOf(grade.getNota());
+        }
+        TextDrawable drawable = TextDrawable.builder().buildRect(nota, scolor);
 
         holder.count.setImageDrawable(drawable);
         holder.type.setText(AppManager.capFirstLetter(type));

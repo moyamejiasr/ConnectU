@@ -44,6 +44,8 @@ public class AccountData {
     }
 
     public String getExecution(){
+        if (execution==null)
+            return "";
         return execution;
     }
 

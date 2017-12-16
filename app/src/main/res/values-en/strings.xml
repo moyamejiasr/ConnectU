@@ -69,10 +69,10 @@
     <string name="home_title_notifications">Pending Notifications</string>
     <string name="home_title_reminder">Important Reminders</string>
     <string name="home_title_schedule">Today/'s Schedule</string>
-    <string name="horario_docente">Incluir Docencia</string><!--?--!>
-    <string name="horario_evaluativo">Incluir Evaluación</string>
-    <string name="horario_ex_menes">Incluir Exámenes</string>
-    <string name="horario_festivos">Incluir Festivos</string>
+    <string name="horario_docente">Include Classes</string>
+    <string name="horario_evaluativo">Include Evaluations</string>
+    <string name="horario_ex_menes">Include Exams</string>
+    <string name="horario_festivos">Include Holidays</string>
     <string name="loading">Hello, stranger!</string>
     <string name="loading1">We/'re loading…</string>
     <string name="loading2">We want to offer you…</string>

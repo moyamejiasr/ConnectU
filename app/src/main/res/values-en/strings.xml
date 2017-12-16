@@ -16,36 +16,36 @@
     <string name="app_name_error">ConnectU Error</string>
     <string name="apps_expediente_fail_reason">Not available as of right now</string>
     <string name="back_to_exit">Press the back button again to exit</string>
-    <string name="blank_favorites">You haven/'t marked anything yet to be reminded of</string>
+    <string name="blank_favorites">You haven\'t marked anything yet to be reminded of</string>
     <string name="completed">Completed</string>
     <string name="custom">UI Configuration</string>
     <string name="date_time_days">days</string>
     <string name="date_time_hours">hours</string>
     <string name="date_time_moment">one moment</string>
     <string name="date_time_months">months</string>
-    <string name="date_time_prev">ago</string><!--one moment ago, instead of ago one moment / hace un momento--!>
+    <string name="date_time_prev">ago</string><!--one moment ago, instead of ago one moment / hace un momento-->
     <string name="deny">Deny</string>
     <string name="error_bad_response">Error, UACloud gave a bad response. Please try again later!</string>
-    <string name="error_casting_action">We couldn/'t do that, please try again later</string>
+    <string name="error_casting_action">We couldn\'t do that, please try again later</string>
     <string name="error_download_cancel">Action cancelled, local storage permission denied!</string>
     <string name="error_external_app">Error calling external app.</string>
-    <string name="error_file_not_downloaded">Error, we weren/'t able to download that file</string>
-    <string name="error_find_open">We couldn/'t find any app to open this file!</string>
-    <string name="error_find_show">We didn/'t find anything to show you</string>
+    <string name="error_file_not_downloaded">Error, we weren\'t able to download that file</string>
+    <string name="error_find_open">We couldn\'t find any app to open this file!</string>
+    <string name="error_find_show">We didn\'t find anything to show you</string>
     <string name="error_login_failed">Unknown error. Please try again later</string>
     <string name="error_materiales_session_ended">Session ended, return to the menu and try again</string>
-    <string name="error_no_internet">Error, we weren/'t able to connect to UACloud.</string>
+    <string name="error_no_internet">Error, we weren\'t able to connect to UACloud.</string>
     <string name="error_no_logged">Error, UACloud closed the session. Restart the app.</string>
-    <string name="error_no_maps">Error, you don/'t have Google Maps installed.</string>
-    <string name="error_notificatin_null">We weren/'t able to show you this notification at this time.</string>
+    <string name="error_no_maps">Error, you don\'t have Google Maps installed.</string>
+    <string name="error_notificatin_null">We weren\'t able to show you this notification at this time.</string>
     <string name="error_notificatin_null_title">Notification error</string>
-    <string name="error_problem_service">Error, we weren/'t able to get information from a service. Please try again. If the problem persists please contact rmoya98@gmail.com with the following code:</string>
-    <string name="error_unable_display">We weren/'t able to show you the content at this time, please try again later!</string>
+    <string name="error_problem_service">Error, we weren\'t able to get information from a service. Please try again. If the problem persists please contact rmoya98@gmail.com with the following code:</string>
+    <string name="error_unable_display">We weren\'t able to show you the content at this time, please try again later!</string>
     <string name="error_unable_show">Unable to display at this time</string>
     <string name="error_unexpected">Unexpected error</string>
     <string name="error_unkown_response_format">Error, we were unable to carry out that action. Please try again!</string>
-    <string name="error_web_older">Older versions of android don/'t allow logging in automatically, please log in manually.</string>
-    <string name="error_year_loading">We/'re already loading a new year!</string>
+    <string name="error_web_older">Older versions of android don\'t allow logging in automatically, please log in manually.</string>
+    <string name="error_year_loading">We\'re already loading a new year!</string>
     <string name="evaluacion_card_not_need_send">Nothing to send</string>
     <string name="evaluacion_card_not_open">Not opened yet</string>
     <string name="evaluacion_card_not_open_sended">Currently Closed</string>
@@ -68,16 +68,16 @@
     <string name="home_schedule">Schedule</string>
     <string name="home_title_notifications">Pending Notifications</string>
     <string name="home_title_reminder">Important Reminders</string>
-    <string name="home_title_schedule">Today/'s Schedule</string>
+    <string name="home_title_schedule">Today\'s Schedule</string>
     <string name="horario_docente">Include Classes</string>
     <string name="horario_evaluativo">Include Evaluations</string>
     <string name="horario_ex_menes">Include Exams</string>
     <string name="horario_festivos">Include Holidays</string>
     <string name="loading">Hello, stranger!</string>
-    <string name="loading1">We/'re loading…</string>
+    <string name="loading1">We\'re loading…</string>
     <string name="loading2">We want to offer you…</string>
     <string name="loading3">…the best experience</string>
-    <string name="loading4">that/'s possible.</string>
+    <string name="loading4">that\'s possible.</string>
     <string name="loading5">Almost ready</string>
     <string name="logout">Log out</string>
     <string name="logout_long">Press here to log out</string>
@@ -90,9 +90,9 @@
     <string name="materiales_sharing_you">Shared through ConnectU</string>
     <string name="materiales_type_file">PDF File</string>
     <string name="mdata">More about</string>
-    <string name="message_marked">Action completed succesfully</string>
+    <string name="message_marked">Action completed successfully</string>
     <string name="no">No</string>
-    <string name="notifi_more_text">You/'ve received several notifications since you last visited</string>
+    <string name="notifi_more_text">You\'ve received several notifications since you last visit</string>
     <string name="notifi_more_title_have">You have</string>
     <string name="notifi_more_title_more">unread notifications</string>
     <string name="notifi_more_title_more_files">pending files</string>
@@ -106,7 +106,7 @@
     <string name="shortcut">Install shortcut to the Schedule</string>
     <string name="subject">Select a subject:</string>
     <string name="theme">Theme UI</string>
-    <string name="theme_long">Customize the app/'s theme</string>
+    <string name="theme_long">Customize the app\'s theme</string>
     <string name="title_favs">Calendar</string>
     <string name="title_folder_home">Home</string>
     <string name="title_folder_unseen">Unseen files</string>
@@ -119,7 +119,7 @@
     <string name="tutoria_cancel">Cancel</string>
     <string name="tutoria_create">Create</string>
     <string name="tutoria_insert_topic">Insert Subject</string>
-    <string name="tutoria_not_found">Couldn/'t find tutoring messages for the current selections</string>
+    <string name="tutoria_not_found">Couldn\'t find tutoring messages for the current selections</string>
     <string name="tutoria_type">Type a message</string>
     <string name="tutoria_without_answer">No response</string>
     <string name="university">University of Alicante</string>
@@ -151,7 +151,7 @@
     </string-array>
     <string name="title_activity_notifications">Notifications</string>
     <string name="ndata">Notification Settings</string>
-    <string name="error_empty_response">Error, UACloud didn/'t respond</string>
+    <string name="error_empty_response">Error, UACloud didn\'t respond</string>
     <string name="enablenot_long">Enable to allow the app to inform the user whenever he receives a new notification</string>
     <string name="enablenot">Enable Notifications</string>
     <string name="displaysilnot_long">Play a sound and turn led light on if these were available</string>
@@ -169,14 +169,14 @@
     <string name="tys_long">Read the terms and conditions again</string>
     <string name="message_downloading_to_d">Downloading files to the downloads folder</string>
     <string name="disclaimer"><![CDATA[<h2><span style="color: #ff0000;">ConnectU T&C</span></h2>
-<h2><span style="color: #ff0000;"><strong>It/'s important to read this!</strong></span></h2>
+<h2><span style="color: #ff0000;"><strong>It\'s important to read this!</strong></span></h2>
 <h3><span style="color: #ff6600;"><strong>-Regarding this app:</strong></span></h3>
-<p>This app is developed by students and is not the official version, for this reason it/'s not related in any way to the University of Alicante</p>
+<p>This app is developed by students and is not the official version, for this reason it\'s not related in any way to the University of Alicante</p>
 <p>The developers are not to be made responsible for possible inaccurate or unupdated information.</p>
-<p>This apps use is free of charge and in no point of time view themselves responsible to present a 100% functional version of it. If there may be any bugs or imperfections in it the developers are under no obligation to fix these. To make this process easier, the app makes use of a service that informs the developers, providing them with specific error information, aswell as the location of it, and in extreme cases an email to contact them.</p>
+<p>This apps use is free of charge and in no point of time view themselves responsible to present a 100% functional version of it. If there may be any bugs or imperfections in it the developers are under no obligation to fix these. To make this process easier, the app makes use of a service that informs the developers, providing them with specific error information, as well as the location of it, and in extreme cases an email to contact them.</p>
 <p>This app asks for permissions for connecting to the internet and storage to connect to UACloud and download and save the content contained in it. It is also possible that it asks for permissions to create shortcuts on the home screen, this last one not compulsory for the user to accept. Ultimately, this application also asks for minor permissions like Wake_CLOCK or START_ON_BOOT to guarantee the correct behavior of the notification system.</p>
-<h3><span style="color: #ff6600;"><strong>-Regarding the user/'s account information:</strong></span></h3>
-<p> So as to keep the user/'s accounts as safe as possible(This meaning the user/'s email and password), these are never sent to third parties (They are, though, sent to UACloud and the email address as a method of contacting you in case of errors), but are instead saved in android/'s system folder, in a private place where only the app can access called SharedPreferences for them to be used when connecting to UACloud.</p>
+<h3><span style="color: #ff6600;"><strong>-Regarding the user\'s account information:</strong></span></h3>
+<p> So as to keep the user\'s accounts as safe as possible(This meaning the user\'s email and password), these are never sent to third parties (They are, though, sent to UACloud and the email address as a method of contacting you in case of errors), but are instead saved in android\'s system folder, in a private place where only the app can access called SharedPreferences for them to be used when connecting to UACloud.</p>
 <p>Despite this, the developers aren/'t to be made accountable for any loss or theft of the account information inside the app, no matter if the phone is rooted or not.</p>
 <h3><span style="color: #ff6600;"><strong>-Regarding the Terms and Conditions:</strong></span></h3>
 <p>This conditions may change if it were necessary, for which the developers reserve the right to do so without any previous notice. The unknowing of the terms is not an excuse to not follow them.</p>

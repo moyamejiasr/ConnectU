@@ -177,10 +177,10 @@
 <p>This app asks for permissions for connecting to the internet and storage to connect to UACloud and download and save the content contained in it. It is also possible that it asks for permissions to create shortcuts on the home screen, this last one not compulsory for the user to accept. Ultimately, this application also asks for minor permissions like Wake_CLOCK or START_ON_BOOT to guarantee the correct behavior of the notification system.</p>
 <h3><span style="color: #ff6600;"><strong>-Regarding the user\'s account information:</strong></span></h3>
 <p> So as to keep the user\'s accounts as safe as possible(This meaning the user\'s email and password), these are never sent to third parties (They are, though, sent to UACloud and the email address as a method of contacting you in case of errors), but are instead saved in android\'s system folder, in a private place where only the app can access called SharedPreferences for them to be used when connecting to UACloud.</p>
-<p>Despite this, the developers aren/'t to be made accountable for any loss or theft of the account information inside the app, no matter if the phone is rooted or not.</p>
+<p>Despite this, the developers aren\'t to be made accountable for any loss or theft of the account information inside the app, no matter if the phone is rooted or not.</p>
 <h3><span style="color: #ff6600;"><strong>-Regarding the Terms and Conditions:</strong></span></h3>
 <p>This conditions may change if it were necessary, for which the developers reserve the right to do so without any previous notice. The unknowing of the terms is not an excuse to not follow them.</p>
-<p>You can read these terms at any time in the login screen or in the "About" option.</p>
+<p>You can read these terms at any time in the login screen or in the About option.</p>
 <p>In case of inconsistencies between the translations of this document, the information on the Spanish version will prevail above any other.</p>]]></string>
     <string name="error_unexpected_long">Please restart the app</string>
     <string name="shortcut2">Install shortcut to the UA E-Mail</string>

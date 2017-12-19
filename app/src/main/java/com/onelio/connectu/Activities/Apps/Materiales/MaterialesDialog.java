@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
@@ -81,7 +82,11 @@ public class MaterialesDialog extends Dialog {
         date.setText(AppManager.before(data.getDate(), " "));
         text.setText(data.getFileDescription());
         autor.setText(AppManager.capAfterSpace(data.getPublisherName()));
-        Picasso.with(getContext()).load(data.getPublisherPicture()).placeholder(R.drawable.ic_placeholder).into(autorPic);
+
+        //Bugfix vectors drawable bug <API 19 BY IMPREZA233
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            Picasso.with(getContext()).load(data.getPublisherPicture()).placeholder(R.drawable.ic_placeholder).into(autorPic);
+        }
 
         lExit.setOnClickListener(new View.OnClickListener() {
             @Override

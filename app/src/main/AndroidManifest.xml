@@ -109,14 +109,16 @@
         <activity
             android:name=".Activities.Apps.WebView.WebActivity"
             android:label="@string/title_activity_webview"
-            android:screenOrientation="sensor" />
+            android:screenOrientation="sensor"
+            android:configChanges="orientation|screenSize"/>
 
         <!-- Webmail UA (WebPage Mod) -->
         <activity
             android:name=".Activities.Apps.Webmail.WebmailActivity"
             android:exported="true"
             android:label="@string/title_activity_webview"
-            android:screenOrientation="sensor" />
+            android:screenOrientation="sensor"
+            android:configChanges="orientation|screenSize"/>
 
         <!-- Materiales Page -->
         <activity

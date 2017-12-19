@@ -142,7 +142,6 @@ public class WebActivity extends AppCompatActivity {
                             }
                         });
                     } else {
-                        webView.destroyDrawingCache();
                         progress.setVisibility(View.INVISIBLE);
                         webView.setVisibility(View.VISIBLE);
                     }

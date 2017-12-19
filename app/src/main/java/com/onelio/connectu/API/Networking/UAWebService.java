@@ -53,7 +53,7 @@ public class UAWebService {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    if (app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
+                    if (app.account != null && app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
                         callback.onNavigationComplete(false, ErrorManager.LOGIN_REJECTED);
                     } else {
                         if (isNotError(response)) {
@@ -99,7 +99,7 @@ public class UAWebService {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    if (app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
+                    if (app.account != null && app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
                         callback.onNavigationComplete(false, ErrorManager.LOGIN_REJECTED);
                     } else {
                         if (isNotError(response)) {
@@ -145,7 +145,7 @@ public class UAWebService {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    if (app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
+                    if (app.account != null && app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
                         callback.onNavigationComplete(false, ErrorManager.LOGIN_REJECTED);
                     } else {
                         if (isNotError(response)) {
@@ -191,7 +191,7 @@ public class UAWebService {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    if (app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
+                    if (app.account != null && app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
                         callback.onNavigationComplete(false, ErrorManager.LOGIN_REJECTED);
                     } else {
                         if (isNotError(response)) {
@@ -238,7 +238,7 @@ public class UAWebService {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    if (app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
+                    if (app.account != null && app.account.isLogged() && !isStillLoggedIn(response, stringUrl)) {
                         callback.onNavigationComplete(false, ErrorManager.LOGIN_REJECTED);
                     } else {
                         BufferedSink sink = Okio.buffer(Okio.sink(file));

@@ -177,8 +177,10 @@ public class TutoriasViewActivity extends AppCompatActivity {
             progress.show();
             text.setEnabled(false);
             v.setEnabled(false);
+            //Bugfix newline being ignored because Windows like screen
+            final String str = text.getText().toString().replace("\\n", "\\r\\n");
             if (id != null && !id.isEmpty()) {
-                request.answerTutoria(id, text.getText().toString(), new TutoriasRequest.TutoriasCallback() {
+                request.answerTutoria(id, str, new TutoriasRequest.TutoriasCallback() {
                     @Override
                     public void onResult(final boolean onResult, final String message) {
                         TutoriasViewActivity.this.runOnUiThread(new Runnable() {
@@ -186,7 +188,7 @@ public class TutoriasViewActivity extends AppCompatActivity {
                             public void run() {
                                 progress.dismiss();
                                 if (onResult) {
-                                    addBubble(text.getText().toString());
+                                    addBubble(str);
                                     text.setText("");
                                     Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
                                 } else {
@@ -202,7 +204,7 @@ public class TutoriasViewActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                request.createTutoria(subjectID, authorId, title, text.getText().toString(), new TutoriasRequest.TutoriasCallback() {
+                request.createTutoria(subjectID, authorId, title, str, new TutoriasRequest.TutoriasCallback() {
                     @Override
                     public void onResult(final boolean onResult, final String message) {
                         TutoriasViewActivity.this.runOnUiThread(new Runnable() {
@@ -210,7 +212,7 @@ public class TutoriasViewActivity extends AppCompatActivity {
                             public void run() {
                                 progress.dismiss();
                                 if (onResult) {
-                                    addBubble(text.getText().toString());
+                                    addBubble(str);
                                     text.setText("");
                                     Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
                                 } else {

@@ -130,7 +130,7 @@ public class NotasRequest {
             event.setTitle(jobject.getString("TITULO"));
             event.setDescription(jobject.getString("DESCRIPCION"));
             event.setObservations(jobject.getString("OBSERVACIONES"));
-            event.setNota(jobject.getLong("NOTANUM"));
+            event.setNota(jobject.getDouble("NOTANUM"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -52,7 +52,7 @@ public class NotaData {
         return nota;
     }
 
-    public void setNota(float nota) {
+    public void setNota(double nota) {
         this.nota = nota;
     }
 

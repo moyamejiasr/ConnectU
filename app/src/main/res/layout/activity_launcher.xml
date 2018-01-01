@@ -11,7 +11,7 @@
         android:id="@+id/launcher_logo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:srcCompat="@drawable/logo_launcher_christmas"
+        app:srcCompat="@drawable/logo_launcher"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"

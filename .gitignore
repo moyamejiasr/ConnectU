@@ -1,2 +1,10 @@
 
 local\.properties
+
+\.gradle/
+
+\.idea/
+
+build/
+
+app/app\.iml

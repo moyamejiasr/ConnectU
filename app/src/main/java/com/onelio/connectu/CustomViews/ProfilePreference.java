@@ -1,6 +1,7 @@
 package com.onelio.connectu.CustomViews;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -42,7 +43,12 @@ public class ProfilePreference extends Preference {
             name = "User";
         }
         user.setText(name);
-        Picasso.with(getContext()).load(app.account.getPictureURL()).placeholder(R.drawable.ic_placeholder).into(picture);
+        //Bugfix vectors drawable bug <API 19 BY IMPREZA233
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Picasso.with(getContext()).load(app.account.getPictureURL()).placeholder(R.drawable.ic_placeholder).into(picture);
+        } else {
+            Picasso.with(getContext()).load(app.account.getPictureURL()).placeholder(R.drawable.logo_launcher).into(picture);
+        }
     }
 
 }

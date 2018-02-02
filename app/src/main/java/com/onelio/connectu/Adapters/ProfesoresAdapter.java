@@ -1,6 +1,7 @@
 package com.onelio.connectu.Adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -128,8 +129,12 @@ public class ProfesoresAdapter extends RecyclerView.Adapter<ProfesoresAdapter.Vi
             holder.typeName.setText("");
             holder.typeDeliminer.setVisibility(View.GONE);
         }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            Picasso.with(context).load(teacher.getPicture()).placeholder(R.drawable.ic_placeholder).into(holder.profile);
+        } else {
+            Picasso.with(context).load(teacher.getPicture()).placeholder(R.drawable.logo_launcher).into(holder.profile);
+        }
 
-        Picasso.with(context).load(teacher.getPicture()).placeholder(R.drawable.ic_placeholder).into(holder.profile);
 
         holder.llayout.setOnTouchListener(new View.OnTouchListener() {
             @Override

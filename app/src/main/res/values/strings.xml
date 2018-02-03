@@ -182,6 +182,7 @@
     <string name="title_webapp_sigua" translatable="false">Campus Map</string>
     <string name="title_webapp_email" translatable="false">UA Webmail</string>
     <string name="title_webapp_ua" translatable="false">UACloud Platform</string>
+    <string name="title_webapp_expediente" translatable="false">Expediente</string>
     <string name="message_downloading_to_d">Downloading file to the download folder</string>
     <!-- Apps Fragment -->
     <string name="apps_expediente_fail_reason">Not available at this moment</string>

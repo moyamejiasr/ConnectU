@@ -141,6 +141,11 @@ public class EvaluacionActivity extends AppCompatActivity {
 
     private void setYearAdapters() {
         List<String> years = new ArrayList<>();
+        if (app.academicYears == null) {
+            ErrorManager error = new ErrorManager(getBaseContext());
+            error.handleError(ErrorManager.UNABLE_DISPLAY);
+            onBackPressed();
+        }
         for (AcademicYear year : app.academicYears) {
             years.add(year.getYear());
         }

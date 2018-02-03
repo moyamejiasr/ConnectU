@@ -113,7 +113,12 @@ public class AppsMenuFragment extends Fragment {
                     startActivity(intentNotas, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
                 case 8: //Expediente
-                    Toast.makeText(getContext(), getString(R.string.apps_expediente_fail_reason), Toast.LENGTH_SHORT).show();
+                    Intent intentex = new Intent(getActivity(), WebActivity.class);
+                    intentex.putExtra(Common.WEBVIEW_EXTRA_COLOR, Color.parseColor("#07aaf4"));
+                    intentex.putExtra(Common.WEBVIEW_EXTRA_NAME, getString(R.string.title_webapp_expediente));
+                    intentex.putExtra(Common.WEBVIEW_EXTRA_URL, WebApps.Expediente);
+                    intentex.putExtra(Common.WEBVIEW_EXTRA_NLOGIN, false);
+                    startActivity(intentex, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
                 case 9: //UAProject
                     Intent intentUAProject = new Intent(getActivity(), WebActivity.class);

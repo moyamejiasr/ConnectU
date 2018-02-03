@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -136,6 +137,11 @@ public class NotasActivity extends AppCompatActivity {
 
     private void setYearAdapters() {
         List<String> years = new ArrayList<>();
+        if (app.academicYears == null) {
+            ErrorManager error = new ErrorManager(getBaseContext());
+            error.handleError(ErrorManager.UNABLE_DISPLAY);
+            onBackPressed();
+        }
         for (AcademicYear year : app.academicYears) {
             years.add(year.getYear());
         }
@@ -271,7 +277,11 @@ public class NotasActivity extends AppCompatActivity {
                     filterSubject(which);
                 }
             });
-            alert.show();
+            try {
+                alert.show();
+            }catch (WindowManager.BadTokenException e) {
+                //Prevent crash when activity closed
+            }
         }
     }
 

@@ -8,5 +8,6 @@ public class WebApps {
     public static String Sigua = "https://www.sigua.ua.es";
     public static String Webmail = "https://www1.webmail.ua.es/login0.php3?idi=es";
     public static String UACloud = "https://autentica.cpd.ua.es/cas/login?service=https://cvnet.cpd.ua.es/uacloud/home/indexVerificado?version=movil";
+    public static String Expediente = "https://autentica.cpd.ua.es/cas/login?service=https%3a%2f%2fcvnet.cpd.ua.es%2fuaExpeAca";
 
 }

@@ -86,6 +86,9 @@ public class MaterialesDialog extends Dialog {
         //Bugfix vectors drawable bug <API 19 BY IMPREZA233
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             Picasso.with(getContext()).load(data.getPublisherPicture()).placeholder(R.drawable.ic_placeholder).into(autorPic);
+        } else {
+            Picasso.with(getContext()).load(data.getPublisherPicture()).placeholder(R.drawable.logo_launcher).into(autorPic);
+
         }
 
         lExit.setOnClickListener(new View.OnClickListener() {

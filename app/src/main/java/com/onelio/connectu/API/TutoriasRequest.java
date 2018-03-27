@@ -175,6 +175,8 @@ public class TutoriasRequest {
                         html = jtutoria.getString(4);
                         id = jtutoria.getString(5);
                     }
+                    Document docname = Jsoup.parse(name);
+                    name = docname.select("span").first().text().replace("\n", "");
                     Document doc = Jsoup.parse(html);
                     Elements elements = doc.select("img");
                     String user = elements.attr("title");

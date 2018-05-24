@@ -1,6 +1,7 @@
 package com.onelio.connectu.API;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.Networking.UAWebService;
@@ -15,10 +16,19 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class LoginRequest {
 
@@ -52,8 +62,8 @@ public class LoginRequest {
             json = "username=" + URLEncoder.encode(loginUsername, "UTF-8") +
                     "&password=" + loginPassword +
                     "&execution=" + app.account.getExecution() +
-                    "&_eventId=submit&geolocation=";
-        } catch (UnsupportedEncodingException e) {
+                    "&_eventId=" + app.account.getEvent() + "&geolocation=";
+        } catch (Exception e) {
             FirebaseCrash.report(e);
         }
         return json;
@@ -88,11 +98,13 @@ public class LoginRequest {
     private void getSessionFromBody(Document doc) throws NullPointerException { //Throws added to handle in case of server fail on response
         //Get Post data
         Element exe = doc.select("input[name=execution]").first();
-        if (exe == null) {
-            app.account.setExecution("");
-            return;
+        if (exe != null) {
+            app.account.setExecution(exe.attr("value"));
         }
-        app.account.setExecution(exe.attr("value"));
+        Element eve = doc.select("input[name=_eventId]").first();
+        if (eve != null) {
+            app.account.setEvent(eve.attr("value"));
+        }
     }
 
     private void saveLoginData() {
@@ -156,5 +168,4 @@ public class LoginRequest {
             }
         });
     }
-
 }

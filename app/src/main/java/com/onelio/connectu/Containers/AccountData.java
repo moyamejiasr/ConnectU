@@ -4,6 +4,7 @@ public class AccountData {
 
     //Session
     private String execution;
+    private String event;
     private String email;
     private String password;
 
@@ -41,6 +42,16 @@ public class AccountData {
 
     public void setExecution(String execution){
         this.execution = execution;
+    }
+
+    public String getEvent(){
+        if (event==null)
+            return "";
+        return event;
+    }
+
+    public void setEvent(String event){
+        this.event = event;
     }
 
     public String getExecution(){

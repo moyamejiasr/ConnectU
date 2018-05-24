@@ -69,8 +69,7 @@ public class HttpClient {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
                 .cookieJar(app.cookieJar);
 
-        String version = AppManager.getAppVersion(context);
-        builder.addInterceptor(new UserAgentInterceptor(strUserAgent + version));
+        builder.addInterceptor(new UserAgentInterceptor(strUserAgent));
         client = builder.build();
     }
 
@@ -84,8 +83,7 @@ public class HttpClient {
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS);
 
-        String version = AppManager.getAppVersion(context);
-        builder.addInterceptor(new UserAgentInterceptor(strUserAgent + version));
+        builder.addInterceptor(new UserAgentInterceptor(strUserAgent));
         client = builder.build();
     }
 

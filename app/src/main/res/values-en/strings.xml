@@ -25,27 +25,27 @@
     <string name="date_time_months">months</string>
     <string name="date_time_prev">ago</string><!--one moment ago, instead of ago one moment / hace un momento-->
     <string name="deny">Deny</string>
-    <string name="error_bad_response">Error, UACloud gave a bad response. Please try again later!</string>
-    <string name="error_casting_action">We couldn\'t do that, please try again later</string>
-    <string name="error_download_cancel">Action cancelled, local storage permission denied!</string>
+    <string name="error_bad_response">Error sending information to UACloud. Try again later</string>
+    <string name="error_casting_action">We couldn\'t do that, try again later</string>
+    <string name="error_download_cancel">Action cancelled. Local storage permission denied</string>
     <string name="error_external_app">Error calling external app.</string>
-    <string name="error_file_not_downloaded">Error, we weren\'t able to download that file</string>
-    <string name="error_find_open">We couldn\'t find any app to open this file!</string>
+    <string name="error_file_not_downloaded">Cannot download that file</string>
+    <string name="error_find_open">We couldn\'t find any app to open this file</string>
     <string name="error_find_show">We didn\'t find anything to show you</string>
     <string name="error_login_failed">Unknown error. Please try again later</string>
     <string name="error_materiales_session_ended">Session ended, return to the menu and try again</string>
-    <string name="error_no_internet">Error, we weren\'t able to connect to UACloud.</string>
-    <string name="error_no_logged">Error, UACloud closed the session. Restart the app.</string>
-    <string name="error_no_maps">Error, you don\'t have Google Maps installed.</string>
+    <string name="error_no_internet">Cannot connect to UACloud.</string>
+    <string name="error_no_logged">UACloud closed the session. Restart the app.</string>
+    <string name="error_no_maps">You don\'t have Google Maps installed.</string>
     <string name="error_notificatin_null">We weren\'t able to show you this notification at this time.</string>
     <string name="error_notificatin_null_title">Notification error</string>
-    <string name="error_problem_service">Error, we weren\'t able to get information from a service. Please try again. If the problem persists please contact rmoya98@gmail.com with the following code:</string>
-    <string name="error_unable_display">We weren\'t able to show you the content at this time, please try again later!</string>
+    <string name="error_problem_service">We weren\'t able to get information from a service. Please try again. If the problem persists please contact rmoya98@gmail.com with the following code:</string>
+    <string name="error_unable_display">We weren\'t able to show you the content at this time, please try again later</string>
     <string name="error_unable_show">Unable to display at this time</string>
     <string name="error_unexpected">Unexpected error</string>
-    <string name="error_unkown_response_format">Error, we were unable to carry out that action. Please try again!</string>
+    <string name="error_unkown_response_format">We were unable to carry out that action. Please try again</string>
     <string name="error_web_older">Older versions of android don\'t allow logging in automatically, please log in manually.</string>
-    <string name="error_year_loading">We\'re already loading a new year!</string>
+    <string name="error_year_loading">We\'re already loading a new year</string>
     <string name="evaluacion_card_not_need_send">Nothing to send</string>
     <string name="evaluacion_card_not_open">Not opened yet</string>
     <string name="evaluacion_card_not_open_sended">Currently Closed</string>
@@ -64,7 +64,7 @@
     <string name="gdata">General Settings</string>
     <string name="home_blank_mini_notifications">No new notifications</string>
     <string name="home_blank_notifications">No new notifications</string>
-    <string name="home_end">You reached the end of the page!</string>
+    <string name="home_end">You reached the end of the page</string>
     <string name="home_schedule">Schedule</string>
     <string name="home_title_notifications">Pending Notifications</string>
     <string name="home_title_reminder">Important Reminders</string>
@@ -73,7 +73,7 @@
     <string name="horario_evaluativo">Include Evaluations</string>
     <string name="horario_ex_menes">Include Exams</string>
     <string name="horario_festivos">Include Holidays</string>
-    <string name="loading">Hello, stranger!</string>
+    <string name="loading">Hello, stranger</string>
     <string name="loading1">We\'re loading…</string>
     <string name="loading2">We want to offer you…</string>
     <string name="loading3">…the best experience</string>
@@ -151,7 +151,7 @@
     </string-array>
     <string name="title_activity_notifications">Notifications</string>
     <string name="ndata">Notification Settings</string>
-    <string name="error_empty_response">Error, UACloud didn\'t respond</string>
+    <string name="error_empty_response">UACloud didn\'t respond</string>
     <string name="enablenot_long">Enable to allow the app to inform the user whenever he receives a new notification</string>
     <string name="enablenot">Enable Notifications</string>
     <string name="displaysilnot_long">Play a sound and turn led light on if these were available</string>
@@ -169,7 +169,7 @@
     <string name="tys_long">Read the terms and conditions again</string>
     <string name="message_downloading_to_d">Downloading files to the downloads folder</string>
     <string name="disclaimer"><![CDATA[<h2><span style="color: #ff0000;">ConnectU T&C</span></h2>
-<h2><span style="color: #ff0000;"><strong>It\'s important to read this!</strong></span></h2>
+<h2><span style="color: #ff0000;"><strong>It\'s important to read this</strong></span></h2>
 <h3><span style="color: #ff6600;"><strong>-Regarding this app:</strong></span></h3>
 <p>This app is developed by students and is not the official version, for this reason it\'s not related in any way to the University of Alicante</p>
 <p>The developers are not to be made responsible for possible inaccurate or unupdated information.</p>

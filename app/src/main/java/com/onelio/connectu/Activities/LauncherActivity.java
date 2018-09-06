@@ -57,6 +57,7 @@ public class LauncherActivity extends AppCompatActivity {
         profile   = (CircleImageView) findViewById(R.id.launcher_cimage);
         ltext     = (TextView) findViewById(R.id.launcher_ltext);
         undefProg = (ProgressBar) findViewById(R.id.undefProg);
+
         // Initialize app networking
         FirebaseCrash.log("01-Launched");
         app = (App) LauncherActivity.this.getApplication();
@@ -66,9 +67,10 @@ public class LauncherActivity extends AppCompatActivity {
         sessionCreate();
     }
 
-    //Request user first login
+    // Processing user first login.
     void sessionCreate() {
         FirebaseCrash.log("02-Creating login");
+
         final LoginRequest login = new LoginRequest(this);
         login.createSession(new LoginRequest.LoginCallback() {
             @Override
@@ -79,7 +81,7 @@ public class LauncherActivity extends AppCompatActivity {
                         public void run() {
                             if (app.loadUser()) {
                                 //Continue to login
-                                login.loginAccount(app.account.getEmail(), app.account.getPassword(), onUserLogin);
+                                login.loginAccount(app.account.Email, app.account.Password, onUserLogin);
                             } else {
                                 //Do first login
                                 FirebaseCrash.log("03-Requesting first login");
@@ -162,7 +164,7 @@ public class LauncherActivity extends AppCompatActivity {
         }
         super.onResume();
         //Success login??
-        if(app.account.isLogged()) {
+        if(app.account.isLogged) {
             if (isFirstResume) {
                 //Continue to Main management
                 isFirstResume = false;
@@ -185,7 +187,7 @@ public class LauncherActivity extends AppCompatActivity {
         if (UpdaterHelper.isFirstLauncher(app.lastUpdateTime)) { //Update first time data
             undefProg.setVisibility(View.INVISIBLE);
             Picasso.with(getBaseContext())
-                    .load(app.account.getPictureURL())
+                    .load(app.account.PictureURL)
                     .error(R.drawable.ic_placeholder)
                     .into(profile, new com.squareup.picasso.Callback() {
                         @Override

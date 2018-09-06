@@ -36,7 +36,7 @@ public class NotificationManager {
     }
 
     public void setRecurrentService() {
-        int time = app.account.getNotificationTime();
+        int time = app.account.NotificationTime;
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), time, pendingIntent);
     }
 

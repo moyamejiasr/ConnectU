@@ -31,20 +31,17 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginRequest {
-
-    //Private definitions
+    // Private definitions
     private static String LOGIN_DOMAIN = "https://autentica.cpd.ua.es/cas/login?service=https%3a%2f%2fcvnet.cpd.ua.es%2fuacloud%2fhome%2findexVerificado";
-    //Private content
-    //Session
+    // Private content
+    // Session
     private Context context;
     private App app;
-    //Error
-    private int error;
-    private String err_message;
+    // Error
+    private String err;
 
     //define callback interface
     public interface LoginCallback {
-
         void onLoginResult(boolean onResult, String message);
     }
 
@@ -52,8 +49,7 @@ public class LoginRequest {
     public LoginRequest(Context context) {
         app = (App) context.getApplicationContext();
         this.context = context;
-        error = 0;
-        err_message = "Error, Alert not added";
+        err = "error: alert not added";
     }
 
     private String getJData(String loginUsername, String loginPassword) {
@@ -61,8 +57,8 @@ public class LoginRequest {
         try {
             json = "username=" + URLEncoder.encode(loginUsername, "UTF-8") +
                     "&password=" + loginPassword +
-                    "&execution=" + app.account.getExecution() +
-                    "&_eventId=" + app.account.getEvent() + "&geolocation=";
+                    "&execution=" + app.account.Execution +
+                    "&_eventId=" + app.account.Event + "&geolocation=";
         } catch (Exception e) {
             FirebaseCrash.report(e);
         }
@@ -70,40 +66,40 @@ public class LoginRequest {
     }
 
     private boolean loginConfirmState(Document doc, String user) {
-        //Get User Data
-        error = 0;
-        err_message = "Error, Alert not added";
+        // Get user data
+        int errn = 0;
+        err = "error: Alert not added";
         String name = "";
         try {
             name = doc.select("span[id=nombre]").first().text();
-            error = doc.select("div.contenido-caja-texto > div.row").get(0).children().size(); //Get Count of alerts
-            err_message = doc.select("div.contenido-caja-texto > div.row").get(0).children().text(); //Get text inside
+            errn = doc.select("div.contenido-caja-texto > div.row").get(0).children().size(); // Get Count of alerts
+            err = doc.select("div.contenido-caja-texto > div.row").get(0).children().text(); //Get text inside
         } catch (Exception ex) {}//In case of 0, prevent exception
 
-        if (error > 0) { // If 0 we have no alerts, Which usually means login success
+        if (errn > 0) { // If 0 we have no alerts, Which usually means login success
             return false;
         } else {
-            //Confirm that name is not invalid
-            if (!name.equals("Usuario no validado")) {
+            // Confirm that name is not invalid
+            if (!name.contains("Usuario no validado")) {
                 return true; // Name is valid, continue login
             } else {
-                //User still not match but error not found, that means that the error is in the method so let's report it
+                // User still not match but error not found, that means that the error is in the method so let's report it
                 FirebaseCrash.report(new Exception(user + " " + doc.text()));
-                err_message = context.getString(R.string.error_login_failed);
+                err = context.getString(R.string.error_login_failed);
                 return false;
             }
         }
     }
 
     private void getSessionFromBody(Document doc) throws NullPointerException { //Throws added to handle in case of server fail on response
-        //Get Post data
+        // Get Post data
         Element exe = doc.select("input[name=execution]").first();
         if (exe != null) {
-            app.account.setExecution(exe.attr("value"));
+            app.account.Execution = exe.attr("value");
         }
         Element eve = doc.select("input[name=_eventId]").first();
         if (eve != null) {
-            app.account.setEvent(eve.attr("value"));
+            app.account.Event = eve.attr("value");
         }
     }
 
@@ -148,17 +144,17 @@ public class LoginRequest {
                         if (loginSuccess) {
                             FirebaseCrash.log("Loggin success");
                             saveLoginData(); //Save date & version of actual login
-                            app.account.setEmail(user);
-                            app.account.setPassword(pass);
-                            app.account.setName(doc.select("a.dropdown-toggle > span[id=nombre]").text());
-                            app.account.setPictureURL(doc.select("a.dropdown-toggle > span[id=retrato] > img").attr("src"));
+                            app.account.Email = user;
+                            app.account.Password = pass;
+                            app.account.Name = doc.select("a.dropdown-toggle > span[id=nombre]").text();
+                            app.account.PictureURL = doc.select("a.dropdown-toggle > span[id=retrato] > img").attr("src");
                             HomeRequest notificationsLoader = new HomeRequest(context);
                             notificationsLoader.parseAlertsFromBody(body);
                         } else {
                             getSessionFromBody(doc);
                         }
-                        app.account.setLogged(loginSuccess);
-                        callback.onLoginResult(loginSuccess, err_message);
+                        app.account.isLogged = loginSuccess;
+                        callback.onLoginResult(loginSuccess, err);
                     } else {
                         callback.onLoginResult(false, body);
                     }

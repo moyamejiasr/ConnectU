@@ -123,8 +123,8 @@ public class WebActivity extends AppCompatActivity {
     private void startControllers() {
         webView.loadUrl(url);
         final String js = "javascript:document.getElementById('username').value = '"
-                + app.account.getEmail() + "';document.getElementById('password').value='"
-                + app.account.getPassword() + "';document.getElementsByName('submit')[0].click();";
+                + app.account.Email + "';document.getElementById('password').value='"
+                + app.account.Password + "';document.getElementsByName('submit')[0].click();";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webView.setWebViewClient(new WebViewClient() {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)

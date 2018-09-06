@@ -76,5 +76,4 @@ public class Common {
 
     //Global Reminders
     public static String GLOBAL_STRINGS_REMINDERS = "reminders";
-
 }

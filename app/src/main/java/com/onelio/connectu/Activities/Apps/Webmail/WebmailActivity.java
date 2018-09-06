@@ -126,8 +126,8 @@ public class WebmailActivity extends AppCompatActivity {
     private void startControllers() {
         webView.loadUrl(url);
         final String js = "javascript:document.getElementById('usuario').value = '"
-                + app.account.getEmail() + "';document.getElementById('pass').value='"
-                + app.account.getPassword() + "';document.getElementsByName('Enviar')[0].click();";
+                + app.account.Email + "';document.getElementById('pass').value='"
+                + app.account.Password + "';document.getElementsByName('Enviar')[0].click();";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webView.setWebViewClient(new WebViewClient() {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)

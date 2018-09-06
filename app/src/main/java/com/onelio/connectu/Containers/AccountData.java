@@ -1,88 +1,18 @@
 package com.onelio.connectu.Containers;
 
 public class AccountData {
+    // User login information.
+    public String Execution;
+    public String Event;
+    public String Email;
+    public String Password;
 
-    //Session
-    private String execution;
-    private String event;
-    private String email;
-    private String password;
+    // Profile info.
+    public boolean isLogged = false;
+    public String Name;
+    public String PictureURL;
 
-    //Profile
-    private boolean isLogged = false;
-    private String name;
-    private String pictureURL;
-
-    //Settings
-    private int notificationTime = 2700000; //45 min
-
-    public void setPassword(String password){
-        this.password = password;
-    }
-
-    public String getPassword(){
-        return password;
-    }
-
-    public void setEmail(String email){
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setLogged(boolean isLogged){
-        this.isLogged = isLogged;
-    }
-
-    public boolean isLogged() {
-        return isLogged;
-    }
-
-    public void setExecution(String execution){
-        this.execution = execution;
-    }
-
-    public String getEvent(){
-        if (event==null)
-            return "";
-        return event;
-    }
-
-    public void setEvent(String event){
-        this.event = event;
-    }
-
-    public String getExecution(){
-        if (execution==null)
-            return "";
-        return execution;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setPictureURL(String pic) {
-        this.pictureURL = pic;
-    }
-
-    public String getPictureURL() {
-        return pictureURL;
-    }
-
-    public int getNotificationTime() {
-        return notificationTime;
-    }
-
-    public void setNotificationTime(int notificationTime) {
-        this.notificationTime = notificationTime;
-    }
-
+    // Profile settings.
+    public int NotificationTime; // Must not be lower than 10 minutes.
 
 }

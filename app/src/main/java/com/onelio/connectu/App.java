@@ -11,12 +11,14 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import com.onelio.connectu.Activities.LauncherActivity;
 import com.onelio.connectu.Containers.AcademicYear;
 import com.onelio.connectu.Containers.AccountData;
 import com.onelio.connectu.Managers.AlertManager;
 import com.onelio.connectu.Managers.DatabaseManager;
 import com.onelio.connectu.Managers.NotificationManager;
+import com.onelio.connectu.Common;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,9 +50,9 @@ public class App extends Application {
     }
 
     public void initializeNetworking() {
-        // Initialize NetWorking
+        // Creating cookie jar.
         cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getBaseContext()));
-        // Initialize userData
+        // Creating object to store account data.
         account = new AccountData();
     }
 
@@ -100,22 +102,21 @@ public class App extends Application {
         if (isLogged) {
             if (account == null)
                 account = new AccountData(); //This happens when coming from ReceiverBoot
-            account.setLogged(true);
-            account.setEmail(database.getString(Common.PREFERENCE_STRING_EMAIL));
-            account.setPassword(database.getString(Common.PREFERENCE_STRING_PASSWORD));
-            account.setNotificationTime(database.getInt(Common.PREFERENCE_INT_RECTIME));
-            if (account.getNotificationTime() == -1) {
-                account.setNotificationTime(Common.INT_REC_TIME);
+            account.isLogged = true;
+            account.Email = database.getString(Common.PREFERENCE_STRING_EMAIL);
+            account.Password = database.getString(Common.PREFERENCE_STRING_PASSWORD);
+            account.NotificationTime = database.getInt(Common.PREFERENCE_INT_RECTIME);
+            if (account.NotificationTime == -1) {
+                account.NotificationTime = Common.INT_REC_TIME;
             }
-
             try {
                 notifications = new JSONObject(database.getString(Common.PREFERENCE_JSON_NOTIFICATIONS));
-            } catch (JSONException | NullPointerException ignored) {} //If content is wrong or empty create new
+            } catch (JSONException | NullPointerException ignored) {} // TODO If content is wrong or empty create new
 
-            //Get Last Update
+            // Get Last Update
             lastUpdateTime = database.getLong(Common.PREFERENCE_LONG_LAST_UP_TIME);
 
-            //Getting Academic Years
+            // Getting Academic Years
             String ayear = database.getString(Common.PREFERENCE_JSON_ACADEMIC_YEAR);
             Type listType = new TypeToken<ArrayList<AcademicYear>>(){}.getType();
             if (ayear != null && ayear.length() != 0) {

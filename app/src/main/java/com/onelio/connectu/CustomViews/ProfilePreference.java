@@ -38,16 +38,16 @@ public class ProfilePreference extends Preference {
         App app = (App) getContext().getApplicationContext();
         TextView user = (TextView) holder.findViewById(R.id.user_Name);
         ImageView picture = (ImageView) holder.findViewById(R.id.user_Profile);
-        String name = app.account.getName();
+        String name = app.account.Name;
         if (name == null) {
             name = "User";
         }
         user.setText(name);
         //Bugfix vectors drawable bug <API 19 BY IMPREZA233
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Picasso.with(getContext()).load(app.account.getPictureURL()).placeholder(R.drawable.ic_placeholder).into(picture);
+            Picasso.with(getContext()).load(app.account.PictureURL).placeholder(R.drawable.ic_placeholder).into(picture);
         } else {
-            Picasso.with(getContext()).load(app.account.getPictureURL()).placeholder(R.drawable.logo_launcher).into(picture);
+            Picasso.with(getContext()).load(app.account.PictureURL).placeholder(R.drawable.logo_launcher).into(picture);
         }
     }
 

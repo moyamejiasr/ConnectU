@@ -49,7 +49,7 @@ public class NotificationsFragment extends PreferenceFragmentCompat {
         if (app.getPublicPreferenceB(Common.GLOBAL_SETTING_ISNOTIFON)) {
             preference.setChecked(true);
             delay.setEnabled(true);
-            delay.setValueIndex(getIdByTime(app.account.getNotificationTime()));
+            delay.setValueIndex(getIdByTime(app.account.NotificationTime));
             display.setEnabled(true);
             display.setChecked(app.getPublicPreferenceB(Common.GLOBAL_SETTING_NOTIFICATIONDISPLAY));
         } else {
@@ -72,7 +72,7 @@ public class NotificationsFragment extends PreferenceFragmentCompat {
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             app.savePublicPreference(Common.PREFERENCE_INT_RECTIME, Integer.valueOf((String)newValue));
-            app.account.setNotificationTime(Integer.valueOf((String)newValue));
+            app.account.NotificationTime = Integer.valueOf((String)newValue);
             NotificationManager manager = new NotificationManager(getContext());
             manager.deactivateRecurrentService();
             manager.setRecurrentService();

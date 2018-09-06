@@ -10,7 +10,7 @@ public class Common {
 
     //Format: OBJECTUSE_DATATYPE_DATANAME
 
-    //AccountManager
+    // AccountManager
     public static String PREFERENCE_BOOLEAN_ISLOGGED = "isLogged";
     public static String PREFERENCE_STRING_EMAIL = "userEmail";
     public static String PREFERENCE_STRING_PASSWORD = "userPassword";
@@ -22,6 +22,7 @@ public class Common {
     public static String PREFERENCE_JSON_ACADEMIC_YEAR = "academicYear";
     public static String PREFERENCE_JSON_SCHEDULE = "uaHorario";
     public static String PREFERENCE_JSON_PUBLICPREF = "publicPreferences";
+    public static String PREFERENCE_FASTMODE_ENABLED = "fastmodeEnabled";
 
     //Notifications
     public static String GROUP_KEY_ALERTS = "group_key_alerts";

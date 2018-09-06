@@ -28,13 +28,13 @@
 
                 <TextView
                     android:id="@+id/toolbar_title"
+                    style="@android:style/TextAppearance.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:textStyle="bold"
+                    android:text="@string/title_activity_notifications"
                     android:textColor="@color/textColorPrimary"
-                    style="@android:style/TextAppearance.Medium"
-                    android:text="@string/title_activity_about" />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 

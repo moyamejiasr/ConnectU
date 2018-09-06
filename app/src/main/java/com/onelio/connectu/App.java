@@ -103,6 +103,7 @@ public class App extends Application {
             if (account == null)
                 account = new AccountData(); //This happens when coming from ReceiverBoot
             account.isLogged = true;
+            account.fastmode = database.getBoolean(Common.PREFERENCE_FASTMODE_ENABLED);
             account.Email = database.getString(Common.PREFERENCE_STRING_EMAIL);
             account.Password = database.getString(Common.PREFERENCE_STRING_PASSWORD);
             account.NotificationTime = database.getInt(Common.PREFERENCE_INT_RECTIME);

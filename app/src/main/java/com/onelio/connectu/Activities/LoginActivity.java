@@ -7,10 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.Html;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.google.firebase.crash.FirebaseCrash;
@@ -30,9 +34,11 @@ public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
+    ImageButton viewButton;
     ProgressBar progress;
     boolean userch = false;
     boolean passch = false;
+    boolean displayedPass = false;
     boolean isAvailable = true;
 
     @Override
@@ -43,7 +49,23 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
         loginButton = (Button)findViewById(R.id.btn_login);
+        viewButton = (ImageButton) findViewById(R.id.showpass);
         progress = (ProgressBar)findViewById(R.id.login_progressBar);
+
+        viewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int curpos = password.getSelectionStart();
+                if(!displayedPass) {
+                    password.setInputType(InputType.TYPE_CLASS_TEXT);
+                } else {
+                    password.setInputType(InputType.TYPE_CLASS_TEXT |
+                            InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+                password.setSelection(curpos);
+                displayedPass = !displayedPass;
+            }
+        });
         username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

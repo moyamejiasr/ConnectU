@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -136,9 +137,9 @@ public class LauncherActivity extends AppCompatActivity {
         }
     };
 
-    //Request user login first time
+    // Request user login by the first time
     void requestLogin() {
-        //Login user manually
+        // Login user manually
         Intent intent = new Intent(getApplication(), LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         View imageView = findViewById(R.id.launcher_logo);
@@ -147,13 +148,12 @@ public class LauncherActivity extends AppCompatActivity {
             Pair<View, String> pair1 = Pair.create(imageView, getString(R.string.activity_login_image_trans));
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1);
             startActivity(intent, options.toBundle());
-        }
-        else {
+        } else {
             startActivity(intent);
         }
     }
 
-    //After user logged for the first login
+    // After user logged for the first login
     boolean isFirstResume = true;
     @Override
     public void onResume(){
@@ -163,7 +163,7 @@ public class LauncherActivity extends AppCompatActivity {
             e.printStackTrace(); //Prevent crash, no method
         }
         super.onResume();
-        //Success login??
+
         if(app.account.isLogged) {
             if (isFirstResume) {
                 //Continue to Main management

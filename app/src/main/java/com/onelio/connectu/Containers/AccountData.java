@@ -14,5 +14,5 @@ public class AccountData {
 
     // Profile settings.
     public int NotificationTime; // Must not be lower than 10 minutes.
-
+    public boolean fastmode = false;
 }

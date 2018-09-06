@@ -34,11 +34,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HttpClient {
-
     private OkHttpClient client;
     private App app;
     //SINCE UACLOUD FILTHY TEAM BLOCKED MY USER-AGENT NOW I NEED A NEW ONE
-    private static String strUserAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
+    private static String strUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36";
 
     public class UserAgentInterceptor implements Interceptor {
 

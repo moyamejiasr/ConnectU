@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App extends Application {
-
     public static boolean isFirstLaunch = false; //For UAService to prevent on set
     public boolean isAppRunning = false;
     public ClearableCookieJar cookieJar;

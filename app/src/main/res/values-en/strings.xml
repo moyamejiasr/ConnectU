@@ -39,7 +39,7 @@
     <string name="error_no_maps">You don\'t have Google Maps installed.</string>
     <string name="error_notificatin_null">We weren\'t able to show you this notification at this time.</string>
     <string name="error_notificatin_null_title">Notification error</string>
-    <string name="error_problem_service">We weren\'t able to get information from a service. Please try again. If the problem persists please contact rmoya98@gmail.com with the following code:</string>
+    <string name="error_problem_service">We weren\'t able to get information from a service. Please try again. If the problem persists please contact dgrripoll@gmail.com with the following code:</string>
     <string name="error_unable_display">We weren\'t able to show you the content at this time, please try again later</string>
     <string name="error_unable_show">Unable to display at this time</string>
     <string name="error_unexpected">Unexpected error</string>

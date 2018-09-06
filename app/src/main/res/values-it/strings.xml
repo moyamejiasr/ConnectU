@@ -39,7 +39,7 @@
     <string name="error_no_maps">Errore, non hai l\'applicazione Google Maps installata.</string>
     <string name="error_notificatin_null">Non è possibile mostrare la notifica in questo momento</string>
     <string name="error_notificatin_null_title">Errore di notifica</string>
-    <string name="error_problem_service">Errore, non è possibile ottenere informazioni di servizio. Perfavore riprova, e se il problema persiste contattaci a rmoya98@gmail.com con il codice:</string>
+    <string name="error_problem_service">Errore, non è possibile ottenere informazioni di servizio. Perfavore riprova, e se il problema persiste contattaci a dgrripoll@gmail.com con il codice:</string>
     <string name="error_unable_display">Non è possibile mostrare il contenuto in questo momento, riprova più tardi!</string>
     <string name="error_unable_show">Non è possibile mostrarlo in questo momento</string>
     <string name="error_unexpected">Errore inaspettato</string>

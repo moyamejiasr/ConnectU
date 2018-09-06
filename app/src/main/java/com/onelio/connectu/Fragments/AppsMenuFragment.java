@@ -167,7 +167,7 @@ public class AppsMenuFragment extends Fragment {
                     } catch (PackageManager.NameNotFoundException e) {
                         e.printStackTrace();
                     }
-                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "rmoya98@gmail.com", null));
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "dgrripoll@gmail.com", null));
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contacto Beta ConnectU Version " + version);
                     emailIntent.putExtra(Intent.EXTRA_TEXT, "Escribe aquí tu mensaje... Aceptamos reportes y sugerencias así como comentarios de todo tipo");
                     startActivity(Intent.createChooser(emailIntent, "Send email..."));

@@ -39,7 +39,7 @@
     <string name="error_no_maps">No tienes la app de Google Maps instalada.</string>
     <string name="error_notificatin_null">No nos ha sido posible mostrar esta notificación en este momento</string>
     <string name="error_notificatin_null_title">Error de notificación</string>
-    <string name="error_problem_service">No nos ha sido posible obtener información de un servicio. Por favor inténtalo de nuevo y si el problema persiste contáctanos en rmoya98@gmail.com con el código:</string>
+    <string name="error_problem_service">No nos ha sido posible obtener información de un servicio. Por favor inténtalo de nuevo y si el problema persiste contáctanos en dgrripoll@gmail.com con el código:</string>
     <string name="error_unable_display">No nos ha sido posible mostrar el contenido en este momento, Inténtalo después</string>
     <string name="error_unable_show">No posible de mostrar en este momento, inténtelo más tarde</string>
     <string name="error_unexpected">Error inesperado</string>

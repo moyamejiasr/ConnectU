@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.HomeRequest;
-import com.onelio.connectu.API.HorarioRequest;
+import com.onelio.connectu.API.ScheduleRequest;
 import com.onelio.connectu.Activities.Apps.Anuncios.AnunciosActivity;
 import com.onelio.connectu.Activities.Apps.Evaluacion.EvaluacionActivity;
 import com.onelio.connectu.Activities.Apps.Horario.HorarioDialog;
@@ -199,8 +199,8 @@ public class HomeMenuFragment extends Fragment {
     }
 
     private void loadReminders() {
-        HorarioRequest request = new HorarioRequest(getContext());
-        List<CalendarEvent> events = request.getDateEvent(new Date(), Common.HORARIO_FILTER_EXAMENES + Common.HORARIO_FILTER_EVALUACION);
+        ScheduleRequest request = new ScheduleRequest(getContext());
+        List<CalendarEvent> events = request.getDateEvent(new Date(), Common.SCHEDULE_FILTER_EXAMS + Common.SCHEDULE_FILTER_EVALUACION);
         remAdapter = new ReminderAdapter(getContext(), onReminderClick, events);
         remrecyclerView.setAdapter(remAdapter);
         if (events.isEmpty()) {
@@ -212,8 +212,8 @@ public class HomeMenuFragment extends Fragment {
     }
 
     private void loadCalendar() {
-        HorarioRequest request = new HorarioRequest(getContext());
-        List<CalendarEvent> events = request.getDateEvent(new Date(), Common.HORARIO_FILTER_DOCENCIA);
+        ScheduleRequest request = new ScheduleRequest(getContext());
+        List<CalendarEvent> events = request.getDateEvent(new Date(), Common.SCHEDULE_FILTER_DOCENCIA);
         calTimeLineAdapter = new TimeLineAdapter(getContext(), onTimeLineClick, events);
         calRecyclerView.setAdapter(calTimeLineAdapter);
         if (events.isEmpty()) {

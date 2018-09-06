@@ -20,10 +20,8 @@ import okio.BufferedSink;
 import okio.Okio;
 
 public class UAWebService {
-
     //define callback interface
     public interface WebCallBack {
-
         void onNavigationComplete(boolean isSuccessful, String body);
     }
 
@@ -223,7 +221,7 @@ public class UAWebService {
         }
     }
 
-    //Normal Download
+    // Normal Download
     public static void HttpFileDownloadRequest(final Context context, final String stringUrl, final File file, final WebCallBack callback) {
         final App app = (App) context.getApplicationContext();
         HttpClient client = new HttpClient(context, true);

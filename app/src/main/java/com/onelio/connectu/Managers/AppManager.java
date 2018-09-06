@@ -16,7 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 
 import com.google.firebase.crash.FirebaseCrash;
-import com.onelio.connectu.Activities.Apps.Horario.HorarioActivity;
+import com.onelio.connectu.Activities.Apps.Horario.ScheduleActivity;
 import com.onelio.connectu.Activities.Apps.WebView.WebApps;
 import com.onelio.connectu.Activities.Apps.Webmail.WebmailActivity;
 import com.onelio.connectu.BuildConfig;
@@ -83,7 +83,7 @@ public class AppManager {
     public static void addShortcutToHorario(Context context) {
         //Adding shortcut for MainActivity
         //on Home screen
-        Intent shortcutIntent = new Intent(context, HorarioActivity.class);
+        Intent shortcutIntent = new Intent(context, ScheduleActivity.class);
         shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

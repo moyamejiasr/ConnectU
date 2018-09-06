@@ -1,10 +1,9 @@
 package com.onelio.connectu;
 
 public class Common {
-
     /**
     Project developed by Onelio
-     This project has been developed by Onlio and don't offer any warranty of any type.
+     This project has been developed by Onelio and don't offer any warranty of any type.
      If you want to copy this software please refer to this github repository as the original
      in your app
     **/
@@ -21,7 +20,7 @@ public class Common {
     public static String PREFERENCE_INT_RECTIME = "notiTime";
     public static String PREFERENCE_LONG_LAST_UP_TIME = "lastUpdateTime";
     public static String PREFERENCE_JSON_ACADEMIC_YEAR = "academicYear";
-    public static String PREFERENCE_JSON_HORARIO = "uaHorario";
+    public static String PREFERENCE_JSON_SCHEDULE = "uaHorario";
     public static String PREFERENCE_JSON_PUBLICPREF = "publicPreferences";
 
     //Notifications
@@ -52,10 +51,10 @@ public class Common {
     public static String WEBVIEW_EXTRA_NLOGIN = "activityNeedsLogin";
 
     //Horario Filter Type
-    public static String HORARIO_FILTER_DOCENCIA = "docencia";
-    public static String HORARIO_FILTER_EVALUACION = "evaluación";
-    public static String HORARIO_FILTER_EXAMENES = "examenes";
-    public static String HORARIO_FILTER_FESTIVO = "festivos";
+    public static String SCHEDULE_FILTER_DOCENCIA = "docencia";
+    public static String SCHEDULE_FILTER_EVALUACION = "evaluación";
+    public static String SCHEDULE_FILTER_EXAMS = "examenes";
+    public static String SCHEDULE_FILTER_FESTIVO = "festivos";
 
     //Materiales
     public static String MATERIALES_TEMP_FILE = "temp";

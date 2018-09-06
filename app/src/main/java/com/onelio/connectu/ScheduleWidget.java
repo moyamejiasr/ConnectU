@@ -8,11 +8,9 @@ import android.widget.RemoteViews;
 /**
  * Implementation of App Widget functionality.
  */
-public class HorarioWidget extends AppWidgetProvider {
-
+public class ScheduleWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.horario_widget);
         //views.setTextViewText(R.id.appwidget_text, "");
 

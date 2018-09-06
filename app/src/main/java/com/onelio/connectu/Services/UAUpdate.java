@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.AcademicYearRequest;
-import com.onelio.connectu.API.HorarioRequest;
+import com.onelio.connectu.API.ScheduleRequest;
 import com.onelio.connectu.App;
 import com.onelio.connectu.Common;
 import com.onelio.connectu.Helpers.UpdaterHelper;
@@ -35,7 +35,7 @@ public class UAUpdate extends IntentService {
     private boolean isSilence = false;
 
     AcademicYearRequest request;
-    HorarioRequest hrequest;
+    ScheduleRequest hrequest;
 
     public UAUpdate() {
         super("DownloadService");
@@ -48,7 +48,7 @@ public class UAUpdate extends IntentService {
         Bundle bundle = intent.getExtras();
         isSilence = bundle.getString(Common.INTENT_KEY_UPDATE_TYPE).equals(Common.UAUPDATE_TYPE_SILENCE);
         //Start horario request
-        hrequest = new HorarioRequest(getBaseContext());
+        hrequest = new ScheduleRequest(getBaseContext());
         //Start year request
         request = new AcademicYearRequest(getBaseContext());
         request.loadYearsList(callback);
@@ -134,7 +134,7 @@ public class UAUpdate extends IntentService {
         }
     };
 
-    String htype = HorarioRequest.CALENDAR_DOCENCIA;
+    String htype = ScheduleRequest.CALENDAR_DOCENCIA;
     long hstart;
     long hend;
 
@@ -152,39 +152,39 @@ public class UAUpdate extends IntentService {
         result = Activity.RESULT_OK;
         loc = YearDataLoc.C_DOSENCIA;
         publishResults(result, loc, "");
-        hrequest.loadHorario(hstart, hend, htype, hcallback);
+        hrequest.loadSchedule(hstart, hend, htype, hcallback);
     }
 
-    HorarioRequest.HorarioCallback hcallback = new HorarioRequest.HorarioCallback() {
+    ScheduleRequest.ScheduleCallback hcallback = new ScheduleRequest.ScheduleCallback() {
         @Override
         public void onCompleted(boolean onResult, String message) {
             if (onResult) {
                 switch(loc) {
                     case C_DOSENCIA:
-                        htype = HorarioRequest.CALENDAR_EVALUACION;
+                        htype = ScheduleRequest.CALENDAR_EVALUACION;
                         loc = YearDataLoc.C_EVALUACION;
                         result = Activity.RESULT_OK;
                         publishResults(result, loc, message);
-                        hrequest.loadHorario(hstart, hend, htype, hcallback);
+                        hrequest.loadSchedule(hstart, hend, htype, hcallback);
                         break;
                     case C_EVALUACION:
-                        htype = HorarioRequest.CALENDAR_EXAMENES;
+                        htype = ScheduleRequest.CALENDAR_EXAMENES;
                         loc = YearDataLoc.C_EXAMENES;
                         result = Activity.RESULT_OK;
                         publishResults(result, loc, message);
-                        hrequest.loadHorario(hstart, hend, htype, hcallback);
+                        hrequest.loadSchedule(hstart, hend, htype, hcallback);
                         break;
                     case C_EXAMENES:
-                        htype = HorarioRequest.CAlENDAR_FESTIVOS;
+                        htype = ScheduleRequest.CAlENDAR_FESTIVOS;
                         loc = YearDataLoc.C_FESTIVOS;
                         result = Activity.RESULT_OK;
                         publishResults(result, loc, message);
-                        hrequest.loadHorario(hstart, hend, htype, hcallback);
+                        hrequest.loadSchedule(hstart, hend, htype, hcallback);
                         break;
                     case C_FESTIVOS:
                         loc = YearDataLoc.COMPLETED;
                         result = Activity.RESULT_FIRST_USER;
-                        hrequest.saveFullHorario();
+                        hrequest.saveFullSchedule();
                         publishResults(result, loc, message);
                         //Finish Update & Save update time
                         app.lastUpdateTime = UpdaterHelper.changeUpdatedDate(getBaseContext());

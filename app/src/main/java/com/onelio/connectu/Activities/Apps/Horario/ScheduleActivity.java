@@ -7,14 +7,13 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.github.badoualy.datepicker.DatePickerTimeline;
-import com.onelio.connectu.API.HorarioRequest;
+import com.onelio.connectu.API.ScheduleRequest;
 import com.onelio.connectu.Adapters.HorarioAdapter;
 import com.onelio.connectu.App;
 import com.onelio.connectu.Common;
@@ -29,7 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class HorarioActivity extends AppCompatActivity {
+public class ScheduleActivity extends AppCompatActivity {
 
     //Data
     List<CalendarEvent> events;
@@ -76,10 +75,10 @@ public class HorarioActivity extends AppCompatActivity {
         MenuItem cfest = menu.findItem(R.id.action_festivo);
 
         //Try to get filter option or use default true
-        cdoc.setChecked(app.getPublicPreferenceB(Common.HORARIO_FILTER_DOCENCIA));
-        ceva.setChecked(app.getPublicPreferenceB(Common.HORARIO_FILTER_EVALUACION));
-        cexa.setChecked(app.getPublicPreferenceB(Common.HORARIO_FILTER_EXAMENES));
-        cfest.setChecked(app.getPublicPreferenceB(Common.HORARIO_FILTER_FESTIVO));
+        cdoc.setChecked(app.getPublicPreferenceB(Common.SCHEDULE_FILTER_DOCENCIA));
+        ceva.setChecked(app.getPublicPreferenceB(Common.SCHEDULE_FILTER_EVALUACION));
+        cexa.setChecked(app.getPublicPreferenceB(Common.SCHEDULE_FILTER_EXAMS));
+        cfest.setChecked(app.getPublicPreferenceB(Common.SCHEDULE_FILTER_FESTIVO));
 
         return true;
     }
@@ -91,25 +90,25 @@ public class HorarioActivity extends AppCompatActivity {
         if (id == R.id.action_docente) {
             //Calendario Docente
             item.setChecked(!item.isChecked());
-            app.savePublicPreference(Common.HORARIO_FILTER_DOCENCIA, item.isChecked());
+            app.savePublicPreference(Common.SCHEDULE_FILTER_DOCENCIA, item.isChecked());
             getDateData(date);
             return super.onOptionsItemSelected(item);
         } else if (id == R.id.action_evaluacion) {
             //Calendario Evaluacion
             item.setChecked(!item.isChecked());
-            app.savePublicPreference(Common.HORARIO_FILTER_EVALUACION, item.isChecked());
+            app.savePublicPreference(Common.SCHEDULE_FILTER_EVALUACION, item.isChecked());
             getDateData(date);
             return super.onOptionsItemSelected(item);
         } else if (id == R.id.action_examenes) {
             //Calendario Examenes
             item.setChecked(!item.isChecked());
-            app.savePublicPreference(Common.HORARIO_FILTER_EXAMENES, item.isChecked());
+            app.savePublicPreference(Common.SCHEDULE_FILTER_EXAMS, item.isChecked());
             getDateData(date);
             return super.onOptionsItemSelected(item);
         } else if (id == R.id.action_festivo) {
             //Calendario Festivo
             item.setChecked(!item.isChecked());
-            app.savePublicPreference(Common.HORARIO_FILTER_FESTIVO, item.isChecked());
+            app.savePublicPreference(Common.SCHEDULE_FILTER_FESTIVO, item.isChecked());
             getDateData(date);
             return super.onOptionsItemSelected(item);
         } else {
@@ -125,7 +124,7 @@ public class HorarioActivity extends AppCompatActivity {
             DatabaseManager database = new DatabaseManager(getApplicationContext());
             app.lastUpdateTime = database.getLong(Common.PREFERENCE_LONG_LAST_UP_TIME);
             try {
-                app.horario = new JSONObject(database.getString(Common.PREFERENCE_JSON_HORARIO));
+                app.schedule = new JSONObject(database.getString(Common.PREFERENCE_JSON_SCHEDULE));
             } catch (JSONException | NullPointerException ignored) {}
         }
         /* end after 1 month from now */
@@ -157,7 +156,7 @@ public class HorarioActivity extends AppCompatActivity {
     }
 
     private void getDateData(Date date) {
-        HorarioRequest request = new HorarioRequest(getBaseContext());
+        ScheduleRequest request = new ScheduleRequest(getBaseContext());
         events = request.getDateEvents(date);
         mAdapter = new HorarioAdapter(getBaseContext(), onClick, events);
         recyclerView.setAdapter(mAdapter);
@@ -174,7 +173,7 @@ public class HorarioActivity extends AppCompatActivity {
     HorarioAdapter.OnItemClickListener onClick = new HorarioAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(int item) {
-            HorarioDialog dialog = new HorarioDialog(HorarioActivity.this, events.get(item));
+            HorarioDialog dialog = new HorarioDialog(ScheduleActivity.this, events.get(item));
             dialog.show();
         }
     };

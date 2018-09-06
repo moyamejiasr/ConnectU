@@ -46,19 +46,18 @@ public class LauncherActivity extends AppCompatActivity {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_launcher);
         registerReceiver(receiver, new IntentFilter(UAUpdate.NOTIFICATION));
-        //__________________________________________________________
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //Bugfix illegal access in +24 versions
+        // Bugfix illegal access in +24 versions
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
         }
-        //__________________________________________________________
-        //Set Snackbar content
-        layout = (ConstraintLayout)findViewById(R.id.launcher_layout);
-        rlayout = (RelativeLayout) findViewById(R.id.launcher_playout);
-        profile = (CircleImageView) findViewById(R.id.launcher_cimage);
-        ltext = (TextView) findViewById(R.id.launcher_ltext);
+        // Set Snackbar content
+        layout    = (ConstraintLayout)findViewById(R.id.launcher_layout);
+        rlayout   = (RelativeLayout) findViewById(R.id.launcher_playout);
+        profile   = (CircleImageView) findViewById(R.id.launcher_cimage);
+        ltext     = (TextView) findViewById(R.id.launcher_ltext);
         undefProg = (ProgressBar) findViewById(R.id.undefProg);
-        //Initialize app networking
+        // Initialize app networking
         FirebaseCrash.log("01-Launched");
         app = (App) LauncherActivity.this.getApplication();
         app.initializeNetworking();
@@ -251,7 +250,7 @@ public class LauncherActivity extends AppCompatActivity {
                     ltext.setText(getString(R.string.app_name_error));
                     ErrorManager error = new ErrorManager(LauncherActivity.this);
                     if (!error.handleError(message)) {
-                        FirebaseCrash.log("Falied doing normal update in " + num.name());
+                        FirebaseCrash.log("Failed doing normal update in " + num.name());
                         FirebaseCrash.log(message);
                         FirebaseCrash.report(new Exception("Normal Update Error"));
                         Toast.makeText(getBaseContext(), getString(R.string.error_problem_service) + " " + num.name(), Toast.LENGTH_LONG).show();

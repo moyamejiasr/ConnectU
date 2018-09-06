@@ -100,7 +100,7 @@
 
         <!-- Horario Page -->
         <activity
-            android:name=".Activities.Apps.Horario.HorarioActivity"
+            android:name=".Activities.Apps.Horario.ScheduleActivity"
             android:exported="true"
             android:label="@string/title_activity_horario"
             android:screenOrientation="portrait" />
@@ -167,7 +167,7 @@
             android:screenOrientation="portrait" />
 
         <!-- Widgets -->
-        <receiver android:name=".HorarioWidget">
+        <receiver android:name=".ScheduleWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

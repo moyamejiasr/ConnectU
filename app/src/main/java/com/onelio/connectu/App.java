@@ -33,15 +33,14 @@ public class App extends Application {
     public AccountData account;
     public JSONObject notifications = new JSONObject();
     public JSONArray newNotifications = new JSONArray();
-    //Extra
     public JSONObject publicPreferences = new JSONObject();
 
-    //Content
+    // Content
     public long lastUpdateTime = 0;
     public List<AcademicYear> academicYears;
-    public JSONObject horario = new JSONObject();
+    public JSONObject schedule = new JSONObject();
 
-    //Bugfix API 16 Ressource Compat
+    // Bugfix API 16 Resource Compat
     @Override
     public void onCreate() {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -49,9 +48,9 @@ public class App extends Application {
     }
 
     public void initializeNetworking() {
-        //Initialize NetWorking
+        // Initialize NetWorking
         cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getBaseContext()));
-        //Initialize userData
+        // Initialize userData
         account = new AccountData();
     }
 
@@ -125,9 +124,9 @@ public class App extends Application {
                 academicYears = new ArrayList<>();
             }
 
-            //Getting Horario
+            // Getting schedule
             try {
-                horario = new JSONObject(database.getString(Common.PREFERENCE_JSON_HORARIO));
+                schedule = new JSONObject(database.getString(Common.PREFERENCE_JSON_SCHEDULE));
             } catch (JSONException | NullPointerException ignored) {} //If content is wrong or empty create new
 
             //Getting Public Preferences

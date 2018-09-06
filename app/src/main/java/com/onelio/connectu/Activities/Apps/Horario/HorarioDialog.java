@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
-import com.onelio.connectu.API.HorarioRequest;
+import com.onelio.connectu.API.ScheduleRequest;
 import com.onelio.connectu.Containers.CalendarEvent;
 import com.onelio.connectu.Helpers.ObjectHelper;
 import com.onelio.connectu.Helpers.TimeParserHelper;
@@ -54,19 +53,19 @@ public class HorarioDialog extends Dialog {
         LinearLayout lExit = (LinearLayout) findViewById(R.id.llExitD);
         title.setText(event.getTitle());
         subtitle.setText(event.getSubtitle());
-        if (event.getType().equals(HorarioRequest.CALENDAR_DOCENCIA)) {
+        if (event.getType().equals(ScheduleRequest.CALENDAR_DOCENCIA)) {
             typeCard.setCardBackgroundColor(Color.parseColor("#0091EA"));
             type.setText(getContext().getString(R.string.dialog_horario_docencia));
         }
-        if (event.getType().equals(HorarioRequest.CALENDAR_EVALUACION)) {
+        if (event.getType().equals(ScheduleRequest.CALENDAR_EVALUACION)) {
             typeCard.setCardBackgroundColor(Color.parseColor("#009688"));
             type.setText(getContext().getString(R.string.dialog_horario_evaluacion));
         }
-        if (event.getType().equals(HorarioRequest.CALENDAR_EXAMENES)) {
+        if (event.getType().equals(ScheduleRequest.CALENDAR_EXAMENES)) {
             typeCard.setCardBackgroundColor(Color.parseColor("#F50057"));
             type.setText(getContext().getString(R.string.dialog_horario_examen));
         }
-        if (event.getType().equals(HorarioRequest.CAlENDAR_FESTIVOS)) {
+        if (event.getType().equals(ScheduleRequest.CAlENDAR_FESTIVOS)) {
             typeCard.setCardBackgroundColor(Color.parseColor("#FFEB3B"));
             type.setText(getContext().getString(R.string.dialog_horario_festivo));
         }
@@ -88,13 +87,13 @@ public class HorarioDialog extends Dialog {
         });
 
         //Last loadding part
-        if (event.getType().equals(HorarioRequest.CAlENDAR_FESTIVOS) || activity == null) {
+        if (event.getType().equals(ScheduleRequest.CAlENDAR_FESTIVOS) || activity == null) {
             return; //If festivo or activity null disable last segment for preventing crash
         }
 
 
-        HorarioRequest request = new HorarioRequest(activity);
-        request.getSIGUA(event, new HorarioRequest.HorarioCallback() {
+        ScheduleRequest request = new ScheduleRequest(activity);
+        request.getSIGUA(event, new ScheduleRequest.ScheduleCallback() {
             @Override
             public void onCompleted(final boolean onResult, final String message) {
                 activity.runOnUiThread(new Runnable() {

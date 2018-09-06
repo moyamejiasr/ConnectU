@@ -13,11 +13,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.onelio.connectu.Activities.Apps.Anuncios.AnunciosActivity;
 import com.onelio.connectu.Activities.Apps.Evaluacion.EvaluacionActivity;
-import com.onelio.connectu.Activities.Apps.Horario.HorarioActivity;
+import com.onelio.connectu.Activities.Apps.Horario.ScheduleActivity;
 import com.onelio.connectu.Activities.Apps.Materiales.MaterialesActivity;
 import com.onelio.connectu.Activities.Apps.Notas.NotasActivity;
 import com.onelio.connectu.Activities.Apps.Profesores.ProfesoresActivity;
@@ -101,7 +100,7 @@ public class AppsMenuFragment extends Fragment {
                     startActivity(intentMoodle, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
                 case 5: //Horario
-                    Intent intentHorario = new Intent(getActivity(), HorarioActivity.class);
+                    Intent intentHorario = new Intent(getActivity(), ScheduleActivity.class);
                     startActivity(intentHorario, AnimTransHelper.circleSlideUp(getContext(), v));
                     break;
                 case 6: //Evaluacion

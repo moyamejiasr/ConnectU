@@ -7,7 +7,7 @@
         android:shortcutShortLabel="@string/static_shortcut_message">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.onelio.connectu.Activities.Apps.Horario.HorarioActivity"
+            android:targetClass="com.onelio.connectu.Activities.Apps.Horario.ScheduleActivity"
             android:targetPackage="com.onelio.connectu" />
     </shortcut>
     <shortcut

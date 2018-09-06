@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.onelio.connectu.API.HorarioRequest;
+import com.onelio.connectu.API.ScheduleRequest;
 import com.onelio.connectu.Containers.CalendarEvent;
 import com.onelio.connectu.R;
 
@@ -76,11 +76,11 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         final CalendarEvent event = values.get(position);
         int color = Color.parseColor("#009688");
         String type = "Undefnied";
-        if (event.getType().equals(HorarioRequest.CALENDAR_EVALUACION)) {
+        if (event.getType().equals(ScheduleRequest.CALENDAR_EVALUACION)) {
             color = Color.parseColor("#00BFA5");
             type = context.getString(R.string.dialog_horario_evaluacion);
         }
-        if (event.getType().equals(HorarioRequest.CALENDAR_EXAMENES)) {
+        if (event.getType().equals(ScheduleRequest.CALENDAR_EXAMENES)) {
             color = Color.parseColor("#F44336");
             type = context.getString(R.string.dialog_horario_examen);
         }

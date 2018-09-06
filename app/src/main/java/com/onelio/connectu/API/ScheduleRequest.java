@@ -1,7 +1,6 @@
 package com.onelio.connectu.API;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.onelio.connectu.API.Networking.UAWebService;
 import com.onelio.connectu.App;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class HorarioRequest {
+public class ScheduleRequest {
 
     //Private definitions
     private static String DATES_URL = "https://cvnet.cpd.ua.es/uaHorarios/Home/ObtenerEventosCalendarioJson?calendario=";
@@ -36,33 +35,33 @@ public class HorarioRequest {
     private App app;
 
     //Content
-    private JSONObject horario;
+    private JSONObject schedule;
 
     //define callback interface
-    public interface HorarioCallback {
+    public interface ScheduleCallback {
         void onCompleted(boolean onResult, String message);
     }
 
-    public HorarioRequest(Context context) {
+    public ScheduleRequest(Context context) {
         app = (App) context.getApplicationContext();
         this.context = context;
-        horario = new JSONObject();
+        schedule = new JSONObject();
     }
 
-    public void saveFullHorario() { //Only do when all 4 horarios has been downloaded
+    public void saveFullSchedule() { //Only do when all 4 horarios has been downloaded
         DatabaseManager database = new DatabaseManager(context);
-        database.putString(Common.PREFERENCE_JSON_HORARIO, horario.toString());
-        app.horario = horario;
+        database.putString(Common.PREFERENCE_JSON_SCHEDULE, schedule.toString());
+        app.schedule = schedule;
     }
 
-    public void loadHorario (long start, long stop, final String type, final HorarioCallback callback) {
+    public void loadSchedule(long start, long stop, final String type, final ScheduleCallback callback) {
         String url = DATES_URL + type + "&start=" + String.valueOf(start) + "&end=" + String.valueOf(stop);
         UAWebService.HttpWebGetRequest(context, url, new UAWebService.WebCallBack() {
             @Override
             public void onNavigationComplete(boolean isSuccessful, String body) {
                 if (isSuccessful) {
                     try {
-                        horario.put(type, new JSONArray(body));
+                        schedule.put(type, new JSONArray(body));
                         callback.onCompleted(true, "");
                     } catch (JSONException e) {
                         callback.onCompleted(false, e.getMessage());
@@ -100,7 +99,7 @@ public class HorarioRequest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         List<CalendarEvent> events = new ArrayList<>();
         try {
-            JSONArray array = app.horario.getJSONArray(type);
+            JSONArray array = app.schedule.getJSONArray(type);
             for (int i = 0; i < array.length(); i++) {
                 CalendarEvent event = new CalendarEvent();
                 JSONObject jdata = array.getJSONObject(i);
@@ -165,29 +164,29 @@ public class HorarioRequest {
         date.setMinutes(0);
         date.setSeconds(0);
 
-        //Festivo
-        if (filter.contains(Common.HORARIO_FILTER_FESTIVO)) {
+        // Festivo
+        if (filter.contains(Common.SCHEDULE_FILTER_FESTIVO)) {
             List<CalendarEvent> festivo = getEvents(date, CAlENDAR_FESTIVOS);
             for (CalendarEvent event : festivo) {
                 result.add(event);
             }
         }
         //Examenes
-        if (filter.contains(Common.HORARIO_FILTER_EXAMENES)) {
+        if (filter.contains(Common.SCHEDULE_FILTER_EXAMS)) {
             List<CalendarEvent> examenes = getEvents(date, CALENDAR_EXAMENES);
             for (CalendarEvent event : examenes) {
                 result.add(event);
             }
         }
         //Evaluacion
-        if (filter.contains(Common.HORARIO_FILTER_EVALUACION)) {
+        if (filter.contains(Common.SCHEDULE_FILTER_EVALUACION)) {
             List<CalendarEvent> eva = getEvents(date, CALENDAR_EVALUACION);
             for (CalendarEvent event : eva) {
                 result.add(event);
             }
         }
         //Docencia
-        if (filter.contains(Common.HORARIO_FILTER_DOCENCIA)) {
+        if (filter.contains(Common.SCHEDULE_FILTER_DOCENCIA)) {
             List<CalendarEvent> docencia = getEvents(date, CALENDAR_DOCENCIA);
             for (CalendarEvent event : docencia) {
                 result.add(event);
@@ -203,28 +202,28 @@ public class HorarioRequest {
         date.setSeconds(0);
 
         //Festivo
-        if (app.getPublicPreferenceB(Common.HORARIO_FILTER_FESTIVO)) {
+        if (app.getPublicPreferenceB(Common.SCHEDULE_FILTER_FESTIVO)) {
             List<CalendarEvent> festivo = getEvents(date, CAlENDAR_FESTIVOS);
             for (CalendarEvent event : festivo) {
                 result.add(event);
             }
         }
         //Examenes
-        if (app.getPublicPreferenceB(Common.HORARIO_FILTER_EXAMENES)) {
+        if (app.getPublicPreferenceB(Common.SCHEDULE_FILTER_EXAMS)) {
             List<CalendarEvent> examenes = getEvents(date, CALENDAR_EXAMENES);
             for (CalendarEvent event : examenes) {
                 result.add(event);
             }
         }
         //Evaluacion
-        if (app.getPublicPreferenceB(Common.HORARIO_FILTER_EVALUACION)) {
+        if (app.getPublicPreferenceB(Common.SCHEDULE_FILTER_EVALUACION)) {
             List<CalendarEvent> eva = getEvents(date, CALENDAR_EVALUACION);
             for (CalendarEvent event : eva) {
                 result.add(event);
             }
         }
         //Docencia
-        if (app.getPublicPreferenceB(Common.HORARIO_FILTER_DOCENCIA)) {
+        if (app.getPublicPreferenceB(Common.SCHEDULE_FILTER_DOCENCIA)) {
             List<CalendarEvent> docencia = getEvents(date, CALENDAR_DOCENCIA);
             for (CalendarEvent event : docencia) {
                 result.add(event);
@@ -233,7 +232,7 @@ public class HorarioRequest {
         return result;
     }
 
-    public void getSIGUA(CalendarEvent event, final HorarioCallback callback) {
+    public void getSIGUA(CalendarEvent event, final ScheduleCallback callback) {
         String url = SIGUA_URL + event.getSigua();
         UAWebService.HttpWebGetRequest(context, url, new UAWebService.WebCallBack() {
             @Override

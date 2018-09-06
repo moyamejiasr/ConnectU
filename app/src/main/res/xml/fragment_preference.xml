@@ -29,6 +29,11 @@
             android:key="preference_notification"
             android:title="@string/notifications" />
 
+        <SwitchPreference
+            android:key="preference_fastmode"
+            android:title="Fastmode"
+            android:defaultValue="false" />
+
         <Preference
             android:key="preference_shortcut"
             android:title="@string/shortcut" />

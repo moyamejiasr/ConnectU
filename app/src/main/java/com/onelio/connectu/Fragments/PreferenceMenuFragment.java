@@ -2,12 +2,15 @@ package com.onelio.connectu.Fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.SwitchPreference;
 import android.support.annotation.Nullable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -20,6 +23,7 @@ import com.onelio.connectu.Common;
 import com.onelio.connectu.Containers.AcademicYear;
 import com.onelio.connectu.Managers.AlertManager;
 import com.onelio.connectu.Managers.AppManager;
+import com.onelio.connectu.Managers.DatabaseManager;
 import com.onelio.connectu.R;
 
 import java.util.ArrayList;
@@ -36,25 +40,30 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
-    {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         app = (App) getContext().getApplicationContext();
         setYearAdapters();
         view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
         Preference preference = findPreference("preference_logout");
-        preference.setOnPreferenceClickListener(onLogout);
-        Preference year = findPreference("preference_staticyear");
-        year.setOnPreferenceClickListener(onStaticYear);
         Preference test = findPreference("preference_notification");
-        test.setOnPreferenceClickListener(onNotificationsOpen);
         Preference about = findPreference("preference_about");
-        about.setOnPreferenceClickListener(onAbout);
         Preference shortcut = findPreference("preference_shortcut");
-        shortcut.setOnPreferenceClickListener(onTheme);
         Preference shortcut1 = findPreference("preference_webmail");
-        shortcut1.setOnPreferenceClickListener(onTheme1);
         Preference tys = findPreference("preference_tys");
+        Preference year = findPreference("preference_staticyear");
+        Preference fastmode = findPreference("preference_fastmode");
+
+        fastmode.setDefaultValue(app.account.fastmode);
+
+        fastmode.setOnPreferenceClickListener(onFastmodeClick);
+        preference.setOnPreferenceClickListener(onLogout);
+        year.setOnPreferenceClickListener(onStaticYear);
+        test.setOnPreferenceClickListener(onNotificationsOpen);
+        about.setOnPreferenceClickListener(onAbout);
+        shortcut.setOnPreferenceClickListener(onTheme);
+        shortcut1.setOnPreferenceClickListener(onTheme1);
         tys.setOnPreferenceClickListener(onTySRequest);
 
         String type = "release";
@@ -65,6 +74,17 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         version.setTitle("ConnectU App version " + AppManager.getAppVersion(getContext()));
         version.setSummary("You are on " + type + " mode");
     }
+
+    Preference.OnPreferenceClickListener onFastmodeClick = new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            app.account.fastmode = !app.account.fastmode;
+            DatabaseManager database = new DatabaseManager(getContext());
+            database.putBoolean(Common.PREFERENCE_FASTMODE_ENABLED, app.account.fastmode);
+            Log.d("FASTMODE", Boolean.toString(app.account.fastmode));
+            return true;
+        }
+    };
 
     private void setYearAdapters() {
         List<String> years = new ArrayList<>();

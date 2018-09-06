@@ -139,7 +139,6 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
                         android:background="@android:drawable/screen_background_light_transparent"
-                        android:transitionName="@string/activity_login_image_trans"
                         app:layout_constraintBottom_toTopOf="@+id/cardView"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"

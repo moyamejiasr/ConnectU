@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import com.onelio.connectu.R;
 
 public class NotificationsActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

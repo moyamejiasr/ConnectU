@@ -68,7 +68,6 @@ public class AppsMenuFragment extends Fragment {
         mAdapter = new AppsAdapter(getContext(), onClick, input);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addItemDecoration(new SpacesItemDecoration(getContext()));
-
     }
 
     AppsAdapter.OnItemClickListener onClick = new AppsAdapter.OnItemClickListener() {

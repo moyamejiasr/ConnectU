@@ -9,8 +9,7 @@ import android.widget.Toast;
 import com.onelio.connectu.R;
 
 public class ErrorManager {
-
-    //Data
+    // Data
     private Context context;
     private Activity activity;
     private View v;

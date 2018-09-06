@@ -12,7 +12,7 @@
     <string name="action_subject">Filter by Subject</string>
     <string name="action_year">Filter by Year</string>
     <string name="alert_loading">Loading, please wait…</string>
-    <string name="alert_logout">Are you sure you want to Log Out?</string>
+    <string name="alert_logout">Are you sure?</string>
     <string name="app_name_error">ConnectU Error</string>
     <string name="apps_expediente_fail_reason">Not available as of right now</string>
     <string name="back_to_exit">Press the back button again to exit</string>
@@ -80,7 +80,7 @@
     <string name="loading4">that\'s possible.</string>
     <string name="loading5">Almost ready</string>
     <string name="logout">Log out</string>
-    <string name="logout_long">Press here to log out</string>
+    <string name="logout_long">Press here to logout</string>
     <string name="materiales_by">by</string>
     <string name="materiales_loading">Obteniendo archivo…</string>
     <string name="materiales_loading_file">Recibiendo archivo…</string>

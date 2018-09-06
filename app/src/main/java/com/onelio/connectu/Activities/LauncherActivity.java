@@ -80,17 +80,17 @@ public class LauncherActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             if (app.loadUser()) {
-                                //Continue to login
+                                // Continue to login
                                 login.loginAccount(app.account.Email, app.account.Password, onUserLogin);
                             } else {
-                                //Do first login
+                                // Do first login
                                 FirebaseCrash.log("03-Requesting first login");
                                 requestLogin();
                             }
                         }
                     });
                 } else {
-                    //Error login in
+                    // Error logging in
                     ErrorManager error = new ErrorManager(layout);
                     if (!error.handleError(message)) {
                         Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
@@ -101,7 +101,7 @@ public class LauncherActivity extends AppCompatActivity {
         });
     }
 
-    //Normal Login completed!
+    // Normal Login completed!
     LoginRequest.LoginCallback onUserLogin = new LoginRequest.LoginCallback() {
         @Override
         public void onLoginResult(final boolean onResult, final String message) {

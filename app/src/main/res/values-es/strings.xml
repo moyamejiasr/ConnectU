@@ -13,7 +13,7 @@
     <string name="action_year">Filtro por año</string>
     <string name="alert_loading">Cargando, espere por favor…</string>
     <string name="alert_logout">¿Realmente deseas desconectarte?</string>
-    <string name="app_name_error">ConnectU Error</string>
+    <string name="app_name_error">ConnectU error</string>
     <string name="apps_expediente_fail_reason">No disponible en este momento</string>
     <string name="back_to_exit">Presiona atrás de nuevo para salir de la app</string>
     <string name="blank_favorites">Aun no has marcado nada para recordar</string>

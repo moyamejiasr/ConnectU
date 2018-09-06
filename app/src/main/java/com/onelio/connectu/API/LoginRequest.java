@@ -74,7 +74,7 @@ public class LoginRequest {
             name = doc.select("span[id=nombre]").first().text();
             errn = doc.select("div.contenido-caja-texto > div.row").get(0).children().size(); // Get Count of alerts
             err = doc.select("div.contenido-caja-texto > div.row").get(0).children().text(); //Get text inside
-        } catch (Exception ex) {}//In case of 0, prevent exception
+        } catch (Exception ex) {} // TODO: In case of 0, prevent exception
 
         if (errn > 0) { // If 0 we have no alerts, Which usually means login success
             return false;

@@ -36,13 +36,10 @@ import okhttp3.Response;
 public class HttpClient {
     private OkHttpClient client;
     private App app;
-    //SINCE UACLOUD FILTHY TEAM BLOCKED MY USER-AGENT NOW I NEED A NEW ONE
-    private static String strUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36";
+    private String UserAgent = "";
 
     public class UserAgentInterceptor implements Interceptor {
-
         private final String userAgent;
-
         public UserAgentInterceptor(String userAgent) {
             this.userAgent = userAgent;
         }
@@ -68,7 +65,10 @@ public class HttpClient {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
                 .cookieJar(app.cookieJar);
 
-        builder.addInterceptor(new UserAgentInterceptor(strUserAgent));
+        if (this.UserAgent.length() == 0) {
+            this.UserAgent = UserAgentSwitcher.Get();
+        }
+        builder.addInterceptor(new UserAgentInterceptor(this.UserAgent));
         client = builder.build();
     }
 
@@ -82,7 +82,10 @@ public class HttpClient {
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS);
 
-        builder.addInterceptor(new UserAgentInterceptor(strUserAgent));
+        if (this.UserAgent.length() == 0) {
+            this.UserAgent = UserAgentSwitcher.Get();
+        }
+        builder.addInterceptor(new UserAgentInterceptor(this.UserAgent));
         client = builder.build();
     }
 

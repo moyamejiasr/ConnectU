@@ -1,6 +1,7 @@
 <resources>
     <!-- AppData -->
     <string name="app_name">ConnectU</string>
+    <string name="app_version">2.3.4</string>
     <!-- Errors -->
     <string name="app_name_error">ConnectU Error</string>
     <string name="error_unexpected">Unexpected error</string>

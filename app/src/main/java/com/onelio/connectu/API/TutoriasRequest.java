@@ -1,6 +1,7 @@
 package com.onelio.connectu.API;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.firebase.crash.FirebaseCrash;
 import com.onelio.connectu.API.Networking.UAWebService;
@@ -27,7 +28,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class TutoriasRequest {
-
     //Private definitions
     private static String LOGIN_TUTORIAS_HECHAS = "https://cvnet.cpd.ua.es/uatutorias/emisor/hechas";
     private static String TUTORIAS_ALL_FETCH_SUBJECT = "https://cvnet.cpd.ua.es/uaTutorias/Emisor/FiltroListadoTutoHechasAsig";
@@ -109,9 +109,10 @@ public class TutoriasRequest {
     private List<BubbleData> parseBubblesFromBody(String body) {
         List<BubbleData> bubbles = new ArrayList<>();
         Document doc = Jsoup.parse(body);
-        //Get Padre
-        idPadre = doc.select("input[name=idPadre").attr("value");
-        //Get Rows
+
+        // Get Padre
+        idPadre = doc.select("input[name=idPadre]").attr("value");
+        // Get Rows
         Element chats = doc.select(TUTORIAS_LIST_BODY).first();
         try {
             for (Element chat : chats.children()) {

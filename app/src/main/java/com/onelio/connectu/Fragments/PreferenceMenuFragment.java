@@ -56,6 +56,7 @@ public class PreferenceMenuFragment extends PreferenceFragmentCompat {
         Preference fastmode = findPreference("preference_fastmode");
 
         fastmode.setDefaultValue(app.account.fastmode);
+        fastmode.setEnabled(false);
 
         fastmode.setOnPreferenceClickListener(onFastmodeClick);
         preference.setOnPreferenceClickListener(onLogout);

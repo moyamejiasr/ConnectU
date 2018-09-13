@@ -28,8 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UAService extends Service {
-
-    //Data
+    // Data
     App app;
 
     @Nullable

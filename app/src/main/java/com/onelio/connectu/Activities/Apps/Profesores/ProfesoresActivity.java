@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfesoresActivity extends AppCompatActivity {
-
     App app;
 
     //RecyclerView

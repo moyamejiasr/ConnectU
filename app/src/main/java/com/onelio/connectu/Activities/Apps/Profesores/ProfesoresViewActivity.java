@@ -54,9 +54,9 @@ public class ProfesoresViewActivity extends AppCompatActivity {
         name.setText(data.getName());
         subject.setText(data.getSubject());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            text.setText(Html.fromHtml(data.getDescription().replace("&nbsp", " "), Html.FROM_HTML_MODE_COMPACT));
+            text.setText(Html.fromHtml(data.getDescription(), Html.FROM_HTML_MODE_COMPACT).toString().replace("&nbsp", " "));
         } else {
-            text.setText(Html.fromHtml(data.getDescription().replace("nbsp", " ")));
+            text.setText(Html.fromHtml(data.getDescription()).toString().replace("&nbsp", " "));
         }
 
     }

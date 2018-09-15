@@ -4,27 +4,27 @@ import java.util.Date;
 
 public class StringReminderData {
 
-    private String text;
-    private Date date;
+  private String text;
+  private Date date;
 
-    public StringReminderData() {
-        text = "";
-        date = new Date();
-    }
+  public StringReminderData() {
+    text = "";
+    date = new Date();
+  }
 
-    public String getText() {
-        return text;
-    }
+  public String getText() {
+    return text;
+  }
 
-    public void setText(String text) {
-        this.text = text;
-    }
+  public void setText(String text) {
+    this.text = text;
+  }
 
-    public Date getDate() {
-        return date;
-    }
+  public Date getDate() {
+    return date;
+  }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+  public void setDate(Date date) {
+    this.date = date;
+  }
 }

@@ -7,10 +7,10 @@ import android.util.Log;
 
 public class AlarmNotificatorReceiver extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        // Send command to Service
-        Log.e("TEST ONELIO", "FIRED NOTIFICATION CHECKER");
-        context.startService(new Intent(context, UAService.class));
-    }
+  @Override
+  public void onReceive(Context context, Intent intent) {
+    //  Send command to Service
+    Log.e("TEST ONELIO", "FIRED NOTIFICATION CHECKER");
+    context.startService(new Intent(context, UAService.class));
+  }
 }

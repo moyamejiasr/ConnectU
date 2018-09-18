@@ -177,7 +177,7 @@
     <!-- WebView -->
     <string name="title_activity_webview" translatable="false">WebView</string>
     <string name="action_restart">Restart App</string>
-    <string name="title_webapp_moodle" translatable="false">Moodle 2017–2018</string>
+    <string name="title_webapp_moodle" translatable="false">Moodle 2018-2019</string>
     <string name="title_webapp_uaproject" translatable="false">UAProject</string>
     <string name="title_webapp_otrosservicios" translatable="false">Otros Servicios</string>
     <string name="title_webapp_sigua" translatable="false">Campus Map</string>

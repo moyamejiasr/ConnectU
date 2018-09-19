@@ -12,8 +12,8 @@ android {
         applicationId "com.onelio.connectu"
         minSdkVersion 20
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 200
+        versionName "3.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -40,6 +40,7 @@ dependencies {
 
     // HTTP LIBRARY
     implementation 'com.github.jkcclemens:khttp:-SNAPSHOT'
+    implementation 'com.google.code.gson:gson:2.8.0'
 
     // CRASHLYTICS IMPLEMENTATION
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {

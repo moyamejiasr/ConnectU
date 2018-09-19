@@ -15,7 +15,7 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="e39d6bee51093e361fdddac7cb0512ffb7498dee" />
-        <activity android:name=".activity.LaunchActivity">
+        <activity android:name=".activities.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

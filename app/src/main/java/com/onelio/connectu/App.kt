@@ -4,20 +4,29 @@ import android.app.Application
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import com.crashlytics.android.core.CrashlyticsCore
-
-
+import com.google.gson.Gson
+import com.onelio.connectu.types.Account
+import com.onelio.connectu.utils.UserSettings
 
 class App : Application() {
 
-    private var email : String = ""
-    val getEmail = fun() : String {return email}
+    private var settings = UserSettings(baseContext)
 
-    private var password : String = ""
-    val getPassword = fun() : String {return password}
+    private var account = Account()
+    val getAccount = fun() : Account {return account}
 
     private var connected : Boolean = false
     val isConnected = fun() : Boolean {return connected}
     val setConnected = fun(connected : Boolean) {this.connected = connected}
+
+    private fun ReloadAccount() {
+        val gson = Gson()
+        val jacc = settings.getString(PREF_ACCOUNT)
+        if (jacc.isEmpty()) return
+
+        account = gson.fromJson(jacc, Account::class.java)
+        connected = true
+    }
 
     /**
      * We override onCreate from the Application to allow it to
@@ -32,5 +41,8 @@ class App : Application() {
                 .build()
         // Initialize Fabric with the debug-disabled crashlytics.
         Fabric.with(this, crashlyticsKit)
+
+        // Load user data
+        ReloadAccount()
     }
 }

@@ -1,4 +1,4 @@
-package com.onelio.connectu.activity
+package com.onelio.connectu.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

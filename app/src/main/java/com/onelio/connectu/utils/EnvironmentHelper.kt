@@ -6,7 +6,7 @@ class EnvironmentHelper {
     companion object {
         fun AppVersion(activity : Activity): String? {
             val info = activity.packageManager.getPackageInfo(activity.packageName, 0)
-            return info.packageName
+            return info.versionName
         }
 
         fun AppVersionCode(activity : Activity): Int? {

@@ -53,11 +53,10 @@ class UserAgentSwitcher {
             "Mozilla/5.0 (Windows NT 6.1; rv:27.3) Gecko/20130101 Firefox/27.3",
             "Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:27.0) Gecko/20121011 Firefox/27.0",
             "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0"
-    )
+        )
 
-        fun Get(): String {
-            val r = Random()
-            val n = r.nextInt(userAgentList.size)
+        fun get(): String {
+            val n = Random().nextInt(userAgentList.size)
             return userAgentList[n]
         }
     }

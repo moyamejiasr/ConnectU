@@ -33,6 +33,11 @@ dependencies {
     implementation 'com.android.support:preference-v7:27.1.1'
     implementation 'com.takisoft.fix:preference-v7:27.1.1.0' //Bugfix preference library
 
+    // HTTP IMPLEMENTATION
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+    api 'org.jsoup:jsoup:1.11.3'
+
     // JUNIT IMPLEMENTATION
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -5,11 +5,12 @@
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
+        android:name=".App"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Launcher_AppTheme">
-        <activity android:name=".LaunchActivity">
+        <activity android:name=".activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

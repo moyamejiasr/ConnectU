@@ -10,7 +10,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.onelio.connectu"
-        minSdkVersion 20
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 200
         versionName "3.0.0"

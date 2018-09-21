@@ -1,4 +1,16 @@
 <resources>
     <!-- AppData -->
     <string name="app_name">ConnectU</string>
+    <string name="ua_email">\@alu.ua.es</string>
+
+    <!-- Transitions -->
+    <string name="activity_login_image_trans" translatable="false">activity_image_transition</string>
+
+    <!-- LoginActivity Data -->
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">Login</string>
+
+    <!-- MainActivity Data -->
+    <string name="main_search_by">Search by text</string>
 </resources>

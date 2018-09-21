@@ -16,6 +16,7 @@
     <color name="windowBackgroundLight">#EEEEEE</color>
     <color name="textColorPrimary">#757575</color>
     <color name="colorAccentLight">#E65100</color>
+    <color name="iconsTint">#9E9E9E</color>
 
     <!-- Spinner -->
     <color name="black_overlay">#66000000</color>

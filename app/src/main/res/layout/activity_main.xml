@@ -61,14 +61,16 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_search"/>
+                app:srcCompat="@drawable/ic_search"
+                tools:ignore="ContentDescription" />
 
             <EditText
                 android:layout_marginStart="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="Buscar por texto" />
+                android:hint="@string/main_search_by"
+                android:inputType="textAutoComplete" />
 
         </LinearLayout>
 

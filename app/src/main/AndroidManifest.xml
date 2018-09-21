@@ -5,16 +5,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
-        android:label="@string/app_name"
         android:name=".App"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Launcher_AppTheme">
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="e39d6bee51093e361fdddac7cb0512ffb7498dee" />
+
         <activity android:name=".activities.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity"
-            android:theme="@style/Launcher_AppTheme"/>
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/Launcher_AppTheme" />
+        <activity android:name=".activities.LoginActivity"></activity>
     </application>
 
 </manifest>

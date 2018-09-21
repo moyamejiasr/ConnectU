@@ -46,13 +46,11 @@ class App : Application() {
     }
 
     fun reloadAccount() {
-        val gson = Gson()
-
         val jaccount = Settings(baseContext).getString(CONFIG_OBJECT_ACCOUNT)
         if (jaccount.isEmpty()) {
             return
         }
-        gson.fromJson(jaccount, Account::class.java)
+        Gson().fromJson(jaccount, Account::class.java)
         validAccount = true
     }
 }

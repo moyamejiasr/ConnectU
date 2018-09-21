@@ -1,3 +1,3 @@
 package com.onelio.connectu
 
-const val PREF_ACCOUNT = "account"
+const val CONFIG_OBJECT_ACCOUNT = "account"

@@ -11,7 +11,8 @@
         android:layout_width="0px"
         android:layout_height="0px"
         android:focusable="true"
-        android:focusableInTouchMode="true" />
+        android:focusableInTouchMode="true"
+        tools:ignore="UselessLeaf" />
 
     <ImageView
         android:id="@+id/launcher_logo"
@@ -80,7 +81,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/login_email"
                             android:inputType="textEmailAddress"
-                            android:paddingRight="120dp" />
+                            android:paddingEnd="120dp" />
                     </android.support.design.widget.TextInputLayout>
 
                     <TextView
@@ -88,10 +89,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
-                        android:paddingRight="34dp"
+                        android:paddingEnd="34dp"
                         android:paddingTop="8dp"
                         android:text="@string/ua_email"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -109,7 +110,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:tint="@color/iconsTint"
-                    app:srcCompat="@drawable/ic_key" />
+                    app:srcCompat="@drawable/ic_key"
+                    tools:ignore="ContentDescription" />
 
                 <FrameLayout
                     android:layout_width="match_parent"

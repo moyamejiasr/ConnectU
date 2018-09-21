@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 
-class UserSettings(context: Context) {
+class Settings(context: Context) {
 
     /**
      * Private preference context

@@ -1,18 +1,28 @@
 package com.onelio.connectu
 
 import android.app.Application
-import android.support.v7.app.AppCompatDelegate
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import com.crashlytics.android.core.CrashlyticsCore
 import com.google.gson.Gson
 import com.onelio.connectu.types.Account
-import com.onelio.connectu.utils.UserSettings
+import com.onelio.connectu.utils.Settings
 
 class App : Application() {
-
+    /**
+     * Usually called when an activity wants to know the current
+     * account data or the requests want to use cookies.
+     */
     private var account = Account()
     val getAccount = fun() : Account {return account}
+
+    /**
+     * This bool will tell if there is a valid account(user and password exists)
+     * and will be set by the loader function. Normally in the onCreate.
+     */
+    private var validAccount : Boolean = false
+    val isValidAccount = fun() : Boolean {return validAccount}
+    val setValidAccount = fun(validAccount : Boolean) {this.validAccount = validAccount}
 
     private var connected : Boolean = false
     val isConnected = fun() : Boolean {return connected}
@@ -30,7 +40,19 @@ class App : Application() {
                 .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
                 .build()
         Fabric.with(this, crashlyticsKit)
-        // Set Android Compat for Vectors
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+
+        //Reload user-data
+        reloadAccount()
+    }
+
+    fun reloadAccount() {
+        val gson = Gson()
+
+        val jaccount = Settings(baseContext).getString(CONFIG_OBJECT_ACCOUNT)
+        if (jaccount.isEmpty()) {
+            return
+        }
+        gson.fromJson(jaccount, Account::class.java)
+        validAccount = true
     }
 }

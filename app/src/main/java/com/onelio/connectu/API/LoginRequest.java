@@ -161,9 +161,8 @@ public class LoginRequest {
                   saveLoginData(); // Save date & version of actual login
                   app.account.Email = user;
                   app.account.Password = pass;
-                  app.account.Name = doc.select("a.dropdown-toggle > span[id=nombre]").text();
-                  app.account.PictureURL =
-                      doc.select("a.dropdown-toggle > span[id=retrato] > img").attr("src");
+                  app.account.Name = doc.getElementById("usunombre").text();
+                  app.account.PictureURL = doc.getElementById("usufoto").children().attr("src");
                   HomeRequest notificationsLoader = new HomeRequest(context);
                   notificationsLoader.parseAlertsFromBody(body);
                 } else {
